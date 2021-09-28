@@ -1,5 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:rainbow_challenge/pages/about.dart';
+import 'package:rainbow_challenge/pages/__example.dart';
+import 'package:rainbow_challenge/pages/article.dart';
+import 'package:rainbow_challenge/pages/challenges.dart';
+import 'package:rainbow_challenge/pages/home_empty.dart';
+import 'package:rainbow_challenge/pages/loading.dart';
+import 'package:rainbow_challenge/pages/navigation.dart';
+import 'package:rainbow_challenge/pages/welcome.dart';
+import 'package:rainbow_challenge/theme/design_theme.dart';
 import 'package:rainbow_challenge/utils/repository/user_repository.dart';
 import 'package:rainbow_challenge/bloc/authentication_bloc.dart';
 
@@ -13,16 +22,13 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 void main() {
   final userRepository = UserRepository();
-  runApp(
-      BlocProvider<AuthenticationBloc>(
-        create: (context) {
-          return AuthenticationBloc(
-              userRepository: userRepository
-          )..add(AppStarted());
-        },
-        child: App(userRepository: userRepository),
-      )
-  );
+  runApp(BlocProvider<AuthenticationBloc>(
+    create: (context) {
+      return AuthenticationBloc(userRepository: userRepository)
+        ..add(AppStarted());
+    },
+    child: App(userRepository: userRepository),
+  ));
 }
 
 class App extends StatelessWidget {
@@ -33,12 +39,10 @@ class App extends StatelessWidget {
         super(key: key);
 
   @override
-  Widget build (BuildContext context) {
+  Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        brightness: Brightness.light,
-      ),
+      theme: DesignTheme.lightTheme,
+      darkTheme: DesignTheme.darkTheme,
       title: 'Rainbow challenge App',
       localizationsDelegates: [
         AppLocalizations.delegate,
@@ -47,12 +51,14 @@ class App extends StatelessWidget {
         GlobalCupertinoLocalizations.delegate,
       ],
       supportedLocales: [
-        Locale('lt', ''),//Lithuanian, no entry code
+        Locale('lt', ''), //Lithuanian, no entry code
         Locale('en', '')
       ],
       routes: {
         '/logout': (context) => LogoutPage(),
       },
+      //  home: WelcomePage()
+
       home: BlocBuilder<AuthenticationBloc, AuthenticationState>(
         builder: (context, state) {
           if (state is AuthenticationUninitialized) {
@@ -62,14 +68,14 @@ class App extends StatelessWidget {
             return HomePage();
           }
           if (state is AuthenticationUnauthenticated) {
+            //print(AppLocalizations.of(context)!.hello);
 
-           //print(AppLocalizations.of(context)!.hello);
-
-            return LoginPage(userRepository: userRepository,);
+            return LoginPage(
+              userRepository: userRepository,
+            );
           }
-         // return LoadingIndicator();
+          // return LoadingIndicator();
         },
-
       ),
     );
   }
