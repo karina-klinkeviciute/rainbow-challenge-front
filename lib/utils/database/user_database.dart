@@ -35,20 +35,20 @@ class DatabaseProvider {
   }
 
   void onUpgrade(
-      Database database,
-      int oldVersion,
-      int newVersion,
-      ){
+    Database database,
+    int oldVersion,
+    int newVersion,
+  ){
     if (newVersion > oldVersion){}
   }
 
   void initDB(Database database, int version) async {
     await database.execute(
-        "CREATE TABLE $userTable ("
-            "id INTEGER PRIMARY KEY, "
-            "email TEXT, "
-            "token TEXT "
-            ")"
+      "CREATE TABLE $userTable ("
+      "id INTEGER PRIMARY KEY, "
+      "email TEXT, "
+      "token TEXT "
+      ")"
     );
   }
 }

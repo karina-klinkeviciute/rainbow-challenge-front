@@ -24,12 +24,12 @@ void main() {
   final userRepository = UserRepository();
   runApp(
       BlocProvider<AuthenticationBloc>(
-          create: (context) {
-            return AuthenticationBloc(
-                userRepository: userRepository
-            )..add(AppStarted());
-          },
-          child: App(userRepository: userRepository)
+        create: (context) {
+          return AuthenticationBloc(
+              userRepository: userRepository
+          )..add(AppStarted());
+        },
+        child: App(userRepository: userRepository)
       )
   );
 }
@@ -72,7 +72,7 @@ class App extends StatelessWidget {
             return HomePage();
           }
           //if (state is AuthenticationUnauthenticated) {
-          //return LoginPage(userRepository: userRepository);
+            //return LoginPage(userRepository: userRepository);
           //}
 
           return LoginPage(userRepository: userRepository);

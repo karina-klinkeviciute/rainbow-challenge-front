@@ -11,6 +11,8 @@ class _LoginFormState extends State<LoginForm> {
   final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
 
+
+
   @override
   Widget build(BuildContext context) {
     _onLoginButtonPressed() {
@@ -22,7 +24,7 @@ class _LoginFormState extends State<LoginForm> {
 
     return BlocListener<LoginBloc, LoginState>(
       listener: (context, state) {
-        if (state is LoginFaliure) {
+        if (state is LoginFailure) {
           Scaffold.of(context).showSnackBar(SnackBar(
             content: Text('${state.error}'),
             backgroundColor: Colors.red,

@@ -2,7 +2,7 @@ class UserLogin {
   String email;
   String password;
 
-  UserLogin({this.email, this.password});
+  UserLogin({required this.email, required this.password});
 
   Map <String, dynamic> toDatabaseJson() => {
     "email": this.email,
@@ -13,11 +13,11 @@ class UserLogin {
 class Token{
   String token;
 
-  Token({this.token});
+  Token({required this.token});
 
   factory Token.fromJson(Map<String, dynamic> json) {
     return Token(
-      token: json['token']
+      token: json['auth_token']
     );
   }
 }

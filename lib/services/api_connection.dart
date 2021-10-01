@@ -8,21 +8,16 @@ final _tokenEndpoint = "/auth/token/login/";
 final _tokenURL = _base + _tokenEndpoint;
 
 Future<Token> getToken(UserLogin userLogin) async {
-  print(_tokenURL);
+  //print(_tokenURL);
   final http.Response response = await http.post(
-    _tokenURL,
+      Uri.parse(_tokenURL),
     headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
     },
     body: jsonEncode(userLogin.toDatabaseJson()),
   );
   if (response.statusCode == 200) {
-
-    //print('Logged: ' + response.body);
-    //print('access token is -> ${json.decode(response.body)['auth_token']}');
-
-//print(Token.fromJson(json.decode(response.body)));
-
+   //print('access token is -> ${json.decode(response.body)['auth_token']}');
    return Token.fromJson(json.decode(response.body));
 
   } else {

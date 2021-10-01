@@ -14,8 +14,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final AuthenticationBloc authenticationBloc;
 
   LoginBloc({
-    @required this.userRepository,
-    @required this.authenticationBloc,
+    required this.userRepository,
+    required this.authenticationBloc,
   })  : assert(userRepository != null),
         assert(authenticationBloc != null),
         super(LoginInitial())
@@ -37,7 +37,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         authenticationBloc.add(LoggedIn(user: user));
         yield LoginInitial();
       } catch (error) {
-        yield LoginFaliure(error: error.toString());//error.toString()
+        yield LoginFailure(error: error.toString());
       }
     }
   }

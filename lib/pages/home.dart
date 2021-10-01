@@ -1,8 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:rainbow_challenge/utils/repository/user_repository.dart';
 import 'package:rainbow_challenge/bloc/authentication_bloc.dart';
 
 class HomePage extends StatelessWidget {
+
+  //final UserRepository userRepository;
+  //HomePage({Key key, @required this.userRepository})
+    //  : assert(userRepository != null),
+      //  super(key: key);
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,7 +24,7 @@ class HomePage extends StatelessWidget {
           children: <Widget>[
             Padding(padding: EdgeInsets.only(left: 30.0),
             child: Text(
-              'Sveiki',
+              'Sveiki, ',//+ user.email.toString(),
               style: TextStyle(
                 fontSize: 24.0,
               ),

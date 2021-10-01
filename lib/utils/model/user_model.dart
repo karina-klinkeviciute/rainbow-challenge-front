@@ -4,9 +4,9 @@ class User {
   String token;
 
   User(
-      {this.id,
-      this.email,
-      this.token});
+      {required this.id,
+      required this.email,
+      required this.token});
 
   factory User.fromDatabaseJson(Map<String, dynamic> data) => User(
       id: data['id'],
@@ -18,5 +18,5 @@ class User {
         "id": this.id,
         "email": this.email,
         "token": this.token
-      };
+  };
 }
