@@ -5,13 +5,13 @@ import 'package:flutter/material.dart';
 
 class ImageExternalWidget extends StatelessWidget {
   final String url;
-  final double width;
-  final double height;
+  final double? width;
+  final double? height;
   final double borderRadius;
 
   const ImageExternalWidget(
-      {Key key,
-      @required this.url,
+      {Key? key,
+      required this.url,
       this.width,
       this.height,
       this.borderRadius = 8.0})

@@ -3,7 +3,7 @@ import 'package:rainbow_challenge/widgets/image_local.dart';
 
 // Example page. Testing, playing with widgets and compositions.
 class ExamplePage2 extends StatelessWidget {
-  const ExamplePage2({Key key}) : super(key: key);
+  const ExamplePage2({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(

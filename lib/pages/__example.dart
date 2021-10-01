@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:rainbow_challenge/theme/colors.dart';
 import 'package:rainbow_challenge/widgets/colored_area.dart';
 import 'package:rainbow_challenge/widgets/heading_lined.dart';
 import 'package:rainbow_challenge/widgets/headline.dart';
@@ -8,7 +7,7 @@ import 'package:rainbow_challenge/widgets/bottom_menu.dart';
 
 // Example page. Testing, playing with widgets and compositions.
 class ExamplePage extends StatelessWidget {
-  const ExamplePage({Key key}) : super(key: key);
+  const ExamplePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -97,7 +96,7 @@ class _TitleSection extends StatelessWidget {
             title,
             style: Theme.of(context)
                 .textTheme
-                .headline3
+                .headline3!
                 .merge(const TextStyle(color: Colors.black, height: 1)),
           ),
           const Divider(),

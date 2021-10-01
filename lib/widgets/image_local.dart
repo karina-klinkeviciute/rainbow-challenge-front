@@ -5,14 +5,14 @@ import 'package:flutter/material.dart';
 
 class ImageLocalWidget extends StatelessWidget {
   final String url;
-  final double width;
-  final double height;
+  final double? width;
+  final double? height;
   // Border has a default value that can be changed
   final double borderRadius;
 
   const ImageLocalWidget(
-      {Key key,
-      @required this.url,
+      {Key? key,
+      required this.url,
       this.width,
       this.height,
       this.borderRadius = 8.0})

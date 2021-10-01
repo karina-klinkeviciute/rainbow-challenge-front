@@ -6,7 +6,7 @@ import 'package:rainbow_challenge/widgets/image_external.dart';
 // Now it's just an empty space.
 
 class ArticlesPage extends StatelessWidget {
-  const ArticlesPage({Key key}) : super(key: key);
+  const ArticlesPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

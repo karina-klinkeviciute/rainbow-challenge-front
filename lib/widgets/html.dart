@@ -15,7 +15,7 @@ class HtmlWidget extends StatelessWidget {
   // Centering of text is useful for short texts snippets (e.g., in MessageWidget())
   final bool center;
 
-  const HtmlWidget({Key key, @required this.data, this.center = false})
+  const HtmlWidget({Key? key, required this.data, this.center = false})
       : super(key: key);
   @override
   Widget build(BuildContext context) {

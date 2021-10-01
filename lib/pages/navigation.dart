@@ -7,7 +7,7 @@ import 'package:rainbow_challenge/widgets/bottom_menu.dart';
 // TO DO: functionality
 
 class NavigationPage extends StatelessWidget {
-  const NavigationPage({Key key}) : super(key: key);
+  const NavigationPage({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     // final String _itemTitle;
@@ -51,7 +51,7 @@ class _GridItem extends StatelessWidget {
   final IconData itemIcon;
   final String itemTitle;
 
-  const _GridItem({Key key, @required this.itemIcon, @required this.itemTitle})
+  const _GridItem({Key? key, required this.itemIcon, required this.itemTitle})
       : super(key: key);
 
   @override
