@@ -68,16 +68,14 @@ class App extends StatelessWidget {
             //return SplashPage();
           }
           if (state is AuthenticationAuthenticated) {
-            //print('homepage');
             return HomePage();
           }
           //if (state is AuthenticationUnauthenticated) {
-            //return LoginPage(userRepository: userRepository);
+          //return LoginPage(userRepository: userRepository);
           //}
 
           return LoginPage(userRepository: userRepository);
           //return RegistrationPage(userRepository: userRepository);
-          //return LoadingPage();
         },
 
       ),
