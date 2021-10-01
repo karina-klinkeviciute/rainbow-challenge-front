@@ -8,7 +8,7 @@ import 'package:rainbow_challenge/theme/fonts.dart';
 // TO DO: add functionality
 
 class BottomMenuWidget extends StatelessWidget {
-  const BottomMenuWidget({Key key}) : super(key: key);
+  const BottomMenuWidget({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(

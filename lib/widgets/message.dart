@@ -9,13 +9,13 @@ import 'package:rainbow_challenge/widgets/html.dart';
 class MessageWidget extends StatelessWidget {
   final IconData icon;
   final String title;
-  final String message;
+  final String? message;
   // const MessageWidget({ Key  key }) : super(key: key);
 
   const MessageWidget(
-      {Key key,
+      {Key? key,
       this.icon = Icons.info_outline,
-      @required this.title,
+      required this.title,
       this.message})
       : super(key: key);
 
@@ -85,13 +85,13 @@ class MessageWidget extends StatelessWidget {
               Text(
                 title,
                 textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.headline3.merge(
+                style: Theme.of(context).textTheme.headline3!.merge(
                     const TextStyle(
                         color: ThemeColors.primaryColor, height: 1)),
               ),
               const SizedBox(height: 10),
               if (message != null)
-                Center(child: HtmlWidget(data: message, center: true))
+                Center(child: HtmlWidget(data: message!, center: true))
             ]),
       ),
     );

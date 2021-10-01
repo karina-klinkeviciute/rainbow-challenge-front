@@ -6,7 +6,7 @@ import 'package:rainbow_challenge/theme/headings.dart';
 
 class HeadingLinedWidget extends StatelessWidget {
   final String title;
-  const HeadingLinedWidget({Key key, @required this.title}) : super(key: key);
+  const HeadingLinedWidget({Key? key, required this.title}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +29,7 @@ class HeadingLinedWidget extends StatelessWidget {
 }
 
 class _Line extends StatelessWidget {
-  const _Line({Key key}) : super(key: key);
+  const _Line({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

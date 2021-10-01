@@ -7,7 +7,7 @@ import 'package:rainbow_challenge/widgets/message.dart';
 // the ArticlesPage() is empty.
 
 class HomeEmptyPage extends StatelessWidget {
-  const HomeEmptyPage({Key key}) : super(key: key);
+  const HomeEmptyPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

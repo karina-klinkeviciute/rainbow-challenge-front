@@ -9,7 +9,7 @@ import 'package:url_launcher/url_launcher.dart';
 // TO DO: further functionality, create and add LogosWidget(), API connection
 
 class AboutPage extends StatelessWidget {
-  const AboutPage({Key key}) : super(key: key);
+  const AboutPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +18,7 @@ class AboutPage extends StatelessWidget {
 }
 
 class _PageContent extends StatelessWidget {
-  const _PageContent({Key key}) : super(key: key);
+  const _PageContent({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

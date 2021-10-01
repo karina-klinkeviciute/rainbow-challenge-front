@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 // To do everything.
 
 class RegionsPage extends StatelessWidget {
-  const RegionsPage({Key key}) : super(key: key);
+  const RegionsPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

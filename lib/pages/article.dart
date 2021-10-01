@@ -4,7 +4,7 @@ import 'package:rainbow_challenge/widgets/html.dart';
 // A single article page.
 // TO DO: continue with both layout and functionality
 class ArticlePage extends StatelessWidget {
-  const ArticlePage({Key key}) : super(key: key);
+  const ArticlePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,7 @@ class ArticlePage extends StatelessWidget {
 }
 
 class _TitleSection extends StatelessWidget {
-  const _TitleSection({Key key}) : super(key: key);
+  const _TitleSection({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +47,7 @@ class _TitleSection extends StatelessWidget {
 }
 
 class _TextSection extends StatelessWidget {
-  const _TextSection({Key key}) : super(key: key);
+  const _TextSection({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

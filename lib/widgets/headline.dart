@@ -5,9 +5,9 @@ import 'package:rainbow_challenge/theme/colors.dart';
 
 class HeadlineWidget extends StatelessWidget {
   final String title;
-  final String subtitle;
+  final String? subtitle;
 
-  const HeadlineWidget({Key  key,@required this.title, this.subtitle})
+  const HeadlineWidget({Key? key, required this.title, this.subtitle})
       : super(key: key);
 
   @override
@@ -18,7 +18,7 @@ class HeadlineWidget extends StatelessWidget {
         children: [
           Text(
             title.toUpperCase(),
-            style: Theme.of(context).textTheme.headline2.merge(TextStyle(
+            style: Theme.of(context).textTheme.headline2!.merge(TextStyle(
                     color: ThemeColors.primaryColor,
                     shadows: <Shadow>[
                       Shadow(
@@ -36,9 +36,9 @@ class HeadlineWidget extends StatelessWidget {
           // Show subtitle only if it exists
           if (subtitle != null)
             Text(
-              subtitle,
+              subtitle!,
               textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.headline3.merge(
+              style: Theme.of(context).textTheme.headline3!.merge(
                   const TextStyle(color: ThemeColors.primaryColor, height: 1)),
             ),
         ],

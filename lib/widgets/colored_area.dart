@@ -10,9 +10,9 @@ class ColoredAreaWidget extends StatelessWidget {
   final Color backgroundColor;
   final Widget content;
   const ColoredAreaWidget(
-      {Key key,
+      {Key? key,
       this.backgroundColor = ThemeColors.bgColorLight,
-      @required this.content})
+      required this.content})
       : super(key: key);
 
   @override

@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:rainbow_challenge/theme/colors.dart';
-import 'package:rainbow_challenge/widgets/heading_lined.dart';
 import 'package:rainbow_challenge/widgets/headline.dart';
 import 'package:rainbow_challenge/widgets/wrapper_main.dart';
 
 // TO DO: change hard coded values to API, design, functionality.
 
 class ChallengesPage extends StatelessWidget {
-  const ChallengesPage({Key key}) : super(key: key);
+  const ChallengesPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +17,7 @@ class ChallengesPage extends StatelessWidget {
 }
 
 class _PageContent extends StatelessWidget {
-  const _PageContent({Key key}) : super(key: key);
+  const _PageContent({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +49,7 @@ class _ChallengesList extends StatelessWidget {
     'Pasidalink savo istorija',
     'Įvairūs',
   ];
-  _ChallengesList({Key key}) : super(key: key);
+  _ChallengesList({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +70,7 @@ class _ChallengesList extends StatelessWidget {
         */
           return ExpansionTile(
             title: Text(challengeCategories[index],
-                style: Theme.of(context).textTheme.headline3.merge(
+                style: Theme.of(context).textTheme.headline3!.merge(
                     const TextStyle(
                         fontWeight: FontWeight.w400,
                         color: ThemeColors.neutralColorLight))),
@@ -87,7 +86,7 @@ class _ChallengesList extends StatelessWidget {
 }
 
 class _LocalNavigation extends StatefulWidget {
-  const _LocalNavigation({Key key}) : super(key: key);
+  const _LocalNavigation({Key? key}) : super(key: key);
 
   @override
   __LocalNavigationState createState() => __LocalNavigationState();
