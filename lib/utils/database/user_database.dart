@@ -10,19 +10,20 @@ final userTable = 'userTable';
 class DatabaseProvider {
   static final DatabaseProvider dbProvider = DatabaseProvider();
 
-  Database _database;
+  Database? _database = null;
 
   Future <Database> get database async {
     if (_database != null){
-      return _database;
+      return _database!;
     }
     _database = await createDatabase();
-    return _database;
+    return _database!;
+
   }
 
   createDatabase() async {
     Directory documentsDirectory = await getApplicationDocumentsDirectory();
-    String path = join(documentsDirectory.path, "User.db");
+    String path = join(documentsDirectory.path, "UserAuth.db");
 
     var database = await openDatabase(
       path,
@@ -34,20 +35,20 @@ class DatabaseProvider {
   }
 
   void onUpgrade(
-    Database database,
-    int oldVersion,
-    int newVersion,
-  ){
+      Database database,
+      int oldVersion,
+      int newVersion,
+      ){
     if (newVersion > oldVersion){}
   }
 
   void initDB(Database database, int version) async {
     await database.execute(
-      "CREATE TABLE $userTable ("
-      "id INTEGER PRIMARY KEY, "
-      "username TEXT, "
-      "token TEXT "
-      ")"
+        "CREATE TABLE $userTable ("
+            "id INTEGER PRIMARY KEY, "
+            "email TEXT, "
+            "token TEXT "
+            ")"
     );
   }
 }
