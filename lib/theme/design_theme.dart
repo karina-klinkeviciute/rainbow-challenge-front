@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rainbow_challenge/theme/colors.dart';
-import 'package:rainbow_challenge/theme/fonts.dart';
+import 'package:rainbow_challenge/theme/fonts.dart' as ThemeFonts;
 
 // MaterialApp theme adapted for our needs. Defines the colors and typography
 // of built-in MaterialApp widgets.

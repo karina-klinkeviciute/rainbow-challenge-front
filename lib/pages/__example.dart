@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:rainbow_challenge/bloc/internet_cubit.dart';
 import 'package:rainbow_challenge/widgets/colored_area.dart';
 import 'package:rainbow_challenge/widgets/heading_lined.dart';
 import 'package:rainbow_challenge/widgets/headline.dart';
@@ -22,6 +24,7 @@ class ExamplePage extends StatelessWidget {
                 padding: const EdgeInsets.fromLTRB(30, 30, 30, 40),
                 child: Column(
                   children: [
+                    // _ConnectionInfo(),
                     const HeadingLinedWidget(title: 'Labas rytas'),
                     const ColoredAreaWidget(
                       content: Text("labas rytas"),
@@ -59,6 +62,28 @@ class ExamplePage extends StatelessWidget {
         bottomNavigationBar: const BottomMenuWidget());
   }
 }
+
+/*
+class _ConnectionInfo extends StatelessWidget {
+  const _ConnectionInfo({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<InternetCubit, InternetState>(builder: (context, state) {
+      if (state is InternetConnected &&
+          state.connectionType == Connection.Type.Wifi) {
+        return Text('Wifi');
+      } else if (state is InternetConnected &&
+          state.connectionType == ConnectionType.Mobile) {
+        return Text('Mobile');
+      } else if (state is InternetDisconnected) {
+        return Text('No connection');
+      }
+      return CircularProgressIndicator();
+    });
+  }
+}
+*/
 
 class _ImageSection extends StatelessWidget {
   final String src;

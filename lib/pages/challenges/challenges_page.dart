@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:rainbow_challenge/pages/__example.dart';
 import 'package:rainbow_challenge/theme/colors.dart';
 import 'package:rainbow_challenge/widgets/headline.dart';
 import 'package:rainbow_challenge/widgets/wrapper_main.dart';
+import 'package:rainbow_challenge/utils/model/challenge_model.dart';
 
 // TO DO: change hard coded values to API, design, functionality.
 
@@ -11,13 +13,13 @@ class ChallengesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const WrapperMainWidget(
-      mainArea: _PageContent(),
+      mainArea: _MainArea(),
     );
   }
 }
 
-class _PageContent extends StatelessWidget {
-  const _PageContent({Key? key}) : super(key: key);
+class _MainArea extends StatelessWidget {
+  const _MainArea({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +30,14 @@ class _PageContent extends StatelessWidget {
           const HeadlineWidget(
             title: 'Užduotys',
           ),
+          ElevatedButton(
+              onPressed: () {
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => ExamplePage()));
+              },
+              child: Text('Make request')),
           //    _LocalNavigation(),
+          //  _AllChallenges(challenges: []),
           _ChallengesList()
         ],
       ),
@@ -110,3 +119,25 @@ class __LocalNavigationState extends State<_LocalNavigation> {
     );
   }
 }
+
+class _AllChallenges extends StatelessWidget {
+  const _AllChallenges({Key? key, required this.challenges}) : super(key: key);
+
+  final List<Challenge> challenges;
+
+  @override
+  Widget build(BuildContext context) {
+    return GridView.builder(
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+      ),
+      itemCount: challenges.length,
+      itemBuilder: (context, index) {
+        return Text(challenges[index].description);
+      },
+    );
+  }
+}
+
+void _makeRequest() async {}
+void _goToPage() {}

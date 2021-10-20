@@ -12,11 +12,9 @@ part 'authentication_state.dart';
 
 class AuthenticationBloc
     extends Bloc<AuthenticationEvent, AuthenticationState> {
-
   AuthenticationBloc({required this.userRepository})
       : assert(UserRepository != null),
-        super(AuthenticationUnauthenticated())
-  ;
+        super(AuthenticationUnauthenticated());
 
   final UserRepository userRepository;
 
@@ -25,7 +23,6 @@ class AuthenticationBloc
     AuthenticationEvent event,
   ) async* {
     if (event is AppStarted) {
-
       final bool hasToken = await userRepository.hasToken();
 
       if (hasToken) {
@@ -39,9 +36,7 @@ class AuthenticationBloc
       yield AuthenticationLoading();
 
       //print(event.user);
-      await userRepository.persistToken(
-       user: event.user
-      );
+      await userRepository.persistToken(user: event.user);
 
       yield AuthenticationAuthenticated();
     }

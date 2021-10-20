@@ -19,6 +19,7 @@ dependencies:
   http: ^0.13.3
   sqflite: ^2.0.0+4
   path_provider: ^2.0.0
+  connectivity_plus: ^2.0.2
   linter: ^1.12.0
 
   # A Flutter widget for rendering HTML and CSS as Flutter widgets.

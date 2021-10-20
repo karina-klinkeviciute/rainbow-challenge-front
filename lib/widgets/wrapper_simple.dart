@@ -17,7 +17,6 @@ class WrapperSimpleWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: bodyBackgroundColor,
-        body:
-            SafeArea(top: true, bottom: true, child: Center(child: mainArea)));
+        body: SafeArea(top: true, bottom: true, child: mainArea));
   }
 }
