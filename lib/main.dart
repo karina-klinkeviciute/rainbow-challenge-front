@@ -25,7 +25,6 @@ void main() {
 
 class App extends StatelessWidget {
   final UserRepository userRepository;
-  // These should be combined to runApp(), ex. bloc video 2:02
   final AppRouter appRouter;
   // Connectivity: to check if mobile
   // is connected to Wifi or Mobile Data
@@ -38,7 +37,9 @@ class App extends StatelessWidget {
       required this.appRouter})
       : assert(userRepository != null),
         super(key: key);
-  // Bloc video 1:48 - provide bloc globally by wrapping MaterialApp()
+  // A video guide about bloc, https://www.youtube.com/watch?v=THCkkQ-V1-8
+  // 1h:48min - explains how to provide bloc globally by
+  // wrapping MaterialApp()
   // A MultiProvider that combines different providers comes here
   @override
   Widget build(BuildContext context) {

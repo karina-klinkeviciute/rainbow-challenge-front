@@ -13,6 +13,7 @@ class Challenge {
     required this.description,
     this.image,
     this.published,
+    // Points = Vaivorykštės
     required this.points,
     this.startDate,
     this.endDate,

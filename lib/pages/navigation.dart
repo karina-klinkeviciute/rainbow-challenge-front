@@ -51,7 +51,7 @@ class NavigationPage extends StatelessWidget {
                 _GridItem(
                   itemIcon: ThemeIcons.qrCode,
                   itemTitle: 'Qr kodo skenavimas',
-                  routeName: AppRoute.code,
+                  routeName: AppRoute.qrCode,
                 ),
                 _GridItem(
                   itemIcon: ThemeIcons.challengesStarted,

@@ -7,8 +7,8 @@ import 'package:rainbow_challenge/widgets/wrapper_main.dart';
 // Shop page.
 // To do everything.
 
-class CodePage extends StatelessWidget {
-  const CodePage({Key? key}) : super(key: key);
+class QrCodePage extends StatelessWidget {
+  const QrCodePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

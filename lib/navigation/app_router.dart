@@ -5,14 +5,14 @@ import 'package:rainbow_challenge/pages/challenge.dart';
 import 'package:rainbow_challenge/pages/challenges/challenges_page.dart';
 import 'package:rainbow_challenge/pages/home_empty.dart';
 import 'package:rainbow_challenge/pages/navigation.dart';
-import 'package:rainbow_challenge/pages/code.dart';
+import 'package:rainbow_challenge/pages/qr_code.dart';
 import 'package:rainbow_challenge/pages/shop.dart';
 import 'package:rainbow_challenge/pages/logout.dart';
 import 'package:rainbow_challenge/pages/messages.dart';
 import 'package:rainbow_challenge/pages/regions.dart';
 import 'package:rainbow_challenge/pages/profile/profile_page.dart';
 
-// Inf this file we define named app route.
+// In this file we define named app route.
 // One of use cases is with Navigator: `Navigator.pushNamed(context, routeName)`.
 class AppRouter {
   Route? onGenerateRoute(RouteSettings routeSettings) {
@@ -31,8 +31,8 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => LogoutPage());
       case AppRoute.shop:
         return MaterialPageRoute(builder: (_) => ShopPage());
-      case AppRoute.code:
-        return MaterialPageRoute(builder: (_) => CodePage());
+      case AppRoute.qrCode:
+        return MaterialPageRoute(builder: (_) => QrCodePage());
       case AppRoute.messages:
         return MaterialPageRoute(builder: (_) => MessagesPage());
       case AppRoute.profile:

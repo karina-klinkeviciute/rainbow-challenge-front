@@ -26,7 +26,7 @@ class _MainArea extends StatelessWidget {
   Widget build(BuildContext context) {
     return MessageWidget(
       icon: ThemeIcons.shop,
-      title: 'Čia galėsi keisti taškus į mielus daikčiukus',
+      title: 'Čia galėsi keisti vaivorykštes į mielus daikčiukus',
     );
   }
 }
