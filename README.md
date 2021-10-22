@@ -42,3 +42,10 @@ Custom widgets can be found in `lib > widgets`. They can be reused in different 
 - **WrapperSimpleWidget({ required mainArea, bodyBackgroundColor })** - displays a Scaffold structure with minimal setup with fullscreen body.
 
 - **WrapperMainWidget( { required mainArea, bodyBackgroundColor })** - displays a Scaffold structure with standard setup.
+
+## Constants
+
+A list of constants that can be used for navigation and API, and perhaps to store some other values. Can be found in `lib/constants` folder.
+
+### AppRoute.routeName 
+Can be used to access a named route constant 

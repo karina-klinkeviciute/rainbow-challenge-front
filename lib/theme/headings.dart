@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:rainbow_challenge/theme/colors.dart';
-import 'package:rainbow_challenge/theme/fonts.dart';
+import 'package:rainbow_challenge/theme/fonts.dart' as ThemeFonts;
 
 // TO DO: make headings easy to use in various cases.
 // Maybe we should use Theme.of() instead? I am not sure what it better.

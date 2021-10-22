@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:rainbow_challenge/theme/colors.dart';
-import 'package:rainbow_challenge/theme/icons.dart';
+import 'package:rainbow_challenge/widgets/bottom_menu.dart';
 import 'package:rainbow_challenge/widgets/message.dart';
 import 'package:rainbow_challenge/widgets/wrapper_main.dart';
 
-// Regions page.
-// To do everything.
+// Profile page
+// TO DO: everything
 
-class RegionsPage extends StatelessWidget {
-  const RegionsPage({Key? key}) : super(key: key);
+class ProfilePage extends StatelessWidget {
+  const ProfilePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -25,8 +25,8 @@ class _MainArea extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MessageWidget(
-      icon: ThemeIcons.regions,
-      title: 'Čia bus regionai',
+      icon: Icons.account_circle,
+      title: 'Čia bus tavo profilis',
     );
   }
 }

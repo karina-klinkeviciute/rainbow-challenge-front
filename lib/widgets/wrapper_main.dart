@@ -10,19 +10,21 @@ class WrapperMainWidget extends StatelessWidget {
   final Color bodyBackgroundColor;
 
   const WrapperMainWidget(
-      {Key key,
-      @required this.mainArea,
+      {Key? key,
+      required this.mainArea,
       this.bodyBackgroundColor = Colors.white})
       : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(),
+        appBar: AppBar(
+          backgroundColor: bodyBackgroundColor,
+        ),
         backgroundColor: bodyBackgroundColor,
         bottomNavigationBar: const BottomMenuWidget(),
         body: SingleChildScrollView(
           child: Center(
-            child: Container(
+            child: Padding(
                 padding: const EdgeInsets.only(bottom: 30), child: mainArea),
           ),
         ));

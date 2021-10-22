@@ -4,11 +4,11 @@ import 'package:rainbow_challenge/theme/icons.dart';
 import 'package:rainbow_challenge/widgets/message.dart';
 import 'package:rainbow_challenge/widgets/wrapper_main.dart';
 
-// Regions page.
+// Messages page.
 // To do everything.
 
-class RegionsPage extends StatelessWidget {
-  const RegionsPage({Key? key}) : super(key: key);
+class MessagesPage extends StatelessWidget {
+  const MessagesPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -25,8 +25,8 @@ class _MainArea extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MessageWidget(
-      icon: ThemeIcons.regions,
-      title: 'Čia bus regionai',
+      icon: ThemeIcons.chat,
+      title: 'Čia galėsi susirašinėti',
     );
   }
 }
