@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:rainbow_challenge/utils/model/api_model.dart';
 
-final _base = "http://rainbowchallenge.lt:8000";
+final _base = "https://rainbowchallenge.lt";
 final _tokenEndpoint = "/auth/token/login/";
 final _tokenURL = _base + _tokenEndpoint;
 
@@ -21,7 +21,7 @@ Future<Token> getToken(UserLogin userLogin) async {
    return Token.fromJson(json.decode(response.body));
 
   } else {
-    print(json.decode(response.body).toString());
+    //print(json.decode(response.body).toString());
     throw Exception(json.decode(response.body));
   }
 }
