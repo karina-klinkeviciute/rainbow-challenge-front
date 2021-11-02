@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rainbow_challenge/pages/__example.dart';
+import 'package:rainbow_challenge/pages/challenges/cubit/challenges_cubit.dart';
 import 'package:rainbow_challenge/theme/colors.dart';
 import 'package:rainbow_challenge/widgets/headline.dart';
 import 'package:rainbow_challenge/widgets/wrapper_main.dart';
-import 'package:rainbow_challenge/utils/model/challenge_model.dart';
+import 'package:rainbow_challenge/utils/model/challenge/challenge_class.dart';
 
 // TO DO: change hard coded values to API, design, functionality.
 
@@ -12,6 +14,7 @@ class ChallengesPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    BlocProvider.of<ChallengesCubit>(context).fetchChallenges();
     return const WrapperMainWidget(
       mainArea: _MainArea(),
     );
@@ -30,15 +33,10 @@ class _MainArea extends StatelessWidget {
           const HeadlineWidget(
             title: 'Užduotys',
           ),
-          ElevatedButton(
-              onPressed: () {
-                Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => ExamplePage()));
-              },
-              child: Text('Make request')),
           //    _LocalNavigation(),
           //  _AllChallenges(challenges: []),
-          _ChallengesList()
+          _ChallengesList2(),
+          //  _ChallengesList()
         ],
       ),
     );
@@ -94,6 +92,7 @@ class _ChallengesList extends StatelessWidget {
   }
 }
 
+/*
 class _LocalNavigation extends StatefulWidget {
   const _LocalNavigation({Key? key}) : super(key: key);
 
@@ -119,25 +118,34 @@ class __LocalNavigationState extends State<_LocalNavigation> {
     );
   }
 }
+*/
 
-class _AllChallenges extends StatelessWidget {
-  const _AllChallenges({Key? key, required this.challenges}) : super(key: key);
-
-  final List<Challenge> challenges;
+class _ChallengesList2 extends StatelessWidget {
+  const _ChallengesList2({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return GridView.builder(
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-      ),
-      itemCount: challenges.length,
-      itemBuilder: (context, index) {
-        return Text(challenges[index].description);
+    return BlocBuilder<ChallengesCubit, ChallengesState>(
+      builder: (context, state) {
+        if (!(state is ChallengesLoaded))
+          return Center(child: CircularProgressIndicator());
+        // final challenges = (state as ChallengesLoaded).challenges;
+        final challengesList = (state).challengesList;
+        return ListView(
+          // Add context to _challenge if needed
+          // children: challenges.map((e) => _challenge(e, context)).toList(),
+
+          children: challengesList.map((e) => _challenge(e)).toList(),
+        );
       },
     );
   }
 }
 
-void _makeRequest() async {}
-void _goToPage() {}
+// Widget _challenge(Challenge challenge, context) - in case we would need it
+Widget _challenge(Challenge challenge) {
+  return ListTile(
+    title: Text(challenge.name),
+    subtitle: Text(challenge.description),
+  );
+}
