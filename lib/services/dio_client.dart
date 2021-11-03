@@ -114,7 +114,7 @@ class Logging extends Interceptor {
 
 class DioClient {
   // TO DO: Get current user token here
-  static String token = '726dad29ac2279a5001ed9b61baeebe1ab99fae3';
+  static String token = '';
   Dio _dio = Dio();
 
   DioClient() {
