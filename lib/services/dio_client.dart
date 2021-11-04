@@ -110,11 +110,12 @@ class Logging extends Interceptor {
   }
 }
 
+
 */
 
 class DioClient {
   // TO DO: Get current user token here
-  static String token = '';
+  static String token = 'af3790b6940fe23d541d13748af4a87c46d54bef';
   Dio _dio = Dio();
 
   DioClient() {
@@ -156,7 +157,7 @@ class DioClient {
     try {
       final response = await _dio.get(endPoint);
       print(response.data);
-      return response.data.toString() as List;
+      return response.data as List;
     } on DioError catch (e) {
       print(e);
     }
