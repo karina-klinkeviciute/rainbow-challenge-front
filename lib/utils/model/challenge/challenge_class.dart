@@ -5,7 +5,7 @@ part 'challenge_class.g.dart';
 class Challenge {
   Challenge({
     required this.uuid,
-    required this.concreteChallengeUuid,
+    required this.concrete_challenge_uuid,
     required this.type,
     required this.name,
     required this.description,
@@ -13,25 +13,25 @@ class Challenge {
 //    this.published,
     // Points = Vaivorykštės
     required this.points,
-    this.startDate,
-    this.endDate,
+    this.start_date,
+    this.end_date,
     required this.multiple,
-    required this.needsConfirmation,
+    required this.needs_confirmation,
     this.region,
   });
 
   String uuid;
-  String concreteChallengeUuid;
+  String concrete_challenge_uuid;
   String type;
   String name;
   String description;
   String? image;
 //  bool? published;
   int points;
-  DateTime? startDate;
-  DateTime? endDate;
+  DateTime? start_date;
+  DateTime? end_date;
   bool multiple;
-  bool needsConfirmation;
+  bool needs_confirmation;
   String? region;
 
   factory Challenge.fromJson(Map<String, dynamic> json) =>
