@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rainbow_challenge/constants/app.dart';
 import 'package:rainbow_challenge/pages/about.dart';
 import 'package:rainbow_challenge/pages/challenge.dart';
 import 'package:rainbow_challenge/pages/challenges/challenges_page.dart';
+import 'package:rainbow_challenge/pages/challenges/cubit/challenges_cubit.dart';
 import 'package:rainbow_challenge/pages/home_empty.dart';
 import 'package:rainbow_challenge/pages/navigation.dart';
 import 'package:rainbow_challenge/pages/qr_code.dart';
@@ -11,14 +13,29 @@ import 'package:rainbow_challenge/pages/logout.dart';
 import 'package:rainbow_challenge/pages/messages.dart';
 import 'package:rainbow_challenge/pages/regions.dart';
 import 'package:rainbow_challenge/pages/profile/profile_page.dart';
+import 'package:rainbow_challenge/services/dio_client.dart';
+import 'package:rainbow_challenge/utils/repository/challenges_repository.dart';
 
 // In this file we define named app route.
 // One of use cases is with Navigator: `Navigator.pushNamed(context, routeName)`.
+
 class AppRouter {
+  ChallengesRepository challengesRepository =
+      ChallengesRepository(dioClient: DioClient());
+
+  AppRouter() {
+    challengesRepository = ChallengesRepository(dioClient: DioClient());
+  }
+
   Route? onGenerateRoute(RouteSettings routeSettings) {
     switch (routeSettings.name) {
       case AppRoute.challenges:
-        return MaterialPageRoute(builder: (_) => ChallengesPage());
+        return MaterialPageRoute(
+            builder: (_) => BlocProvider(
+                  create: (BuildContext context) => ChallengesCubit(
+                      challengesRepository: challengesRepository),
+                  child: ChallengesPage(),
+                ));
       case AppRoute.challengesStarted:
         return MaterialPageRoute(builder: (_) => ChallengesPage());
       case AppRoute.challenge:

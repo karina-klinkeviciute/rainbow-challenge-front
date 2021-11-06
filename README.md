@@ -49,3 +49,14 @@ A list of constants that can be used for navigation and API, and perhaps to stor
 
 ### AppRoute.routeName 
 Can be used to access a named route constant 
+
+## Json serialization
+
+We can use JSON serialization and generate the factory methods automatically by using `json_serializable`, `build_runner` and `json_annotation` packages. 
+
+Generate
+`flutter pub run build_runner build`
+
+Generate and update automatically while working with model
+`flutter pub run build_runner serve --delete-conflicting-outputs`
+
