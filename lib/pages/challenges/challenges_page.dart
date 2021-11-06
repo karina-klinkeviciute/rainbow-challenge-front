@@ -132,6 +132,8 @@ class _ChallengesList2 extends StatelessWidget {
         // final challenges = (state as ChallengesLoaded).challenges;
         final challengesList = (state).challengesList;
         return ListView(
+          scrollDirection: Axis.vertical,
+          shrinkWrap: true,
           // Add context to _challenge if needed
           // children: challenges.map((e) => _challenge(e, context)).toList(),
 
