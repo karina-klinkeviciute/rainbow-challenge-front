@@ -1,4 +1,25 @@
 {
     "app_title": "Rainbow Challenge",
-   "email": "El. paštas"
+    "email": "El. paštas",
+    "testing": "Test",
+    "menu_home": "Home",
+    "menu_profile": "Profile",
+    "menu_challenges": "Challenges",
+    "menu_regions": "Regions",
+    "menu_navigation": "Navigation",
+    "menu_challenges_joined": "Joined challenges",
+    "menu_about": "About",
+    "menu_qr_code": "Scan QR code",
+    "menu_shop": "Shop",
+    "menu_messages": "Messages",
+    "challenge_type_article": "Articles",
+    "challenge_type_custom": "Custom",
+    "challenge_type_event": "Event participation",
+    "challenge_type_event_org": "Event organization",
+    "challenge_type_project": "Project",
+    "challenge_type_quiz": "Quiz",
+    "challenge_type_reacting": "Reaction to events",
+    "challenge_type_school_gsa": "School GSA",
+    "challenge_type_story": "Story",
+    "challenge_type_support": "Support"
 }

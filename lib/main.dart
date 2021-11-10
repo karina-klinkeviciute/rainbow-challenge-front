@@ -56,17 +56,15 @@ class App extends StatelessWidget {
         child: MaterialApp(
           theme: DesignTheme.lightTheme,
           darkTheme: DesignTheme.darkTheme,
-          title: 'Rainbow challenge', //AppLocalizations.of(context)!.app_title,
+          onGenerateTitle: (BuildContext context) =>
+              AppLocalizations.of(context)!.app_title,
           localizationsDelegates: [
             AppLocalizations.delegate,
             GlobalMaterialLocalizations.delegate,
             GlobalWidgetsLocalizations.delegate,
             GlobalCupertinoLocalizations.delegate,
           ],
-          supportedLocales: [
-            Locale('lt', ''),
-            //Locale('en', '')
-          ],
+          supportedLocales: [Locale('lt', ''), Locale('en', '')],
           onGenerateRoute: appRouter.onGenerateRoute,
           initialRoute: '/',
           // Home value can be removed after we define the default route in AppRoute()

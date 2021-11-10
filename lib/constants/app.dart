@@ -3,7 +3,7 @@
 class AppRoute {
   AppRoute._();
   static const String challenges = 'challenges';
-  static const String challengesStarted = 'challenges_started';
+  static const String challengesJoined = 'challenges_joined';
   static const String challenge = 'challenge';
   static const String profile = 'profile';
   static const String shop = 'shop';
