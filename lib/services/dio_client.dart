@@ -120,11 +120,13 @@ class DioClient {
 
   DioClient() {
     _dio = Dio(BaseOptions(
-        baseUrl: Api.baseUrl,
-        responseType: ResponseType.json,
-        connectTimeout: 30000,
-        receiveTimeout: 30000,
-        headers: {"Authorization": "Token $token"}));
+      baseUrl: Api.baseUrl,
+      responseType: ResponseType.json,
+      contentType: 'application/json', // Added contentType here
+      connectTimeout: 30000,
+      receiveTimeout: 30000,
+      headers: {"Authorization": "Token $token"},
+    ));
 
     //  initializeInterceptors();
   }

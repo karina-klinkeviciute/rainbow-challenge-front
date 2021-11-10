@@ -29,6 +29,7 @@ class AppRouter {
 
   Route? onGenerateRoute(RouteSettings routeSettings) {
     switch (routeSettings.name) {
+      // Maybe we should divide this file to parts?
       case AppRoute.challenges:
         return MaterialPageRoute(
             builder: (_) => BlocProvider(
@@ -36,7 +37,8 @@ class AppRouter {
                       challengesRepository: challengesRepository),
                   child: ChallengesPage(),
                 ));
-      case AppRoute.challengesStarted:
+
+      case AppRoute.challengesJoined:
         return MaterialPageRoute(builder: (_) => ChallengesPage());
       case AppRoute.challenge:
         return MaterialPageRoute(builder: (_) => ChallengePage());

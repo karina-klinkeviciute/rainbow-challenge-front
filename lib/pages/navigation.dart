@@ -4,6 +4,7 @@ import 'package:rainbow_challenge/theme/colors.dart';
 import 'package:rainbow_challenge/theme/headings.dart';
 import 'package:rainbow_challenge/theme/icons.dart';
 import 'package:rainbow_challenge/widgets/bottom_menu.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 // A page that consists of all main pages displayed in a grid.
 // TO DO: functionality
@@ -27,45 +28,46 @@ class NavigationPage extends StatelessWidget {
               mainAxisSpacing: 10,
               crossAxisCount: 2,
               childAspectRatio: (2 / 1.3),
-              children: const <Widget>[
+              children: <Widget>[
                 _GridItem(
                   itemIcon: ThemeIcons.challenges,
-                  itemTitle: 'Užduotys',
+                  itemTitle: AppLocalizations.of(context)!.menu_challenges,
                   routeName: AppRoute.challenges,
                 ),
                 _GridItem(
                   itemIcon: ThemeIcons.regions,
-                  itemTitle: 'Regionai',
+                  itemTitle: AppLocalizations.of(context)!.menu_regions,
                   routeName: AppRoute.regions,
                 ),
                 _GridItem(
                   itemIcon: ThemeIcons.profile,
-                  itemTitle: 'Profilis',
+                  itemTitle: AppLocalizations.of(context)!.menu_profile,
                   routeName: AppRoute.profile,
                 ),
                 _GridItem(
                   itemIcon: ThemeIcons.chat,
-                  itemTitle: 'Susirašinėjimai',
+                  itemTitle: AppLocalizations.of(context)!.menu_messages,
                   routeName: AppRoute.messages,
                 ),
                 _GridItem(
                   itemIcon: ThemeIcons.qrCode,
-                  itemTitle: 'Qr kodo skenavimas',
+                  itemTitle: AppLocalizations.of(context)!.menu_qr_code,
                   routeName: AppRoute.qrCode,
                 ),
                 _GridItem(
-                  itemIcon: ThemeIcons.challengesStarted,
-                  itemTitle: 'Pradėtos užduotys',
-                  routeName: AppRoute.challengesStarted,
+                  itemIcon: ThemeIcons.challengesJoined,
+                  itemTitle:
+                      AppLocalizations.of(context)!.menu_challenges_joined,
+                  routeName: AppRoute.challengesJoined,
                 ),
                 _GridItem(
                   itemIcon: ThemeIcons.shop,
-                  itemTitle: 'Parduotuvė',
+                  itemTitle: AppLocalizations.of(context)!.menu_shop,
                   routeName: AppRoute.shop,
                 ),
                 _GridItem(
                   itemIcon: ThemeIcons.about,
-                  itemTitle: 'Apie projektą',
+                  itemTitle: AppLocalizations.of(context)!.menu_about,
                   routeName: AppRoute.about,
                 ),
                 //  _gridItem(Icons.favorite, 'Apie projektą'),

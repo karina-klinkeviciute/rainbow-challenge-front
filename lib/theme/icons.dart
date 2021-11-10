@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 
 class ThemeIcons {
   static const challenges = Icons.star_outline;
-  static const challengesStarted = Icons.star_half;
+  static const challengesJoined = Icons.star_half;
   static const regions = Icons.fmd_good;
   static const profile = Icons.account_circle;
   static const chat = Icons.chat;
