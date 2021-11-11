@@ -6,7 +6,7 @@ Rainbow Challenge is licensed by the MIT license. Full license in the LICENSE fi
 
 ## About Rainbow Challenge
 
-Rainbow challenge is a project meant to help young LGBTQIA+ activists to get involved in the activism and protection of LGBTQIA rights.
+Rainbow challenge is a project meant to help young LGBTQIA+ activists to get involved in the activism and protection of LGBTQIA+ rights.
 
 ## Rainbow challenge app
 
