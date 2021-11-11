@@ -14,7 +14,7 @@ This app helps people, especially youth to get involved in the LGBTQIA+ activism
 
 ## Backend of the app
 
-Backend of the app is in another repository which is also licensed byt the MIT license: [https://github.com/karina-klinkeviciute/rainbow-challenge](https://github.com/karina-klinkeviciute/rainbow-challenge) 
+Backend of the app is in another repository which is also licensed by the MIT license: [https://github.com/karina-klinkeviciute/rainbow-challenge](https://github.com/karina-klinkeviciute/rainbow-challenge) 
 
 ## Theme
 
