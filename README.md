@@ -1,5 +1,20 @@
 # rainbow_challenge
 
+## License
+
+Rainbow Challenge is licensed by the MIT license. Full license in the LICENSE file
+
+## About Rainbow Challenge
+
+Rainbow challenge is a project meant to help young LGBTQIA+ activists to get involved in the activism and protection of LGBTQIA rights.
+
+## Rainbow challenge app
+
+This app helps people, especially youth to get involved in the LGBTQIA+ activism and support in a captivating and rewarding way.
+
+## Backend of the app
+
+Backend of the app is in another repository which is also licensed byt the MIT license: [https://github.com/karina-klinkeviciute/rainbow-challenge](https://github.com/karina-klinkeviciute/rainbow-challenge) 
 
 ## Theme
 
