@@ -14,25 +14,18 @@ class ChallengePage extends StatelessWidget {
     //  BlocProvider.of<ChallengesCubit>(context).fetchChallenges();
     return WrapperMainWidget(
         mainArea: SizedBox(
-      width: MediaQuery.of(context).size.width * 0.8,
-      child: Column(
-        children: [
-          ChallengeHeadlineWidget(
-            title: challengeInfo.name,
-            points: challengeInfo.points,
-          ),
-          ChallengeDescriptionWidget(description: challengeInfo.description),
-          Padding(
-              padding: const EdgeInsets.symmetric(vertical: 40.0),
-              child: Column(
-                children: [
-                  _buttonArea,
-                  _challengeFormArea,
-                ],
-              ))
-        ],
-      ),
-    ));
+            width: MediaQuery.of(context).size.width * 0.8,
+            child: Column(children: [
+              ChallengeHeadlineWidget(
+                title: challengeInfo.name,
+                points: challengeInfo.points,
+              ),
+              ChallengeDescriptionWidget(
+                  description: challengeInfo.description),
+              Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 40.0),
+                  child: _buttonArea)
+            ])));
   }
 
   // Work in progress
@@ -40,10 +33,8 @@ class ChallengePage extends StatelessWidget {
   // If != then show _buttonArea
   // Else show _challengeFormArea
 
-  Widget _buttonArea = Text('If not joined - Join Challenge button',
-      style: TextStyle(color: Colors.red));
-  Widget _challengeFormArea =
-      Text('If joined - Challenge form', style: TextStyle(color: Colors.green));
+  Widget _buttonArea =
+      ElevatedButton(onPressed: () {}, child: Text('Join the challenge'));
 }
 
 class ChallengePageArguments {

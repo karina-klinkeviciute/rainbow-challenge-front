@@ -87,25 +87,27 @@ class _ChallengesList extends StatelessWidget {
       if (!(state is ChallengesLoaded))
         return Center(child: CircularProgressIndicator());
       final challengesList = (state).challengesList;
+      final challengesListJoinable = challengesList
+        ..where((e) => e.can_be_joined == true);
       final challengesTypeQuiz = challengesList.where((e) => e.type == 'quiz');
       final challengesTypeArticle =
-          challengesList.where((e) => e.type == 'article');
+          challengesListJoinable.where((e) => e.type == 'article');
       final challengesTypeEvent =
-          challengesList.where((e) => e.type == 'event');
+          challengesListJoinable.where((e) => e.type == 'event');
       final challengesTypeCustom =
-          challengesList.where((e) => e.type == 'custom');
+          challengesListJoinable.where((e) => e.type == 'custom');
       final challengesTypeSchoolGsa =
-          challengesList.where((e) => e.type == 'school_gsa');
+          challengesListJoinable.where((e) => e.type == 'school_gsa');
       final challengesTypeEventOrg =
-          challengesList.where((e) => e.type == 'event_org');
+          challengesListJoinable.where((e) => e.type == 'event_org');
       final challengesTypeStory =
-          challengesList.where((e) => e.type == 'story');
+          challengesListJoinable.where((e) => e.type == 'story');
       final challengesTypeProject =
-          challengesList.where((e) => e.type == 'project');
+          challengesListJoinable.where((e) => e.type == 'project');
       final challengesTypeReacting =
-          challengesList.where((e) => e.type == 'reacting');
+          challengesListJoinable.where((e) => e.type == 'reacting');
       final challengesTypeSupport =
-          challengesList.where((e) => e.type == 'support');
+          challengesListJoinable.where((e) => e.type == 'support');
 
       final List<dynamic> filteredChallengeTypes = [
         challengesTypeArticle,
@@ -188,6 +190,7 @@ class _challengeType extends StatelessWidget {
             MaterialPageRoute(
                 builder: (context) => ChallengePage(challengeInfo: challenge)));
       },
+
       /*
       onTap: () {
         Navigator.pushNamed(context, AppRoute.challenge,
