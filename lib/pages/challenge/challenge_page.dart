@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:rainbow_challenge/constants/app.dart';
-import 'package:rainbow_challenge/pages/__example.dart';
-import 'package:rainbow_challenge/pages/challenges/challenges_page.dart';
 import 'package:rainbow_challenge/utils/model/challenge/challenge_class.dart';
 import 'package:rainbow_challenge/widgets/widgets.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ChallengePage extends StatelessWidget {
   ChallengePage({Key? key, required this.challengeInfo}) : super(key: key);
@@ -24,7 +22,8 @@ class ChallengePage extends StatelessWidget {
                   description: challengeInfo.description),
               Padding(
                   padding: const EdgeInsets.symmetric(vertical: 40.0),
-                  child: _buttonArea)
+                  child: _buttonArea(
+                      AppLocalizations.of(context)!.action_join_challenge))
             ])));
   }
 
@@ -33,8 +32,12 @@ class ChallengePage extends StatelessWidget {
   // If != then show _buttonArea
   // Else show _challengeFormArea
 
-  Widget _buttonArea =
-      ElevatedButton(onPressed: () {}, child: Text('Join the challenge'));
+  ElevatedButton _buttonArea(String buttonText) {
+    return ElevatedButton(
+      onPressed: () {},
+      child: Text(buttonText),
+    );
+  }
 }
 
 class ChallengePageArguments {
