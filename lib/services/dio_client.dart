@@ -164,4 +164,14 @@ class DioClient {
       print(e);
     }
   }
+
+  Future<dynamic> getItem(String endPoint) async {
+    try {
+      final response = await _dio.get(endPoint);
+      print(response.data);
+      return response.data;
+    } on DioError catch (e) {
+      print(e);
+    }
+  }
 }

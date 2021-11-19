@@ -31,6 +31,7 @@ extension ChallengeTypeName on ChallengeType {
     ChallengeType.school_gsa: "Visuomenės informavimas",
     ChallengeType.story: "Pasidalink savo istorija",
     ChallengeType.support: "Parama",
+    
   };
 
   String? get name => names[this];

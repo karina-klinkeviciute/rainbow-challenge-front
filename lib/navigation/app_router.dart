@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rainbow_challenge/constants/app.dart';
 import 'package:rainbow_challenge/pages/about.dart';
-import 'package:rainbow_challenge/pages/challenge.dart';
+import 'package:rainbow_challenge/pages/challenge/challenge_page.dart';
 import 'package:rainbow_challenge/pages/challenges/challenges_page.dart';
 import 'package:rainbow_challenge/pages/challenges/cubit/challenges_cubit.dart';
 import 'package:rainbow_challenge/pages/home_empty.dart';
@@ -40,8 +40,8 @@ class AppRouter {
 
       case AppRoute.challengesJoined:
         return MaterialPageRoute(builder: (_) => ChallengesPage());
-      case AppRoute.challenge:
-        return MaterialPageRoute(builder: (_) => ChallengePage());
+      //  case AppRoute.challenge:
+      //    return MaterialPageRoute(builder: (_) => ChallengePage());
       case AppRoute.regions:
         return MaterialPageRoute(builder: (_) => RegionsPage());
       case AppRoute.navigation:

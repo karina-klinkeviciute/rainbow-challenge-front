@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:rainbow_challenge/widgets/html.dart';
+import 'package:rainbow_challenge/widgets/widgets.dart';
 
 // A single article page.
 // TO DO: continue with both layout and functionality

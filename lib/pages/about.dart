@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:rainbow_challenge/widgets/headline.dart';
-import 'package:rainbow_challenge/widgets/html.dart';
-import 'package:rainbow_challenge/widgets/image_external.dart';
-import 'package:rainbow_challenge/widgets/wrapper_main.dart';
+import 'package:rainbow_challenge/widgets/widgets.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 // About page

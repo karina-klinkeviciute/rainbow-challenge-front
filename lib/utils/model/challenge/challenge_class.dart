@@ -3,6 +3,20 @@ part 'challenge_class.g.dart';
 
 @JsonSerializable()
 class Challenge {
+  String uuid;
+  String concrete_challenge_uuid;
+  String type;
+  String name;
+  String description;
+  String? image;
+//  bool? published;
+  int points;
+  DateTime? start_date;
+  DateTime? end_date;
+  bool multiple;
+  bool needs_confirmation;
+  String? region;
+
   Challenge({
     required this.uuid,
     required this.concrete_challenge_uuid,
@@ -19,20 +33,6 @@ class Challenge {
     required this.needs_confirmation,
     this.region,
   });
-
-  String uuid;
-  String concrete_challenge_uuid;
-  String type;
-  String name;
-  String description;
-  String? image;
-//  bool? published;
-  int points;
-  DateTime? start_date;
-  DateTime? end_date;
-  bool multiple;
-  bool needs_confirmation;
-  String? region;
 
   factory Challenge.fromJson(Map<String, dynamic> json) =>
       _$ChallengeFromJson(json);

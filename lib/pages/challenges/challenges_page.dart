@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:rainbow_challenge/constants/enums.dart';
+import 'package:rainbow_challenge/constants/app.dart';
 import 'package:rainbow_challenge/pages/challenges/cubit/challenges_cubit.dart';
+import 'package:rainbow_challenge/pages/pages.dart';
 import 'package:rainbow_challenge/theme/colors.dart';
-import 'package:rainbow_challenge/widgets/headline.dart';
-import 'package:rainbow_challenge/widgets/wrapper_main.dart';
-import 'package:rainbow_challenge/utils/model/challenge/challenge_class.dart';
+import 'package:rainbow_challenge/widgets/widgets.dart';
+import 'package:rainbow_challenge/utils/model/models.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-// TO DO: change hard coded values to API, design, functionality.
+// TO DO: design _challenge
+// TO DO: replace front end filtering with backend endpoints
 
 class ChallengesPage extends StatelessWidget {
   const ChallengesPage({Key? key}) : super(key: key);
@@ -181,6 +182,31 @@ class _challengeType extends StatelessWidget {
       title:
           Text(challenge.name, style: Theme.of(context).textTheme.headline4!),
       subtitle: Text(challenge.description),
+      onTap: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => ChallengePage(challengeInfo: challenge)));
+      },
+      /*
+      onTap: () {
+        Navigator.pushNamed(context, AppRoute.challenge,
+            arguments: ChallengesPageArguments(
+                description: 'ths', title: 'tr', uuid: 'rrr', points: 4));
+      },*/
     );
   }
+}
+
+class ChallengesPageArguments {
+  final String title;
+  final String description;
+  final String uuid;
+  final int points;
+
+  ChallengesPageArguments(
+      {required this.description,
+      required this.title,
+      required this.uuid,
+      required this.points});
 }

@@ -8,7 +8,7 @@ import 'package:rainbow_challenge/theme/fonts.dart' as ThemeFonts;
 // BottomMenu is built with the built-in widget BottomNavigationBar.
 // The looks are defined with theme variables in lib/theme folder.
 
-// TO DO: add functionality
+// TO DO: fix functionality. Tabs should be activated even without onTap.
 
 class BottomMenuWidget extends StatelessWidget {
   const BottomMenuWidget({Key? key}) : super(key: key);
