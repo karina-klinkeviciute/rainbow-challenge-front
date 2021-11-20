@@ -23,6 +23,7 @@ Challenge _$ChallengeFromJson(Map<String, dynamic> json) => Challenge(
       multiple: json['multiple'] as bool,
       needs_confirmation: json['needs_confirmation'] as bool,
       region: json['region'] as String?,
+      can_be_joined: json['can_be_joined'] as bool,
     );
 
 Map<String, dynamic> _$ChallengeToJson(Challenge instance) => <String, dynamic>{
@@ -38,4 +39,5 @@ Map<String, dynamic> _$ChallengeToJson(Challenge instance) => <String, dynamic>{
       'multiple': instance.multiple,
       'needs_confirmation': instance.needs_confirmation,
       'region': instance.region,
+      'can_be_joined': instance.can_be_joined,
     };

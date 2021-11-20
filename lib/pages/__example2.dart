@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:rainbow_challenge/widgets/image_local.dart';
+import 'package:rainbow_challenge/widgets/widgets.dart';
 
 // Example page. Testing, playing with widgets and compositions.
 class ExamplePage2 extends StatelessWidget {

@@ -14,4 +14,5 @@ class AppRoute {
   static const String qrCode = 'qr_code';
   static const String messages = 'messages';
   static const String about = 'about';
+  static const String example = 'example';
 }

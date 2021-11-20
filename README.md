@@ -38,7 +38,7 @@ Colors for various built-in widgets are described in `lib/theme/design_theme.dar
 
 Custom widgets can be found in `lib > widgets`. They can be reused in different places of the app.
 
-- **BottomMenuWidget()** - a buttom navigation bar that uses the built-in MaterialApp BottomNavigationBar widget. The built-in widget has limited options for visual effects (item border is not available at the moment), but it's easier to implement than a widget made from scratch. Perhaps there are possibilities to add more visual flexibility (further research is needed).
+- **BottomMenuWidget()** - a bottom navigation bar that uses the built-in MaterialApp BottomNavigationBar widget. The built-in widget has limited options for visual effects (item border is not available at the moment), but it's easier to implement than a widget made from scratch. Perhaps there are possibilities to add more visual flexibility (further research is needed).
 
 - **ColoredAreaWidget({ backgroundColor, required content })** - this widget adds an area with background and rounded corners. Background color has a default value.
 
@@ -69,9 +69,9 @@ Can be used to access a named route constant
 
 We can use JSON serialization and generate the factory methods automatically by using `json_serializable`, `build_runner` and `json_annotation` packages. 
 
-Generate  
+Generate code 
 `flutter pub run build_runner build`
 
-Generate and update automatically while working with model  
+Generate code and update it automatically while working with model
 `flutter pub run build_runner serve --delete-conflicting-outputs`
 

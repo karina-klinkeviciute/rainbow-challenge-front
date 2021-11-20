@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rainbow_challenge/theme/colors.dart';
-import 'package:rainbow_challenge/widgets/html.dart';
+import 'package:rainbow_challenge/widgets/widgets.dart';
 
 // A message widget that can be used in dialog messages, action boxes
 // and similar.

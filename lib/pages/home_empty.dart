@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rainbow_challenge/theme/colors.dart';
-import 'package:rainbow_challenge/widgets/bottom_menu.dart';
-import 'package:rainbow_challenge/widgets/message.dart';
+import 'package:rainbow_challenge/widgets/widgets.dart';
 
 // This page is a suggestion on how the home page can look while
 // the ArticlesPage() is empty.

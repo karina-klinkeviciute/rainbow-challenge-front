@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rainbow_challenge/theme/colors.dart';
-import 'package:rainbow_challenge/widgets/bottom_menu.dart';
+import 'package:rainbow_challenge/widgets/widgets.dart';
 
 // A widget that uses a built in Scaffold widget with pages that use standard
 // Scaffold structure with standard Scaffold.AppBar settings and BottomMenuWidget()

@@ -21,5 +21,6 @@
     "challenge_type_reacting": "Reaction to events",
     "challenge_type_school_gsa": "School GSA",
     "challenge_type_story": "Story",
-    "challenge_type_support": "Support"
+    "challenge_type_support": "Support",
+    "action_join_challenge": "Join the challenge"
 }

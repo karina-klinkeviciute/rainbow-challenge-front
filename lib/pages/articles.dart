@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:rainbow_challenge/widgets/image_external.dart';
+import 'package:rainbow_challenge/widgets/widgets.dart';
 
 // Articles page that will be used as a landing page for those who log in.
 // TO DO: Everything. Articles list will be added here.

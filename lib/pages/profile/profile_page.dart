@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rainbow_challenge/theme/colors.dart';
-import 'package:rainbow_challenge/widgets/bottom_menu.dart';
-import 'package:rainbow_challenge/widgets/message.dart';
-import 'package:rainbow_challenge/widgets/wrapper_main.dart';
+import 'package:rainbow_challenge/widgets/widgets.dart';
 
 // Profile page
 // TO DO: everything

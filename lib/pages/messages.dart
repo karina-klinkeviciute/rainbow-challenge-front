@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rainbow_challenge/theme/colors.dart';
 import 'package:rainbow_challenge/theme/icons.dart';
-import 'package:rainbow_challenge/widgets/message.dart';
-import 'package:rainbow_challenge/widgets/wrapper_main.dart';
+import 'package:rainbow_challenge/widgets/widgets.dart';
 
 // Messages page.
 // To do everything.

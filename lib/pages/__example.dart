@@ -1,23 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:rainbow_challenge/bloc/internet_cubit.dart';
-import 'package:rainbow_challenge/widgets/colored_area.dart';
-import 'package:rainbow_challenge/widgets/heading_lined.dart';
-import 'package:rainbow_challenge/widgets/headline.dart';
-import 'package:rainbow_challenge/widgets/html.dart';
-import 'package:rainbow_challenge/widgets/bottom_menu.dart';
+import 'package:rainbow_challenge/pages/challenge/challenge_page.dart';
+import 'package:rainbow_challenge/widgets/widgets.dart';
 
 // Example page. Testing, playing with widgets and compositions.
 class ExamplePage extends StatelessWidget {
   const ExamplePage({Key? key}) : super(key: key);
+//  static const routeName = 'example';
 
   @override
   Widget build(BuildContext context) {
+    final args =
+        ModalRoute.of(context)!.settings.arguments as ChallengePageArguments;
     return Scaffold(
         appBar: AppBar(),
         body: SingleChildScrollView(
           child: Column(
             children: [
+              Text(args.title),
               const _ImageSection(
                   'https://tja.lt/wp-content/uploads/2021/08/vidutinis.png'),
               Padding(

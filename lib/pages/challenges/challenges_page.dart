@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:rainbow_challenge/constants/enums.dart';
+import 'package:rainbow_challenge/constants/app.dart';
 import 'package:rainbow_challenge/pages/challenges/cubit/challenges_cubit.dart';
+import 'package:rainbow_challenge/pages/pages.dart';
 import 'package:rainbow_challenge/theme/colors.dart';
-import 'package:rainbow_challenge/widgets/headline.dart';
-import 'package:rainbow_challenge/widgets/wrapper_main.dart';
-import 'package:rainbow_challenge/utils/model/challenge/challenge_class.dart';
+import 'package:rainbow_challenge/widgets/widgets.dart';
+import 'package:rainbow_challenge/utils/model/models.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-// TO DO: change hard coded values to API, design, functionality.
+// TO DO: design _challenge
+// TO DO: replace front end filtering with backend endpoints
 
 class ChallengesPage extends StatelessWidget {
   const ChallengesPage({Key? key}) : super(key: key);
@@ -86,25 +87,27 @@ class _ChallengesList extends StatelessWidget {
       if (!(state is ChallengesLoaded))
         return Center(child: CircularProgressIndicator());
       final challengesList = (state).challengesList;
+      final challengesListJoinable = challengesList
+        ..where((e) => e.can_be_joined == true);
       final challengesTypeQuiz = challengesList.where((e) => e.type == 'quiz');
       final challengesTypeArticle =
-          challengesList.where((e) => e.type == 'article');
+          challengesListJoinable.where((e) => e.type == 'article');
       final challengesTypeEvent =
-          challengesList.where((e) => e.type == 'event');
+          challengesListJoinable.where((e) => e.type == 'event');
       final challengesTypeCustom =
-          challengesList.where((e) => e.type == 'custom');
+          challengesListJoinable.where((e) => e.type == 'custom');
       final challengesTypeSchoolGsa =
-          challengesList.where((e) => e.type == 'school_gsa');
+          challengesListJoinable.where((e) => e.type == 'school_gsa');
       final challengesTypeEventOrg =
-          challengesList.where((e) => e.type == 'event_org');
+          challengesListJoinable.where((e) => e.type == 'event_org');
       final challengesTypeStory =
-          challengesList.where((e) => e.type == 'story');
+          challengesListJoinable.where((e) => e.type == 'story');
       final challengesTypeProject =
-          challengesList.where((e) => e.type == 'project');
+          challengesListJoinable.where((e) => e.type == 'project');
       final challengesTypeReacting =
-          challengesList.where((e) => e.type == 'reacting');
+          challengesListJoinable.where((e) => e.type == 'reacting');
       final challengesTypeSupport =
-          challengesList.where((e) => e.type == 'support');
+          challengesListJoinable.where((e) => e.type == 'support');
 
       final List<dynamic> filteredChallengeTypes = [
         challengesTypeArticle,
@@ -181,6 +184,32 @@ class _challengeType extends StatelessWidget {
       title:
           Text(challenge.name, style: Theme.of(context).textTheme.headline4!),
       subtitle: Text(challenge.description),
+      onTap: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => ChallengePage(challengeInfo: challenge)));
+      },
+
+      /*
+      onTap: () {
+        Navigator.pushNamed(context, AppRoute.challenge,
+            arguments: ChallengesPageArguments(
+                description: 'ths', title: 'tr', uuid: 'rrr', points: 4));
+      },*/
     );
   }
+}
+
+class ChallengesPageArguments {
+  final String title;
+  final String description;
+  final String uuid;
+  final int points;
+
+  ChallengesPageArguments(
+      {required this.description,
+      required this.title,
+      required this.uuid,
+      required this.points});
 }

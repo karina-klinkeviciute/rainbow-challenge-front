@@ -3,7 +3,7 @@ import 'package:rainbow_challenge/constants/app.dart';
 import 'package:rainbow_challenge/theme/colors.dart';
 import 'package:rainbow_challenge/theme/headings.dart';
 import 'package:rainbow_challenge/theme/icons.dart';
-import 'package:rainbow_challenge/widgets/bottom_menu.dart';
+import 'package:rainbow_challenge/widgets/widgets.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 // A page that consists of all main pages displayed in a grid.
