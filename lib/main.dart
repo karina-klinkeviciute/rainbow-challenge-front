@@ -65,7 +65,9 @@ class App extends StatelessWidget {
             GlobalWidgetsLocalizations.delegate,
             GlobalCupertinoLocalizations.delegate,
           ],
-          supportedLocales: [Locale('lt', ''), Locale('en', '')],
+          supportedLocales: [Locale('lt', ''),
+            // Locale('en', '')
+          ],
           onGenerateRoute: appRouter.onGenerateRoute,
           initialRoute: '/',
           // Home value can be removed after we define the default route in AppRoute()
