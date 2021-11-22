@@ -7,12 +7,12 @@ part 'joined_challenge_quiz_class.g.dart';
 class JoinedChallengeQuiz {
   JoinedChallengeQuiz({
     required this.uuid,
-    required this.mainChallenge,
+    required this.mainJoinedChallenge,
     this.quiz_user,
   });
 
   String uuid;
-  Challenge mainChallenge;
+  JoinedChallenge mainJoinedChallenge;
   String? quiz_user;
 
   factory JoinedChallengeQuiz.fromJson(Map<String, dynamic> json) =>
