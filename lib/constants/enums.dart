@@ -16,6 +16,8 @@ enum ChallengeType {
   support
 }
 
+enum ChallengeStatus { joined, completed, cancelled, confirmed }
+
 // Would be nice if this worked with localizations. We need context here...
 /*
 extension ChallengeTypeName on ChallengeType {
