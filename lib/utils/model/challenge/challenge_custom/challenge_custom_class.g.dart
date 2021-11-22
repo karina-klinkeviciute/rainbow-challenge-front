@@ -9,7 +9,6 @@ part of 'challenge_custom_class.dart';
 ChallengeCustom _$ChallengeCustomFromJson(Map<String, dynamic> json) =>
     ChallengeCustom(
       uuid: json['uuid'] as String,
-      organization: json['organization'] as String?,
       mainChallenge:
           Challenge.fromJson(json['mainChallenge'] as Map<String, dynamic>),
     );
@@ -17,6 +16,5 @@ ChallengeCustom _$ChallengeCustomFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$ChallengeCustomToJson(ChallengeCustom instance) =>
     <String, dynamic>{
       'uuid': instance.uuid,
-      'organization': instance.organization,
       'mainChallenge': instance.mainChallenge.toJson(),
     };

@@ -22,5 +22,6 @@
     "challenge_type_school_gsa": "School GSA",
     "challenge_type_story": "Story",
     "challenge_type_support": "Support",
-    "action_join_challenge": "Join the challenge"
+    "action_join_challenge": "Join the challenge",
+    "joined_challenge_event_field_qr_code": "QR code"
 }

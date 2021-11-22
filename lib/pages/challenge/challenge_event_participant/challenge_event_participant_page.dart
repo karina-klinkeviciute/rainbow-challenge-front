@@ -28,9 +28,12 @@ class _MainArea extends StatelessWidget {
             title: 'TITLE',
             points: 5,
           ),
-          ChallengeDescriptionWidget(description: 'DESCRIPTION')
+          ChallengeDescriptionWidget(description: 'DESCRIPTION'),
+          //  challengeForm,
         ],
       ),
     );
   }
+
+//  Widget challengeForm = {Text('Challenge form')};
 }
