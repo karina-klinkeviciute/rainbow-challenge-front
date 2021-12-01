@@ -6,16 +6,29 @@ import 'package:rainbow_challenge/widgets/widgets.dart';
 // Regions page.
 // To do everything.
 
-class RegionsPage extends StatelessWidget {
+class RegionsPage extends StatefulWidget {
   const RegionsPage({Key? key}) : super(key: key);
 
   @override
+  _RegionsPageState createState() {
+    return _RegionsPageState();
+  }
+}
+
+class _RegionsPageState extends State<RegionsPage>
+    with AutomaticKeepAliveClientMixin<RegionsPage> {
+  @override
   Widget build(BuildContext context) {
+    super.build(context);
     return WrapperMainWidget(
       mainArea: _MainArea(),
       bodyBackgroundColor: ThemeColors.bgColorLight,
+      useAppBar: false,
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }
 
 class _MainArea extends StatelessWidget {

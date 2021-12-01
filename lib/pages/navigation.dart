@@ -3,80 +3,93 @@ import 'package:rainbow_challenge/constants/app.dart';
 import 'package:rainbow_challenge/theme/colors.dart';
 import 'package:rainbow_challenge/theme/headings.dart';
 import 'package:rainbow_challenge/theme/icons.dart';
-import 'package:rainbow_challenge/widgets/widgets.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 // A page that consists of all main pages displayed in a grid.
 // TO DO: functionality
 
-class NavigationPage extends StatelessWidget {
+class NavigationPage extends StatefulWidget {
   const NavigationPage({Key? key}) : super(key: key);
+
+  @override
+  _NavigationPageState createState() {
+    return _NavigationPageState();
+  }
+}
+
+class _NavigationPageState extends State<NavigationPage>
+    with AutomaticKeepAliveClientMixin<NavigationPage> {
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     // final String _itemTitle;
     // final String _itemIcon;
     return Scaffold(
-        appBar: AppBar(),
-        body: Center(
-          child: SizedBox(
-            width: MediaQuery.of(context).size.width * 0.8,
-            child: GridView.count(
-              //  scrollDirection: Axis.horizontal,
-              primary: false,
-              padding: const EdgeInsets.symmetric(vertical: 20),
-              crossAxisSpacing: 10,
-              mainAxisSpacing: 10,
-              crossAxisCount: 2,
-              childAspectRatio: (2 / 1.3),
-              children: <Widget>[
-                _GridItem(
-                  itemIcon: ThemeIcons.challenges,
-                  itemTitle: AppLocalizations.of(context)!.menu_challenges,
-                  routeName: AppRoute.challenges,
-                ),
-                _GridItem(
-                  itemIcon: ThemeIcons.regions,
-                  itemTitle: AppLocalizations.of(context)!.menu_regions,
-                  routeName: AppRoute.regions,
-                ),
-                _GridItem(
-                  itemIcon: ThemeIcons.profile,
-                  itemTitle: AppLocalizations.of(context)!.menu_profile,
-                  routeName: AppRoute.profile,
-                ),
-                _GridItem(
-                  itemIcon: ThemeIcons.chat,
-                  itemTitle: AppLocalizations.of(context)!.menu_messages,
-                  routeName: AppRoute.messages,
-                ),
-                _GridItem(
-                  itemIcon: ThemeIcons.qrCode,
-                  itemTitle: AppLocalizations.of(context)!.menu_qr_code,
-                  routeName: AppRoute.qrCode,
-                ),
-                _GridItem(
-                  itemIcon: ThemeIcons.challengesJoined,
-                  itemTitle:
-                      AppLocalizations.of(context)!.menu_challenges_joined,
-                  routeName: AppRoute.challengesJoined,
-                ),
-                _GridItem(
-                  itemIcon: ThemeIcons.shop,
-                  itemTitle: AppLocalizations.of(context)!.menu_shop,
-                  routeName: AppRoute.shop,
-                ),
-                _GridItem(
-                  itemIcon: ThemeIcons.about,
-                  itemTitle: AppLocalizations.of(context)!.menu_about,
-                  routeName: AppRoute.about,
-                ),
-                //  _gridItem(Icons.favorite, 'Apie projektą'),
-              ],
+      body: Padding(
+          padding: EdgeInsets.only(top: 40),
+          child: Center(
+            child: SizedBox(
+              width: MediaQuery.of(context).size.width * 0.8,
+              child: GridView.count(
+                //  scrollDirection: Axis.horizontal,
+                primary: false,
+                padding: const EdgeInsets.symmetric(vertical: 20),
+                crossAxisSpacing: 10,
+                mainAxisSpacing: 10,
+                crossAxisCount: 2,
+                childAspectRatio: (2 / 1.3),
+                children: <Widget>[
+                  _GridItem(
+                    itemIcon: ThemeIcons.challenges,
+                    itemTitle: AppLocalizations.of(context)!.menu_challenges,
+                    routeName: AppRoute.challenges,
+                  ),
+                  _GridItem(
+                    itemIcon: ThemeIcons.regions,
+                    itemTitle: AppLocalizations.of(context)!.menu_regions,
+                    routeName: AppRoute.regions,
+                  ),
+                  _GridItem(
+                    itemIcon: ThemeIcons.profile,
+                    itemTitle: AppLocalizations.of(context)!.menu_profile,
+                    routeName: AppRoute.profile,
+                  ),
+                  _GridItem(
+                    itemIcon: ThemeIcons.chat,
+                    itemTitle: AppLocalizations.of(context)!.menu_messages,
+                    routeName: AppRoute.messages,
+                  ),
+                  _GridItem(
+                    itemIcon: ThemeIcons.qrCode,
+                    itemTitle: AppLocalizations.of(context)!.menu_qr_code,
+                    routeName: AppRoute.qrCode,
+                  ),
+                  _GridItem(
+                    itemIcon: ThemeIcons.challengesJoined,
+                    itemTitle:
+                        AppLocalizations.of(context)!.menu_challenges_joined,
+                    routeName: AppRoute.challengesJoined,
+                  ),
+                  _GridItem(
+                    itemIcon: ThemeIcons.shop,
+                    itemTitle: AppLocalizations.of(context)!.menu_shop,
+                    routeName: AppRoute.shop,
+                  ),
+                  _GridItem(
+                    itemIcon: ThemeIcons.about,
+                    itemTitle: AppLocalizations.of(context)!.menu_about,
+                    routeName: AppRoute.about,
+                  ),
+                  //  _gridItem(Icons.favorite, 'Apie projektą'),
+                ],
+              ),
             ),
-          ),
-        ),
-        bottomNavigationBar: const BottomMenuWidget());
+          )),
+    );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }
 
 class _GridItem extends StatelessWidget {

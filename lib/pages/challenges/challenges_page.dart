@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:rainbow_challenge/constants/app.dart';
 import 'package:rainbow_challenge/pages/challenges/cubit/challenges_cubit.dart';
 import 'package:rainbow_challenge/pages/pages.dart';
 import 'package:rainbow_challenge/theme/colors.dart';
@@ -11,16 +10,26 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 // TO DO: design _challenge
 // TO DO: replace front end filtering with backend endpoints
 
-class ChallengesPage extends StatelessWidget {
+class ChallengesPage extends StatefulWidget {
   const ChallengesPage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    BlocProvider.of<ChallengesCubit>(context).fetchChallenges();
-    return const WrapperMainWidget(
-      mainArea: _MainArea(),
-    );
+  _ChallengesPageState createState() {
+    return _ChallengesPageState();
   }
+}
+
+class _ChallengesPageState extends State<ChallengesPage>
+    with AutomaticKeepAliveClientMixin<ChallengesPage> {
+  @override
+  Widget build(BuildContext context) {
+    super.build(context);
+    BlocProvider.of<ChallengesCubit>(context).fetchChallenges();
+    return const WrapperMainWidget(mainArea: _MainArea(), useAppBar: false);
+  }
+
+  @override
+  bool get wantKeepAlive => true;
 }
 
 class _MainArea extends StatelessWidget {

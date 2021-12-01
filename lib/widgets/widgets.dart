@@ -1,6 +1,5 @@
 // A list of our custom widgets.
 
-export 'bottom_menu.dart';
 export 'colored_area.dart';
 export 'heading_lined.dart';
 export 'headline.dart';
