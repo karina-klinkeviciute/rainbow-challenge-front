@@ -5,16 +5,11 @@ import 'package:rainbow_challenge/widgets/widgets.dart';
 // Profile page
 // TO DO: everything
 
-class ProfilePage extends StatelessWidget {
+class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return WrapperMainWidget(
-      mainArea: _MainArea(),
-      bodyBackgroundColor: ThemeColors.bgColorLight,
-    );
-  }
+  _profilePageState createState() => _profilePageState();
 }
 
 class _MainArea extends StatelessWidget {
@@ -27,4 +22,20 @@ class _MainArea extends StatelessWidget {
       title: 'Čia bus tavo profilis',
     );
   }
+}
+
+class _profilePageState extends State<ProfilePage>
+    with AutomaticKeepAliveClientMixin<ProfilePage> {
+  @override
+  Widget build(BuildContext context) {
+    super.build(context);
+    return WrapperMainWidget(
+      mainArea: _MainArea(),
+      bodyBackgroundColor: ThemeColors.bgColorLight,
+      useAppBar: false,
+    );
+  }
+
+  @override
+  bool get wantKeepAlive => true;
 }

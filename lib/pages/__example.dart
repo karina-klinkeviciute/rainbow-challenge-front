@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rainbow_challenge/pages/challenge/challenge_page.dart';
 import 'package:rainbow_challenge/widgets/widgets.dart';
 
@@ -13,53 +12,53 @@ class ExamplePage extends StatelessWidget {
     final args =
         ModalRoute.of(context)!.settings.arguments as ChallengePageArguments;
     return Scaffold(
-        appBar: AppBar(),
-        body: SingleChildScrollView(
-          child: Column(
-            children: [
-              Text(args.title),
-              const _ImageSection(
-                  'https://tja.lt/wp-content/uploads/2021/08/vidutinis.png'),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(30, 30, 30, 40),
-                child: Column(
-                  children: [
-                    // _ConnectionInfo(),
-                    const HeadingLinedWidget(title: 'Labas rytas'),
-                    const ColoredAreaWidget(
-                      content: Text("labas rytas"),
-                      //  backgroundColor: ThemeColors.primaryColor
-                    ),
-                    const _TitleSection(
-                        '2021 08 16',
-                        'This title can be long, and it also can be short.'
-                            ' It depends.'),
-                    _textSection,
-                    const HeadlineWidget(
-                        title: 'Užduotys',
-                        subtitle: 'Labas! Smagu tave matyti ir vėl!'),
-                    const HeadlineWidget(title: 'Regionai'),
-                    ElevatedButton(
-                      child: Text('Prisijungti'.toUpperCase()),
-                      onPressed: () {},
-                    ),
-                    const SizedBox(height: 5),
-                    OutlinedButton(
-                      child: Text('Prisijungti'.toUpperCase()),
-                      onPressed: () {},
-                    ),
-                    const SizedBox(height: 5),
-                    TextButton(
-                      child: const Text('Prisijungti'),
-                      onPressed: () {},
-                    )
-                  ],
-                ),
+      appBar: AppBar(),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Text(args.title),
+            const _ImageSection(
+                'https://tja.lt/wp-content/uploads/2021/08/vidutinis.png'),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(30, 30, 30, 40),
+              child: Column(
+                children: [
+                  // _ConnectionInfo(),
+                  const HeadingLinedWidget(title: 'Labas rytas'),
+                  const ColoredAreaWidget(
+                    content: Text("labas rytas"),
+                    //  backgroundColor: ThemeColors.primaryColor
+                  ),
+                  const _TitleSection(
+                      '2021 08 16',
+                      'This title can be long, and it also can be short.'
+                          ' It depends.'),
+                  _textSection,
+                  const HeadlineWidget(
+                      title: 'Užduotys',
+                      subtitle: 'Labas! Smagu tave matyti ir vėl!'),
+                  const HeadlineWidget(title: 'Regionai'),
+                  ElevatedButton(
+                    child: Text('Prisijungti'.toUpperCase()),
+                    onPressed: () {},
+                  ),
+                  const SizedBox(height: 5),
+                  OutlinedButton(
+                    child: Text('Prisijungti'.toUpperCase()),
+                    onPressed: () {},
+                  ),
+                  const SizedBox(height: 5),
+                  TextButton(
+                    child: const Text('Prisijungti'),
+                    onPressed: () {},
+                  )
+                ],
               ),
-            ],
-          ),
+            ),
+          ],
         ),
-        bottomNavigationBar: const BottomMenuWidget());
+      ),
+    );
   }
 }
 
