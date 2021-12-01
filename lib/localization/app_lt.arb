@@ -23,5 +23,7 @@
     "challenge_type_story": "Pasidalink savo istorija",
     "challenge_type_support": "Parama",
     "action_join_challenge": "Pradėk užduotį",
-    "joined_challenge_event_field_qr_code": "QR kodas"
+    "joined_challenge_event_field_qr_code": "Skenuoti QR kodą",
+    "joined_challenge_event_field_qr_code_wrong": "Atsiprašome, neteisingas QR kodas",
+    "joined_challenge_event_field_qr_code_right": "Užduotis atlikta"
 }

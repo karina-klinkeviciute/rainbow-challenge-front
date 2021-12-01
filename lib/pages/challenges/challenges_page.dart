@@ -192,7 +192,7 @@ class _challengeType extends StatelessWidget {
     return ListTile(
       title:
           Text(challenge.name, style: Theme.of(context).textTheme.headline4!),
-      subtitle: Text(challenge.description),
+      // subtitle: Text(challenge.description),
       onTap: () {
         Navigator.push(
             context,

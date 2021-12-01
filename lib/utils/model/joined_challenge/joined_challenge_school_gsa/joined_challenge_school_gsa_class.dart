@@ -6,10 +6,10 @@ part 'joined_challenge_school_gsa_class.g.dart';
 @JsonSerializable(explicitToJson: true)
 class JoinedChallengeSchoolGsa {
   JoinedChallengeSchoolGsa(
-      {required this.uuid, required this.mainJoinedChallenge});
+      {required this.uuid, required this.main_joinedChallenge});
 
   String uuid;
-  JoinedChallenge mainJoinedChallenge;
+  JoinedChallenge main_joinedChallenge;
 
   factory JoinedChallengeSchoolGsa.fromJson(Map<String, dynamic> json) =>
       _$JoinedChallengeSchoolGsaFromJson(json);

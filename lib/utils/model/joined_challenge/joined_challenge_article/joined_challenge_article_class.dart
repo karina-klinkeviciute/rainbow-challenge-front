@@ -7,14 +7,14 @@ part 'joined_challenge_article_class.g.dart';
 class JoinedChallengeArticle {
   JoinedChallengeArticle(
       {required this.uuid,
-      required this.mainJoinedChallenge,
+      required this.main_joinedChallenge,
       this.article_name,
       this.article_url});
 
   String uuid;
   String? article_name;
   String? article_url;
-  JoinedChallenge mainJoinedChallenge;
+  JoinedChallenge main_joinedChallenge;
 
   factory JoinedChallengeArticle.fromJson(Map<String, dynamic> json) =>
       _$JoinedChallengeArticleFromJson(json);

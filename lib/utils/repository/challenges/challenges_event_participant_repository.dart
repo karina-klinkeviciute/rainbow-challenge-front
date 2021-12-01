@@ -14,9 +14,14 @@ class ChallengesEventParticipantRepository {
         .toList();
   }
 
-  Future<ChallengeEventParticipant> fetchChallenge(String uuid) async {
-    final challengeRaw =
-        await dioClient.getItem(Api.challengeEventParticipantEndpoint + uuid);
-    return challengeRaw!.map((e) => ChallengeEventParticipant.fromJson(e));
+  Future<ChallengeEventParticipant> fetchChallenge(
+      {required String uuid}) async {
+    // BUG: Putting constant creates wrong URL. Should fix this later.
+    //
+    Api api = Api();
+    final challengeType = api.getChallengeTypeSubPath(Api.challengeTypeEvent);
+    final challengeRaw = await dioClient
+        .getItem('/api/challenge/event_participant_challenge/$uuid/');
+    return ChallengeEventParticipant.fromJson(challengeRaw!);
   }
 }

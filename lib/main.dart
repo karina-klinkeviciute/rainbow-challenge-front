@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rainbow_challenge/bloc/bottom_menu_cubit.dart';
 import 'package:rainbow_challenge/bloc/internet_cubit.dart';
 import 'package:rainbow_challenge/navigation/app_router.dart';
-import 'package:rainbow_challenge/pages/challenge/challenge_page.dart';
 import 'package:rainbow_challenge/pages/home_empty.dart';
 import 'package:rainbow_challenge/theme/design_theme.dart';
 import 'package:rainbow_challenge/utils/repository/user_repository.dart';
@@ -24,6 +23,7 @@ void main() {
       connectivity: Connectivity()));
 }
 
+// Perhaps App could be added as an import
 class App extends StatelessWidget {
   final UserRepository userRepository;
   final AppRouter appRouter;
@@ -65,7 +65,8 @@ class App extends StatelessWidget {
             GlobalWidgetsLocalizations.delegate,
             GlobalCupertinoLocalizations.delegate,
           ],
-          supportedLocales: [Locale('lt', ''),
+          supportedLocales: [
+            Locale('lt', ''),
             // Locale('en', '')
           ],
           onGenerateRoute: appRouter.onGenerateRoute,

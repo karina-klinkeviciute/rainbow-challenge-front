@@ -10,9 +10,9 @@ JoinedChallengeCustom _$JoinedChallengeCustomFromJson(
         Map<String, dynamic> json) =>
     JoinedChallengeCustom(
       uuid: json['uuid'] as String,
-      description: json['description'] as String,
-      mainJoinedChallenge: JoinedChallenge.fromJson(
-          json['mainJoinedChallenge'] as Map<String, dynamic>),
+      description: json['description'] as String?,
+      main_joinedChallenge: JoinedChallenge.fromJson(
+          json['main_joinedChallenge'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$JoinedChallengeCustomToJson(
@@ -20,5 +20,5 @@ Map<String, dynamic> _$JoinedChallengeCustomToJson(
     <String, dynamic>{
       'uuid': instance.uuid,
       'description': instance.description,
-      'mainJoinedChallenge': instance.mainJoinedChallenge.toJson(),
+      'main_joinedChallenge': instance.main_joinedChallenge.toJson(),
     };

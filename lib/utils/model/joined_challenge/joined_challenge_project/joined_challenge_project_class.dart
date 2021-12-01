@@ -7,15 +7,15 @@ part 'joined_challenge_project_class.g.dart';
 class JoinedChallengeProject {
   JoinedChallengeProject(
       {required this.uuid,
-      required this.mainJoinedChallenge,
-      required this.project_description,
+      required this.main_joinedChallenge,
+      this.project_description,
       this.project_name,
       this.project_url,
       this.implemented_alone});
 
   String uuid;
-  JoinedChallenge mainJoinedChallenge;
-  String project_description;
+  JoinedChallenge main_joinedChallenge;
+  String? project_description;
   String? project_url;
   String? project_name;
   bool? implemented_alone;

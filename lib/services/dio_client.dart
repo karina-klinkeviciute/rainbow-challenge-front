@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:rainbow_challenge/constants/api.dart';
+import 'package:rainbow_challenge/utils/model/models.dart';
 
 // TO DO: Add interceptors
 // We could create helper methods that can be used for various
@@ -110,17 +111,17 @@ class Logging extends Interceptor {
   }
 }
 
-
 */
 
 class DioClient {
   // TO DO: Get current user token here
   static String token = 'af3790b6940fe23d541d13748af4a87c46d54bef';
   Dio _dio = Dio();
+  static String baseUrl = Api.baseUrl;
 
   DioClient() {
     _dio = Dio(BaseOptions(
-      baseUrl: Api.baseUrl,
+      baseUrl: baseUrl,
       responseType: ResponseType.json,
       contentType: 'application/json', // Added contentType here
       connectTimeout: 30000,
@@ -143,7 +144,7 @@ class DioClient {
       print(response.data);
     }));
   }
-
+/*
   Future<Response?> getRequest(String endPoint) async {
     Response response;
     try {
@@ -152,8 +153,9 @@ class DioClient {
       print(e.message);
       throw Exception(e.message);
     }
+    print(response.data);
     return response;
-  }
+  } */
 
   Future<List<dynamic>?> getList(String endPoint) async {
     try {
@@ -165,10 +167,44 @@ class DioClient {
     }
   }
 
-  Future<dynamic> getItem(String endPoint) async {
+  Future<Map<String, dynamic>?> getItem(String endPoint) async {
     try {
       final response = await _dio.get(endPoint);
       print(response.data);
+      return response.data;
+    } on DioError catch (e) {
+      print('Error');
+      print(e);
+    }
+  }
+
+  Future<Map<String, dynamic>?> addItem(
+      String endPoint, Map<String, dynamic> itemObject) async {
+    try {
+      final response = await _dio.post(endPoint, data: itemObject);
+      print('Item added ${response.data}');
+      return response.data;
+    } on DioError catch (e) {
+      print(e);
+    }
+  }
+
+  Future<Map<String, dynamic>?> updateItem(
+      String endPoint, Map<String, dynamic> itemObject) async {
+    try {
+      final response = await _dio.patch(endPoint, data: itemObject);
+      print('Item updated ${response.data}');
+      return response.data;
+    } on DioError catch (e) {
+      print(e);
+    }
+  }
+
+  Future<Map<String, dynamic>?> removeItem(
+      String endPoint, Map<String, dynamic> itemObject) async {
+    try {
+      final response = await _dio.delete(endPoint, data: itemObject);
+      print('Item removed ${response.data}');
       return response.data;
     } on DioError catch (e) {
       print(e);

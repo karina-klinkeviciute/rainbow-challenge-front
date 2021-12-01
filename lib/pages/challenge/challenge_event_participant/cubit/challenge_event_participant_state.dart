@@ -8,3 +8,8 @@ abstract class ChallengeEventParticipantState extends Equatable {
 }
 
 class ChallengeEventParticipantInitial extends ChallengeEventParticipantState {}
+
+class ChallengeEventParticipantLoaded extends ChallengeEventParticipantState {
+  final ChallengeEventParticipant challengeTypeItem;
+  ChallengeEventParticipantLoaded({required this.challengeTypeItem});
+}

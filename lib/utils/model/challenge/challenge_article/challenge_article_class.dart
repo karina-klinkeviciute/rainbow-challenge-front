@@ -5,10 +5,10 @@ part 'challenge_article_class.g.dart';
 // explicitToJson lets using nested class Challenge
 @JsonSerializable(explicitToJson: true)
 class ChallengeArticle {
-  ChallengeArticle({required this.uuid, required this.mainChallenge});
+  ChallengeArticle({required this.uuid, required this.main_challenge});
 
   String uuid;
-  Challenge mainChallenge;
+  Challenge main_challenge;
 
   factory ChallengeArticle.fromJson(Map<String, dynamic> json) =>
       _$ChallengeArticleFromJson(json);

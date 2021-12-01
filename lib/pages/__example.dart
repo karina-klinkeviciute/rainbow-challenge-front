@@ -9,14 +9,12 @@ class ExamplePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final args =
-        ModalRoute.of(context)!.settings.arguments as ChallengePageArguments;
     return Scaffold(
       appBar: AppBar(),
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Text(args.title),
+            Text('Test'),
             const _ImageSection(
                 'https://tja.lt/wp-content/uploads/2021/08/vidutinis.png'),
             Padding(

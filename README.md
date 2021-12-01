@@ -34,6 +34,12 @@ Custom colors for the project are described in `lib/theme/colors.dart`.
 
 Colors for various built-in widgets are described in `lib/theme/design_theme.dart`. Some descriptions are work-in-progress, the light mode is more complete than the dark mode.
 
+### Icons 
+We combine our own icons with Material icons in the project.
+
+#### Material icons 
+List of material icons can be found [here »](https://fonts.google.com/icons)
+
 ## Custom Widgets 
 
 Custom widgets can be found in `lib > widgets`. They can be reused in different places of the app.
@@ -58,6 +64,10 @@ Custom widgets can be found in `lib > widgets`. They can be reused in different 
 
 - **WrapperMainWidget( { required mainArea, bodyBackgroundColor })** - displays a Scaffold structure with standard setup.
 
+- **ChallengeHeadlineWidget({ required title, required points })** - displays a headline in single challenge page templates. It includes the title and points. UI work is in progress.
+
+- **ChallengeDescriptionWidget({ description })** - displays a description in single challenge page if it exists. Uses HtmlWidget(). UI work is in progress.
+
 ## Constants
 
 A list of constants that can be used for navigation and API, and perhaps to store some other values. Can be found in `lib/constants` folder.
@@ -69,9 +79,8 @@ Can be used to access a named route constant
 
 We can use JSON serialization and generate the factory methods automatically by using `json_serializable`, `build_runner` and `json_annotation` packages. 
 
-Generate code 
+Generate code   
 `flutter pub run build_runner build`
 
-Generate code and update it automatically while working with model
+Generate code and update it automatically while working with model  
 `flutter pub run build_runner serve --delete-conflicting-outputs`
-

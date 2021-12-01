@@ -8,17 +8,17 @@ part 'joined_challenge_event_organizer_class.g.dart';
 class JoinedChallengeEventOrganizer {
   JoinedChallengeEventOrganizer(
       {required this.uuid,
-      required this.mainJoinedChallenge,
-      required this.event_description,
+      required this.main_joinedChallenge,
+      this.event_description,
       this.event_name,
       this.event_url,
       this.organized_alone});
 
   String uuid;
-  JoinedChallenge mainJoinedChallenge;
+  JoinedChallenge main_joinedChallenge;
   String? event_name;
   String? event_url;
-  String event_description;
+  String? event_description;
   bool? organized_alone;
 
   factory JoinedChallengeEventOrganizer.fromJson(Map<String, dynamic> json) =>
