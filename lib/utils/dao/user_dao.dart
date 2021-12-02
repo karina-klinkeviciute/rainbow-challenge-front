@@ -32,6 +32,20 @@ class UserDao {
     } catch (error) {
       return false;
     }
-
   }
+
+  Future<String?> getUserToken() async {
+    final db = await dbProvider.database;
+
+     try {
+      //List<Map> users = await db.query(userTable, where: 'id = ?', whereArgs: [0]);
+      var res = await db.query(userTable, where: 'id = ?', whereArgs: [0]);
+      return res.isNotEmpty ? (User.fromDatabaseJson(res.first)).token : null;
+
+    } catch (error) {
+      return null;
+    }
+  }
+
 }
+
