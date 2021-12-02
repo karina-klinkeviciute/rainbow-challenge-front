@@ -8,11 +8,11 @@ class JoinedChallengeCustom {
   JoinedChallengeCustom(
       {required this.uuid,
       this.description,
-      required this.main_joinedChallenge});
+      required this.main_joined_challenge});
 
   String uuid;
   String? description;
-  JoinedChallenge main_joinedChallenge;
+  JoinedChallenge main_joined_challenge;
 
   factory JoinedChallengeCustom.fromJson(Map<String, dynamic> json) =>
       _$JoinedChallengeCustomFromJson(json);

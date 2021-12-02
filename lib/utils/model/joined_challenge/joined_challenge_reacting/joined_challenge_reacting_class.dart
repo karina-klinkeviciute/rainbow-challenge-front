@@ -8,11 +8,11 @@ part 'joined_challenge_reacting_class.g.dart';
 class JoinedChallengeReacting {
   JoinedChallengeReacting(
       {required this.uuid,
-      required this.main_joinedChallenge,
+      required this.main_joined_challenge,
       this.reaction_description});
 
   String uuid;
-  JoinedChallenge main_joinedChallenge;
+  JoinedChallenge main_joined_challenge;
   String? reaction_description;
 
   factory JoinedChallengeReacting.fromJson(Map<String, dynamic> json) =>

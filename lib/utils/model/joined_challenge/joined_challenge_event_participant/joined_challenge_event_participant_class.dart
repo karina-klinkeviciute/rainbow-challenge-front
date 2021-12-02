@@ -7,11 +7,11 @@ part 'joined_challenge_event_participant_class.g.dart';
 class JoinedChallengeEventParticipant {
   JoinedChallengeEventParticipant(
       {required this.uuid,
-      required this.main_joinedChallenge,
+      required this.main_joined_challenge,
       this.qr_code = ""});
 
   String uuid;
-  JoinedChallenge main_joinedChallenge;
+  JoinedChallenge main_joined_challenge;
   String qr_code;
 
   factory JoinedChallengeEventParticipant.fromJson(Map<String, dynamic> json) =>
