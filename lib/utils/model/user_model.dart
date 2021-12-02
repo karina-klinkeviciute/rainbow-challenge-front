@@ -1,7 +1,7 @@
 class User {
   int id;
   String email;
-  String token;
+  String? token;
 
   User(
       {required this.id,
