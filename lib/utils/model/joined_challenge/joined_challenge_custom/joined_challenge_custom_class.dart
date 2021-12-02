@@ -7,12 +7,12 @@ part 'joined_challenge_custom_class.g.dart';
 class JoinedChallengeCustom {
   JoinedChallengeCustom(
       {required this.uuid,
-      required this.description,
-      required this.mainJoinedChallenge});
+      this.description,
+      required this.main_joined_challenge});
 
   String uuid;
-  String description;
-  JoinedChallenge mainJoinedChallenge;
+  String? description;
+  JoinedChallenge main_joined_challenge;
 
   factory JoinedChallengeCustom.fromJson(Map<String, dynamic> json) =>
       _$JoinedChallengeCustomFromJson(json);

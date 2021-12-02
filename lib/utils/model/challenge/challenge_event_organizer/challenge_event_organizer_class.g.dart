@@ -10,13 +10,13 @@ ChallengeEventOrganizer _$ChallengeEventOrganizerFromJson(
         Map<String, dynamic> json) =>
     ChallengeEventOrganizer(
       uuid: json['uuid'] as String,
-      mainChallenge:
-          Challenge.fromJson(json['mainChallenge'] as Map<String, dynamic>),
+      main_challenge:
+          Challenge.fromJson(json['main_challenge'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$ChallengeEventOrganizerToJson(
         ChallengeEventOrganizer instance) =>
     <String, dynamic>{
       'uuid': instance.uuid,
-      'mainChallenge': instance.mainChallenge.toJson(),
+      'main_challenge': instance.main_challenge.toJson(),
     };

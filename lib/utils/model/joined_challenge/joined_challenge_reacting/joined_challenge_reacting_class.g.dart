@@ -10,15 +10,15 @@ JoinedChallengeReacting _$JoinedChallengeReactingFromJson(
         Map<String, dynamic> json) =>
     JoinedChallengeReacting(
       uuid: json['uuid'] as String,
-      mainJoinedChallenge: JoinedChallenge.fromJson(
-          json['mainJoinedChallenge'] as Map<String, dynamic>),
-      reaction_description: json['reaction_description'] as String,
+      main_joined_challenge: JoinedChallenge.fromJson(
+          json['main_joined_challenge'] as Map<String, dynamic>),
+      reaction_description: json['reaction_description'] as String?,
     );
 
 Map<String, dynamic> _$JoinedChallengeReactingToJson(
         JoinedChallengeReacting instance) =>
     <String, dynamic>{
       'uuid': instance.uuid,
-      'mainJoinedChallenge': instance.mainJoinedChallenge.toJson(),
+      'main_joined_challenge': instance.main_joined_challenge.toJson(),
       'reaction_description': instance.reaction_description,
     };

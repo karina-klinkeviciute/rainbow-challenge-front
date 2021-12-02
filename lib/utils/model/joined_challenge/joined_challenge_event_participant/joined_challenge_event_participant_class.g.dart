@@ -10,15 +10,15 @@ JoinedChallengeEventParticipant _$JoinedChallengeEventParticipantFromJson(
         Map<String, dynamic> json) =>
     JoinedChallengeEventParticipant(
       uuid: json['uuid'] as String,
-      mainJoinedChallenge: JoinedChallenge.fromJson(
-          json['mainJoinedChallenge'] as Map<String, dynamic>),
-      qr_code: json['qr_code'] as String?,
+      main_joined_challenge: JoinedChallenge.fromJson(
+          json['main_joined_challenge'] as Map<String, dynamic>),
+      qr_code: json['qr_code'] as String? ?? "",
     );
 
 Map<String, dynamic> _$JoinedChallengeEventParticipantToJson(
         JoinedChallengeEventParticipant instance) =>
     <String, dynamic>{
       'uuid': instance.uuid,
-      'mainJoinedChallenge': instance.mainJoinedChallenge.toJson(),
+      'main_joined_challenge': instance.main_joined_challenge.toJson(),
       'qr_code': instance.qr_code,
     };

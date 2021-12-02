@@ -10,8 +10,8 @@ JoinedChallengeArticle _$JoinedChallengeArticleFromJson(
         Map<String, dynamic> json) =>
     JoinedChallengeArticle(
       uuid: json['uuid'] as String,
-      mainJoinedChallenge: JoinedChallenge.fromJson(
-          json['mainJoinedChallenge'] as Map<String, dynamic>),
+      main_joined_challenge: JoinedChallenge.fromJson(
+          json['main_joined_challenge'] as Map<String, dynamic>),
       article_name: json['article_name'] as String?,
       article_url: json['article_url'] as String?,
     );
@@ -22,5 +22,5 @@ Map<String, dynamic> _$JoinedChallengeArticleToJson(
       'uuid': instance.uuid,
       'article_name': instance.article_name,
       'article_url': instance.article_url,
-      'mainJoinedChallenge': instance.mainJoinedChallenge.toJson(),
+      'main_joined_challenge': instance.main_joined_challenge.toJson(),
     };

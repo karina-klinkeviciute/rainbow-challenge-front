@@ -10,12 +10,12 @@ ChallengeEventParticipant _$ChallengeEventParticipantFromJson(
         Map<String, dynamic> json) =>
     ChallengeEventParticipant(
       uuid: json['uuid'] as String,
-      event_name: json['event_name'] as String,
+      event_name: json['event_name'] as String?,
       date:
           json['date'] == null ? null : DateTime.parse(json['date'] as String),
       url: json['url'] as String?,
-      mainChallenge:
-          Challenge.fromJson(json['mainChallenge'] as Map<String, dynamic>),
+      main_challenge:
+          Challenge.fromJson(json['main_challenge'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$ChallengeEventParticipantToJson(
@@ -25,5 +25,5 @@ Map<String, dynamic> _$ChallengeEventParticipantToJson(
       'event_name': instance.event_name,
       'date': instance.date?.toIso8601String(),
       'url': instance.url,
-      'mainChallenge': instance.mainChallenge.toJson(),
+      'main_challenge': instance.main_challenge.toJson(),
     };

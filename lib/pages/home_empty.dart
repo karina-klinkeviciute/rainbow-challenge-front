@@ -5,7 +5,7 @@ import 'package:rainbow_challenge/pages/regions.dart';
 import 'package:rainbow_challenge/services/dio_client.dart';
 import 'package:rainbow_challenge/theme/colors.dart';
 import 'package:rainbow_challenge/theme/fonts.dart' as ThemeFonts;
-import 'package:rainbow_challenge/utils/repository/challenges_repository.dart';
+import 'package:rainbow_challenge/utils/repository/challenges/challenges_repository.dart';
 import 'package:rainbow_challenge/widgets/message.dart';
 
 import 'challenges/challenges_page.dart';

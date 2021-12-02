@@ -9,12 +9,12 @@ part of 'challenge_article_class.dart';
 ChallengeArticle _$ChallengeArticleFromJson(Map<String, dynamic> json) =>
     ChallengeArticle(
       uuid: json['uuid'] as String,
-      mainChallenge:
-          Challenge.fromJson(json['mainChallenge'] as Map<String, dynamic>),
+      main_challenge:
+          Challenge.fromJson(json['main_challenge'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$ChallengeArticleToJson(ChallengeArticle instance) =>
     <String, dynamic>{
       'uuid': instance.uuid,
-      'mainChallenge': instance.mainChallenge.toJson(),
+      'main_challenge': instance.main_challenge.toJson(),
     };

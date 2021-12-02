@@ -6,10 +6,10 @@ part 'challenge_quiz_class.g.dart';
 @JsonSerializable(explicitToJson: true)
 class ChallengeQuiz {
   ChallengeQuiz(
-      {required this.uuid, required this.quiz, required this.mainChallenge});
+      {required this.uuid, required this.quiz, required this.main_challenge});
 
   String uuid;
-  Challenge mainChallenge;
+  Challenge main_challenge;
   String quiz;
 
   factory ChallengeQuiz.fromJson(Map<String, dynamic> json) =>

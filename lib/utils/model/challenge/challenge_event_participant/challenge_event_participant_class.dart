@@ -7,16 +7,16 @@ part 'challenge_event_participant_class.g.dart';
 class ChallengeEventParticipant {
   ChallengeEventParticipant(
       {required this.uuid,
-      required this.event_name,
+      this.event_name,
       this.date,
       this.url,
-      required this.mainChallenge});
+      required this.main_challenge});
 
   String uuid;
-  String event_name;
+  String? event_name;
   DateTime? date;
   String? url;
-  Challenge mainChallenge;
+  Challenge main_challenge;
 
   factory ChallengeEventParticipant.fromJson(Map<String, dynamic> json) =>
       _$ChallengeEventParticipantFromJson(json);
