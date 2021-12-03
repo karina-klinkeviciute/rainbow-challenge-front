@@ -2,20 +2,15 @@ import 'dart:async';
 import 'package:rainbow_challenge/utils/model/user_model.dart';
 import 'package:rainbow_challenge/utils/model/api_model.dart';
 import 'package:rainbow_challenge/services/api_connection.dart';
-import 'package:rainbow_challenge/utils/dao/user_dao.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class UserRepository {
+  final String _userAccessTokenKey = "userAccessToken";
+  final storage = new FlutterSecureStorage();
 
-  final userDao = UserDao();
-
-  Future<User> authenticate ({
-    required String email,
-    required String password
-  }) async {
-    UserLogin userLogin = UserLogin(
-        email: email,
-        password: password
-    );
+  Future<User> authenticate(
+      {required String email, required String password}) async {
+    UserLogin userLogin = UserLogin(email: email, password: password);
 
     Token token = await getToken(userLogin);
 
@@ -27,50 +22,38 @@ class UserRepository {
     return user;
   }
 
-  Future<User> register ({
-    required int year_of_birth,
-    required String email,
-    required String password,
-    required String re_password
-  }) async {
+  Future<User> register(
+      {required int year_of_birth,
+      required String email,
+      required String password,
+      required String re_password}) async {
     UserRegister userReg = UserRegister(
-        year_of_birth: year_of_birth,
-        email: email,
-        password: password,
-        re_password: re_password,
-    );
-
-    Token token = await setUser(userReg);
-
-    User user = User(
-      id: 0,
+      year_of_birth: year_of_birth,
       email: email,
-      token: token.token,
+      password: password,
+      re_password: re_password,
     );
+
+    //Token token = await setUser(userReg);
+
+    User user = User(id: 0, email: email, token: null //token.token,
+        );
     return user;
   }
 
-  Future<void> persistToken ({
-    required User user
-  }) async {
-    // write token with the user to the database
-    await userDao.createUser(user);
+  Future<void> persistToken({required User user}) {
+    return storage.write(key: _userAccessTokenKey, value: user.token);
   }
 
-  Future <void> deleteToken({
-    required int id
-  }) async {
-    await userDao.deleteUser(id);
+  Future<void> deleteToken({required int id}) {
+    return storage.delete(key: _userAccessTokenKey);
   }
 
   Future<bool> hasToken() async {
-    bool result = await userDao.checkUser(0);
-    return result;
+    return await getUserToken() != null;
   }
 
-  Future<String?> getUserToken() async {
-    String? result = await userDao.getUserToken();
-    return result;
+  Future<String?> getUserToken() {
+    return storage.read(key: _userAccessTokenKey);
   }
-
 }
