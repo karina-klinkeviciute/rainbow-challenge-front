@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:rainbow_challenge/pages/profile/cubit/profile_info_cubit.dart';
 import 'package:rainbow_challenge/pages/profile/profile_page.dart';
 import 'package:rainbow_challenge/pages/regions.dart';
 import 'package:rainbow_challenge/services/dio_client.dart';
 import 'package:rainbow_challenge/theme/colors.dart';
 import 'package:rainbow_challenge/theme/fonts.dart' as ThemeFonts;
 import 'package:rainbow_challenge/utils/repository/challenges/challenges_repository.dart';
+import 'package:rainbow_challenge/utils/repository/profile/profile_repository.dart';
 import 'package:rainbow_challenge/widgets/message.dart';
 
 import 'challenges/challenges_page.dart';
@@ -21,6 +23,8 @@ class HomeEmptyPage extends StatelessWidget {
   final ChallengesRepository challengesRepository =
       ChallengesRepository(dioClient: DioClient());
 
+  final ProfileRepository profileRepository =
+      ProfileRepository(dioClient: DioClient());
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -45,7 +49,11 @@ class HomeEmptyPage extends StatelessWidget {
                       //      ' <a href="https://tja.lt">informacijos</a>.</p>',
                     ),
                   )),
-              ProfilePage(),
+              BlocProvider(
+                create: (BuildContext context) =>
+                    ProfileInfoCubit(profileRepository: profileRepository),
+                child: ProfilePage(),
+              ),
               BlocProvider(
                 create: (BuildContext context) =>
                     ChallengesCubit(challengesRepository: challengesRepository),

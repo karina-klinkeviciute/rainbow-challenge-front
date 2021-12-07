@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rainbow_challenge/constants/app.dart';
 import 'package:rainbow_challenge/navigation/route_arguments/single_challenge_arguments.dart';
 import 'package:rainbow_challenge/pages/pages.dart';
+import 'package:rainbow_challenge/pages/profile/cubit/profile_info_cubit.dart';
 import 'package:rainbow_challenge/services/dio_client.dart';
 import 'package:rainbow_challenge/utils/repository/repositories.dart';
 
@@ -23,6 +24,9 @@ import 'package:rainbow_challenge/pages/challenges/cubit/challenges_cubit.dart';
 // One of use cases is with Navigator: `Navigator.pushNamed(context, routeName)`.
 
 class AppRouter {
+  ProfileRepository profileRepository =
+      ProfileRepository(dioClient: DioClient());
+
   ChallengesRepository challengesRepository =
       ChallengesRepository(dioClient: DioClient());
 
@@ -219,6 +223,14 @@ class AppRouter {
                   ),
                 ));
 
+      case AppRoute.profile:
+        return MaterialPageRoute(
+            builder: (_) => BlocProvider(
+                  create: (BuildContext context) =>
+                      ProfileInfoCubit(profileRepository: profileRepository),
+                  child: ProfilePage(),
+                ));
+
       case AppRoute.challengesJoined:
         return MaterialPageRoute(builder: (_) => ChallengesPage());
       //  case AppRoute.challenge:
@@ -241,9 +253,6 @@ class AppRouter {
 
       case AppRoute.messages:
         return MaterialPageRoute(builder: (_) => MessagesPage());
-
-      case AppRoute.profile:
-        return MaterialPageRoute(builder: (_) => ProfilePage());
 
       case AppRoute.about:
         return MaterialPageRoute(builder: (_) => AboutPage());
