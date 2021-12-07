@@ -1,7 +1,6 @@
-import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:rainbow_challenge/constants/api.dart';
-import 'package:rainbow_challenge/utils/model/models.dart';
+import 'package:rainbow_challenge/utils/repository/repositories.dart';
 
 // TO DO: Add interceptors
 // We could create helper methods that can be used for various
@@ -115,7 +114,7 @@ class Logging extends Interceptor {
 
 class DioClient {
   // TO DO: Get current user token here
-  static String token = 'af3790b6940fe23d541d13748af4a87c46d54bef';
+  String _token = "";
   Dio _dio = Dio();
   static String baseUrl = Api.baseUrl;
 
@@ -126,7 +125,6 @@ class DioClient {
       contentType: 'application/json', // Added contentType here
       connectTimeout: 30000,
       receiveTimeout: 30000,
-      headers: {"Authorization": "Token $token"},
     ));
 
     //  initializeInterceptors();
@@ -159,6 +157,7 @@ class DioClient {
 
   Future<List<dynamic>?> getList(String endPoint) async {
     try {
+      await addAuthorizationHeader();
       final response = await _dio.get(endPoint);
       print(response.data);
       return response.data as List;
@@ -169,6 +168,7 @@ class DioClient {
 
   Future<Map<String, dynamic>?> getItem(String endPoint) async {
     try {
+      await addAuthorizationHeader();
       final response = await _dio.get(endPoint);
       print(response.data);
       return response.data;
@@ -181,6 +181,7 @@ class DioClient {
   Future<Map<String, dynamic>?> addItem(
       String endPoint, Map<String, dynamic> itemObject) async {
     try {
+      await addAuthorizationHeader();
       final response = await _dio.post(endPoint, data: itemObject);
       print('Item added ${response.data}');
       return response.data;
@@ -192,6 +193,7 @@ class DioClient {
   Future<Map<String, dynamic>?> updateItem(
       String endPoint, Map<String, dynamic> itemObject) async {
     try {
+      await addAuthorizationHeader();
       final response = await _dio.patch(endPoint, data: itemObject);
       print('Item updated ${response.data}');
       return response.data;
@@ -203,11 +205,25 @@ class DioClient {
   Future<Map<String, dynamic>?> removeItem(
       String endPoint, Map<String, dynamic> itemObject) async {
     try {
+      await addAuthorizationHeader();
       final response = await _dio.delete(endPoint, data: itemObject);
       print('Item removed ${response.data}');
       return response.data;
     } on DioError catch (e) {
       print(e);
     }
+  }
+
+  Future<void> addAuthorizationHeader() async {
+    String token = await _getAccessToken();
+    _dio.options.headers = {"Authorization": "Token $token"};
+  }
+
+  Future<String> _getAccessToken() async {
+    if (_token.isNotEmpty) return _token;
+
+    var token = await UserRepository().getUserToken();
+    if (token != null) _token = token;
+    return _token;
   }
 }
