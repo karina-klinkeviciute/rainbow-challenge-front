@@ -18,16 +18,32 @@ class ChallengeEventParticipantPage extends StatelessWidget {
   Widget build(BuildContext context) {
     BlocProvider.of<ChallengeEventParticipantCubit>(context)
         .fetchChallenge(uuid: uuid);
-
     return WrapperMainWidget(
         mainArea: SizedBox(
             width: MediaQuery.of(context).size.width * 0.8,
             child: Column(
               children: [
                 _challengeInfo,
-                _challengeFormMain(context, uuid),
+                _challengeFormMain(context),
               ],
             )));
+  }
+
+  // Add a link to QR scanner
+  Widget _challengeFormMain(context) {
+    return ElevatedButton.icon(
+        onPressed: () {
+          Navigator.push(
+              context,
+              // Add arguments
+              MaterialPageRoute(
+                  builder: (context) => QrCodeScannerPage(
+                        uuid: uuid,
+                      )));
+        },
+        icon: Icon(ThemeIcons.qrCode),
+        label: Text(AppLocalizations.of(context)!
+            .joined_challenge_event_field_qr_code));
   }
 
   // Add an alternative way of complete the challenge
