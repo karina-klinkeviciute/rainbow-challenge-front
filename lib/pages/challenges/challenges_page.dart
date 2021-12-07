@@ -3,12 +3,16 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rainbow_challenge/pages/challenges/cubit/challenges_cubit.dart';
 import 'package:rainbow_challenge/pages/pages.dart';
 import 'package:rainbow_challenge/theme/colors.dart';
+import 'package:rainbow_challenge/theme/icons.dart';
 import 'package:rainbow_challenge/widgets/widgets.dart';
 import 'package:rainbow_challenge/utils/model/models.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 // TO DO: design _challenge
 // TO DO: replace front end filtering with backend endpoints
+part 'part_challenges_list.dart';
+part 'part_joined_challenges_list.dart';
+part 'part_done_challenges_list.dart';
 
 class ChallengesPage extends StatefulWidget {
   const ChallengesPage({Key? key}) : super(key: key);
@@ -44,7 +48,10 @@ class _MainArea extends StatelessWidget {
           HeadlineWidget(
             title: AppLocalizations.of(context)!.menu_challenges,
           ),
-          //    _LocalNavigation(),
+          //     _LocalNavigation(),
+          _LocalTabs(),
+          //  _LocalTabs(),
+          //    _LocalTabFields(),
           //  _AllChallenges(challenges: []),
           _ChallengesList(),
           //  _ChallengesList()
@@ -63,13 +70,14 @@ class _LocalNavigation extends StatefulWidget {
 }
 
 class __LocalNavigationState extends State<_LocalNavigation> {
-  List<bool> isSelected = [true, false];
+  List<bool> isSelected = [true, false, false];
   @override
   Widget build(BuildContext context) {
     return ToggleButtons(
       children: const <Widget>[
-        Icon(Icons.ac_unit),
-        Icon(Icons.call),
+        Text('Challenges'),
+        Text('Joined'),
+        Text('Done'),
       ],
       onPressed: (int index) {
         setState(() {
@@ -81,144 +89,54 @@ class __LocalNavigationState extends State<_LocalNavigation> {
   }
 }
 */
+class _LocalTabs extends StatefulWidget {
+  const _LocalTabs({Key? key}) : super(key: key);
 
-// Code below could be shorter, I tried using `lib/constants/enum`, but
-// localizations don't work there without context.
-// ChallengeType? challengeType;
+  @override
+  State<_LocalTabs> createState() => _LocalTabsState();
+}
 
-class _ChallengesList extends StatelessWidget {
-  const _ChallengesList({Key? key}) : super(key: key);
+class _LocalTabsState extends State<_LocalTabs> with TickerProviderStateMixin {
+  late TabController _tabController;
+
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(length: 3, vsync: this);
+  }
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ChallengesCubit, ChallengesState>(
-        builder: (context, state) {
-      if (!(state is ChallengesLoaded))
-        return Center(child: CircularProgressIndicator());
-      final challengesList = (state).challengesList;
-      final challengesListJoinable = challengesList
-        ..where((e) => e.can_be_joined == true);
-      final challengesTypeQuiz = challengesList.where((e) => e.type == 'quiz');
-      final challengesTypeArticle =
-          challengesListJoinable.where((e) => e.type == 'article');
-      final challengesTypeEvent =
-          challengesListJoinable.where((e) => e.type == 'event');
-      final challengesTypeCustom =
-          challengesListJoinable.where((e) => e.type == 'custom');
-      final challengesTypeSchoolGsa =
-          challengesListJoinable.where((e) => e.type == 'school_gsa');
-      final challengesTypeEventOrg =
-          challengesListJoinable.where((e) => e.type == 'event_org');
-      final challengesTypeStory =
-          challengesListJoinable.where((e) => e.type == 'story');
-      final challengesTypeProject =
-          challengesListJoinable.where((e) => e.type == 'project');
-      final challengesTypeReacting =
-          challengesListJoinable.where((e) => e.type == 'reacting');
-      final challengesTypeSupport =
-          challengesListJoinable.where((e) => e.type == 'support');
-
-      final List<dynamic> filteredChallengeTypes = [
-        challengesTypeArticle,
-        challengesTypeCustom,
-        challengesTypeEvent,
-        challengesTypeEventOrg,
-        challengesTypeProject,
-        challengesTypeQuiz,
-        challengesTypeReacting,
-        challengesTypeSchoolGsa,
-        challengesTypeStory,
-        challengesTypeSupport
-      ];
-
-      final List<String> challengeTypeNames = <String>[
-        AppLocalizations.of(context)!.challenge_type_article,
-        AppLocalizations.of(context)!.challenge_type_custom,
-        AppLocalizations.of(context)!.challenge_type_event,
-        AppLocalizations.of(context)!.challenge_type_event_org,
-        AppLocalizations.of(context)!.challenge_type_project,
-        AppLocalizations.of(context)!.challenge_type_quiz,
-        AppLocalizations.of(context)!.challenge_type_reacting,
-        AppLocalizations.of(context)!.challenge_type_school_gsa,
-        AppLocalizations.of(context)!.challenge_type_story,
-        AppLocalizations.of(context)!.challenge_type_support
-      ];
-
-      return ListView.builder(
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          itemCount: challengeTypeNames.length,
-          itemBuilder: (BuildContext context, int index) {
-            return _challengeType(
-                typeTitle: challengeTypeNames[index],
-                typeList: filteredChallengeTypes[index]);
-          });
-    });
+    return Column(children: [
+      Container(
+        decoration: BoxDecoration(
+          border: Border.all(color: ThemeColors.neutralColorLight),
+          borderRadius: BorderRadius.circular(30),
+        ),
+        margin: EdgeInsets.symmetric(vertical: 30),
+        child: TabBar(
+          indicator: BoxDecoration(
+              borderRadius: BorderRadius.circular(30), // Creates border
+              color: ThemeColors.secondaryColor),
+          controller: _tabController,
+          tabs: [
+            Tab(icon: Icon(Icons.star_border_outlined)),
+            Tab(icon: Icon(Icons.star_half_outlined)),
+            Tab(icon: Icon(Icons.star)),
+          ],
+        ),
+      ),
+      Container(
+        height: 1000,
+        child: TabBarView(
+          controller: _tabController,
+          children: [
+            _ChallengesList(),
+            _JoinedChallengesList(),
+            _DoneChallengesList()
+          ],
+        ),
+      ),
+    ]);
   }
-}
-
-class _challengeType extends StatelessWidget {
-  final String typeTitle;
-  final Iterable<Challenge> typeList;
-  const _challengeType(
-      {Key? key, required this.typeTitle, required this.typeList})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return ExpansionTile(
-        title: Text(typeTitle,
-            style: Theme.of(context).textTheme.headline3!.merge(const TextStyle(
-                fontWeight: FontWeight.w400,
-                color: ThemeColors.neutralColorLight))),
-        controlAffinity: ListTileControlAffinity.leading,
-        //  children: typeList.map((e) => _challenge(e)).toList());
-        children: [
-          ListView.builder(
-              //  scrollDirection: Axis.horizontal,
-              shrinkWrap: true,
-              itemCount: typeList.length,
-              physics: const NeverScrollableScrollPhysics(),
-              itemBuilder: (BuildContext context, int index) {
-                return typeList
-                    .map((e) => _challenge(e, context))
-                    .toList()[index];
-              })
-        ]);
-  }
-
-  // Widget _challenge(Challenge challenge, context) - in case we would need it
-  Widget _challenge(Challenge challenge, context) {
-    return ListTile(
-      title:
-          Text(challenge.name, style: Theme.of(context).textTheme.headline4!),
-      // subtitle: Text(challenge.description),
-      onTap: () {
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => ChallengePage(challengeInfo: challenge)));
-      },
-
-      /*
-      onTap: () {
-        Navigator.pushNamed(context, AppRoute.challenge,
-            arguments: ChallengesPageArguments(
-                description: 'ths', title: 'tr', uuid: 'rrr', points: 4));
-      },*/
-    );
-  }
-}
-
-class ChallengesPageArguments {
-  final String title;
-  final String description;
-  final String uuid;
-  final int points;
-
-  ChallengesPageArguments(
-      {required this.description,
-      required this.title,
-      required this.uuid,
-      required this.points});
 }
