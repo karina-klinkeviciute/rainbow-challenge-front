@@ -164,6 +164,9 @@ class DioClient {
       return response.data as List;
     } on DioError catch (e) {
       print(e);
+    } on Exception catch (e) {
+      // Unhandled exception
+      print(e);
     }
   }
 
@@ -174,6 +177,9 @@ class DioClient {
       return response.data;
     } on DioError catch (e) {
       print('Error');
+      print(e);
+    } on Exception catch (e) {
+      // Unhandled exception
       print(e);
     }
   }
@@ -186,6 +192,9 @@ class DioClient {
       return response.data;
     } on DioError catch (e) {
       print(e);
+    } on Exception catch (e) {
+      // Unhandled exception
+      print(e);
     }
   }
 
@@ -197,6 +206,9 @@ class DioClient {
       return response.data;
     } on DioError catch (e) {
       print(e);
+    } on Exception catch (e) {
+      // Unhandled exception
+      print(e);
     }
   }
 
@@ -207,6 +219,9 @@ class DioClient {
       print('Item removed ${response.data}');
       return response.data;
     } on DioError catch (e) {
+      print(e);
+    } on Exception catch (e) {
+      // Unhandled exception
       print(e);
     }
   }
