@@ -12,3 +12,4 @@ export 'wrapper_simple.dart';
 
 export 'challenge_description_widget.dart';
 export 'challenge_headline_widget.dart';
+export 'stats.dart';

@@ -25,5 +25,8 @@
     "action_join_challenge": "Pradėk užduotį",
     "joined_challenge_event_field_qr_code": "Skenuoti QR kodą",
     "joined_challenge_event_field_qr_code_wrong": "Atsiprašome, neteisingas QR kodas",
-    "joined_challenge_event_field_qr_code_right": "Užduotis atlikta"
+    "joined_challenge_event_field_qr_code_right": "Užduotis atlikta",
+    "profile_page_title": "Mano profilis",
+    "profile_page_stats_rainbows": "Vaivorykštės",
+    "profile_page_stats_active_weeks": "Aktyvios savaitės"
 }

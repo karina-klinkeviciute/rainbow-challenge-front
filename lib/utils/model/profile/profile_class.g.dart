@@ -7,18 +7,15 @@ part of 'profile_class.dart';
 // **************************************************************************
 
 Profile _$ProfileFromJson(Map<String, dynamic> json) => Profile(
+      email: json['email'] as String,
       username: json['username'] as String?,
+      region: json['region'] as String?,
       all_points: json['all_points'] as int? ?? 0,
-      remaining_points: json['remaining_points'] as String?,
-      streak: json['streak'] as String?,
-      medals: json['medals'],
-    )..region = json['region'] as String?;
+    );
 
 Map<String, dynamic> _$ProfileToJson(Profile instance) => <String, dynamic>{
+      'email': instance.email,
       'username': instance.username,
       'region': instance.region,
       'all_points': instance.all_points,
-      'remaining_points': instance.remaining_points,
-      'streak': instance.streak,
-      'medals': instance.medals,
     };
