@@ -10,10 +10,10 @@ class JoinedChallengesEventParticipantRepository {
       {required String uuid, required String qr_code}) async {
     Api api = Api();
     final challengeType = api.getChallengeTypeSubPath(Api.challengeTypeEvent);
+
     final challengeRaw = await dioClient.updateItem(
-        '/api/joined_challenge/${challengeType}_joined_challenge/', {
+        '/api/joined_challenge/${challengeType}_joined_challenge/${uuid}/', {
       "main_joined_challenge": {
-        "challenge": "${uuid}",
         "status": "completed",
       },
       "qr_code": "${qr_code}"

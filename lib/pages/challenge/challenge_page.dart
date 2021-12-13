@@ -59,10 +59,29 @@ class _Page extends StatelessWidget {
       required String uuid,
       required String type_uuid}) {
     return ElevatedButton(
-      onPressed: () {
+      onPressed: () async {
         Api api = Api();
-        BlocProvider.of<JoinChallengeCubit>(context)
+
+        var joinedChallenge = await BlocProvider.of<JoinChallengeCubit>(context)
             .joinChallenge(api.getChallengeTypeSubPath(challengeType), uuid);
+
+        if (joinedChallenge == null) {
+          showDialog<String>(
+            context: context,
+            builder: (BuildContext context) => AlertDialog(
+              title: const Text('Klaida'),
+              content: const Text('Užduotis yra pradėta'),
+              actions: <Widget>[
+                TextButton(
+                  onPressed: () => Navigator.pop(context, 'OK'),
+                  child: const Text('OK'),
+                ),
+              ],
+            ),
+          );
+          return;
+        }
+
         Navigator.pushReplacementNamed(
             context, api.getChallengeTypeRoute(challengeType),
             arguments: SingleChallengePageArguments(uuid: type_uuid));

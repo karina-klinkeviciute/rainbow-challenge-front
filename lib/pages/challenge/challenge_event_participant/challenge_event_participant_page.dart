@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:rainbow_challenge/pages/challenge/challenge_event_participant/qr_code_scanner/cubit/qr_code_scanner_cubit.dart';
+import 'package:rainbow_challenge/services/dio_client.dart';
+import 'package:rainbow_challenge/utils/repository/joined_challenges/joined_challenges_event_participant_repository.dart';
 import 'qr_code_scanner/qr_code_scanner_page.dart';
 import 'package:rainbow_challenge/theme/icons.dart';
 import 'cubit/challenge_event_participant_cubit.dart';
@@ -18,6 +21,7 @@ class ChallengeEventParticipantPage extends StatelessWidget {
   Widget build(BuildContext context) {
     BlocProvider.of<ChallengeEventParticipantCubit>(context)
         .fetchChallenge(uuid: uuid);
+
     return WrapperMainWidget(
         mainArea: SizedBox(
             width: MediaQuery.of(context).size.width * 0.8,
@@ -35,10 +39,15 @@ class ChallengeEventParticipantPage extends StatelessWidget {
         onPressed: () {
           Navigator.push(
               context,
-              // Add arguments
               MaterialPageRoute(
-                  builder: (context) => QrCodeScannerPage(
-                        uuid: uuid,
+                  builder: (_) => BlocProvider(
+                        create: (context) => QrCodeScannerCubit(
+                            challengeRepository:
+                                JoinedChallengesEventParticipantRepository(
+                                    dioClient: DioClient())),
+                        child: QrCodeScannerPage(
+                          uuid: uuid,
+                        ),
                       )));
         },
         icon: Icon(ThemeIcons.qrCode),

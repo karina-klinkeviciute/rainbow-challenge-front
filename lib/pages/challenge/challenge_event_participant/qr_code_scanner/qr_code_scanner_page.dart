@@ -4,8 +4,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rainbow_challenge/pages/challenge/challenge_event_participant/qr_code_scanner/cubit/qr_code_scanner_cubit.dart';
-import 'package:rainbow_challenge/services/dio_client.dart';
-import 'package:rainbow_challenge/utils/repository/repositories.dart';
 import 'package:rainbow_challenge/widgets/widgets.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
@@ -52,36 +50,49 @@ class QrCodeScannerPageState extends State<QrCodeScannerPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: <Widget>[
-          Expanded(
-            flex: 5,
-            child: QRView(
-              key: qrKey,
-              onQRViewCreated: _onQRViewCreated,
+        appBar: AppBar(
+          backgroundColor: Colors.white,
+        ),
+        body: Column(
+          children: <Widget>[
+            Expanded(
+              flex: 5,
+              child: QRView(
+                key: qrKey,
+                onQRViewCreated: _onQRViewCreated,
+              ),
             ),
-          ),
-          Expanded(
-            flex: 1,
-            child: Center(
-              child: (result != null)
-                  ? Text(
-                      'Barcode Type: ${describeEnum(result!.format)}   Data: ${result!.code}')
-                  : Text('Scan a code'),
-            ),
-          )
-        ],
-      ),
-    );
+            Expanded(
+              flex: 1,
+              child: Center(
+                child: (result != null)
+                    ? CircularProgressIndicator()
+                    : Text('Scan a code'),
+              ),
+            )
+          ],
+        ));
   }
 
   void _onQRViewCreated(QRViewController controller) {
     this.controller = controller;
-    controller.scannedDataStream.listen((scanData) {
+    controller.scannedDataStream.listen((scanData) async {
       setState(() {
         result = scanData;
       });
+      await completeChallenge();
     });
+  }
+
+  Future<void> completeChallenge() async {
+    var qrCodeScannerCubit = BlocProvider.of<QrCodeScannerCubit>(context);
+    String qrCode = result?.code ?? "";
+    var completedChallenge = await qrCodeScannerCubit.challengeRepository
+        .completeChallenge(uuid: uuid, qr_code: qrCode);
+
+    //TODO
+
+    Navigator.pop(context);
   }
 
   @override
@@ -111,9 +122,6 @@ class _Page extends StatelessWidget {
 // Challenges page: concrete_challenge_uuid = challenge type uuid; 
 // If I know challenge type uuid, how do I get joined challenge type uuid then?
 // Do i need it at all for completing the challenge?
-
- //   BlocProvider.of<QrCodeScannerCubit>(context)
- //       .completeChallenge(uuid: uuid, ... );
 
 // BlocBuilder 
 // Form validation 

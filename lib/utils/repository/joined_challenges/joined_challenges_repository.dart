@@ -5,12 +5,15 @@ class JoinedChallengesRepository {
   final DioClient dioClient;
   JoinedChallengesRepository({required this.dioClient});
 
-  Future<JoinedChallenge> joinChallenge(
+  Future<JoinedChallenge?> joinChallenge(
       {required String uuid, required String challengeType}) async {
     final challengeRaw = await dioClient
         .addItem('/api/joined_challenge/${challengeType}_joined_challenge/', {
       "main_joined_challenge": {"challenge": "${uuid}"}
     });
-    return JoinedChallenge.fromJson(challengeRaw!);
+
+    if (challengeRaw == null) return null;
+
+    return JoinedChallenge.fromJson(challengeRaw);
   }
 }
