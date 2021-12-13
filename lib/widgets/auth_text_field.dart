@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:rainbow_challenge/theme/colors.dart';
-
 class AuthTextField extends StatelessWidget {
   final String hint;
   final ValueChanged<String> onChanged;
