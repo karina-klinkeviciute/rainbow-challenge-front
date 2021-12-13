@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:rainbow_challenge/utils/model/user_model.dart';
+import 'package:rainbow_challenge/utils/model/reg_model.dart';
 import 'package:rainbow_challenge/utils/model/api_model.dart';
 import 'package:rainbow_challenge/services/api_connection.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -22,23 +23,43 @@ class UserRepository {
     return user;
   }
 
-  Future<User> register(
-      {required int year_of_birth,
-      required String email,
-      required String password,
-      required String re_password}) async {
+  Future<regUser> register({
+    required int year_of_birth,
+    required String email,
+    required String password,
+    required String re_password,
+    //required String gender,
+    //required String gender_other,
+    //required String username,
+    //required String region,
+    //required String is_lgbtqia
+  }) async {
     UserRegister userReg = UserRegister(
       year_of_birth: year_of_birth,
       email: email,
       password: password,
       re_password: re_password,
+      //gender: gender,
+      //gender_other: gender_other,
+      //username: username,
+      //region: region,
+      //is_lgbtqia: is_lgbtqia,
     );
 
-    //Token token = await setUser(userReg);
+    await createUser(userReg);
 
-    User user = User(id: 0, email: email, token: null //token.token,
-        );
-    return user;
+    regUser reguser = regUser(
+      year_of_birth: year_of_birth,
+      email: email,
+      password: password,
+      re_password: re_password,
+      //gender: gender,
+      //gender_other: gender_other,
+      //username: username,
+      //region: region,
+      //is_lgbtqia: is_lgbtqia
+    );
+    return reguser;
   }
 
   Future<void> persistToken({required User user}) {

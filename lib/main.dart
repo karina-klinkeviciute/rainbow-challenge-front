@@ -12,7 +12,7 @@ import 'package:rainbow_challenge/bloc/authentication_bloc.dart';
 //import 'package:rainbow_challenge/pages/splash.dart';
 import 'package:rainbow_challenge/pages/home.dart';
 import 'package:rainbow_challenge/pages/login/login_page.dart';
-
+import 'package:rainbow_challenge/pages/registration/registration_page.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -79,7 +79,7 @@ class App extends StatelessWidget {
               }
               if (state is AuthenticationAuthenticated) {
                 // To do in the future: change to HomePage()
-                return HomeEmptyPage();
+                return RegistrationPage(userRepository: userRepository);//HomeEmptyPage();
               }
               //if (state is AuthenticationUnauthenticated) {
               //return LoginPage(userRepository: userRepository);
