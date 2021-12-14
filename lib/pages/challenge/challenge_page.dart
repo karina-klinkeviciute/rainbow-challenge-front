@@ -70,7 +70,8 @@ class _Page extends StatelessWidget {
             context: context,
             builder: (BuildContext context) => AlertDialog(
               title: const Text('Klaida'),
-              content: const Text('Užduotis yra pradėta'),
+              content: const Text(
+                  'Užduotis yra pradėta'), //TODO add messages from backend
               actions: <Widget>[
                 TextButton(
                   onPressed: () => Navigator.pop(context, 'OK'),
@@ -84,7 +85,8 @@ class _Page extends StatelessWidget {
 
         Navigator.pushReplacementNamed(
             context, api.getChallengeTypeRoute(challengeType),
-            arguments: SingleChallengePageArguments(uuid: type_uuid));
+            arguments: SingleChallengePageArguments(
+                type_uuid: type_uuid, uuid: joinedChallenge.uuid));
       },
       child: BlocBuilder<JoinChallengeCubit, JoinChallengeState>(
         builder: (context, state) {

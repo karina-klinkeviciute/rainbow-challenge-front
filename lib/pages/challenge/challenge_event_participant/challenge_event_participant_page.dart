@@ -13,14 +13,16 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 part 'part_info.dart';
 
 class ChallengeEventParticipantPage extends StatelessWidget {
-  ChallengeEventParticipantPage({Key? key, required this.uuid})
+  ChallengeEventParticipantPage(
+      {Key? key, required this.type_uuid, required this.uuid})
       : super(key: key);
+  final String type_uuid;
   final String uuid;
 
   @override
   Widget build(BuildContext context) {
     BlocProvider.of<ChallengeEventParticipantCubit>(context)
-        .fetchChallenge(uuid: uuid);
+        .fetchChallenge(uuid: type_uuid);
 
     return WrapperMainWidget(
         mainArea: SizedBox(

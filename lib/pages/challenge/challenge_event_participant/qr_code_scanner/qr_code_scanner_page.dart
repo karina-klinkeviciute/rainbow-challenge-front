@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -77,10 +76,13 @@ class QrCodeScannerPageState extends State<QrCodeScannerPage> {
   void _onQRViewCreated(QRViewController controller) {
     this.controller = controller;
     controller.scannedDataStream.listen((scanData) async {
+      controller.pauseCamera();
       setState(() {
         result = scanData;
       });
+      print("QR scanned");
       await completeChallenge();
+      controller.resumeCamera();
     });
   }
 
@@ -91,6 +93,22 @@ class QrCodeScannerPageState extends State<QrCodeScannerPage> {
         .completeChallenge(uuid: uuid, qr_code: qrCode);
 
     //TODO
+    if (completedChallenge.main_joined_challenge.status == "confirmed") {
+      showDialog<String>(
+        context: context,
+        builder: (BuildContext context) => AlertDialog(
+          title: const Text('Ačiū'),
+          content: const Text(
+              'Ačiū už atliktą užduotį! Jums įskaičiuota X vaivorykščių.'), //TODO add localizations
+          actions: <Widget>[
+            TextButton(
+              onPressed: () => Navigator.pop(context, 'OK'),
+              child: const Text('OK'),
+            ),
+          ],
+        ),
+      );
+    }
 
     Navigator.pop(context);
   }

@@ -1,6 +1,6 @@
 import 'package:rainbow_challenge/constants/api.dart';
 import 'package:rainbow_challenge/services/dio_client.dart';
-import 'package:rainbow_challenge/utils/model/models.dart';
+import 'package:rainbow_challenge/utils/model/joined_challenge/joined_challenge_event_participant/joined_challenge_event_participant_class.dart';
 
 class JoinedChallengesEventParticipantRepository {
   final DioClient dioClient;
