@@ -1,6 +1,6 @@
 import 'package:rainbow_challenge/constants/api.dart';
 import 'package:rainbow_challenge/services/dio_client.dart';
-import 'package:rainbow_challenge/utils/model/models.dart';
+import 'package:rainbow_challenge/utils/model/joined_challenge/joined_challenge_event_participant/joined_challenge_event_participant_class.dart';
 
 class JoinedChallengesEventParticipantRepository {
   final DioClient dioClient;
@@ -10,10 +10,10 @@ class JoinedChallengesEventParticipantRepository {
       {required String uuid, required String qr_code}) async {
     Api api = Api();
     final challengeType = api.getChallengeTypeSubPath(Api.challengeTypeEvent);
+
     final challengeRaw = await dioClient.updateItem(
-        '/api/joined_challenge/${challengeType}_joined_challenge/', {
+        '/api/joined_challenge/${challengeType}_joined_challenge/${uuid}/', {
       "main_joined_challenge": {
-        "challenge": "${uuid}",
         "status": "completed",
       },
       "qr_code": "${qr_code}"
