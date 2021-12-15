@@ -79,14 +79,10 @@ class App extends StatelessWidget {
               }
               if (state is AuthenticationAuthenticated) {
                 // To do in the future: change to HomePage()
-                return RegistrationPage(userRepository: userRepository);//HomeEmptyPage();
+                return HomeEmptyPage();
+              } else {
+                return RegistrationPage(userRepository: userRepository);
               }
-              //if (state is AuthenticationUnauthenticated) {
-              //return LoginPage(userRepository: userRepository);
-              //}
-              // return NavigationPage();
-              return LoginPage(userRepository: userRepository);
-              //return RegistrationPage(userRepository: userRepository);
             },
           ),
         ));

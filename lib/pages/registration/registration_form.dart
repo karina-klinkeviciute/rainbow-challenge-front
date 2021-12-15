@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
+import 'package:rainbow_challenge/pages/pages.dart';
+import 'package:rainbow_challenge/utils/repository/repositories.dart';
 import 'package:rainbow_challenge/widgets/headline.dart';
 import 'package:rainbow_challenge/widgets/html.dart';
 //import 'package:rainbow_challenge/pages/registration/fields/email.dart';
@@ -20,14 +22,18 @@ class RegistrationForm extends StatelessWidget {
     return BlocListener<RegistrationBloc, RegState>(
         listener: (context, state) {
           if (state.status.isSubmissionFailure) {
-            _msg(context,'Registracija nesėkminga. Toks vartotojas egzistuoja.');
+            _msg(context,
+                'Registracija nesėkminga. Toks vartotojas egzistuoja.');
           } else if (state.status.isSubmissionSuccess) {
             //Navigator.of(context).pushNamed('/success');
-            Navigator.push(context,MaterialPageRoute(builder: (context) => RegistrationPageConfirm()));
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => RegistrationPageConfirm()));
           }
         },
         child: SingleChildScrollView(
-          padding: const EdgeInsets.fromLTRB(38.0, 0, 38.0, 8.0),
+          padding: const EdgeInsets.fromLTRB(38.0, 20, 38.0, 8.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
@@ -44,13 +50,26 @@ class RegistrationForm extends StatelessWidget {
               //_RegionInputField(),
               //_IsLgbtqiaInputField(),
               _RulesCheckbox(),
-              _RegSubmit()
+              _RegSubmit(),
+              _LoginButton(context)
             ],
           ),
-        )
-    );
+        ));
   }
+}
 
+Widget _LoginButton(BuildContext context) {
+  return TextButton(
+    onPressed: () {
+      Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+              builder: (context) => LoginPage(
+                    userRepository: UserRepository(),
+                  )));
+    },
+    child: const Text('Turi paskyrą? Prisijunk'), //TODO localizations
+  );
 }
 
 /*
@@ -92,7 +111,8 @@ class _AgeInputField extends StatelessWidget {
             key: const Key('Age_textField'),
             isRequiredField: true,
             keyboardType: TextInputType.text,
-            onChanged: (name) => context.read<RegistrationBloc>().add(NameChanged(name: name)),
+            onChanged: (name) =>
+                context.read<RegistrationBloc>().add(NameChanged(name: name)),
           ),
         );
       },
@@ -113,7 +133,9 @@ class _EmailInputField extends StatelessWidget {
             key: const Key('Email_textField'),
             isRequiredField: true,
             keyboardType: TextInputType.emailAddress,
-            onChanged: (email) => context.read<RegistrationBloc>().add(EmailChanged(email: email)),
+            onChanged: (email) => context
+                .read<RegistrationBloc>()
+                .add(EmailChanged(email: email)),
           ),
         );
       },
@@ -136,8 +158,9 @@ class _PasswordInputField extends StatelessWidget {
             isRequiredField: true,
             keyboardType: TextInputType.text,
             error: state.password.error.name,
-            onChanged: (password) =>
-                context.read<RegistrationBloc>().add(PasswordChanged(password: password)),
+            onChanged: (password) => context
+                .read<RegistrationBloc>()
+                .add(PasswordChanged(password: password)),
           ),
         );
       },
@@ -150,7 +173,7 @@ class _ConfirmPasswordInput extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<RegistrationBloc, RegState>(
       buildWhen: (previous, current) =>
-      previous.password != current.password ||
+          previous.password != current.password ||
           previous.confirmPassword != current.confirmPassword,
       builder: (context, state) {
         return AuthTextField(
@@ -169,7 +192,6 @@ class _ConfirmPasswordInput extends StatelessWidget {
   }
 }
 
-
 class _GenderInputField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -183,7 +205,8 @@ class _GenderInputField extends StatelessWidget {
             key: const Key('Gender_textField'),
             isRequiredField: false,
             keyboardType: TextInputType.text,
-            onChanged: (name) => context.read<RegistrationBloc>().add(NameChanged(name: name)),
+            onChanged: (name) =>
+                context.read<RegistrationBloc>().add(NameChanged(name: name)),
           ),
         );
       },
@@ -204,14 +227,14 @@ class _GenderOtherInputField extends StatelessWidget {
             key: const Key('GenderOther_textField'),
             isRequiredField: false,
             keyboardType: TextInputType.text,
-            onChanged: (name) => context.read<RegistrationBloc>().add(NameChanged(name: name)),
+            onChanged: (name) =>
+                context.read<RegistrationBloc>().add(NameChanged(name: name)),
           ),
         );
       },
     );
   }
 }
-
 
 class _UsernameInputField extends StatelessWidget {
   @override
@@ -226,7 +249,8 @@ class _UsernameInputField extends StatelessWidget {
             key: const Key('Username_textField'),
             isRequiredField: false,
             keyboardType: TextInputType.text,
-            onChanged: (name) => context.read<RegistrationBloc>().add(NameChanged(name: name)),
+            onChanged: (name) =>
+                context.read<RegistrationBloc>().add(NameChanged(name: name)),
           ),
         );
       },
@@ -247,7 +271,8 @@ class _RegionInputField extends StatelessWidget {
             key: const Key('Region_textField'),
             isRequiredField: false,
             keyboardType: TextInputType.text,
-            onChanged: (name) => context.read<RegistrationBloc>().add(NameChanged(name: name)),
+            onChanged: (name) =>
+                context.read<RegistrationBloc>().add(NameChanged(name: name)),
           ),
         );
       },
@@ -268,7 +293,8 @@ class _IsLgbtqiaInputField extends StatelessWidget {
             key: const Key('IsLgbtqia_textField'),
             isRequiredField: false,
             keyboardType: TextInputType.text,
-            onChanged: (name) => context.read<RegistrationBloc>().add(NameChanged(name: name)),
+            onChanged: (name) =>
+                context.read<RegistrationBloc>().add(NameChanged(name: name)),
           ),
         );
       },
@@ -282,49 +308,45 @@ class _RulesCheckbox extends StatelessWidget {
     return BlocBuilder<RegistrationBloc, RegState>(
       buildWhen: (previous, current) => previous.rules != current.rules,
       builder: (context, state) {
-        return
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-              children:[
-                Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  SizedBox(
-                    width: 40,
-                    child:
-                    Checkbox(
-                      value: true,
-                      onChanged: (bool? value) {
-                        //setState(() {
-                        //this.value = value!;
-                        //isCheckedRules = this.value;
-                        // });
-                      },
-                      //onChanged: (rules) => context.read<RegistrationBloc>().add(RulesChanged(rules: rules)),
-                    ),
+        return Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                SizedBox(
+                  width: 40,
+                  child: Checkbox(
+                    value: true,
+                    onChanged: (bool? value) {
+                      //setState(() {
+                      //this.value = value!;
+                      //isCheckedRules = this.value;
+                      // });
+                    },
+                    //onChanged: (rules) => context.read<RegistrationBloc>().add(RulesChanged(rules: rules)),
                   ),
-                ],
-               ),
-                Column(
-                  //mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      width: 225,
-                      child:
-                      Padding(
-                        padding: const EdgeInsets.all(5.0),
-                        child: HtmlWidget(
-                            data: '<p>Aš sutinku su paslaugų <a href="https://rainbowchallenge.lt/taisykles/">taisyklėmis</a><br> ir <a href="https://rainbowchallenge.lt/privatumas/">privatumo politika</a>.</p>'
-                        ),
-                      ),
-
-                    ),
-                  ],
                 ),
               ],
-          );
+            ),
+            Column(
+              //mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                SizedBox(
+                  width: 225,
+                  child: Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: HtmlWidget(
+                        data:
+                            '<p>Aš sutinku su paslaugų <a href="https://rainbowchallenge.lt/taisykles/">taisyklėmis</a><br> ir <a href="https://rainbowchallenge.lt/privatumas/">privatumo politika</a>.</p>'),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        );
 
-          /*
+        /*
           Padding(
           padding: const EdgeInsets.only(bottom: 16.0),
           child: AuthTextField(
@@ -363,10 +385,7 @@ class _RegSubmit extends StatelessWidget {
   }
 }
 
-
-
-
-void _msg(_,txt){
+void _msg(_, txt) {
   ScaffoldMessenger.of(_).showSnackBar(SnackBar(
     content: Text(txt),
     backgroundColor: Colors.redAccent,
