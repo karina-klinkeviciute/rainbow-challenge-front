@@ -70,12 +70,13 @@ class _MainArea extends StatelessWidget {
           //  message: profile.region,
         ),
         Divider(),
+        ImageLocalWidget(url: 'assets/images/placeholder.png'),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             StatsWidget(
               // To do: fix loading the asset
-              localIcon: 'assets/icons/rainbow.svg',
+              localIcon: 'assets/images/placeholder.png',
               icon: Icons.looks,
               number: profile.all_points.toString(),
               label: AppLocalizations.of(context)!.profile_page_stats_rainbows,

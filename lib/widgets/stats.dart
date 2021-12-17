@@ -30,7 +30,7 @@ class StatsWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           if (icon != null) Icon(icon),
-          if (localIcon != null) ImageLocalWidget(url: 'url', width: 20),
+          if (localIcon != null) ImageLocalWidget(url: localIcon!, width: 20),
           Text(number, style: ThemeHeadings.bigNumber),
           Text(label, style: ThemeHeadings.themeHeading4),
         ],
