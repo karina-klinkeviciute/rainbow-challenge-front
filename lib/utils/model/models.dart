@@ -1,6 +1,8 @@
 export 'api_model.dart';
 export 'user_model.dart';
 
+export 'news/news_class.dart';
+
 export 'challenge/challenge_class.dart';
 export 'challenge/challenge_article/challenge_article_class.dart';
 export 'challenge/challenge_custom/challenge_custom_class.dart';

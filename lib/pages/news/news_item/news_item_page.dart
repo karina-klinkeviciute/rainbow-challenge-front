@@ -3,8 +3,8 @@ import 'package:rainbow_challenge/widgets/widgets.dart';
 
 // A single article page.
 // TO DO: continue with both layout and functionality
-class ArticlePage extends StatelessWidget {
-  const ArticlePage({Key? key}) : super(key: key);
+class NewsItemPage extends StatelessWidget {
+  const NewsItemPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
