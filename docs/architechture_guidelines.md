@@ -25,7 +25,7 @@ show a user friendly and accurate message (for example if the request fails we c
   
 ## Commenting
 
-* In cases where you think that it might be not clear what 
+* In cases where you think that it might be not clear what you were doing and would like ot explain to others, what you were doing, and, most importantly, why.
 
 ## Consistency
 
