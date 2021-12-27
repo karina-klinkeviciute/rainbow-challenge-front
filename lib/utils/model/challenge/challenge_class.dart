@@ -9,7 +9,6 @@ class Challenge {
   String name;
   String description;
   String? image;
-//  bool? published;
   int points;
   DateTime? start_date;
   DateTime? end_date;
@@ -17,6 +16,7 @@ class Challenge {
   bool needs_confirmation;
   String? region;
   bool can_be_joined;
+  bool is_joined;
 
   Challenge(
       {required this.uuid,
@@ -25,15 +25,14 @@ class Challenge {
       required this.name,
       required this.description,
       this.image,
-//    this.published,
-      // Points = Vaivorykštės
       required this.points,
       this.start_date,
       this.end_date,
       required this.multiple,
       required this.needs_confirmation,
       this.region,
-      required this.can_be_joined});
+      required this.can_be_joined,
+      required this.is_joined});
 
   factory Challenge.fromJson(Map<String, dynamic> json) =>
       _$ChallengeFromJson(json);

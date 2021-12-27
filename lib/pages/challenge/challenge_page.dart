@@ -26,7 +26,9 @@ class ChallengePage extends StatelessWidget {
 }
 
 class _Page extends StatelessWidget {
-  _Page({Key? key, required this.challengeInfo}) : super(key: key);
+  _Page({Key? key, required this.challengeInfo}) : super(key: key) {
+    int i;
+  }
   final Challenge challengeInfo;
 
   @override
