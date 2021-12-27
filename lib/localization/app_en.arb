@@ -25,5 +25,6 @@
     "action_join_challenge": "Join the challenge",
     "joined_challenge_event_field_qr_code": "Scan QR code", 
     "joined_challenge_event_field_qr_code_wrong": "Sorry! Wrong QR code",
-    "joined_challenge_event_field_qr_code_right": "Challenge accomplished!"
+    "joined_challenge_event_field_qr_code_right": "Challenge accomplished!",
+    "error": "Error"
 }

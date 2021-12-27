@@ -62,16 +62,17 @@ class _Page extends StatelessWidget {
       onPressed: () async {
         Api api = Api();
 
-        var joinedChallenge = await BlocProvider.of<JoinChallengeCubit>(context)
-            .joinChallenge(api.getChallengeTypeSubPath(challengeType), uuid);
+        var joinedChallengeResponse =
+            await BlocProvider.of<JoinChallengeCubit>(context).joinChallenge(
+                api.getChallengeTypeSubPath(challengeType), uuid);
 
-        if (joinedChallenge == null) {
+        if (joinedChallengeResponse.isSuccess == false) {
           showDialog<String>(
             context: context,
             builder: (BuildContext context) => AlertDialog(
-              title: const Text('Klaida'),
-              content: const Text(
-                  'Užduotis yra pradėta'), //TODO add messages from backend
+              title: Text(AppLocalizations.of(context)!.error),
+              content:
+                  Text(joinedChallengeResponse.errorMessage ?? "Unknown error"),
               actions: <Widget>[
                 TextButton(
                   onPressed: () => Navigator.pop(context, 'OK'),
@@ -86,7 +87,8 @@ class _Page extends StatelessWidget {
         Navigator.pushReplacementNamed(
             context, api.getChallengeTypeRoute(challengeType),
             arguments: SingleChallengePageArguments(
-                type_uuid: type_uuid, uuid: joinedChallenge.uuid));
+                type_uuid: type_uuid,
+                uuid: joinedChallengeResponse.result?.uuid ?? ""));
       },
       child: BlocBuilder<JoinChallengeCubit, JoinChallengeState>(
         builder: (context, state) {
