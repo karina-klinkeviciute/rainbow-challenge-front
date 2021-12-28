@@ -14,6 +14,10 @@ import '../challenges/cubit/challenges_cubit.dart';
 
 import 'cubit/news_cubit.dart';
 
+// TODO: check scrolling abilities
+// TODO: paddings - safeArea()
+//
+
 class NewsPage extends StatelessWidget {
   NewsPage({Key? key}) : super(key: key);
 
@@ -62,7 +66,6 @@ class _NewsList extends StatelessWidget {
       if (!(state is NewsLoaded))
         return Center(child: CircularProgressIndicator());
       final newsList = (state).newsList;
-
       return ListView.builder(
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
@@ -74,12 +77,23 @@ class _NewsList extends StatelessWidget {
   }
 
   Widget _newsItem(News newsItem, context) {
-    return Row(
-      children: [
-        Text(newsItem.title),
-        if (newsItem.image != null) ImageExternalWidget(url: newsItem.image!),
-        HtmlWidget(data: newsItem.body)
-      ],
+    // TODO add interaction with hero
+    return Container(
+      decoration: BoxDecoration(color: Colors.red[50]),
+      padding: EdgeInsets.symmetric(vertical: 20),
+      child: Row(
+        children: [
+          if (newsItem.image != null)
+            ImageExternalWidget(url: newsItem.image!, width: 80, height: 80),
+          // TODO: add a branded placeholder image if news item image doesn't exist
+          SizedBox(width: 20),
+          Expanded(
+              child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [Text(newsItem.title), HtmlWidget(data: newsItem.body)],
+          )),
+        ],
+      ),
     );
   }
 }
