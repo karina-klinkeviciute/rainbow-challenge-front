@@ -31,6 +31,6 @@ mixin JoinChallengeMixin {
       {required String uuid, required String challengeType}) async {
     final challengeRaw = await dioClient
         .addItem('/api/challenge/joined_challenge/${challengeType}/', {});
-    return Challenge.fromJson(challengeRaw!);
+    return Challenge.fromJson(challengeRaw);
   }
 }
