@@ -25,5 +25,7 @@
     "action_join_challenge": "Pradėk užduotį",
     "joined_challenge_event_field_qr_code": "Skenuoti QR kodą",
     "joined_challenge_event_field_qr_code_wrong": "Atsiprašome, neteisingas QR kodas",
-    "joined_challenge_event_field_qr_code_right": "Užduotis atlikta"
+    "joined_challenge_event_field_qr_code_right": "Užduotis atlikta",
+    "error": "Klaida",
+    "challenge_completed_already": "Šią užduotį jau atlikote"
 }

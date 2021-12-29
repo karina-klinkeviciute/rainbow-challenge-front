@@ -29,7 +29,7 @@ class _ChallengesPageState extends State<ChallengesPage>
   }
 
   @override
-  bool get wantKeepAlive => true;
+  bool get wantKeepAlive => false;
 }
 
 class _MainArea extends StatelessWidget {
