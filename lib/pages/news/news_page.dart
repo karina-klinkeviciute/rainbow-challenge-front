@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rainbow_challenge/services/dio_client.dart';
@@ -14,9 +15,8 @@ import '../challenges/cubit/challenges_cubit.dart';
 
 import 'cubit/news_cubit.dart';
 
-// TODO: check scrolling abilities
-// TODO: paddings - safeArea()
-//
+// TODO: add some nice placeholder images
+// TODO: fix trunkaded text body indicator in _newsItem
 
 class NewsPage extends StatelessWidget {
   NewsPage({Key? key}) : super(key: key);
@@ -36,10 +36,7 @@ class NewsPage extends StatelessWidget {
               BlocProvider(
                 create: (BuildContext context) =>
                     NewsCubit(newsRepository: newsRepository),
-                child: SafeArea(
-                  top: true,
-                  child: _NewsList(),
-                ),
+                child: _NewsList(),
               ),
               ProfilePage(),
               BlocProvider(
@@ -67,8 +64,8 @@ class _NewsList extends StatelessWidget {
         return Center(child: CircularProgressIndicator());
       final newsList = (state).newsList;
       return ListView.builder(
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
+          //  shrinkWrap: true,
+          //  physics: const NeverScrollableScrollPhysics(),
           itemCount: newsList.length,
           itemBuilder: (BuildContext context, int index) {
             return newsList.map((e) => _newsItem(e, context)).toList()[index];
@@ -76,25 +73,56 @@ class _NewsList extends StatelessWidget {
     });
   }
 
+  // Should this widget be rewritten as stless widget?
   Widget _newsItem(News newsItem, context) {
     // TODO add interaction with hero
     return Container(
       decoration: BoxDecoration(color: Colors.red[50]),
-      padding: EdgeInsets.symmetric(vertical: 20),
+      padding: EdgeInsets.all(20),
       child: Row(
         children: [
           if (newsItem.image != null)
-            ImageExternalWidget(url: newsItem.image!, width: 80, height: 80),
-          // TODO: add a branded placeholder image if news item image doesn't exist
+            ImageExternalWidget(url: newsItem.image!, width: 80, height: 80)
+          else
+            _RandomPlaceholderImage(),
           SizedBox(width: 20),
           Expanded(
               child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: [Text(newsItem.title), HtmlWidget(data: newsItem.body)],
+            children: [
+              Text(newsItem.title,
+                  style: Theme.of(context).textTheme.headline3!),
+              Container(
+                  height: 36,
+                  child: Text(
+                    newsItem.body,
+                    overflow: TextOverflow.fade,
+                    softWrap: true,
+                  )),
+
+              // HtmlWidget(data: newsItem.body)
+            ],
           )),
         ],
       ),
     );
+  }
+}
+
+class _RandomPlaceholderImage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    List _placeholderImages = [
+      'assets/images/placeholder.png',
+      'assets/images/placeholder1.png',
+      'assets/images/placeholder2.png',
+      'assets/images/placeholder3.png'
+    ];
+
+    String _randomImage =
+        _placeholderImages[Random().nextInt(_placeholderImages.length)];
+
+    return ImageLocalWidget(url: _randomImage, width: 80, height: 80);
   }
 }
 
