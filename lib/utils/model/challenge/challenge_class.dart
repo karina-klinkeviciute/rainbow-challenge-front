@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:meta/meta.dart';
 part 'challenge_class.g.dart';
 
 @JsonSerializable()
@@ -17,6 +18,7 @@ class Challenge {
   String? region;
   bool can_be_joined;
   bool is_joined;
+  List<ConcreteJoinedChallenge> concrete_joined_challenges;
 
   Challenge(
       {required this.uuid,
@@ -32,9 +34,21 @@ class Challenge {
       required this.needs_confirmation,
       this.region,
       required this.can_be_joined,
-      required this.is_joined});
+      required this.is_joined,
+      required this.concrete_joined_challenges});
 
   factory Challenge.fromJson(Map<String, dynamic> json) =>
       _$ChallengeFromJson(json);
   Map<String, dynamic> toJson() => _$ChallengeToJson(this);
+}
+
+class ConcreteJoinedChallenge {
+  String uuid;
+  String date_joined;
+
+  ConcreteJoinedChallenge({required this.uuid, required this.date_joined});
+
+  factory ConcreteJoinedChallenge.fromJson(Map<String, dynamic> json) =>
+      ConcreteJoinedChallenge(
+          uuid: json["uuid"] as String, date_joined: json["date_joined"]);
 }

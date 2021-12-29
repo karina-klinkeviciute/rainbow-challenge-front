@@ -24,7 +24,10 @@ Challenge _$ChallengeFromJson(Map<String, dynamic> json) => Challenge(
     needs_confirmation: json['needs_confirmation'] as bool,
     region: json['region'] as String?,
     can_be_joined: json['can_be_joined'] as bool,
-    is_joined: json['is_joined'] as bool);
+    is_joined: json['is_joined'] as bool,
+    concrete_joined_challenges: List<ConcreteJoinedChallenge>.from(
+        json["concrete_joined_challenges"]
+            .map((x) => ConcreteJoinedChallenge.fromJson(x))));
 
 Map<String, dynamic> _$ChallengeToJson(Challenge instance) => <String, dynamic>{
       'uuid': instance.uuid,

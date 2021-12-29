@@ -24,18 +24,6 @@ class QrCodeScannerPageState extends State<QrCodeScannerPage> {
 
   QrCodeScannerPageState({required this.uuid});
 
-  // @override
-  // Widget build(BuildContext context) {
-  //   JoinedChallengesEventParticipantRepository repository =
-  //       JoinedChallengesEventParticipantRepository(dioClient: DioClient());
-  //   return BlocProvider(
-  //     create: (_) => QrCodeScannerCubit(challengeRepository: repository),
-  //     child: _Page(uuid: uuid),
-  //   );
-  // }
-
-  // In order to get hot reload to work we need to pause the camera if the platform
-  // is android, or resume the camera if the platform is iOS.
   @override
   void reassemble() {
     super.reassemble();
@@ -92,25 +80,28 @@ class QrCodeScannerPageState extends State<QrCodeScannerPage> {
     var completedChallenge = await qrCodeScannerCubit.challengeRepository
         .completeChallenge(uuid: uuid, qr_code: qrCode);
 
-    //TODO
+    bool success = false;
     if (completedChallenge.main_joined_challenge.status == "confirmed") {
-      showDialog<String>(
+      success = true;
+      await showDialog<String>(
         context: context,
         builder: (BuildContext context) => AlertDialog(
           title: const Text('Ačiū'),
           content: const Text(
-              'Ačiū už atliktą užduotį! Jums įskaičiuota X vaivorykščių.'), //TODO add localizations
+              'Ačiū už atliktą užduotį! Jums įskaičiuota vaivorykščių.'), //TODO add localizations
           actions: <Widget>[
             TextButton(
-              onPressed: () => Navigator.pop(context, 'OK'),
+              onPressed: () {
+                Navigator.pop(context, 'OK');
+              },
               child: const Text('OK'),
             ),
           ],
         ),
       );
-    }
 
-    Navigator.pop(context);
+      Navigator.pop(context, success);
+    }
   }
 
   @override
