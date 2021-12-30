@@ -184,7 +184,7 @@ class DioClient {
     }
   }
 
-  Future<Map<String, dynamic>?> addItem(
+  Future<Map<String, dynamic>> addItem(
       String endPoint, Map<String, dynamic> itemObject) async {
     try {
       await addAuthorizationHeader();
@@ -193,9 +193,11 @@ class DioClient {
       return response.data;
     } on DioError catch (e) {
       print(e);
+      return <String, dynamic>{"_error": e};
     } on Exception catch (e) {
       // Unhandled exception
       print(e);
+      return <String, dynamic>{"_exception": e};
     }
   }
 

@@ -38,8 +38,8 @@ class ChallengeEventParticipantPage extends StatelessWidget {
   // Add a link to QR scanner
   Widget _challengeFormMain(context) {
     return ElevatedButton.icon(
-        onPressed: () {
-          Navigator.push(
+        onPressed: () async {
+          bool? result = await Navigator.push(
               context,
               MaterialPageRoute(
                   builder: (_) => BlocProvider(
@@ -51,6 +51,9 @@ class ChallengeEventParticipantPage extends StatelessWidget {
                           uuid: uuid,
                         ),
                       )));
+
+          if (result == true)
+            Navigator.of(context).popUntil((route) => route.isFirst);
         },
         icon: Icon(ThemeIcons.qrCode),
         label: Text(AppLocalizations.of(context)!
