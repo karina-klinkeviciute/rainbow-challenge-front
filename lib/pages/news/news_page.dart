@@ -17,6 +17,8 @@ import 'cubit/news_cubit.dart';
 
 // TODO: add some nice placeholder images
 // TODO: fix trunkaded text body indicator in _newsItem
+// TODO: _newsItem bottom border remove for last item
+// TODO make placeholder persistent
 
 class NewsPage extends StatelessWidget {
   NewsPage({Key? key}) : super(key: key);
@@ -68,42 +70,64 @@ class _NewsList extends StatelessWidget {
           //  physics: const NeverScrollableScrollPhysics(),
           itemCount: newsList.length,
           itemBuilder: (BuildContext context, int index) {
-            return newsList.map((e) => _newsItem(e, context)).toList()[index];
+            return newsList
+                .map((e) => _newsItem(e, context, index))
+                .toList()[index];
           });
     });
   }
 
   // Should this widget be rewritten as stless widget?
-  Widget _newsItem(News newsItem, context) {
+  Widget _newsItem(News newsItem, context, index) {
     // TODO add interaction with hero
-    return Container(
-      decoration: BoxDecoration(color: Colors.red[50]),
-      padding: EdgeInsets.all(20),
-      child: Row(
-        children: [
-          if (newsItem.image != null)
-            ImageExternalWidget(url: newsItem.image!, width: 80, height: 80)
-          else
-            _RandomPlaceholderImage(),
-          SizedBox(width: 20),
-          Expanded(
-              child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(newsItem.title,
-                  style: Theme.of(context).textTheme.headline3!),
-              Container(
-                  height: 36,
-                  child: Text(
-                    newsItem.body,
-                    overflow: TextOverflow.fade,
-                    softWrap: true,
-                  )),
+    return InkWell(
+      onTap: () {
+        Navigator.push(context, MaterialPageRoute(builder: (context) {
+          return NewsItemPage(
+            title: newsItem.title,
+            body: newsItem.body,
+            image: newsItem.image,
+            date: newsItem.created_at,
+          );
+        }));
+      },
+      child: Container(
+        decoration: BoxDecoration(
+            border: Border(
+                bottom: BorderSide(
+                    width: 1,
+                    color: ThemeColors.neutralColorLight.withOpacity(0.3)))),
+        padding: EdgeInsets.symmetric(vertical: 20),
+        margin: EdgeInsets.symmetric(horizontal: 20),
+        child: Row(
+          children: [
+            if (newsItem.image != null)
+              Hero(
+                  tag: newsItem.title,
+                  child: ImageExternalWidget(
+                      url: newsItem.image!, width: 80, height: 80))
+            else
+              Hero(tag: newsItem.title, child: _RandomPlaceholderImage()),
+            SizedBox(width: 20),
+            Expanded(
+                child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(newsItem.title,
+                    style: Theme.of(context).textTheme.headline4!),
+                Container(
+                    height: 36,
+                    child: Text(
+                      newsItem.body,
+                      overflow: TextOverflow.fade,
+                      softWrap: true,
+                    )),
 
-              // HtmlWidget(data: newsItem.body)
-            ],
-          )),
-        ],
+                // HtmlWidget(data: newsItem.body)
+              ],
+            )),
+          ],
+        ),
       ),
     );
   }
