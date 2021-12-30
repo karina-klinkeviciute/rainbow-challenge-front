@@ -5,7 +5,6 @@ import 'package:rainbow_challenge/services/dio_client.dart';
 import 'package:rainbow_challenge/theme/colors.dart';
 import 'package:rainbow_challenge/theme/fonts.dart' as ThemeFonts;
 import 'package:rainbow_challenge/utils/model/models.dart';
-import 'package:rainbow_challenge/widgets/html.dart';
 import '../pages.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:rainbow_challenge/widgets/widgets.dart';
@@ -18,7 +17,7 @@ import 'cubit/news_cubit.dart';
 // TODO: add some nice placeholder images
 // TODO: fix trunkaded text body indicator in _newsItem
 // TODO: _newsItem bottom border remove for last item
-// TODO make placeholder persistent
+// TODO make placeholder persistent for same news item
 
 class NewsPage extends StatelessWidget {
   NewsPage({Key? key}) : super(key: key);
@@ -79,7 +78,6 @@ class _NewsList extends StatelessWidget {
 
   // Should this widget be rewritten as stless widget?
   Widget _newsItem(News newsItem, context, index) {
-    // TODO add interaction with hero
     return InkWell(
       onTap: () {
         Navigator.push(context, MaterialPageRoute(builder: (context) {
