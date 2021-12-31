@@ -15,7 +15,7 @@ export 'login/login_page.dart';
 export 'profile/profile_page.dart';
 export 'registration/registration_page.dart';
 export 'about.dart';
-export 'news/news_item/news_item_page.dart';
+export 'news/news_item_page.dart';
 export 'news/news_page.dart';
 
 export 'home_empty.dart';

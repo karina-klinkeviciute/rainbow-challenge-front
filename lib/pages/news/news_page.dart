@@ -16,7 +16,7 @@ import 'cubit/news_cubit.dart';
 
 // TODO: add some nice placeholder images
 // TODO: fix trunkaded text body indicator in _newsItem
-// TODO: _newsItem bottom border remove for last item
+// More info here: https://stackoverflow.com/questions/53359109/dart-how-to-truncate-string-and-add-ellipsis-after-character-number
 // TODO make placeholder persistent for same news item
 
 class NewsPage extends StatelessWidget {
@@ -76,7 +76,7 @@ class _NewsList extends StatelessWidget {
     });
   }
 
-  // Should this widget be rewritten as stless widget?
+  // TODO research: Should this widget be rewritten as stless widget?
   Widget _newsItem(News newsItem, context, index) {
     return InkWell(
       onTap: () {
@@ -91,10 +91,13 @@ class _NewsList extends StatelessWidget {
       },
       child: Container(
         decoration: BoxDecoration(
-            border: Border(
-                bottom: BorderSide(
-                    width: 1,
-                    color: ThemeColors.neutralColorLight.withOpacity(0.3)))),
+            border: index == 0
+                ? Border()
+                : Border(
+                    top: BorderSide(
+                        width: 1,
+                        color:
+                            ThemeColors.neutralColorLight.withOpacity(0.3)))),
         padding: EdgeInsets.symmetric(vertical: 20),
         margin: EdgeInsets.symmetric(horizontal: 20),
         child: Row(
@@ -106,13 +109,17 @@ class _NewsList extends StatelessWidget {
                       url: newsItem.image!, width: 80, height: 80))
             else
               Hero(tag: newsItem.title, child: _RandomPlaceholderImage()),
-            SizedBox(width: 20),
+            SizedBox(width: 10),
             Expanded(
                 child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(newsItem.title,
-                    style: Theme.of(context).textTheme.headline4!),
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyText2!
+                        .merge(TextStyle(fontWeight: FontWeight.bold))),
+
                 Container(
                     height: 36,
                     child: Text(
