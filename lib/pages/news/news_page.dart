@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rainbow_challenge/services/dio_client.dart';
 import 'package:rainbow_challenge/theme/colors.dart';
 import 'package:rainbow_challenge/theme/fonts.dart' as ThemeFonts;
+import 'package:rainbow_challenge/theme/icons.dart';
 import 'package:rainbow_challenge/utils/model/models.dart';
 import '../pages.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -15,9 +16,9 @@ import '../challenges/cubit/challenges_cubit.dart';
 import 'cubit/news_cubit.dart';
 
 // TODO: add some nice placeholder images
+// TODO: make placeholder persistent for same news item
 // TODO: fix trunkaded text body indicator in _newsItem
 // More info here: https://stackoverflow.com/questions/53359109/dart-how-to-truncate-string-and-add-ellipsis-after-character-number
-// TODO make placeholder persistent for same news item
 
 class NewsPage extends StatelessWidget {
   NewsPage({Key? key}) : super(key: key);
@@ -98,8 +99,8 @@ class _NewsList extends StatelessWidget {
                         width: 1,
                         color:
                             ThemeColors.neutralColorLight.withOpacity(0.3)))),
-        padding: EdgeInsets.symmetric(vertical: 20),
-        margin: EdgeInsets.symmetric(horizontal: 20),
+        padding: EdgeInsets.symmetric(vertical: 15),
+        margin: EdgeInsets.symmetric(horizontal: 15),
         child: Row(
           children: [
             if (newsItem.image != null)
@@ -121,16 +122,22 @@ class _NewsList extends StatelessWidget {
                         .merge(TextStyle(fontWeight: FontWeight.bold))),
 
                 Container(
-                    height: 36,
+                    //  height: 36,
                     child: Text(
-                      newsItem.body,
-                      overflow: TextOverflow.fade,
-                      softWrap: true,
-                    )),
+                  newsItem.body.truncate(max: 70),
+                  overflow: TextOverflow.fade,
+                  softWrap: true,
+                )),
 
                 // HtmlWidget(data: newsItem.body)
               ],
             )),
+            SizedBox(width: 10),
+            Icon(
+              Icons.chevron_right_outlined,
+              color: ThemeColors.secondaryColor.withOpacity(0.7),
+              size: 24.0,
+            ),
           ],
         ),
       ),
@@ -200,5 +207,13 @@ class _BottomTabs extends StatelessWidget {
               labelStyle: const TextStyle(
                   fontFamily: ThemeFonts.primaryFontFamily, fontSize: 14),
             )));
+  }
+}
+
+extension Truncate on String {
+  String truncate({required int max, String suffix = '...'}) {
+    return length < max
+        ? this
+        : '${substring(0, substring(0, max - suffix.length).lastIndexOf(" "))}$suffix';
   }
 }
