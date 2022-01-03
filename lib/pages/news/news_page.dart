@@ -17,8 +17,6 @@ import 'cubit/news_cubit.dart';
 
 // TODO: add some nice placeholder images
 // TODO: make placeholder persistent for same news item
-// TODO: fix trunkaded text body indicator in _newsItem
-// More info here: https://stackoverflow.com/questions/53359109/dart-how-to-truncate-string-and-add-ellipsis-after-character-number
 
 class NewsPage extends StatelessWidget {
   NewsPage({Key? key}) : super(key: key);
@@ -149,10 +147,7 @@ class _RandomPlaceholderImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List _placeholderImages = [
-      'assets/images/placeholder.png',
-      'assets/images/placeholder1.png',
-      'assets/images/placeholder2.png',
-      'assets/images/placeholder3.png'
+      'assets/images/news_placeholder.png',
     ];
 
     String _randomImage =
