@@ -86,7 +86,7 @@ class _Page extends StatelessWidget {
             if (state is JoinChallengeAdding)
               return CircularProgressIndicator();
             return Text(
-              "Tęsti jau pradėtą užduotį",
+              AppLocalizations.of(context)!.challenge_continue_single,
               style: TextStyle(color: Colors.white),
             );
           },
@@ -138,6 +138,73 @@ class _Page extends StatelessWidget {
           },
         ),
       );
+    }
+
+    if (challengeInfo.is_joined && challengeInfo.can_be_joined) {
+      var buttons = new List<Widget>.empty(growable: true);
+      for (var joinedChallenge in challengeInfo.concrete_joined_challenges) {
+        buttons.add(ElevatedButton(
+          onPressed: () {
+            Api api = Api();
+
+            Navigator.pushReplacementNamed(
+                context, api.getChallengeTypeRoute(challengeType),
+                arguments: SingleChallengePageArguments(
+                    type_uuid: type_uuid, uuid: joinedChallenge.uuid));
+          },
+          child: Text(
+            "${AppLocalizations.of(context)!.challenge_continue} ${joinedChallenge.date_joined}",
+            style: TextStyle(color: Colors.white),
+          ),
+        ));
+      }
+
+      //Static join new button
+      buttons.add(ElevatedButton(
+        onPressed: () async {
+          Api api = Api();
+
+          var joinedChallengeResponse =
+              await BlocProvider.of<JoinChallengeCubit>(context).joinChallenge(
+                  api.getChallengeTypeSubPath(challengeType), uuid);
+
+          if (joinedChallengeResponse.isSuccess == false) {
+            showDialog<String>(
+              context: context,
+              builder: (BuildContext context) => AlertDialog(
+                title: Text(AppLocalizations.of(context)!.error),
+                content: Text(
+                    joinedChallengeResponse.errorMessage ?? "Unknown error"),
+                actions: <Widget>[
+                  TextButton(
+                    onPressed: () => Navigator.pop(context, 'OK'),
+                    child: const Text('OK'),
+                  ),
+                ],
+              ),
+            );
+            return;
+          }
+
+          Navigator.pushReplacementNamed(
+              context, api.getChallengeTypeRoute(challengeType),
+              arguments: SingleChallengePageArguments(
+                  type_uuid: type_uuid,
+                  uuid: joinedChallengeResponse.result?.uuid ?? ""));
+        },
+        child: BlocBuilder<JoinChallengeCubit, JoinChallengeState>(
+          builder: (context, state) {
+            if (state is JoinChallengeAdding)
+              return CircularProgressIndicator();
+            return Text(
+              actionText,
+              style: TextStyle(color: Colors.white),
+            );
+          },
+        ),
+      ));
+
+      return new Column(children: buttons);
     }
 
     // Empty

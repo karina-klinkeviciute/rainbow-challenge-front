@@ -27,5 +27,7 @@
     "joined_challenge_event_field_qr_code_wrong": "Atsiprašome, neteisingas QR kodas",
     "joined_challenge_event_field_qr_code_right": "Užduotis atlikta",
     "error": "Klaida",
-    "challenge_completed_already": "Šią užduotį jau atlikote"
+    "challenge_completed_already": "Šią užduotį jau atlikote",
+    "challenge_continue_single": "Tęsti jau pradėtą užduotį",
+    "challenge_continue": "Tęsti"
 }
