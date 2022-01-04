@@ -3,6 +3,9 @@ import 'package:rainbow_challenge/constants/app.dart';
 class Api {
   static const String baseUrl = 'https://rainbowchallenge.lt';
 
+  // News
+  static const String newsEndpoint = '/api/news/';
+
   // Challenges
   static const String challengeEndpoint = '/api/challenge/challenge/';
   static const String challengeArticleEndpoint =

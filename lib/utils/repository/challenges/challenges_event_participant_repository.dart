@@ -18,8 +18,6 @@ class ChallengesEventParticipantRepository {
       {required String uuid}) async {
     // BUG: Putting constant creates wrong URL. Should fix this later.
     //
-    Api api = Api();
-    final challengeType = api.getChallengeTypeSubPath(Api.challengeTypeEvent);
     final challengeRaw = await dioClient
         .getItem('/api/challenge/event_participant_challenge/$uuid/');
     return ChallengeEventParticipant.fromJson(challengeRaw!);

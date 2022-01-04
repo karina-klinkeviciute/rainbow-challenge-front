@@ -17,9 +17,6 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Prisijungimas: | Rainbow Challenge'),
-      ),
       body: BlocProvider(
         create: (context) {
           return LoginBloc(

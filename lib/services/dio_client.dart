@@ -163,6 +163,9 @@ class DioClient {
       return response.data as List;
     } on DioError catch (e) {
       print(e);
+    } on Exception catch (e) {
+      // Unhandled exception
+      print(e);
     }
   }
 
@@ -175,10 +178,13 @@ class DioClient {
     } on DioError catch (e) {
       print('Error');
       print(e);
+    } on Exception catch (e) {
+      // Unhandled exception
+      print(e);
     }
   }
 
-  Future<Map<String, dynamic>?> addItem(
+  Future<Map<String, dynamic>> addItem(
       String endPoint, Map<String, dynamic> itemObject) async {
     try {
       await addAuthorizationHeader();
@@ -187,6 +193,11 @@ class DioClient {
       return response.data;
     } on DioError catch (e) {
       print(e);
+      return <String, dynamic>{"_error": e};
+    } on Exception catch (e) {
+      // Unhandled exception
+      print(e);
+      return <String, dynamic>{"_exception": e};
     }
   }
 
@@ -199,6 +210,9 @@ class DioClient {
       return response.data;
     } on DioError catch (e) {
       print(e);
+    } on Exception catch (e) {
+      // Unhandled exception
+      print(e);
     }
   }
 
@@ -210,6 +224,9 @@ class DioClient {
       print('Item removed ${response.data}');
       return response.data;
     } on DioError catch (e) {
+      print(e);
+    } on Exception catch (e) {
+      // Unhandled exception
       print(e);
     }
   }
