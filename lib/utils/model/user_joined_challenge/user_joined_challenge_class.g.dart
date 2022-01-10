@@ -9,7 +9,7 @@ part of 'user_joined_challenge_class.dart';
 UserJoinedChallenge _$UserJoinedChallengeFromJson(Map<String, dynamic> json) =>
     UserJoinedChallenge(
       uuid: json['uuid'] as String,
-      challenge: json['challenge'] as String?,
+      challenge: json['challenge'] as String,
       challenge_data:
           Challenge.fromJson(json['challenge_data'] as Map<String, dynamic>),
     );

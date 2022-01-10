@@ -12,6 +12,7 @@ import 'package:rainbow_challenge/widgets/widgets.dart';
 
 import 'package:rainbow_challenge/utils/repository/repositories.dart';
 import '../challenges/cubit/challenges_cubit.dart';
+import '../challenges/cubit/user_joined_challenges_cubit.dart';
 
 import 'cubit/news_cubit.dart';
 
@@ -23,6 +24,9 @@ class NewsPage extends StatelessWidget {
 
   final ChallengesRepository challengesRepository =
       ChallengesRepository(dioClient: DioClient());
+
+  final UserJoinedChallengesRepository userJoinedChallengesRepository =
+      UserJoinedChallengesRepository(dioClient: DioClient());
 
   final NewsRepository newsRepository = NewsRepository(dioClient: DioClient());
 
@@ -39,9 +43,17 @@ class NewsPage extends StatelessWidget {
                 child: _NewsList(),
               ),
               ProfilePage(),
-              BlocProvider(
-                create: (BuildContext context) =>
-                    ChallengesCubit(challengesRepository: challengesRepository),
+              MultiBlocProvider(
+                providers: [
+                  BlocProvider<ChallengesCubit>(
+                      create: (BuildContext context) => ChallengesCubit(
+                          challengesRepository: challengesRepository)),
+                  BlocProvider<UserJoinedChallengesCubit>(
+                      create: (BuildContext context) =>
+                          UserJoinedChallengesCubit(
+                              userJoinedChallengesRepository:
+                                  userJoinedChallengesRepository))
+                ],
                 child: ChallengesPage(),
               ),
               RegionsPage(),

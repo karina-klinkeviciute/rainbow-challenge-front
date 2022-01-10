@@ -18,6 +18,7 @@ import 'package:rainbow_challenge/pages/challenge/challenge_story/cubit/challeng
 import 'package:rainbow_challenge/pages/challenge/challenge_support/cubit/challenge_support_cubit.dart';
 
 import 'package:rainbow_challenge/pages/challenges/cubit/challenges_cubit.dart';
+import 'package:rainbow_challenge/pages/challenges/cubit/user_joined_challenges_cubit.dart';
 
 // In this file we define named app routes.
 // One of use cases is with Navigator: `Navigator.pushNamed(context, routeName)`.
@@ -25,6 +26,9 @@ import 'package:rainbow_challenge/pages/challenges/cubit/challenges_cubit.dart';
 class AppRouter {
   ChallengesRepository challengesRepository =
       ChallengesRepository(dioClient: DioClient());
+
+  UserJoinedChallengesRepository userJoinedChallengesRepository =
+      UserJoinedChallengesRepository(dioClient: DioClient());
 
   ChallengesEventParticipantRepository challengesEventParticipantRepository =
       ChallengesEventParticipantRepository(dioClient: DioClient());
@@ -91,11 +95,19 @@ class AppRouter {
       // Maybe we should divide this file to parts?
       case AppRoute.challenges:
         return MaterialPageRoute(
-            builder: (_) => BlocProvider(
+          builder: (_) => MultiBlocProvider(
+            providers: [
+              BlocProvider<ChallengesCubit>(
                   create: (BuildContext context) => ChallengesCubit(
-                      challengesRepository: challengesRepository),
-                  child: ChallengesPage(),
-                ));
+                      challengesRepository: challengesRepository)),
+              BlocProvider<UserJoinedChallengesCubit>(
+                  create: (BuildContext context) => UserJoinedChallengesCubit(
+                      userJoinedChallengesRepository:
+                          userJoinedChallengesRepository))
+            ],
+            child: ChallengesPage(),
+          ),
+        );
 
       case AppRoute.challengeEventParticipant:
         final arguments =

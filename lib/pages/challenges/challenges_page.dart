@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rainbow_challenge/pages/challenges/cubit/challenges_cubit.dart';
+import 'package:rainbow_challenge/pages/challenges/cubit/user_joined_challenges_cubit.dart';
 import 'package:rainbow_challenge/pages/pages.dart';
 import 'package:rainbow_challenge/theme/colors.dart';
 import 'package:rainbow_challenge/theme/icons.dart';
@@ -23,6 +24,7 @@ class _ChallengesPageState extends State<ChallengesPage>
   Widget build(BuildContext context) {
     super.build(context);
     BlocProvider.of<ChallengesCubit>(context).fetchChallenges();
+    BlocProvider.of<UserJoinedChallengesCubit>(context).fetchChallenges();
     return const WrapperMainWidget(mainArea: _MainArea(), useAppBar: false);
   }
 
@@ -43,11 +45,6 @@ class _MainArea extends StatelessWidget {
             title: AppLocalizations.of(context)!.menu_challenges,
           ),
           _LocalTabs(),
-          //  _LocalTabs(),
-          //    _LocalTabFields(),
-          //  _AllChallenges(challenges: []),
-          _ChallengesList(),
-          //  _ChallengesList()
         ],
       ),
     );
@@ -76,7 +73,7 @@ class _LocalTabsState extends State<_LocalTabs> with TickerProviderStateMixin {
       Container(
         decoration: BoxDecoration(
           border: Border.all(color: ThemeColors.neutralColorLight),
-          borderRadius: BorderRadius.circular(30),
+          borderRadius: BorderRadius.circular(10),
         ),
         margin: EdgeInsets.symmetric(vertical: 30),
         child: TabBar(
@@ -228,7 +225,31 @@ class _JoinedChallengesList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(child: Text('Joined Challenges List'));
+    return BlocBuilder<UserJoinedChallengesCubit, UserJoinedChallengesState>(
+        builder: (context, state) {
+      if (!(state is UserJoinedChallengesLoaded))
+        return Center(child: CircularProgressIndicator());
+      final userJoinedchallengesList = (state).userJoinedChallengesList;
+
+      return ListView.builder(
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          itemCount: userJoinedchallengesList.length,
+          itemBuilder: (BuildContext context, int index) {
+            return userJoinedchallengesList
+                .map((e) => _userJoinedChallenge(e, context))
+                .toList()[index];
+          });
+    });
+  }
+
+  Widget _userJoinedChallenge(
+      UserJoinedChallenge userJoinedChallenge, context) {
+    return ListTile(
+      title: Text(userJoinedChallenge.challenge,
+          style: Theme.of(context).textTheme.headline4!),
+      onTap: () {},
+    );
   }
 }
 
