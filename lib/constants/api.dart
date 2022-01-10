@@ -74,6 +74,9 @@ class Api {
   static const challengeTypeStorySubPath = "story";
   static const challengeTypeSupportSubPath = "support";
 
+  // User profile
+  static const userJoinedChallengesEndpoint = "'​/api​/user/joined_challenges";
+
   // Get endpoints for Challenge types. Used when we know challenge type from
   // the backend and need to use a suitable API endpoint for it.
   String getChallengeTypeEndpoint(challengeType) {

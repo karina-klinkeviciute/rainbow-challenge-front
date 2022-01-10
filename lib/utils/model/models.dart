@@ -1,5 +1,6 @@
 export 'api_model.dart';
 export 'user_model.dart';
+export 'user_joined_challenge/user_joined_challenge_class.dart';
 
 export 'news/news_class.dart';
 

@@ -42,7 +42,6 @@ class _MainArea extends StatelessWidget {
           HeadlineWidget(
             title: AppLocalizations.of(context)!.menu_challenges,
           ),
-          //     _LocalNavigation(),
           _LocalTabs(),
           //  _LocalTabs(),
           //    _LocalTabFields(),
@@ -55,34 +54,6 @@ class _MainArea extends StatelessWidget {
   }
 }
 
-/*
-class _LocalNavigation extends StatefulWidget {
-  const _LocalNavigation({Key? key}) : super(key: key);
-
-  @override
-  __LocalNavigationState createState() => __LocalNavigationState();
-}
-
-class __LocalNavigationState extends State<_LocalNavigation> {
-  List<bool> isSelected = [true, false, false];
-  @override
-  Widget build(BuildContext context) {
-    return ToggleButtons(
-      children: const <Widget>[
-        Text('Challenges'),
-        Text('Joined'),
-        Text('Done'),
-      ],
-      onPressed: (int index) {
-        setState(() {
-          isSelected[index] = !isSelected[index];
-        });
-      },
-      isSelected: isSelected,
-    );
-  }
-}
-*/
 class _LocalTabs extends StatefulWidget {
   const _LocalTabs({Key? key}) : super(key: key);
 
@@ -135,6 +106,7 @@ class _LocalTabsState extends State<_LocalTabs> with TickerProviderStateMixin {
   }
 }
 
+// CHALLENGES
 class _ChallengesList extends StatelessWidget {
   const _ChallengesList({Key? key}) : super(key: key);
 
@@ -236,12 +208,10 @@ class _challengeType extends StatelessWidget {
         ]);
   }
 
-  // Widget _challenge(Challenge challenge, context) - in case we would need it
   Widget _challenge(Challenge challenge, context) {
     return ListTile(
       title:
           Text(challenge.name, style: Theme.of(context).textTheme.headline4!),
-      // subtitle: Text(challenge.description),
       onTap: () {
         Navigator.push(
             context,
@@ -252,6 +222,7 @@ class _challengeType extends StatelessWidget {
   }
 }
 
+// JOINED CHALLENGES
 class _JoinedChallengesList extends StatelessWidget {
   const _JoinedChallengesList({Key? key}) : super(key: key);
 
@@ -261,6 +232,7 @@ class _JoinedChallengesList extends StatelessWidget {
   }
 }
 
+// COMPLETED CHALLENGES
 class _DoneChallengesList extends StatelessWidget {
   const _DoneChallengesList({Key? key}) : super(key: key);
 

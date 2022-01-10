@@ -1,4 +1,5 @@
 export 'user_repository.dart';
+export 'user_joined_challenges_repository.dart';
 export 'news_repository.dart';
 
 export 'challenges/challenges_repository.dart';
