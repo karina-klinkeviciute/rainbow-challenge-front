@@ -26,4 +26,4 @@ export 'joined_challenge/joined_challenge_school_gsa/joined_challenge_school_gsa
 export 'joined_challenge/joined_challenge_story/joined_challenge_story_class.dart';
 export 'joined_challenge/joined_challenge_quiz/joined_challenge_quiz_class.dart';
 
-export 'profile/profile_class.dart';
+export 'user_profile/profile_class.dart';

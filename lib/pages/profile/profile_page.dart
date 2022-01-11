@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:rainbow_challenge/pages/profile/cubit/profile_info_cubit.dart';
+import 'cubit/profile_info_cubit.dart';
+import 'package:rainbow_challenge/bloc/authentication_bloc.dart';
 import 'package:rainbow_challenge/theme/icons.dart';
 import 'package:rainbow_challenge/widgets/widgets.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -8,7 +9,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 // Profile page
 // Data now:
 // username, region, all_points
-// Design prio: points, username
+// Design prio: rainbows, username and region.
 // To do: profile - get streaks and other nested data.
 // Get region names from their uuids.
 // Streaks design.
@@ -28,7 +29,7 @@ class _profilePageState extends State<ProfilePage>
     BlocProvider.of<ProfileInfoCubit>(context).fetchProfile();
     return WrapperMainWidget(
       mainArea: _MainArea(),
-      useAppBar: false,
+      //  useAppBar: false,
     );
   }
 
@@ -69,16 +70,25 @@ class _MainArea extends StatelessWidget {
           // Get region name instead of uuid
           //  message: profile.region,
         ),
+        Container(
+          child: Column(
+            children: [
+              HeadingLinedWidget(title: 'Streaks'),
+              Container(
+                child: Text('Add streaks here'),
+              ),
+            ],
+          ),
+        ),
         Divider(),
-        ImageLocalWidget(url: 'assets/images/placeholder.png'),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             StatsWidget(
               // To do: fix loading the asset
-              localIcon: 'assets/images/placeholder.png',
               icon: Icons.looks,
               number: profile.all_points.toString(),
+              // number: '5',
               label: AppLocalizations.of(context)!.profile_page_stats_rainbows,
             ),
             SizedBox(width: 20),
@@ -92,4 +102,18 @@ class _MainArea extends StatelessWidget {
       ]);
     },
   );
+}
+
+class _UserProfileInfo extends StatelessWidget {
+  const _UserProfileInfo({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialButton(
+      child: Text('Logout'),
+      onPressed: () {
+        //  BlocProvider.of<AuthenticationBloc>(context).add(LoggedOut());
+      },
+    );
+  }
 }

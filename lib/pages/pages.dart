@@ -19,7 +19,6 @@ export 'news/news_item_page.dart';
 export 'news/news_page.dart';
 
 export 'home_empty.dart';
-export 'home.dart';
 export 'loading.dart';
 export 'logout.dart';
 export 'messages.dart';
