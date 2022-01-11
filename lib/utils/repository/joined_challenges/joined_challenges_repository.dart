@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:rainbow_challenge/constants/api.dart';
 import 'package:rainbow_challenge/services/dio_client.dart';
 import 'package:rainbow_challenge/utils/model/api_response.dart';
 import 'package:rainbow_challenge/utils/model/models.dart';
@@ -32,5 +33,25 @@ class JoinedChallengesRepository {
     var joinedChallenge = JoinedChallenge.fromJson(challengeRaw);
     var response = ApiResponse<JoinedChallenge>(joinedChallenge, true, null);
     return response;
+  }
+
+  Future<Map<String, dynamic>?> completeChallenge(
+      {required String uuid,
+      required String challengeType,
+      required String status,
+      required Iterable<MapEntry<String, Object>> bodyParams}) async {
+    Map<String, Object> body = {
+      "main_joined_challenge": {
+        "status": "${status}",
+      }
+    };
+
+    body.addEntries(bodyParams);
+    var url =
+        "/api/joined_challenge/${challengeType}_joined_challenge/${uuid}/";
+
+    final challengeRaw = await dioClient.updateItem(url, body);
+
+    return challengeRaw;
   }
 }
