@@ -5,6 +5,7 @@ import 'package:rainbow_challenge/bloc/bottom_menu_cubit.dart';
 import 'package:rainbow_challenge/bloc/internet_cubit.dart';
 import 'package:rainbow_challenge/navigation/app_router.dart';
 import 'package:rainbow_challenge/pages/home_empty.dart';
+import 'package:rainbow_challenge/pages/pages.dart';
 import 'package:rainbow_challenge/theme/design_theme.dart';
 import 'package:rainbow_challenge/utils/repository/user_repository.dart';
 import 'package:rainbow_challenge/bloc/authentication_bloc.dart';
@@ -78,15 +79,10 @@ class App extends StatelessWidget {
                 //return SplashPage();
               }
               if (state is AuthenticationAuthenticated) {
-                // To do in the future: change to HomePage()
-                return RegistrationPage(userRepository: userRepository);//HomeEmptyPage();
+                return NewsPage();
+              } else {
+                return RegistrationPage(userRepository: userRepository);
               }
-              //if (state is AuthenticationUnauthenticated) {
-              //return LoginPage(userRepository: userRepository);
-              //}
-              // return NavigationPage();
-              return LoginPage(userRepository: userRepository);
-              //return RegistrationPage(userRepository: userRepository);
             },
           ),
         ));

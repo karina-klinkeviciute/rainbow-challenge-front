@@ -110,6 +110,7 @@ class AppRouter {
                       challengesTypeRepository:
                           challengesEventParticipantRepository),
                   child: ChallengeEventParticipantPage(
+                    type_uuid: arguments.type_uuid,
                     uuid: arguments.uuid,
                   ),
                 ));
@@ -122,7 +123,7 @@ class AppRouter {
                   create: (context) => ChallengeArticleCubit(
                       challengesTypeRepository: challengesArticleRepository),
                   child: ChallengeArticlePage(
-                    uuid: arguments.uuid,
+                    uuid: arguments.type_uuid,
                   ),
                 ));
 
@@ -134,7 +135,7 @@ class AppRouter {
                   create: (context) => ChallengeCustomCubit(
                       challengesTypeRepository: challengesCustomRepository),
                   child: ChallengeCustomPage(
-                    uuid: arguments.uuid,
+                    uuid: arguments.type_uuid,
                   ),
                 ));
 
@@ -147,7 +148,7 @@ class AppRouter {
                       challengesTypeRepository:
                           challengesEventOrganizerRepository),
                   child: ChallengeEventOrganizerPage(
-                    uuid: arguments.uuid,
+                    uuid: arguments.type_uuid,
                   ),
                 ));
 
@@ -159,7 +160,7 @@ class AppRouter {
                   create: (context) => ChallengeProjectCubit(
                       challengesTypeRepository: challengesProjectRepository),
                   child: ChallengeProjectPage(
-                    uuid: arguments.uuid,
+                    uuid: arguments.type_uuid,
                   ),
                 ));
 
@@ -171,7 +172,7 @@ class AppRouter {
                   create: (context) => ChallengeQuizCubit(
                       challengesTypeRepository: challengesQuizRepository),
                   child: ChallengeQuizPage(
-                    uuid: arguments.uuid,
+                    uuid: arguments.type_uuid,
                   ),
                 ));
 
@@ -183,7 +184,7 @@ class AppRouter {
                   create: (context) => ChallengeReactingCubit(
                       challengesTypeRepository: challengesReactingRepository),
                   child: ChallengeReactingPage(
-                    uuid: arguments.uuid,
+                    uuid: arguments.type_uuid,
                   ),
                 ));
 
@@ -195,7 +196,7 @@ class AppRouter {
                   create: (context) => ChallengeSchoolGsaCubit(
                       challengesTypeRepository: challengesSchoolGsaRepository),
                   child: ChallengeSchoolGsaPage(
-                    uuid: arguments.uuid,
+                    uuid: arguments.type_uuid,
                   ),
                 ));
 
@@ -207,7 +208,7 @@ class AppRouter {
                   create: (context) => ChallengeStoryCubit(
                       challengesTypeRepository: challengesStoryRepository),
                   child: ChallengeStoryPage(
-                    uuid: arguments.uuid,
+                    uuid: arguments.type_uuid,
                   ),
                 ));
 
@@ -219,7 +220,7 @@ class AppRouter {
                   create: (context) => ChallengeSupportCubit(
                       challengesTypeRepository: challengesSupportRepository),
                   child: ChallengeSupportPage(
-                    uuid: arguments.uuid,
+                    uuid: arguments.type_uuid,
                   ),
                 ));
 

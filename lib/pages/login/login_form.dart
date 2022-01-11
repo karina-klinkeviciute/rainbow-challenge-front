@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rainbow_challenge/pages/login/bloc/login_bloc.dart';
+import 'package:rainbow_challenge/pages/pages.dart';
+import 'package:rainbow_challenge/pages/registration/registration_page.dart';
+import 'package:rainbow_challenge/utils/repository/user_repository.dart';
 
 class LoginForm extends StatefulWidget {
   @override
@@ -10,8 +13,6 @@ class LoginForm extends StatefulWidget {
 class _LoginFormState extends State<LoginForm> {
   final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -29,6 +30,9 @@ class _LoginFormState extends State<LoginForm> {
             content: Text('${state.error}'),
             backgroundColor: Colors.red,
           ));
+        } else if (state is LoginSuccess) {
+          Navigator.pushReplacement(context,
+              MaterialPageRoute(builder: (context) => HomeEmptyPage()));
         }
       },
       child: BlocBuilder<LoginBloc, LoginState>(
@@ -81,6 +85,20 @@ class _LoginFormState extends State<LoginForm> {
                           ? CircularProgressIndicator()
                           : null,
                     ),
+                    Padding(
+                        padding: EdgeInsets.only(top: 20),
+                        child: TextButton(
+                          onPressed: () {
+                            Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => RegistrationPage(
+                                          userRepository: UserRepository(),
+                                        )));
+                          },
+                          child: const Text(
+                              'Neturi paskyros? Registruokis'), //TODO add localizations
+                        ))
                   ],
                 ),
               ),

@@ -26,6 +26,10 @@
     "joined_challenge_event_field_qr_code": "Scan QR code", 
     "joined_challenge_event_field_qr_code_wrong": "Sorry! Wrong QR code",
     "joined_challenge_event_field_qr_code_right": "Challenge accomplished!",
+    "error": "Error",
+    "challenge_completed_already": "Challenge already accomplished",
+    "challenge_continue_single": "Continue challenge",
+    "challenge_continue": "Continue",
     "profile_page_title": "My profile",
     "profile_page_stats_rainbows": "Rainbows",
     "profile_page_stats_active_weeks": "Active weeks"

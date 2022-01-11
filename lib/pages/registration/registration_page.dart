@@ -5,24 +5,20 @@ import 'package:rainbow_challenge/pages/registration/registration_form.dart';
 import 'package:rainbow_challenge/utils/repository/user_repository.dart';
 
 class RegistrationPage extends StatelessWidget {
-
   final UserRepository userRepository;
-  const RegistrationPage({Key? key, required this.userRepository}) : assert(userRepository != null), super(key: key);
+  const RegistrationPage({Key? key, required this.userRepository})
+      : assert(userRepository != null),
+        super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text('Naujas vartotojas'),
-          elevation: 0,
-        ),
         body: SafeArea(
-          top: false,
-          child: BlocProvider(
-            create: (_) => RegistrationBloc(userRepository: userRepository),
-            child: RegistrationForm(),
-          ),
-        )
-    );
+      top: false,
+      child: BlocProvider(
+        create: (_) => RegistrationBloc(userRepository: userRepository),
+        child: RegistrationForm(),
+      ),
+    ));
   }
 }
