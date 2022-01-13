@@ -13,8 +13,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 // TODO: get streaks data
 // TODO: get medals data
-// TODO: localizations
-// TODO: gradient to rainbow background
+// TODO: fix medals design
+// TODO: Lithuanian localizations for Vaivorykstes (word variations).
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -88,7 +88,7 @@ class _MainArea extends StatelessWidget {
           StatsWidget(
               localIcon: 'assets/images/rainbow.png',
               number: profile.all_points.toString(),
-              label: 'Rainbows')
+              label: AppLocalizations.of(context)!.profile_page_stats_rainbows)
         ]),
         Text(profile.username ?? profile.email,
             style: ThemeHeadings.themeHeading3),
