@@ -98,10 +98,17 @@ class _MainArea extends StatelessWidget {
         Column(
           children: [
             SizedBox(height: 20),
-            MiniHeadingLinedWidget(title: 'Streaks'),
-            Container(
-              child: Text('Add streaks here'),
-            ),
+            MiniHeadingLinedWidget(
+                title: AppLocalizations.of(context)!.profile_page_achievements),
+            // TODO: fix achievements func
+            Row(children: [
+              ImageLocalWidget(url: 'assets/images/achievements/ph_silver.png'),
+              SizedBox(width: 10),
+              ImageLocalWidget(url: 'assets/images/achievements/ph_bronze.png'),
+              SizedBox(width: 10),
+              ImageLocalWidget(url: 'assets/images/achievements/ph_gold.png'),
+              SizedBox(width: 10)
+            ]),
             SizedBox(height: 20),
             Divider(
                 height: 1,

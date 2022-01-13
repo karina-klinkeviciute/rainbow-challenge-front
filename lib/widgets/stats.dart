@@ -29,7 +29,7 @@ class StatsWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          if (icon != null) Icon(icon),
+          if (icon != null) Container(height: 30, child: Icon(icon)),
           if (localIcon != null) ImageLocalWidget(url: localIcon!, width: 32),
           Text(number,
               style: ThemeHeadings.bigNumber.merge(TextStyle(height: 1))),
