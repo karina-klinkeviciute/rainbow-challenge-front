@@ -9,11 +9,15 @@ part of 'profile_class.dart';
 Profile _$ProfileFromJson(Map<String, dynamic> json) => Profile(
       email: json['email'] as String,
       username: json['username'] as String?,
+      region: json['region'] == null
+          ? null
+          : Region.fromJson(json['region'] as Map<String, dynamic>),
       all_points: json['all_points'] as int? ?? 0,
     );
 
 Map<String, dynamic> _$ProfileToJson(Profile instance) => <String, dynamic>{
       'email': instance.email,
       'username': instance.username,
+      'region': instance.region,
       'all_points': instance.all_points,
     };

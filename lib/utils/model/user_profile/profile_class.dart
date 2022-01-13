@@ -1,11 +1,13 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:rainbow_challenge/utils/model/models.dart';
+
 part 'profile_class.g.dart';
 
 @JsonSerializable()
 class Profile {
   String email;
   String? username;
-//  String? region;
+  Region? region;
   int all_points;
 //  String? remaining_points;
 //  String? streak;
@@ -15,7 +17,7 @@ class Profile {
   Profile({
     required this.email,
     this.username,
-    //  this.region,
+    this.region,
     this.all_points = 0,
     //     this.remaining_points,
     //   this.streak,

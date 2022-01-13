@@ -58,6 +58,11 @@ class ThemeHeadings {
       fontFamily: ThemeFonts.primaryFontFamily,
       color: ThemeColors.neutralColorLight);
 
+  static const themeHeading5 = TextStyle(
+      fontSize: 14.0,
+      fontFamily: ThemeFonts.primaryFontFamily,
+      color: ThemeColors.neutralColorLight);
+
   static const bigNumber = TextStyle(
       fontSize: 52.0,
       fontFamily: ThemeFonts.primaryFontFamily,

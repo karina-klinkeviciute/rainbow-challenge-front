@@ -5,7 +5,7 @@ part 'region_class.g.dart';
 class Region {
   String name;
   String uuid;
-  String points;
+  int points;
 
   Region({required this.name, required this.points, required this.uuid});
 

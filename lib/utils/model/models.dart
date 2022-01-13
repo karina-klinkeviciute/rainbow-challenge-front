@@ -1,5 +1,6 @@
 export 'api_model.dart';
 export 'user_model.dart';
+export 'region/region_class.dart';
 
 export 'news/news_class.dart';
 

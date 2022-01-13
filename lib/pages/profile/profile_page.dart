@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_html/shims/dart_ui_real.dart';
+import 'package:rainbow_challenge/theme/colors.dart';
+import 'package:rainbow_challenge/theme/headings.dart';
 import 'cubit/profile_info_cubit.dart';
 import 'package:rainbow_challenge/bloc/authentication_bloc.dart';
 import 'package:rainbow_challenge/theme/icons.dart';
@@ -7,12 +10,11 @@ import 'package:rainbow_challenge/widgets/widgets.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 // Profile page
-// Data now:
-// username, region, all_points
-// Design prio: rainbows, username and region.
-// To do: profile - get streaks and other nested data.
-// Get region names from their uuids.
-// Streaks design.
+
+// TODO: get streaks data
+// TODO: get medals data
+// TODO: localizations
+// TODO: gradient to rainbow background
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -64,23 +66,48 @@ class _MainArea extends StatelessWidget {
         ));
       final profile = (state).profile;
       return Column(children: [
-        MessageWidget(
-          icon: ThemeIcons.profile,
-          title: profile.username ?? profile.email,
-          // Get region name instead of uuid
-          //  message: profile.region,
-        ),
-        Container(
-          child: Column(
-            children: [
-              HeadingLinedWidget(title: 'Streaks'),
-              Container(
-                child: Text('Add streaks here'),
-              ),
-            ],
+        Stack(alignment: AlignmentDirectional.bottomCenter, children: [
+          Container(
+            width: 150,
+            height: 150,
+            decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  stops: [
+                    0,
+                    0.8,
+                  ],
+                  colors: [
+                    ThemeColors.bgColor,
+                    Colors.white,
+                  ],
+                ),
+                shape: BoxShape.circle),
           ),
+          StatsWidget(
+              localIcon: 'assets/images/rainbow.png',
+              number: profile.all_points.toString(),
+              label: 'Rainbows')
+        ]),
+        Text(profile.username ?? profile.email,
+            style: ThemeHeadings.themeHeading3),
+        Text(profile.region!.name,
+            style: ThemeHeadings.themeHeading4
+                .merge(TextStyle(color: Colors.black))),
+        Column(
+          children: [
+            SizedBox(height: 20),
+            MiniHeadingLinedWidget(title: 'Streaks'),
+            Container(
+              child: Text('Add streaks here'),
+            ),
+            SizedBox(height: 20),
+            Divider(
+                height: 1,
+                color: ThemeColors.neutralColorLight.withOpacity(0.5))
+          ],
         ),
-        Divider(),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
