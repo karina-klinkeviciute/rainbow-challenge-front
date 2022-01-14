@@ -9,20 +9,20 @@ class Profile {
   String? username;
   Region? region;
   int all_points;
-//  String? remaining_points;
-//  String? streak;
-//  Object? medals;
-  // medals { level, time_issued}
+  int remaining_points;
+  // int streak;
+  List<Medal> medals;
 
-  Profile({
-    required this.email,
-    this.username,
-    this.region,
-    this.all_points = 0,
-    //     this.remaining_points,
-    //   this.streak,
-    //  this.medals
-  });
+  Profile(
+      {required this.email,
+      this.username,
+      this.region,
+      this.all_points = 0,
+      required this.remaining_points,
+      // required this.streak,
+      required this.medals
+      //  this.medals
+      });
 
   factory Profile.fromJson(Map<String, dynamic> json) =>
       _$ProfileFromJson(json);

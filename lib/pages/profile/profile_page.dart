@@ -10,9 +10,8 @@ import 'package:rainbow_challenge/widgets/widgets.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 // Profile page
-
-// TODO: get streaks data
-// TODO: get medals data
+// TODO: fix streaks model and data.
+// TODO: get medals data and fix conditional view for them.
 // TODO: Lithuanian localizations for Vaivorykstes (word variations).
 
 class ProfilePage extends StatefulWidget {
@@ -133,15 +132,16 @@ class _MainArea extends StatelessWidget {
           children: [
             StatsWidget(
               // To do: fix loading the asset
-              icon: Icons.looks,
-              number: profile.all_points.toString(),
+              icon: ThemeIcons.shop,
+              number: profile.remaining_points.toString(),
               // number: '5',
               label: AppLocalizations.of(context)!.profile_page_stats_rainbows,
             ),
             SizedBox(width: 20),
             StatsWidget(
                 icon: Icons.rotate_right,
-                number: '2',
+                //  number: profile.streak.toString(),
+                number: profile.remaining_points.toString(),
                 label: AppLocalizations.of(context)!
                     .profile_page_stats_active_weeks),
           ],
