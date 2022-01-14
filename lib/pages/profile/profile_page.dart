@@ -13,7 +13,6 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 // TODO: get streaks data
 // TODO: get medals data
-// TODO: fix medals design
 // TODO: Lithuanian localizations for Vaivorykstes (word variations).
 
 class ProfilePage extends StatefulWidget {
@@ -101,12 +100,26 @@ class _MainArea extends StatelessWidget {
             MiniHeadingLinedWidget(
                 title: AppLocalizations.of(context)!.profile_page_achievements),
             // TODO: fix achievements func
-            Row(children: [
-              ImageLocalWidget(url: 'assets/images/achievements/ph_silver.png'),
+            Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+              ImageLocalWidget(
+                url: 'assets/images/achievements/medal_platinum.png',
+                width: 60,
+              ),
               SizedBox(width: 10),
-              ImageLocalWidget(url: 'assets/images/achievements/ph_bronze.png'),
+              ImageLocalWidget(
+                url: 'assets/images/achievements/medal_gold.png',
+                width: 60,
+              ),
               SizedBox(width: 10),
-              ImageLocalWidget(url: 'assets/images/achievements/ph_gold.png'),
+              ImageLocalWidget(
+                url: 'assets/images/achievements/medal_silver.png',
+                width: 60,
+              ),
+              SizedBox(width: 10),
+              ImageLocalWidget(
+                url: 'assets/images/achievements/medal_bronze.png',
+                width: 60,
+              ),
               SizedBox(width: 10)
             ]),
             SizedBox(height: 20),
