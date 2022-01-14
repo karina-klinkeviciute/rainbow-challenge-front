@@ -10,7 +10,6 @@ import 'package:rainbow_challenge/widgets/widgets.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 // Profile page
-// TODO: fix streaks model and data.
 // TODO: get medals data and fix conditional view for them.
 // TODO: Lithuanian localizations for Vaivorykstes (word variations).
 
@@ -99,27 +98,27 @@ class _MainArea extends StatelessWidget {
             MiniHeadingLinedWidget(
                 title: AppLocalizations.of(context)!.profile_page_achievements),
             // TODO: fix achievements func
+            // bronze, silver, gold, platinum
             Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-              ImageLocalWidget(
-                url: 'assets/images/achievements/medal_platinum.png',
-                width: 60,
+              Padding(
+                padding: const EdgeInsets.all(5.0),
+                child: ImageLocalWidget(
+                  url: 'assets/images/achievements/medal_platinum.png',
+                  width: 60,
+                ),
               ),
-              SizedBox(width: 10),
               ImageLocalWidget(
                 url: 'assets/images/achievements/medal_gold.png',
                 width: 60,
               ),
-              SizedBox(width: 10),
               ImageLocalWidget(
                 url: 'assets/images/achievements/medal_silver.png',
                 width: 60,
               ),
-              SizedBox(width: 10),
               ImageLocalWidget(
                 url: 'assets/images/achievements/medal_bronze.png',
                 width: 60,
               ),
-              SizedBox(width: 10)
             ]),
             SizedBox(height: 20),
             Divider(
@@ -141,7 +140,7 @@ class _MainArea extends StatelessWidget {
             StatsWidget(
                 icon: Icons.rotate_right,
                 //  number: profile.streak.toString(),
-                number: profile.remaining_points.toString(),
+                number: profile.streak.streak.toString(),
                 label: AppLocalizations.of(context)!
                     .profile_page_stats_active_weeks),
           ],

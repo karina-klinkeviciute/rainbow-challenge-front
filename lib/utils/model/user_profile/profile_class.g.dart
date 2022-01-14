@@ -14,7 +14,7 @@ Profile _$ProfileFromJson(Map<String, dynamic> json) => Profile(
           : Region.fromJson(json['region'] as Map<String, dynamic>),
       all_points: json['all_points'] as int? ?? 0,
       remaining_points: json['remaining_points'] as int,
-      // streak: json['streak'] as int,
+      streak: Streak.fromJson(json['streak'] as Map<String, dynamic>),
       medals: (json['medals'] as List<dynamic>)
           .map((e) => Medal.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -26,6 +26,6 @@ Map<String, dynamic> _$ProfileToJson(Profile instance) => <String, dynamic>{
       'region': instance.region,
       'all_points': instance.all_points,
       'remaining_points': instance.remaining_points,
-      // 'streak': instance.streak,
+      'streak': instance.streak,
       'medals': instance.medals,
     };

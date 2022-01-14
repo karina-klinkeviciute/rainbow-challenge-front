@@ -1,5 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:rainbow_challenge/utils/model/models.dart';
+import 'package:rainbow_challenge/utils/model/streak/streak_class.dart';
 
 part 'profile_class.g.dart';
 
@@ -10,7 +11,7 @@ class Profile {
   Region? region;
   int all_points;
   int remaining_points;
-  // int streak;
+  Streak streak;
   List<Medal> medals;
 
   Profile(
@@ -19,10 +20,8 @@ class Profile {
       this.region,
       this.all_points = 0,
       required this.remaining_points,
-      // required this.streak,
-      required this.medals
-      //  this.medals
-      });
+      required this.streak,
+      required this.medals});
 
   factory Profile.fromJson(Map<String, dynamic> json) =>
       _$ProfileFromJson(json);
