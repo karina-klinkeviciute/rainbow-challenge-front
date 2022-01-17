@@ -11,6 +11,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 // Profile page
 // TODO: get medals data and fix conditional view for them.
+// TODO: add option to logout.
 // TODO: Lithuanian localizations for Vaivorykstes (word variations).
 
 class ProfilePage extends StatefulWidget {
@@ -62,6 +63,7 @@ class _MainArea extends StatelessWidget {
           child: CircularProgressIndicator(),
         ));
       final profile = (state).profile;
+      final List profileMedals = profile.medals;
       return Column(children: [
         Stack(alignment: AlignmentDirectional.bottomCenter, children: [
           Container(
@@ -99,28 +101,19 @@ class _MainArea extends StatelessWidget {
                 title: AppLocalizations.of(context)!.profile_page_achievements),
             // TODO: fix achievements func
             // bronze, silver, gold, platinum
-            Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-              Padding(
-                padding: const EdgeInsets.all(5.0),
-                child: ImageLocalWidget(
-                  url: 'assets/images/achievements/medal_platinum.png',
-                  width: 60,
-                ),
-              ),
-              ImageLocalWidget(
-                url: 'assets/images/achievements/medal_gold.png',
-                width: 60,
-              ),
-              ImageLocalWidget(
-                url: 'assets/images/achievements/medal_silver.png',
-                width: 60,
-              ),
-              ImageLocalWidget(
-                url: 'assets/images/achievements/medal_bronze.png',
-                width: 60,
-              ),
-            ]),
-            SizedBox(height: 20),
+
+            // TODO conditional if (profileMedals.length > 0) {}
+            Column(
+              children: [
+                Text(profileMedals.length.toString()),
+                Column(children: <Widget>[
+                  profileMedals
+                      .forEach((medal) => _medal(medalType: medal.level))
+                ]),
+                SizedBox(height: 20)
+              ],
+            ),
+
             Divider(
                 height: 1,
                 color: ThemeColors.neutralColorLight.withOpacity(0.5))
@@ -148,6 +141,22 @@ class _MainArea extends StatelessWidget {
       ]);
     },
   );
+}
+
+class _medal extends StatelessWidget {
+  _medal({Key? key, required this.medalType}) : super(key: key);
+  String medalType;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(5.0),
+      child: ImageLocalWidget(
+        url: 'assets/images/achievements/medal_${medalType}.png',
+        width: 60,
+      ),
+    );
+  }
 }
 
 class _UserProfileInfo extends StatelessWidget {
