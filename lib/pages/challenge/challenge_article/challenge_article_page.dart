@@ -11,32 +11,57 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 // Single challenge page of type Event Participant.
 part 'part_info.dart';
 
-class ChallengeArticlePage extends StatelessWidget {
+class ChallengeArticlePage extends StatefulWidget {
   ChallengeArticlePage({Key? key, required this.type_uuid, required this.uuid})
       : super(key: key);
+
   final String type_uuid;
   final String uuid;
-  String articleDescription = "";
-  String articleTitle = "";
-  String articleUrl = "";
+
+  @override
+  State<StatefulWidget> createState() {
+    return _ChallengeArticlePageState(type_uuid: type_uuid, uuid: uuid);
+  }
+}
+
+class _ChallengeArticlePageState extends State<ChallengeArticlePage> {
+  TextEditingController articleDescriptionController = TextEditingController();
+  TextEditingController articleTitleController = TextEditingController();
+  TextEditingController articleUrlController = TextEditingController();
+  final String type_uuid;
+  final String uuid;
+
+  _ChallengeArticlePageState({required this.type_uuid, required this.uuid});
+
+  @override
+  void initState() {
+    super.initState();
+    loadData();
+  }
+
+  Future loadData() async {
+    var joinedChallenge = await BlocProvider.of<ChallengeArticleCubit>(context)
+        .fetchChallenge(type_uuid: type_uuid, uuid: uuid);
+
+    articleDescriptionController.text = joinedChallenge.description ?? "";
+    articleTitleController.text = joinedChallenge.article_name ?? "";
+    articleUrlController.text = joinedChallenge.article_url ?? "";
+  }
 
   @override
   Widget build(BuildContext context) {
-    BlocProvider.of<ChallengeArticleCubit>(context)
-        .fetchChallenge(uuid: type_uuid);
-
     return WrapperMainWidget(
         mainArea: SizedBox(
             width: MediaQuery.of(context).size.width * 0.8,
             child: Column(
               children: [
                 _challengeInfo,
-                getArticleForm(context),
+                getArticleForm(),
               ],
             )));
   }
 
-  Widget getArticleForm(BuildContext context) {
+  Widget getArticleForm() {
     OutlineInputBorder border = OutlineInputBorder(
       borderSide: BorderSide(width: 1, color: ThemeColors.primaryColor),
       borderRadius: BorderRadius.circular(5),
@@ -58,10 +83,11 @@ class ChallengeArticlePage extends StatelessWidget {
                 floatingLabelBehavior: FloatingLabelBehavior.never,
               ),
               autocorrect: false,
+              controller: articleDescriptionController,
               textInputAction: TextInputAction.done,
               obscureText: false,
               maxLines: 4,
-              onChanged: (val) => {articleDescription = val},
+              //onChanged: (val) => {articleDescription = val},
             )),
         Padding(
             padding: EdgeInsets.only(top: 10),
@@ -77,10 +103,11 @@ class ChallengeArticlePage extends StatelessWidget {
                 floatingLabelBehavior: FloatingLabelBehavior.never,
               ),
               autocorrect: false,
+              controller: articleTitleController,
               textInputAction: TextInputAction.done,
               obscureText: false,
               maxLines: 1,
-              onChanged: (val) => {articleTitle = val},
+              //onChanged: (val) => {articleTitle = val},
             )),
         Padding(
             padding: EdgeInsets.only(top: 10),
@@ -97,16 +124,17 @@ class ChallengeArticlePage extends StatelessWidget {
                 floatingLabelBehavior: FloatingLabelBehavior.never,
               ),
               autocorrect: false,
+              controller: articleUrlController,
               textInputAction: TextInputAction.done,
               obscureText: false,
               maxLines: 1,
-              onChanged: (val) => {articleUrl = val},
+              //onChanged: (val) => {articleUrl = val},
             )),
         Padding(
             padding: EdgeInsets.only(top: 20),
             child: ElevatedButton(
                 onPressed: () {
-                  saveAction();
+                  saveAction(context);
                 },
                 child: Text(
                   "Saugoti ir pateikti vėliau",
@@ -127,7 +155,8 @@ class ChallengeArticlePage extends StatelessWidget {
   }
 
   completeAction(BuildContext context) async {
-    if (articleTitle == "" || articleDescription == "") {
+    if (articleTitleController.text == "" ||
+        articleDescriptionController.text == "") {
       await showMessage(context, "Klaida", "Laukai yra privalomi");
       return;
     }
@@ -138,9 +167,9 @@ class ChallengeArticlePage extends StatelessWidget {
     List<MapEntry<String, Object>> bodyParams =
         List<MapEntry<String, Object>>.empty(growable: true);
 
-    bodyParams.add(MapEntry("description", articleDescription));
-    bodyParams.add(MapEntry("article_url", articleUrl));
-    bodyParams.add(MapEntry("article_name", articleTitle));
+    bodyParams.add(MapEntry("description", articleDescriptionController.text));
+    bodyParams.add(MapEntry("article_url", articleUrlController.text));
+    bodyParams.add(MapEntry("article_name", articleTitleController.text));
 
     var result = await joinedChallengesRepository.completeChallenge(
         uuid: uuid,
@@ -148,10 +177,69 @@ class ChallengeArticlePage extends StatelessWidget {
         status: "completed",
         bodyParams: bodyParams);
 
-    int i = 0;
+    if (result != null &&
+        result["main_joined_challenge"] != null &&
+        (result["main_joined_challenge"] as Map<String, dynamic>)["status"] ==
+            "completed") {
+      await showMessage(context, "Ačiū!",
+          "Ačiū už atliktą užduotį! Savanoris peržiūrės jūsų atsakymą ir įskaitys vaivorykštes. Apie tai būsite informuoti pranešimų skiltyje.");
+      Navigator.of(context).pop();
+      return;
+    }
+
+    if (result != null &&
+        result["main_joined_challenge"] != null &&
+        (result["main_joined_challenge"] as Map<String, dynamic>)["status"] ==
+            "confirmed") {
+      await showMessage(context, "Ačiū!",
+          "Ačiū už atliktą užduotį. Jums vaivorykštės įskaičiuotos.");
+      Navigator.of(context).pop();
+      return;
+    }
+
+    if (result != null && result["error"] != null) {
+      await showMessage(context, "Klaida", result["error"]);
+      return;
+    }
+
+    await showMessage(
+        context, "Klaida", "Nenumatyta klaida, mėginkite dar kartą");
   }
 
-  saveAction() {}
+  saveAction(BuildContext context) async {
+    JoinedChallengesRepository joinedChallengesRepository =
+        JoinedChallengesRepository(dioClient: DioClient());
+
+    List<MapEntry<String, Object>> bodyParams =
+        List<MapEntry<String, Object>>.empty(growable: true);
+
+    bodyParams.add(MapEntry("description", articleDescriptionController.text));
+    bodyParams.add(MapEntry("article_url", articleUrlController.text));
+    bodyParams.add(MapEntry("article_name", articleTitleController.text));
+
+    var result = await joinedChallengesRepository.completeChallenge(
+        uuid: uuid,
+        challengeType: Api().getChallengeTypeSubPath(Api.challengeTypeArticle),
+        status: "joined",
+        bodyParams: bodyParams);
+
+    if (result != null &&
+        result["main_joined_challenge"] != null &&
+        (result["main_joined_challenge"] as Map<String, dynamic>)["status"] ==
+            "joined") {
+      await showMessage(context, "Ačiū!", "Pakeitimai išsaugoti");
+      Navigator.of(context).pop();
+      return;
+    }
+
+    if (result != null && result["error"] != null) {
+      await showMessage(context, "Klaida", result["error"]);
+      return;
+    }
+
+    await showMessage(
+        context, "Klaida", "Nenumatyta klaida, mėginkite dar kartą");
+  }
 
   Future showMessage(BuildContext context, String title, String message) {
     return showDialog<String>(

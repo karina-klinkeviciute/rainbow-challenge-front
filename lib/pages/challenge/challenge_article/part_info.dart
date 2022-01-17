@@ -9,6 +9,7 @@ Widget _challengeInfo =
         padding: const EdgeInsets.symmetric(vertical: 20.0),
         child: CircularProgressIndicator(),
       ));
+
     final challengeTypeItem = (state).challengeTypeItem;
     return Column(children: [
       ChallengeHeadlineWidget(

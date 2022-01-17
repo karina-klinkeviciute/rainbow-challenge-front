@@ -38,13 +38,16 @@ class JoinedChallengesRepository {
   Future<Map<String, dynamic>?> completeChallenge(
       {required String uuid,
       required String challengeType,
-      required String status,
+      required String? status,
       required Iterable<MapEntry<String, Object>> bodyParams}) async {
-    Map<String, Object> body = {
-      "main_joined_challenge": {
-        "status": "${status}",
-      }
-    };
+    Map<String, Object> body = Map<String, Object>();
+
+    if (status != null)
+      body = {
+        "main_joined_challenge": {
+          "status": "${status}",
+        }
+      };
 
     body.addEntries(bodyParams);
     var url =
