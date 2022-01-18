@@ -11,5 +11,7 @@ class ChallengeArticleInitial extends ChallengeArticleState {}
 
 class ChallengeArticleLoaded extends ChallengeArticleState {
   final ChallengeArticle challengeTypeItem;
-  ChallengeArticleLoaded({required this.challengeTypeItem});
+  final ChallengeArticle challenge;
+  ChallengeArticleLoaded(
+      {required this.challengeTypeItem, required this.challenge});
 }
