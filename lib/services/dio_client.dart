@@ -210,6 +210,12 @@ class DioClient {
       return response.data;
     } on DioError catch (e) {
       print(e);
+
+      if (e.response?.data is Map<String, dynamic>) {
+        Map<String, dynamic> dataMap = e.response?.data as Map<String, dynamic>;
+        var errorMessagesList = dataMap.entries.first.value as List<dynamic>;
+        return {"error": errorMessagesList.first};
+      }
     } on Exception catch (e) {
       // Unhandled exception
       print(e);
