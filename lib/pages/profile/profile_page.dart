@@ -96,24 +96,20 @@ class _MainArea extends StatelessWidget {
                 .merge(TextStyle(color: Colors.black))),
         Column(
           children: [
+            // TODO conditional if (profileMedals.length > 0) {}
             SizedBox(height: 20),
             MiniHeadingLinedWidget(
                 title: AppLocalizations.of(context)!.profile_page_achievements),
-            // TODO: fix achievements func
-            // bronze, silver, gold, platinum
 
-            // TODO conditional if (profileMedals.length > 0) {}
-            Column(
-              children: [
-                Text(profileMedals.length.toString()),
-                Column(children: <Widget>[
-                  profileMedals
-                      .forEach((medal) => _medal(medalType: medal.level))
-                ]),
-                SizedBox(height: 20)
-              ],
-            ),
+            Column(children: <Widget>[
+              for (int i = 0; i < profileMedals.length; i++)
+                profileMedals
+                    .map((medal) => _medal(medalType: medal.level))
+                    .toList()[i]
+            ]),
+            // END HERE
 
+            SizedBox(height: 20),
             Divider(
                 height: 1,
                 color: ThemeColors.neutralColorLight.withOpacity(0.5))
@@ -167,7 +163,7 @@ class _UserProfileInfo extends StatelessWidget {
     return MaterialButton(
       child: Text('Logout'),
       onPressed: () {
-        //  BlocProvider.of<AuthenticationBloc>(context).add(LoggedOut());
+        BlocProvider.of<AuthenticationBloc>(context).add(LoggedOut());
       },
     );
   }
