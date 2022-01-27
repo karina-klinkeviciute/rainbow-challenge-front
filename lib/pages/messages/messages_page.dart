@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:rainbow_challenge/services/dio_client.dart';
+import 'package:rainbow_challenge/theme/colors.dart';
 import 'package:rainbow_challenge/utils/model/message.dart';
 import 'package:rainbow_challenge/utils/repository/messages_repository.dart';
 import 'package:rainbow_challenge/widgets/widgets.dart';
+
+import 'message_page.dart';
 
 class MessagesPage extends StatefulWidget {
   const MessagesPage({Key? key}) : super(key: key);
@@ -40,7 +43,7 @@ class _MessagesPageState extends State<MessagesPage> {
     return ListView.separated(
       scrollDirection: Axis.vertical,
       shrinkWrap: true,
-      padding: const EdgeInsets.all(10),
+      padding: const EdgeInsets.only(left: 24, right: 24, top: 10),
       itemCount: messages.length,
       itemBuilder: (BuildContext context, int index) {
         return getListViewCell(messages[index]);
@@ -53,7 +56,42 @@ class _MessagesPageState extends State<MessagesPage> {
   }
 
   Widget getListViewCell(Message message) {
-    return Text(message.messageText);
+    return GestureDetector(
+        child: Container(
+            height: 50,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Expanded(
+                    child: Text(message.messageText ?? "",
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                            fontWeight: message.seen
+                                ? FontWeight.normal
+                                : FontWeight.bold))),
+                Icon(
+                  Icons.chevron_right_outlined,
+                  color: ThemeColors.secondaryColor.withOpacity(0.7),
+                  size: 24.0,
+                ),
+              ],
+            )),
+        onTap: () async {
+          await onMessageClick(message);
+        });
+  }
+
+  Future onMessageClick(Message message) async {
+    await Navigator.push(context, MaterialPageRoute(builder: (context) {
+      return MessagePage(message: message);
+    }));
+    setState(() {
+      isLoading = true;
+    });
+
+    loadData();
   }
 
   Future loadData() async {

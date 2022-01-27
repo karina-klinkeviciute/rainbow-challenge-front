@@ -14,10 +14,10 @@ class Message {
     required this.seen,
   });
 
-  String uuid;
-  String messageText;
-  String user;
-  String adminSender;
+  String? uuid;
+  String? messageText;
+  String? user;
+  String? adminSender;
   DateTime timeSent;
   bool seen;
 

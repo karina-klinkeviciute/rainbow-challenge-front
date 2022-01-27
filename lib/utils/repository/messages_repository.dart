@@ -10,4 +10,9 @@ class MessagesRepository {
     final messagesResponse = await dioClient.getList(Api.messagesEndpoint);
     return messagesResponse!.map((e) => Message.fromJson(e)).toList();
   }
+
+  Future setSeen(String id) {
+    var body = {"seen": true};
+    return dioClient.updateItem("${Api.messagesEndpoint}${id}/", body);
+  }
 }
