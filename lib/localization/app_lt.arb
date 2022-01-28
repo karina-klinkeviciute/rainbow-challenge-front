@@ -34,5 +34,7 @@
     "profile_page_stats_rainbows": "Vaivorykštės",
     "profile_page_stats_active_weeks": "Aktyvios savaitės",
     "profile_page_medals": "Medaliai",
-    "profile_page_achievements": "Pasiekimai"
+    "profile_page_achievements": "Pasiekimai",
+    "action_login": "Prisijungti",
+    "action_logout": "Atsijungti"
 }

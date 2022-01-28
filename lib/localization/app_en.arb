@@ -34,5 +34,7 @@
     "profile_page_stats_rainbows": "Rainbows",
     "profile_page_stats_active_weeks": "Active weeks",
     "profile_page_medals": "Medals",
-    "profile_page_achievements": "Pasiekimai"
+    "profile_page_achievements": "Achievments",
+    "action_login": "Login",
+    "action_logout": "Logout"
 }

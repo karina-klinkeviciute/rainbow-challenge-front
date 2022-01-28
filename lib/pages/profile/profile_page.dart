@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_html/shims/dart_ui_real.dart';
 import 'package:rainbow_challenge/theme/colors.dart';
 import 'package:rainbow_challenge/theme/headings.dart';
+import 'package:rainbow_challenge/widgets/wrapper_custom_appbar.dart';
 import 'cubit/profile_info_cubit.dart';
 import 'package:rainbow_challenge/bloc/authentication_bloc.dart';
 import 'package:rainbow_challenge/theme/icons.dart';
@@ -27,7 +28,25 @@ class _profilePageState extends State<ProfilePage>
   Widget build(BuildContext context) {
     super.build(context);
     BlocProvider.of<ProfileInfoCubit>(context).fetchProfile();
-    return WrapperMainWidget(
+    return WrapperCustomAppbarWidget(
+      appBar: AppBar(
+        leading: IconButton(
+          color: ThemeColors.neutralColorLight,
+          icon: Icon(Icons.settings),
+          // TODO: go to user settings
+          onPressed: () {},
+        ),
+        actions: [
+          TextButton.icon(
+            //   style: style,
+            label: Text(AppLocalizations.of(context)!.action_logout),
+            icon: Icon(Icons.logout),
+            onPressed: () {
+              BlocProvider.of<AuthenticationBloc>(context).add(LoggedOut());
+            },
+          ),
+        ],
+      ),
       mainArea: _MainArea(),
       //  useAppBar: false,
     );
@@ -96,17 +115,18 @@ class _MainArea extends StatelessWidget {
                 .merge(TextStyle(color: Colors.black))),
         Column(
           children: [
-            // TODO conditional if (profileMedals.length > 0) {}
-            SizedBox(height: 20),
-            MiniHeadingLinedWidget(
-                title: AppLocalizations.of(context)!.profile_page_achievements),
-
-            Column(children: <Widget>[
-              for (int i = 0; i < profileMedals.length; i++)
-                profileMedals
-                    .map((medal) => _medal(medalType: medal.level))
-                    .toList()[i]
-            ]),
+            if (profileMedals.length > 0) ...[
+              SizedBox(height: 20),
+              MiniHeadingLinedWidget(
+                  title:
+                      AppLocalizations.of(context)!.profile_page_achievements),
+              Column(children: <Widget>[
+                for (int i = 0; i < profileMedals.length; i++)
+                  profileMedals
+                      .map((medal) => _medal(medalType: medal.level))
+                      .toList()[i]
+              ]),
+            ],
             // END HERE
 
             SizedBox(height: 20),
@@ -141,7 +161,7 @@ class _MainArea extends StatelessWidget {
 
 class _medal extends StatelessWidget {
   _medal({Key? key, required this.medalType}) : super(key: key);
-  String medalType;
+  final String medalType;
 
   @override
   Widget build(BuildContext context) {
@@ -151,20 +171,6 @@ class _medal extends StatelessWidget {
         url: 'assets/images/achievements/medal_${medalType}.png',
         width: 60,
       ),
-    );
-  }
-}
-
-class _UserProfileInfo extends StatelessWidget {
-  const _UserProfileInfo({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialButton(
-      child: Text('Logout'),
-      onPressed: () {
-        BlocProvider.of<AuthenticationBloc>(context).add(LoggedOut());
-      },
     );
   }
 }
