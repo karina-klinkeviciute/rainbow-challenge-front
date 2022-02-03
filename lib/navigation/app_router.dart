@@ -132,7 +132,8 @@ class AppRouter {
                   create: (context) => ChallengeCustomCubit(
                       challengesTypeRepository: challengesCustomRepository),
                   child: ChallengeCustomPage(
-                    uuid: arguments.type_uuid,
+                    type_uuid: arguments.type_uuid,
+                    uuid: arguments.uuid,
                   ),
                 ));
 
