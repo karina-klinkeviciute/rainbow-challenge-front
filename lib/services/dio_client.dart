@@ -240,12 +240,13 @@ class DioClient {
   }
 
   Future<Map<String, dynamic>?> uploadFile(
-      String endPoint, File file, String uuid) async {
+      String endPoint, File file, String uuid, String challengeType) async {
     try {
       String fileName = file.path.split('/').last;
       FormData formData = FormData.fromMap({
         "file": await MultipartFile.fromFile(file.path, filename: fileName),
-        "joined_challenge": uuid
+        "concrete_joined_challenge_uuid": uuid,
+        "challenge_type": challengeType
       });
       await addAuthorizationHeader();
       var response = await _dio.post(endPoint, data: formData);
