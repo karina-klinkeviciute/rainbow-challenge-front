@@ -29,5 +29,12 @@
     "error": "Error",
     "challenge_completed_already": "Challenge already accomplished",
     "challenge_continue_single": "Continue challenge",
-    "challenge_continue": "Continue"
+    "challenge_continue": "Continue",
+    "profile_page_title": "My profile",
+    "profile_page_stats_rainbows": "Rainbows",
+    "profile_page_stats_active_weeks": "Active weeks",
+    "profile_page_medals": "Medals",
+    "profile_page_achievements": "Achievements",
+    "action_login": "Login",
+    "action_logout": "Logout"
 }

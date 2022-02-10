@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:rainbow_challenge/pages/profile/cubit/profile_info_cubit.dart';
 import 'package:rainbow_challenge/services/dio_client.dart';
 import 'package:rainbow_challenge/theme/colors.dart';
 import 'package:rainbow_challenge/theme/fonts.dart' as ThemeFonts;
@@ -24,6 +25,9 @@ class NewsPage extends StatelessWidget {
   final ChallengesRepository challengesRepository =
       ChallengesRepository(dioClient: DioClient());
 
+  final ProfileRepository profileRepository =
+      ProfileRepository(dioClient: DioClient());
+
   final NewsRepository newsRepository = NewsRepository(dioClient: DioClient());
 
   @override
@@ -38,7 +42,11 @@ class NewsPage extends StatelessWidget {
                     NewsCubit(newsRepository: newsRepository),
                 child: _NewsList(),
               ),
-              ProfilePage(),
+              BlocProvider(
+                create: (BuildContext context) =>
+                    ProfileInfoCubit(profileRepository: profileRepository),
+                child: ProfilePage(),
+              ),
               BlocProvider(
                 create: (BuildContext context) =>
                     ChallengesCubit(challengesRepository: challengesRepository),

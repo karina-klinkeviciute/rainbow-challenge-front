@@ -29,5 +29,12 @@
     "error": "Klaida",
     "challenge_completed_already": "Šią užduotį jau atlikote",
     "challenge_continue_single": "Tęsti jau pradėtą užduotį",
-    "challenge_continue": "Tęsti"
+    "challenge_continue": "Tęsti",
+    "profile_page_title": "Mano profilis",
+    "profile_page_stats_rainbows": "Vaivorykštės",
+    "profile_page_stats_active_weeks": "Aktyvios savaitės",
+    "profile_page_medals": "Medaliai",
+    "profile_page_achievements": "Pasiekimai",
+    "action_login": "Prisijungti",
+    "action_logout": "Atsijungti"
 }

@@ -64,9 +64,12 @@ Custom widgets can be found in `lib > widgets`. They can be reused in different 
 
 - **WrapperMainWidget( { required mainArea, bodyBackgroundColor })** - displays a Scaffold structure with standard setup.
 
+- **StatsWidget({ required label, required number, icon, localIcon})** - displays a column with a label, big number and icon. Icon can be added in two ways: by choosing a local asset(use localIcon) or an icon from icons library(use icon). Suitable for displaying stats. 
+
 - **ChallengeHeadlineWidget({ required title, required points })** - displays a headline in single challenge page templates. It includes the title and points. UI work is in progress.
 
 - **ChallengeDescriptionWidget({ description })** - displays a description in single challenge page if it exists. Uses HtmlWidget(). UI work is in progress.
+
 
 ## Constants
 
