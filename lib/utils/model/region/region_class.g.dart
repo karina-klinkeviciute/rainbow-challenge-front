@@ -7,8 +7,8 @@ part of 'region_class.dart';
 // **************************************************************************
 
 Region _$RegionFromJson(Map<String, dynamic> json) => Region(
-      name: json['name'] as String,
-      points: json['points'] as int,
+      name: json['name'] as String? ?? "Lietuva",
+      points: json['points'] as int? ?? 0,
       uuid: json['uuid'] as String,
     );
 

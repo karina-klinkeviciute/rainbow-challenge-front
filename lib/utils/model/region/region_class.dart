@@ -7,7 +7,7 @@ class Region {
   String uuid;
   int points;
 
-  Region({required this.name, required this.points, required this.uuid});
+  Region({this.name = "Lietuva", this.points = 0, required this.uuid});
 
   factory Region.fromJson(Map<String, dynamic> json) => _$RegionFromJson(json);
   Map<String, dynamic> toJson() => _$RegionToJson(this);

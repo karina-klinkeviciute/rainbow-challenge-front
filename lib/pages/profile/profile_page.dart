@@ -110,9 +110,11 @@ class _MainArea extends StatelessWidget {
         ]),
         Text(profile.username ?? profile.email,
             style: ThemeHeadings.themeHeading3),
-        Text(profile.region!.name,
-            style: ThemeHeadings.themeHeading4
-                .merge(TextStyle(color: Colors.black))),
+        (profile.region != null)
+            ? Text(profile.region!.name,
+                style: ThemeHeadings.themeHeading4
+                    .merge(TextStyle(color: Colors.black)))
+            : Container(),
         Column(
           children: [
             if (profileMedals.length > 0) ...[
