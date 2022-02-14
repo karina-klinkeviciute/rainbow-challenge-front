@@ -11,13 +11,9 @@ class ChallengeCustomCubit extends Cubit<ChallengeCustomState> {
   ChallengeCustomCubit({required this.challengesTypeRepository})
       : super(ChallengeCustomInitial());
 
-  void fetchChallenge({required String uuid}) {
-    Timer(Duration(seconds: 1), () {
-      challengesTypeRepository
-          .fetchChallenge(uuid: uuid)
-          .then((challengeTypeItem) {
-        emit(ChallengeCustomLoaded(challengeTypeItem: challengeTypeItem));
-      });
-    });
+  Future<ChallengeCustom> fetchChallenge({required String uuid}) async {
+    var result = await challengesTypeRepository.fetchChallenge(uuid: uuid);
+    emit(ChallengeCustomLoaded(challengeTypeItem: result));
+    return result;
   }
 }

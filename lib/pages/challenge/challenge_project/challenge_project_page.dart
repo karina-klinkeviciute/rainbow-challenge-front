@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:rainbow_challenge/constants/api.dart';
 import 'package:rainbow_challenge/pages/pages.dart';
+import 'package:rainbow_challenge/widgets/file_upload_widget.dart';
 import 'cubit/challenge_project_cubit.dart';
 import 'package:rainbow_challenge/widgets/widgets.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -9,12 +11,15 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 part 'part_info.dart';
 
 class ChallengeProjectPage extends StatelessWidget {
-  ChallengeProjectPage({Key? key, required this.uuid}) : super(key: key);
+  ChallengeProjectPage({Key? key, required this.type_uuid, required this.uuid})
+      : super(key: key);
+  final String type_uuid;
   final String uuid;
 
   @override
   Widget build(BuildContext context) {
-    BlocProvider.of<ChallengeProjectCubit>(context).fetchChallenge(uuid: uuid);
+    BlocProvider.of<ChallengeProjectCubit>(context)
+        .fetchChallenge(uuid: type_uuid);
     return WrapperMainWidget(
         mainArea: SizedBox(
             width: MediaQuery.of(context).size.width * 0.8,
@@ -22,6 +27,11 @@ class ChallengeProjectPage extends StatelessWidget {
               children: [
                 _challengeInfo,
                 _challengeForm,
+                Container(
+                  height: 24,
+                ),
+                new FileUploadWidget(
+                    uuid: uuid, challenge_type: Api.challengeTypeProject)
               ],
             )));
   }
