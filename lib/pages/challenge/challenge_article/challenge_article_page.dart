@@ -4,6 +4,7 @@ import 'package:rainbow_challenge/constants/api.dart';
 import 'package:rainbow_challenge/services/dio_client.dart';
 import 'package:rainbow_challenge/theme/colors.dart';
 import 'package:rainbow_challenge/utils/repository/repositories.dart';
+import 'package:rainbow_challenge/widgets/file_upload_widget.dart';
 import 'cubit/challenge_article_cubit.dart';
 import 'package:rainbow_challenge/widgets/widgets.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -57,6 +58,11 @@ class _ChallengeArticlePageState extends State<ChallengeArticlePage> {
               children: [
                 _challengeInfo,
                 getArticleForm(),
+                Container(
+                  height: 24,
+                ),
+                new FileUploadWidget(
+                    uuid: uuid, challenge_type: Api.challengeTypeArticle)
               ],
             )));
   }
