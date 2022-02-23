@@ -45,6 +45,11 @@ class NewsPage extends StatelessWidget {
                     NewsCubit(newsRepository: newsRepository),
                 child: _NewsList(),
               ),
+              BlocProvider(
+                create: (BuildContext context) =>
+                    ProfileInfoCubit(profileRepository: profileRepository),
+                child: ProfilePage(),
+              ),
               MultiBlocProvider(
                 providers: [
                   BlocProvider<ChallengesCubit>(
@@ -57,11 +62,6 @@ class NewsPage extends StatelessWidget {
                                   userJoinedChallengesRepository))
                 ],
                 child: ChallengesPage(),
-              ),
-              BlocProvider(
-                create: (BuildContext context) =>
-                    ProfileInfoCubit(profileRepository: profileRepository),
-                child: ProfilePage(),
               ),
               RegionsPage(),
               NavigationPage(),
