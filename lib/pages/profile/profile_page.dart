@@ -15,18 +15,11 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 // TODO: add option to logout.
 // TODO: Lithuanian localizations for Vaivorykstes (word variations).
 
-class ProfilePage extends StatefulWidget {
+class ProfilePage extends StatelessWidget {
   const ProfilePage({Key? key}) : super(key: key);
 
   @override
-  _profilePageState createState() => _profilePageState();
-}
-
-class _profilePageState extends State<ProfilePage>
-    with AutomaticKeepAliveClientMixin<ProfilePage> {
-  @override
   Widget build(BuildContext context) {
-    super.build(context);
     BlocProvider.of<ProfileInfoCubit>(context).fetchProfile();
     return WrapperCustomAppbarWidget(
       appBar: AppBar(
