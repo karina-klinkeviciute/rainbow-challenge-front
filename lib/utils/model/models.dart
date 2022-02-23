@@ -1,6 +1,11 @@
 export 'api_model.dart';
 export 'user_model.dart';
+<<<<<<< HEAD
 export 'user_joined_challenge/user_joined_challenge_class.dart';
+=======
+export 'region/region_class.dart';
+export 'medal/medal_class.dart';
+>>>>>>> b9090faa011662f66f3c0a55587a424eb43d6af4
 
 export 'news/news_class.dart';
 
@@ -26,3 +31,5 @@ export 'joined_challenge/joined_challenge_reacting/joined_challenge_reacting_cla
 export 'joined_challenge/joined_challenge_school_gsa/joined_challenge_school_gsa_class.dart';
 export 'joined_challenge/joined_challenge_story/joined_challenge_story_class.dart';
 export 'joined_challenge/joined_challenge_quiz/joined_challenge_quiz_class.dart';
+
+export 'user_profile/profile_class.dart';

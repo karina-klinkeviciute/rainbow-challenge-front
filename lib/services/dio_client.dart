@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:rainbow_challenge/constants/api.dart';
 import 'package:rainbow_challenge/utils/repository/repositories.dart';
@@ -210,6 +212,12 @@ class DioClient {
       return response.data;
     } on DioError catch (e) {
       print(e);
+
+      if (e.response?.data is Map<String, dynamic>) {
+        Map<String, dynamic> dataMap = e.response?.data as Map<String, dynamic>;
+        var errorMessagesList = dataMap.entries.first.value as List<dynamic>;
+        return {"error": errorMessagesList.first};
+      }
     } on Exception catch (e) {
       // Unhandled exception
       print(e);
@@ -222,6 +230,26 @@ class DioClient {
       await addAuthorizationHeader();
       final response = await _dio.delete(endPoint, data: itemObject);
       print('Item removed ${response.data}');
+      return response.data;
+    } on DioError catch (e) {
+      print(e);
+    } on Exception catch (e) {
+      // Unhandled exception
+      print(e);
+    }
+  }
+
+  Future<Map<String, dynamic>?> uploadFile(
+      String endPoint, File file, String uuid, String challengeType) async {
+    try {
+      String fileName = file.path.split('/').last;
+      FormData formData = FormData.fromMap({
+        "file": await MultipartFile.fromFile(file.path, filename: fileName),
+        "concrete_joined_challenge_uuid": uuid,
+        "challenge_type": challengeType
+      });
+      await addAuthorizationHeader();
+      var response = await _dio.post(endPoint, data: formData);
       return response.data;
     } on DioError catch (e) {
       print(e);

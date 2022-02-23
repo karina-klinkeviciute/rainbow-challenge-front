@@ -37,6 +37,19 @@ class Challenge {
       required this.is_joined,
       required this.concrete_joined_challenges});
 
+  factory Challenge.empty() => Challenge(
+      uuid: "",
+      concrete_challenge_uuid: "",
+      type: "",
+      name: "",
+      description: "",
+      points: 0,
+      multiple: false,
+      needs_confirmation: false,
+      can_be_joined: false,
+      is_joined: false,
+      concrete_joined_challenges: List<ConcreteJoinedChallenge>.empty());
+
   factory Challenge.fromJson(Map<String, dynamic> json) =>
       _$ChallengeFromJson(json);
   Map<String, dynamic> toJson() => _$ChallengeToJson(this);

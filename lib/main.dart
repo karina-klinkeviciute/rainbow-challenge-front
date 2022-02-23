@@ -4,14 +4,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rainbow_challenge/bloc/bottom_menu_cubit.dart';
 import 'package:rainbow_challenge/bloc/internet_cubit.dart';
 import 'package:rainbow_challenge/navigation/app_router.dart';
-import 'package:rainbow_challenge/pages/home_empty.dart';
 import 'package:rainbow_challenge/pages/pages.dart';
 import 'package:rainbow_challenge/theme/design_theme.dart';
 import 'package:rainbow_challenge/utils/repository/user_repository.dart';
 import 'package:rainbow_challenge/bloc/authentication_bloc.dart';
 
 //import 'package:rainbow_challenge/pages/splash.dart';
-import 'package:rainbow_challenge/pages/home.dart';
 import 'package:rainbow_challenge/pages/login/login_page.dart';
 import 'package:rainbow_challenge/pages/registration/registration_page.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';

@@ -3,6 +3,15 @@ import 'package:rainbow_challenge/constants/app.dart';
 class Api {
   static const String baseUrl = 'https://rainbowchallenge.lt';
 
+// Messages
+  static const String messagesEndpoint = "/api/message/";
+
+// Files
+  static const String fileUploadEndpoint =
+      "/api/concrete_joined_challenge_file_upload/";
+  static const String fileListEndpoint =
+      "/api/concrete_joined_challenge_file_list/";
+
   // News
   static const String newsEndpoint = '/api/news/';
 
