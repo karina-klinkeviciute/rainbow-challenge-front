@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_html/shims/dart_ui_real.dart';
 import 'package:rainbow_challenge/pages/challenges/cubit/challenges_cubit.dart';
 import 'package:rainbow_challenge/pages/challenges/cubit/user_joined_challenges_cubit.dart';
 import 'package:rainbow_challenge/pages/pages.dart';
 import 'package:rainbow_challenge/theme/colors.dart';
+import 'package:rainbow_challenge/theme/headings.dart';
 import 'package:rainbow_challenge/theme/icons.dart';
 import 'package:rainbow_challenge/widgets/widgets.dart';
 import 'package:rainbow_challenge/utils/model/models.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:rainbow_challenge/theme/fonts.dart' as ThemeFonts;
 
 class ChallengesPage extends StatefulWidget {
   const ChallengesPage({Key? key}) : super(key: key);
@@ -38,7 +41,7 @@ class _MainArea extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: MediaQuery.of(context).size.width * 0.8,
+      width: MediaQuery.of(context).size.width * 0.9,
       child: Column(
         children: [
           HeadlineWidget(
@@ -71,21 +74,35 @@ class _LocalTabsState extends State<_LocalTabs> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     return Column(children: [
       Container(
+        height: 40,
         decoration: BoxDecoration(
-          border: Border.all(color: ThemeColors.neutralColorLight),
-          borderRadius: BorderRadius.circular(10),
+          border: Border.all(color: ThemeColors.secondaryColor),
+          borderRadius: BorderRadius.circular(40),
         ),
-        margin: EdgeInsets.symmetric(vertical: 30),
-        child: TabBar(
-          indicator: BoxDecoration(
-              borderRadius: BorderRadius.circular(30), // Creates border
-              color: ThemeColors.secondaryColor),
-          controller: _tabController,
-          tabs: [
-            Tab(icon: Icon(Icons.star_border_outlined)),
-            Tab(icon: Icon(Icons.star_half_outlined)),
-            Tab(icon: Icon(Icons.star)),
-          ],
+        child: Theme(
+          data: ThemeData(
+            highlightColor: Colors.transparent,
+            splashColor: Colors.transparent,
+          ),
+          child: TabBar(
+            indicator: BoxDecoration(
+                borderRadius: BorderRadius.circular(40), // Creates border
+                color: ThemeColors.secondaryColor),
+            labelColor: Colors.white,
+            labelStyle: TextStyle(
+                fontFamily: ThemeFonts.secondaryFontFamily,
+                fontWeight: FontWeight.bold),
+            unselectedLabelColor: ThemeColors.neutralColor,
+            automaticIndicatorColorAdjustment: false,
+            controller: _tabController,
+            tabs: [
+              Tab(
+                text: 'Challenges',
+              ),
+              Tab(text: 'Joined'),
+              Tab(text: 'Completed'),
+            ],
+          ),
         ),
       ),
       Container(
