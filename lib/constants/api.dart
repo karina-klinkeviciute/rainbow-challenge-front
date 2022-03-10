@@ -6,6 +6,9 @@ class Api {
 // Messages
   static const String messagesEndpoint = "/api/message/";
 
+// Regions
+  static const String regionsEndpoint = "/api/results/region/";
+
 // Files
   static const String fileUploadEndpoint =
       "/api/concrete_joined_challenge_file_upload/";

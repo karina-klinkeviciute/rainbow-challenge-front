@@ -4,6 +4,8 @@ import 'package:rainbow_challenge/constants/app.dart';
 import 'package:rainbow_challenge/navigation/route_arguments/single_challenge_arguments.dart';
 import 'package:rainbow_challenge/pages/pages.dart';
 import 'package:rainbow_challenge/pages/profile/cubit/profile_info_cubit.dart';
+import 'package:rainbow_challenge/pages/regions/cubit/regions_cubit.dart';
+import 'package:rainbow_challenge/pages/regions/regions_page.dart';
 import 'package:rainbow_challenge/services/dio_client.dart';
 import 'package:rainbow_challenge/utils/repository/repositories.dart';
 
@@ -24,6 +26,9 @@ import 'package:rainbow_challenge/pages/challenges/cubit/challenges_cubit.dart';
 // One of use cases is with Navigator: `Navigator.pushNamed(context, routeName)`.
 
 class AppRouter {
+  RegionsRepository regionsRepository =
+      RegionsRepository(dioClient: DioClient());
+
   ProfileRepository profileRepository =
       ProfileRepository(dioClient: DioClient());
 
@@ -239,6 +244,14 @@ class AppRouter {
                   create: (BuildContext context) =>
                       ProfileInfoCubit(profileRepository: profileRepository),
                   child: ProfilePage(),
+                ));
+
+      case AppRoute.regions:
+        return MaterialPageRoute(
+            builder: (_) => BlocProvider(
+                  create: (BuildContext context) =>
+                      RegionsCubit(regionsRepository: regionsRepository),
+                  child: RegionsPage(),
                 ));
 
       case AppRoute.challengesJoined:
