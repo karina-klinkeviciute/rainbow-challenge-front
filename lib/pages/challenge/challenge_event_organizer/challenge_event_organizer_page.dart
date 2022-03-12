@@ -66,6 +66,14 @@ class _ChallengeEventOrganizerPageState
   Future<void> loadData() async {
     var challenge = await BlocProvider.of<ChallengeEventOrganizerCubit>(context)
         .fetchChallenge(type_uuid: type_uuid, uuid: uuid);
+
+    descriptionController.text = challenge.description ?? "";
+    nameController.text = challenge.event_name ?? "";
+    urlController.text = challenge.event_url ?? "";
+
+    setState(() {
+      organizedAlone = challenge.organized_alone ?? false;
+    });
   }
 
   Widget getForm() {
@@ -94,7 +102,6 @@ class _ChallengeEventOrganizerPageState
               textInputAction: TextInputAction.done,
               obscureText: false,
               maxLines: 1,
-              //onChanged: (val) => {articleTitle = val},
             )),
         Padding(
             padding: EdgeInsets.only(top: 20),
@@ -114,7 +121,6 @@ class _ChallengeEventOrganizerPageState
               textInputAction: TextInputAction.done,
               obscureText: false,
               maxLines: 4,
-              //onChanged: (val) => {articleDescription = val},
             )),
         Padding(
             padding: EdgeInsets.only(top: 10),
@@ -177,11 +183,10 @@ class _ChallengeEventOrganizerPageState
   }
 
   completeAction(BuildContext context) async {
-    // if (articleTitleController.text == "" ||
-    //     articleDescriptionController.text == "") {
-    //   await showMessage(context, "Klaida", "Laukai yra privalomi");
-    //   return;
-    // }
+    if (nameController.text == "" || descriptionController.text == "") {
+      await showMessage(context, "Klaida", "Laukai yra privalomi");
+      return;
+    }
 
     JoinedChallengesRepository joinedChallengesRepository =
         JoinedChallengesRepository(dioClient: DioClient());
@@ -189,13 +194,14 @@ class _ChallengeEventOrganizerPageState
     List<MapEntry<String, Object>> bodyParams =
         List<MapEntry<String, Object>>.empty(growable: true);
 
-    // bodyParams.add(MapEntry("description", articleDescriptionController.text));
-    // bodyParams.add(MapEntry("article_url", articleUrlController.text));
-    // bodyParams.add(MapEntry("article_name", articleTitleController.text));
+    bodyParams.add(MapEntry("description", descriptionController.text));
+    bodyParams.add(MapEntry("event_url", urlController.text));
+    bodyParams.add(MapEntry("event_name", nameController.text));
+    bodyParams.add(MapEntry("organized_alone", organizedAlone));
 
     var result = await joinedChallengesRepository.completeChallenge(
         uuid: uuid,
-        challengeType: Api().getChallengeTypeSubPath(Api.challengeTypeArticle),
+        challengeType: Api().getChallengeTypeSubPath(Api.challengeTypeEventOrg),
         status: "completed",
         bodyParams: bodyParams);
 
@@ -235,13 +241,14 @@ class _ChallengeEventOrganizerPageState
     List<MapEntry<String, Object>> bodyParams =
         List<MapEntry<String, Object>>.empty(growable: true);
 
-    // bodyParams.add(MapEntry("description", articleDescriptionController.text));
-    // bodyParams.add(MapEntry("article_url", articleUrlController.text));
-    // bodyParams.add(MapEntry("article_name", articleTitleController.text));
+    bodyParams.add(MapEntry("description", descriptionController.text));
+    bodyParams.add(MapEntry("event_url", urlController.text));
+    bodyParams.add(MapEntry("event_name", nameController.text));
+    bodyParams.add(MapEntry("organized_alone", organizedAlone));
 
     var result = await joinedChallengesRepository.completeChallenge(
         uuid: uuid,
-        challengeType: Api().getChallengeTypeSubPath(Api.challengeTypeArticle),
+        challengeType: Api().getChallengeTypeSubPath(Api.challengeTypeEventOrg),
         status: "joined",
         bodyParams: bodyParams);
 
