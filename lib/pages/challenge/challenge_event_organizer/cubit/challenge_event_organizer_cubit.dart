@@ -11,14 +11,16 @@ class ChallengeEventOrganizerCubit extends Cubit<ChallengeEventOrganizerState> {
   ChallengeEventOrganizerCubit({required this.challengesTypeRepository})
       : super(ChallengeEventOrganizerInitial());
 
-  void fetchChallenge({required String uuid}) {
-    Timer(Duration(seconds: 1), () {
-      challengesTypeRepository
-          .fetchChallenge(uuid: uuid)
-          .then((challengeTypeItem) {
-        emit(ChallengeEventOrganizerLoaded(
-            challengeTypeItem: challengeTypeItem));
-      });
-    });
+  Future<ChallengeEventOrganizer> fetchChallenge(
+      {required String uuid, required String type_uuid}) async {
+    var challenge =
+        await challengesTypeRepository.fetchChallenge(uuid: type_uuid);
+
+    var joinedChallenge =
+        await challengesTypeRepository.fetchJoinedChallenge(uuid: uuid);
+
+    emit(ChallengeEventOrganizerLoaded(challengeTypeItem: challenge));
+
+    return joinedChallenge;
   }
 }
