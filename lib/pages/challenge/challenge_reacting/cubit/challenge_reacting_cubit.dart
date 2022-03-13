@@ -20,7 +20,7 @@ class ChallengeReactingCubit extends Cubit<ChallengeReactingState> {
     emit(ChallengeReactingLoaded(challengeTypeItem: challenge));
 
     var joinedChallenge =
-        await challengesTypeRepository.fetchChallenge(uuid: uuid);
+        await challengesTypeRepository.fetchJoinedChallenge(uuid: uuid);
 
     return joinedChallenge;
   }

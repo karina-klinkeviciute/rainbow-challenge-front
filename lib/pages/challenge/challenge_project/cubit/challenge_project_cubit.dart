@@ -13,7 +13,8 @@ class ChallengeProjectCubit extends Cubit<ChallengeProjectState> {
 
   Future<ChallengeProject> fetchChallenge(
       {required String uuid, required String type_uuid}) async {
-    var challenge = await challengesTypeRepository.fetchChallenge(uuid: uuid);
+    var challenge =
+        await challengesTypeRepository.fetchChallenge(uuid: type_uuid);
     var joinedChallenge =
         await challengesTypeRepository.fetchJoinedChallenge(uuid: uuid);
     emit(ChallengeProjectLoaded(challengeTypeItem: challenge));
