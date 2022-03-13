@@ -11,13 +11,13 @@ class ChallengeProjectCubit extends Cubit<ChallengeProjectState> {
   ChallengeProjectCubit({required this.challengesTypeRepository})
       : super(ChallengeProjectInitial());
 
-  void fetchChallenge({required String uuid}) {
-    Timer(Duration(seconds: 1), () {
-      challengesTypeRepository
-          .fetchChallenge(uuid: uuid)
-          .then((challengeTypeItem) {
-        emit(ChallengeProjectLoaded(challengeTypeItem: challengeTypeItem));
-      });
-    });
+  Future<ChallengeProject> fetchChallenge(
+      {required String uuid, required String type_uuid}) async {
+    var challenge = await challengesTypeRepository.fetchChallenge(uuid: uuid);
+    var joinedChallenge =
+        await challengesTypeRepository.fetchJoinedChallenge(uuid: uuid);
+    emit(ChallengeProjectLoaded(challengeTypeItem: challenge));
+
+    return joinedChallenge;
   }
 }
