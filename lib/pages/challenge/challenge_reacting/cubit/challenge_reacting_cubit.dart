@@ -12,13 +12,16 @@ class ChallengeReactingCubit extends Cubit<ChallengeReactingState> {
   ChallengeReactingCubit({required this.challengesTypeRepository})
       : super(ChallengeReactingInitial());
 
-  void fetchChallenge({required String uuid}) {
-    Timer(Duration(seconds: 1), () {
-      challengesTypeRepository
-          .fetchChallenge(uuid: uuid)
-          .then((challengeTypeItem) {
-        emit(ChallengeReactingLoaded(challengeTypeItem: challengeTypeItem));
-      });
-    });
+  Future<ChallengeReacting> fetchChallenge(
+      {required String uuid, required String type_uuid}) async {
+    var challenge =
+        await challengesTypeRepository.fetchChallenge(uuid: type_uuid);
+
+    emit(ChallengeReactingLoaded(challengeTypeItem: challenge));
+
+    var joinedChallenge =
+        await challengesTypeRepository.fetchChallenge(uuid: uuid);
+
+    return joinedChallenge;
   }
 }
