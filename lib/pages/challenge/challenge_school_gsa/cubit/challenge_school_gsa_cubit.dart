@@ -12,13 +12,16 @@ class ChallengeSchoolGsaCubit extends Cubit<ChallengeSchoolGsaState> {
   ChallengeSchoolGsaCubit({required this.challengesTypeRepository})
       : super(ChallengeSchoolGsaInitial());
 
-  void fetchChallenge({required String uuid}) {
-    Timer(Duration(seconds: 1), () {
-      challengesTypeRepository
-          .fetchChallenge(uuid: uuid)
-          .then((challengeTypeItem) {
-        emit(ChallengeSchoolGsaLoaded(challengeTypeItem: challengeTypeItem));
-      });
-    });
+  Future<ChallengeSchoolGsa> fetchChallenge(
+      {required String uuid, required String type_uuid}) async {
+    var challenge =
+        await challengesTypeRepository.fetchChallenge(uuid: type_uuid);
+
+    emit(ChallengeSchoolGsaLoaded(challengeTypeItem: challenge));
+
+    var joinedChallenge =
+        await challengesTypeRepository.fetchJoinedChallenge(uuid: uuid);
+
+    return joinedChallenge;
   }
 }
