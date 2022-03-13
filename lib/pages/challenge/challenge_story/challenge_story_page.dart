@@ -192,7 +192,7 @@ class _ChallengeStoryPageState extends State<ChallengeStoryPage> {
 
     var result = await joinedChallengesRepository.completeChallenge(
         uuid: uuid,
-        challengeType: Api().getChallengeTypeSubPath(Api.challengeTypeArticle),
+        challengeType: Api().getChallengeTypeSubPath(Api.challengeTypeStory),
         status: "joined",
         bodyParams: bodyParams);
 
@@ -233,5 +233,8 @@ class _ChallengeStoryPageState extends State<ChallengeStoryPage> {
   Future<void> loadData() async {
     var challenge = await BlocProvider.of<ChallengeStoryCubit>(context)
         .fetchChallenge(type_uuid: type_uuid, uuid: uuid);
+
+    urlController.text = challenge.story_url ?? "";
+    descriptionController.text = challenge.description ?? "";
   }
 }
