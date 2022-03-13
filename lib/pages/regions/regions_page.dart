@@ -7,6 +7,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 // TODO: Add styling
 // TODO: Mark first three places differntly
 // Limit regions to 10.
+// AppBar show (with back button possibility)
 class RegionsPage extends StatelessWidget {
   const RegionsPage({Key? key}) : super(key: key);
 
