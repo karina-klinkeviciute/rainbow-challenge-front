@@ -49,6 +49,12 @@ class _ChallengeReactingPageState extends State<ChallengeReactingPage> {
             )));
   }
 
+  @override
+  void initState() {
+    super.initState();
+    loadData();
+  }
+
   Widget getForm() {
     OutlineInputBorder border = OutlineInputBorder(
       borderSide: BorderSide(width: 1, color: ThemeColors.primaryColor),
