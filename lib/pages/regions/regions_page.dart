@@ -88,7 +88,10 @@ class _Regions extends StatelessWidget {
                           .merge(TextStyle(color: _color(index))),
                     ),
                   ]),
-              trailing: Icon(Icons.chevron_right),
+              trailing: Icon(
+                Icons.chevron_right,
+                color: _color(index),
+              ),
               onTap: () {},
             );
           });
