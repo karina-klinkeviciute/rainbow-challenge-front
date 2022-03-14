@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:rainbow_challenge/theme/colors.dart';
 import 'cubit/regions_cubit.dart';
 import 'package:rainbow_challenge/widgets/widgets.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -54,16 +55,74 @@ class _Regions extends StatelessWidget {
       if (!(state is RegionsLoaded))
         return Center(child: CircularProgressIndicator());
       final regionsList = (state).regionsList;
-      return ListView.builder(
+      final bestRegionsList = regionsList.sublist(0, 10);
+      return ListView.separated(
+          separatorBuilder: (context, index) => Divider(
+                color: ThemeColors.neutralColorLight,
+              ),
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
-          itemCount: regionsList.length,
+          itemCount: bestRegionsList.length,
           itemBuilder: (BuildContext context, int index) {
             return ListTile(
-              title: Text(regionsList[index].name),
-              subtitle: Text(regionsList[index].points.toString()),
+              horizontalTitleGap: 0,
+              leading: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text((index + 1).toString(),
+                        style: _textStyle(index, context)),
+                  ]),
+              title: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                      child: Text(bestRegionsList[index].name,
+                          style: _textStyle(index, context)),
+                    ),
+                    SizedBox(width: 10),
+                    Text(
+                      bestRegionsList[index].points.toString(),
+                      style: Theme.of(context)
+                          .textTheme
+                          .headline5!
+                          .merge(TextStyle(color: _color(index))),
+                    ),
+                  ]),
+              trailing: Icon(Icons.chevron_right),
+              onTap: () {},
             );
           });
     });
   }
+}
+
+Color _color(int index) {
+  switch (index) {
+    case 0:
+      {
+        return ThemeColors.primaryColorDark;
+      }
+
+    case 1:
+      {
+        return ThemeColors.primaryColor;
+      }
+
+    case 2:
+      {
+        return ThemeColors.primaryColorLight;
+      }
+
+    default:
+      {
+        return ThemeColors.neutralColorLight;
+      }
+  }
+}
+
+TextStyle _textStyle(int index, context) {
+  return Theme.of(context)
+      .textTheme
+      .headline5!
+      .merge(TextStyle(color: _color(index)));
 }
