@@ -2,6 +2,8 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rainbow_challenge/pages/profile/cubit/profile_info_cubit.dart';
+import 'package:rainbow_challenge/pages/regions/cubit/regions_cubit.dart';
+import 'package:rainbow_challenge/pages/regions/regions_page.dart';
 import 'package:rainbow_challenge/services/dio_client.dart';
 import 'package:rainbow_challenge/theme/colors.dart';
 import 'package:rainbow_challenge/theme/fonts.dart' as ThemeFonts;
@@ -28,6 +30,9 @@ class NewsPage extends StatelessWidget {
 
   final UserJoinedChallengesRepository userJoinedChallengesRepository =
       UserJoinedChallengesRepository(dioClient: DioClient());
+  final RegionsRepository regionsRepository =
+      RegionsRepository(dioClient: DioClient());
+
   final ProfileRepository profileRepository =
       ProfileRepository(dioClient: DioClient());
 
@@ -63,7 +68,11 @@ class NewsPage extends StatelessWidget {
                 ],
                 child: ChallengesPage(),
               ),
-              RegionsPage(),
+              BlocProvider(
+                create: (BuildContext context) =>
+                    RegionsCubit(regionsRepository: regionsRepository),
+                child: RegionsPage(),
+              ),
               NavigationPage(),
             ],
           ),

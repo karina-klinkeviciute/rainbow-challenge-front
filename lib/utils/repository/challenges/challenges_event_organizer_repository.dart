@@ -23,6 +23,17 @@ class ChallengesEventOrganizerRepository {
     final challengeRaw = await dioClient.getItem('$challengeTypePoint$uuid/');
     return ChallengeEventOrganizer.fromJson(challengeRaw!);
   }
+
+  Future<ChallengeEventOrganizer> fetchJoinedChallenge(
+      {required String uuid}) async {
+    // BUG: Putting constant creates wrong URL. Should fix this later.
+    //
+    // final String challengeTypePoint = Api.challengeEventOrganizerEndpoint;
+    final String challengeTypePoint =
+        '/api/joined_challenge/event_organizer_joined_challenge/';
+    final challengeRaw = await dioClient.getItem('$challengeTypePoint$uuid/');
+    return ChallengeEventOrganizer.fromJson(challengeRaw!);
+  }
 }
 
 mixin JoinChallengeMixin {

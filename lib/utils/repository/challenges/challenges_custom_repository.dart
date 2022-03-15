@@ -19,4 +19,14 @@ class ChallengesCustomRepository {
     final challengeRaw = await dioClient.getItem('$challengeTypePoint$uuid/');
     return ChallengeCustom.fromJson(challengeRaw!);
   }
+
+  Future<ChallengeCustom> fetchJoinedChallenge({required String uuid}) async {
+    // BUG: Putting constant creates wrong URL. Should fix this later.
+    //
+    // final String challengeTypePoint = Api.challengeCustomEndpoint;
+    final String challengeTypePoint =
+        '/api/joined_challenge/custom_joined_challenge/';
+    final challengeRaw = await dioClient.getItem('$challengeTypePoint$uuid/');
+    return ChallengeCustom.fromJson(challengeRaw!);
+  }
 }

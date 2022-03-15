@@ -12,6 +12,8 @@ class ThemeColors {
   static const primaryColor = Color(0xFF7843E6);
   // VioletDark color. Used in backgrounds.
   static const primaryColorDark = Color(0xFF4F289F);
+// Violet lighter variant
+  static const primaryColorLight = Color(0xFFA072FF);
 
   // LightRed color. Used in buttons, actions, to draw attention.
   static const secondaryColor = Color(0xFFF85F6A);

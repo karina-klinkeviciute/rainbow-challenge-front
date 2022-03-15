@@ -8,7 +8,7 @@ part 'profile_class.g.dart';
 class Profile {
   String email;
   String? username;
-  Region? region;
+  RegionModel? region;
   int all_points;
   int remaining_points;
   Streak streak;

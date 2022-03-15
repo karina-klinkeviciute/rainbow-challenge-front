@@ -6,10 +6,14 @@ part 'challenge_reacting_class.g.dart';
 // No UUID on backend
 @JsonSerializable(explicitToJson: true)
 class ChallengeReacting {
-  ChallengeReacting({required this.uuid, required this.main_challenge});
+  ChallengeReacting(
+      {required this.uuid,
+      required this.main_challenge,
+      required this.description});
 
   String uuid;
   Challenge main_challenge;
+  String? description;
 
   factory ChallengeReacting.fromJson(Map<String, dynamic> json) =>
       _$ChallengeReactingFromJson(json);

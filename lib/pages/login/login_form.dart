@@ -31,8 +31,8 @@ class _LoginFormState extends State<LoginForm> {
             backgroundColor: Colors.red,
           ));
         } else if (state is LoginSuccess) {
-          Navigator.pushReplacement(context,
-              MaterialPageRoute(builder: (context) => HomeEmptyPage()));
+          Navigator.pushReplacement(
+              context, MaterialPageRoute(builder: (context) => NewsPage()));
         }
       },
       child: BlocBuilder<LoginBloc, LoginState>(

@@ -11,7 +11,7 @@ Profile _$ProfileFromJson(Map<String, dynamic> json) => Profile(
       username: json['username'] as String?,
       region: json['region'] == null
           ? null
-          : Region.fromJson(json['region'] as Map<String, dynamic>),
+          : RegionModel.fromJson(json['region'] as Map<String, dynamic>),
       all_points: json['all_points'] as int? ?? 0,
       remaining_points: json['remaining_points'] as int,
       streak: Streak.fromJson(json['streak'] as Map<String, dynamic>),
