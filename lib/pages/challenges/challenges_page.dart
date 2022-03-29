@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_html/shims/dart_ui_real.dart';
 import 'package:rainbow_challenge/pages/challenges/cubit/challenges_cubit.dart';
 import 'package:rainbow_challenge/pages/challenges/cubit/user_joined_challenges_cubit.dart';
 import 'package:rainbow_challenge/pages/pages.dart';
 import 'package:rainbow_challenge/theme/colors.dart';
-import 'package:rainbow_challenge/theme/headings.dart';
-import 'package:rainbow_challenge/theme/icons.dart';
 import 'package:rainbow_challenge/widgets/widgets.dart';
 import 'package:rainbow_challenge/utils/model/models.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -96,26 +93,27 @@ class _LocalTabsState extends State<_LocalTabs> with TickerProviderStateMixin {
             automaticIndicatorColorAdjustment: false,
             controller: _tabController,
             tabs: [
-              Tab(
-                text: 'Challenges',
-              ),
-              Tab(text: 'Joined'),
-              Tab(text: 'Completed'),
+              Tab(text: 'Visos'),
+              Tab(text: 'Pradėtos'),
+              Tab(text: 'Užbaigtos'),
             ],
           ),
         ),
       ),
-      Container(
-        height: 1000,
-        child: TabBarView(
-          controller: _tabController,
+      ListView(
+
+          //  shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
           children: [
-            _ChallengesList(),
-            _JoinedChallengesList(),
-            _DoneChallengesList()
-          ],
-        ),
-      ),
+            TabBarView(
+              controller: _tabController,
+              children: [
+                _ChallengesList(),
+                _JoinedChallengesList(),
+                _DoneChallengesList()
+              ],
+            ),
+          ])
     ]);
   }
 }
@@ -179,8 +177,11 @@ class _ChallengesList extends StatelessWidget {
         AppLocalizations.of(context)!.challenge_type_support
       ];
 
-      return ListView.builder(
-          shrinkWrap: true,
+      return ListView.separated(
+          separatorBuilder: (context, index) => Divider(
+                height: 1,
+              ),
+          //  shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
           itemCount: challengeTypeNames.length,
           itemBuilder: (BuildContext context, int index) {
@@ -201,31 +202,46 @@ class _challengeType extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ExpansionTile(
-        title: Text(typeTitle,
-            style: Theme.of(context).textTheme.headline3!.merge(const TextStyle(
-                fontWeight: FontWeight.w400,
-                color: ThemeColors.neutralColorLight))),
-        controlAffinity: ListTileControlAffinity.leading,
-        //  children: typeList.map((e) => _challenge(e)).toList());
-        children: [
-          ListView.builder(
-              //  scrollDirection: Axis.horizontal,
-              shrinkWrap: true,
-              itemCount: typeList.length,
-              physics: const NeverScrollableScrollPhysics(),
-              itemBuilder: (BuildContext context, int index) {
-                return typeList
-                    .map((e) => _challenge(e, context))
-                    .toList()[index];
-              })
-        ]);
+    final ThemeData theme = Theme.of(context);
+    return Theme(
+      data: theme.copyWith(dividerColor: Colors.transparent),
+      child: ExpansionTile(
+          title: Text(
+            typeTitle,
+            style: TextStyle(
+                fontFamily: ThemeFonts.secondaryFontFamily,
+                fontSize: 17,
+                fontWeight: FontWeight.bold),
+          ),
+          controlAffinity: ListTileControlAffinity.trailing,
+          collapsedTextColor: ThemeColors.neutralColor,
+          collapsedIconColor: ThemeColors.neutralColor,
+          iconColor: ThemeColors.secondaryColor,
+          textColor: ThemeColors.secondaryColor,
+          //  backgroundColor: ThemeColors.neutralColorLight.withOpacity(0.1),
+          //  children: typeList.map((e) => _challenge(e)).toList());
+          children: [
+            ListView.builder(
+                //  scrollDirection: Axis.horizontal,
+                shrinkWrap: true,
+                itemCount: typeList.length,
+                physics: const NeverScrollableScrollPhysics(),
+                itemBuilder: (BuildContext context, int index) {
+                  return typeList
+                      .map((e) => _challenge(e, context))
+                      .toList()[index];
+                })
+          ]),
+    );
   }
 
   Widget _challenge(Challenge challenge, context) {
     return ListTile(
-      title:
-          Text(challenge.name, style: Theme.of(context).textTheme.headline4!),
+      title: Text(challenge.name,
+          style: Theme.of(context)
+              .textTheme
+              .bodyText2!
+              .merge(const TextStyle(color: ThemeColors.neutralColor))),
       onTap: () {
         Navigator.push(
             context,
