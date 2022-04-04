@@ -14,6 +14,8 @@ import 'package:rainbow_challenge/pages/registration/bloc/reg_event.dart';
 import 'package:rainbow_challenge/pages/registration/bloc/reg_state.dart';
 import 'package:rainbow_challenge/pages/registration/registration_confirm.dart';
 
+import 'fields/email.dart';
+
 class RegistrationForm extends StatelessWidget {
   const RegistrationForm({Key? key}) : super(key: key);
 
@@ -22,8 +24,7 @@ class RegistrationForm extends StatelessWidget {
     return BlocListener<RegistrationBloc, RegState>(
         listener: (context, state) {
           if (state.status.isSubmissionFailure) {
-            _msg(context,
-                'Registracija nesėkminga. Toks vartotojas egzistuoja.');
+            _msg(context, state.errorMessage);
           } else if (state.status.isSubmissionSuccess) {
             //Navigator.of(context).pushNamed('/success');
             Navigator.push(
@@ -132,6 +133,9 @@ class _EmailInputField extends StatelessWidget {
             hint: 'El. pašto adresas',
             key: const Key('Email_textField'),
             isRequiredField: true,
+            error: state.email.error != null
+                ? (state.email.error as EmailValidationError).title
+                : null,
             keyboardType: TextInputType.emailAddress,
             onChanged: (email) => context
                 .read<RegistrationBloc>()
@@ -157,7 +161,7 @@ class _PasswordInputField extends StatelessWidget {
             isPasswordField: true,
             isRequiredField: true,
             keyboardType: TextInputType.text,
-            error: state.password.error.name,
+            error: state.password.error.title,
             onChanged: (password) => context
                 .read<RegistrationBloc>()
                 .add(PasswordChanged(password: password)),
@@ -317,14 +321,17 @@ class _RulesCheckbox extends StatelessWidget {
                 SizedBox(
                   width: 40,
                   child: Checkbox(
-                    value: true,
+                    value: state.rules.value,
                     onChanged: (bool? value) {
                       //setState(() {
                       //this.value = value!;
                       //isCheckedRules = this.value;
                       // });
+                      context
+                          .read<RegistrationBloc>()
+                          .add(RulesChanged(rules: value ?? false));
                     },
-                    //onChanged: (rules) => context.read<RegistrationBloc>().add(RulesChanged(rules: rules)),
+                    //onChanged: (bool?rules) => context.read<RegistrationBloc>().add(RulesChanged(rules: rules)),
                   ),
                 ),
               ],

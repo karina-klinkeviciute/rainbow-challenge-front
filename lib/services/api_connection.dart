@@ -21,15 +21,13 @@ Future<Token> getToken(UserLogin userLogin) async {
   if (response.statusCode == 200) {
     //print('access token is -> ${json.decode(response.body)['auth_token']}');
     return Token.fromJson(json.decode(response.body));
-
   } else {
     //print(json.decode(response.body).toString());
     throw Exception(json.decode(response.body));
   }
 }
 
-Future<bool> createUser(UserRegister userRegister) async {
-
+Future<String?> createUser(UserRegister userRegister) async {
   final http.Response response = await http.post(
     Uri.parse(_registerURL),
     headers: <String, String>{
@@ -41,35 +39,9 @@ Future<bool> createUser(UserRegister userRegister) async {
   final jsonString = response.body.toString();
   Map<String, dynamic> msg = jsonDecode(jsonString);
 
-  String _msg = 'Klaida:${msg['uid']} ${msg['email']} ${msg['auth_token']} ${msg['password']} ${msg['re_password']} ${msg['gender']}';
+  if (response.statusCode == 201) return null;
 
-  /*
-  String _patchURL = _registerURL + "${msg['uid']}/";
-  final http.Response responsePatch = await http.patch(
-    Uri.parse(_patchURL),
-    body:  jsonEncode({
-      "gender": 'man',
-      "region": 'fb48c6cf-6a2d-41e3-9c2f-b9e4b1048f10'
-    }),
-    headers: <String, String>{
-      'Content-Type': 'application/json; charset=UTF-8',
-      'Authorization': 'Token ${msg['auth_token']}',
-    },
-    //body: jsonEncode(userRegister.toDatabaseJson()),
-  );
-  */
-
-  print(response.statusCode);
-
-  if (response.statusCode == 201) {
-
-    print(UserID.fromJson(json.decode(response.body)));
-
-    return true;
-
-  } else {
-    throw HttpException(_msg);
-  }
+  return msg.entries.first.value.toString();
 }
 
 class HttpException implements Exception {

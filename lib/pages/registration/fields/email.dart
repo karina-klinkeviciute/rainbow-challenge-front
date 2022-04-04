@@ -12,13 +12,15 @@ class Email extends FormzInput<String, EmailValidationError> {
 
   @override
   EmailValidationError? validator(String value) {
+    if (value == "") return null;
+
     return _emailRegExp.hasMatch(value) ? null : EmailValidationError.invalid;
   }
 }
 
 extension Explanation on EmailValidationError {
-  String? get name {
-    switch(this) {
+  String? get title {
+    switch (this) {
       case EmailValidationError.invalid:
         return "This is not a valid email";
       default:
