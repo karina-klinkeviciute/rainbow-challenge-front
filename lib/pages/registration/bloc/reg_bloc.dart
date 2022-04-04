@@ -92,7 +92,7 @@ class RegistrationBloc extends Bloc<RegEvent, RegState> {
           state.password,
           state.confirmPassword,
           state.rules,
-          state.region
+          region
         ]),
       );
     } else if (event is FormSubmitted) {

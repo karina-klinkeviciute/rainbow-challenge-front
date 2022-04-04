@@ -7,6 +7,11 @@ abstract class RegEvent extends Equatable {
   List<Object> get props => [];
 }
 
+class RegionsLoaded extends RegEvent {
+  @override
+  List<Object> get props => [];
+}
+
 class NameChanged extends RegEvent {
   const NameChanged({required this.name});
 
