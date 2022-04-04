@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
 import 'package:rainbow_challenge/pages/pages.dart';
+import 'package:rainbow_challenge/theme/colors.dart';
 import 'package:rainbow_challenge/utils/repository/repositories.dart';
 import 'package:rainbow_challenge/widgets/headline.dart';
 import 'package:rainbow_challenge/widgets/html.dart';
@@ -48,7 +49,7 @@ class RegistrationForm extends StatelessWidget {
               //_GenderInputField(),
               //_GenderOtherInputField(),
               //_UsernameInputField(),
-              //_RegionInputField(),
+              _RegionInputField(),
               //_IsLgbtqiaInputField(),
               _RulesCheckbox(),
               _RegSubmit(),
@@ -99,27 +100,27 @@ Widget _ageField(title, nvalue, items) {
 }
  */
 
-class _AgeInputField extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<RegistrationBloc, RegState>(
-      buildWhen: (previous, current) => previous.name != current.name,
-      builder: (context, state) {
-        return Padding(
-          padding: const EdgeInsets.only(bottom: 16.0),
-          child: AuthTextField(
-            hint: 'Amžius',
-            key: const Key('Age_textField'),
-            isRequiredField: true,
-            keyboardType: TextInputType.text,
-            onChanged: (name) =>
-                context.read<RegistrationBloc>().add(NameChanged(name: name)),
-          ),
-        );
-      },
-    );
-  }
-}
+// class _AgeInputField extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return BlocBuilder<RegistrationBloc, RegState>(
+//       buildWhen: (previous, current) => previous.name != current.name,
+//       builder: (context, state) {
+//         return Padding(
+//           padding: const EdgeInsets.only(bottom: 16.0),
+//           child: AuthTextField(
+//             hint: 'Amžius',
+//             key: const Key('Age_textField'),
+//             isRequiredField: true,
+//             keyboardType: TextInputType.text,
+//             onChanged: (name) =>
+//                 context.read<RegistrationBloc>().add(NameChanged(name: name)),
+//           ),
+//         );
+//       },
+//     );
+//   }
+// }
 
 class _EmailInputField extends StatelessWidget {
   @override
@@ -196,115 +197,163 @@ class _ConfirmPasswordInput extends StatelessWidget {
   }
 }
 
-class _GenderInputField extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<RegistrationBloc, RegState>(
-      buildWhen: (previous, current) => previous.name != current.name,
-      builder: (context, state) {
-        return Padding(
-          padding: const EdgeInsets.only(bottom: 16.0),
-          child: AuthTextField(
-            hint: 'Lytis',
-            key: const Key('Gender_textField'),
-            isRequiredField: false,
-            keyboardType: TextInputType.text,
-            onChanged: (name) =>
-                context.read<RegistrationBloc>().add(NameChanged(name: name)),
-          ),
-        );
-      },
-    );
-  }
-}
+// class _GenderInputField extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return BlocBuilder<RegistrationBloc, RegState>(
+//       buildWhen: (previous, current) => previous.name != current.name,
+//       builder: (context, state) {
+//         return Padding(
+//           padding: const EdgeInsets.only(bottom: 16.0),
+//           child: AuthTextField(
+//             hint: 'Lytis',
+//             key: const Key('Gender_textField'),
+//             isRequiredField: false,
+//             keyboardType: TextInputType.text,
+//             onChanged: (name) =>
+//                 context.read<RegistrationBloc>().add(NameChanged(name: name)),
+//           ),
+//         );
+//       },
+//     );
+//   }
+// }
 
-class _GenderOtherInputField extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<RegistrationBloc, RegState>(
-      buildWhen: (previous, current) => previous.name != current.name,
-      builder: (context, state) {
-        return Padding(
-          padding: const EdgeInsets.only(bottom: 16.0),
-          child: AuthTextField(
-            hint: 'GenderOther',
-            key: const Key('GenderOther_textField'),
-            isRequiredField: false,
-            keyboardType: TextInputType.text,
-            onChanged: (name) =>
-                context.read<RegistrationBloc>().add(NameChanged(name: name)),
-          ),
-        );
-      },
-    );
-  }
-}
+// class _GenderOtherInputField extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return BlocBuilder<RegistrationBloc, RegState>(
+//       buildWhen: (previous, current) => previous.name != current.name,
+//       builder: (context, state) {
+//         return Padding(
+//           padding: const EdgeInsets.only(bottom: 16.0),
+//           child: AuthTextField(
+//             hint: 'GenderOther',
+//             key: const Key('GenderOther_textField'),
+//             isRequiredField: false,
+//             keyboardType: TextInputType.text,
+//             onChanged: (name) =>
+//                 context.read<RegistrationBloc>().add(NameChanged(name: name)),
+//           ),
+//         );
+//       },
+//     );
+//   }
+// }
 
-class _UsernameInputField extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<RegistrationBloc, RegState>(
-      buildWhen: (previous, current) => previous.name != current.name,
-      builder: (context, state) {
-        return Padding(
-          padding: const EdgeInsets.only(bottom: 16.0),
-          child: AuthTextField(
-            hint: 'Username',
-            key: const Key('Username_textField'),
-            isRequiredField: false,
-            keyboardType: TextInputType.text,
-            onChanged: (name) =>
-                context.read<RegistrationBloc>().add(NameChanged(name: name)),
-          ),
-        );
-      },
-    );
-  }
-}
+// class _UsernameInputField extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return BlocBuilder<RegistrationBloc, RegState>(
+//       buildWhen: (previous, current) => previous.name != current.name,
+//       builder: (context, state) {
+//         return Padding(
+//           padding: const EdgeInsets.only(bottom: 16.0),
+//           child: AuthTextField(
+//             hint: 'Username',
+//             key: const Key('Username_textField'),
+//             isRequiredField: false,
+//             keyboardType: TextInputType.text,
+//             onChanged: (name) =>
+//                 context.read<RegistrationBloc>().add(NameChanged(name: name)),
+//           ),
+//         );
+//       },
+//     );
+//   }
+// }
 
 class _RegionInputField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    UnderlineInputBorder border = UnderlineInputBorder(
+        borderSide: new BorderSide(color: ThemeColors.primaryColor, width: 1));
+
+    var _regions = ["Vilnius", "Kaunas"];
+
     return BlocBuilder<RegistrationBloc, RegState>(
-      buildWhen: (previous, current) => previous.name != current.name,
+      buildWhen: (previous, current) => previous.region != current.region,
       builder: (context, state) {
+        if (state.region.value == "") {
+          context
+              .read<RegistrationBloc>()
+              .add(RegionChanged(region: _regions.first));
+        }
+
         return Padding(
-          padding: const EdgeInsets.only(bottom: 16.0),
-          child: AuthTextField(
+          padding: const EdgeInsets.only(top: 10, bottom: 16.0),
+          child: FormField<String>(
+            builder: (FormFieldState<String> formFieldState) {
+              return InputDecorator(
+                decoration: InputDecoration(
+                  fillColor: Colors.white,
+                  contentPadding: EdgeInsets.symmetric(horizontal: 12),
+                  filled: true,
+                  hintText: 'Regionas',
+                  border: border,
+                  disabledBorder: border,
+                  enabledBorder: border,
+                  errorBorder: border,
+                  focusedErrorBorder: border,
+                  //errorText: error,
+                  floatingLabelBehavior: FloatingLabelBehavior.never,
+                ),
+                child: DropdownButtonHideUnderline(
+                  child: DropdownButton<String>(
+                    value: state.region.value != ""
+                        ? state.region.value
+                        : _regions.first,
+                    isDense: true,
+                    onChanged: (val) {
+                      context
+                          .read<RegistrationBloc>()
+                          .add(RegionChanged(region: val ?? ""));
+                    },
+                    items: _regions.map((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(value),
+                      );
+                    }).toList(),
+                  ),
+                ),
+              );
+            },
+          ), /*AuthTextField(
             hint: 'Regionas',
             key: const Key('Region_textField'),
             isRequiredField: false,
             keyboardType: TextInputType.text,
             onChanged: (name) =>
                 context.read<RegistrationBloc>().add(NameChanged(name: name)),
-          ),
+          )*/
         );
       },
     );
   }
 }
 
-class _IsLgbtqiaInputField extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<RegistrationBloc, RegState>(
-      buildWhen: (previous, current) => previous.name != current.name,
-      builder: (context, state) {
-        return Padding(
-          padding: const EdgeInsets.only(bottom: 16.0),
-          child: AuthTextField(
-            hint: 'IsLgbtqia',
-            key: const Key('IsLgbtqia_textField'),
-            isRequiredField: false,
-            keyboardType: TextInputType.text,
-            onChanged: (name) =>
-                context.read<RegistrationBloc>().add(NameChanged(name: name)),
-          ),
-        );
-      },
-    );
-  }
-}
+// class _IsLgbtqiaInputField extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return BlocBuilder<RegistrationBloc, RegState>(
+//       buildWhen: (previous, current) => previous.name != current.name,
+//       builder: (context, state) {
+//         return Padding(
+//           padding: const EdgeInsets.only(bottom: 16.0),
+//           child: AuthTextField(
+//             hint: 'IsLgbtqia',
+//             key: const Key('IsLgbtqia_textField'),
+//             isRequiredField: false,
+//             keyboardType: TextInputType.text,
+//             onChanged: (name) =>
+//                 context.read<RegistrationBloc>().add(NameChanged(name: name)),
+//           ),
+//         );
+//       },
+//     );
+//   }
+// }
 
 class _RulesCheckbox extends StatelessWidget {
   @override

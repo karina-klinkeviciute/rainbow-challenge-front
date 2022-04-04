@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:formz/formz.dart';
+import 'package:rainbow_challenge/pages/registration/fields/region.dart';
 import 'package:rainbow_challenge/utils/repository/user_repository.dart';
 import 'package:rainbow_challenge/pages/registration/fields/confirm_password.dart';
 import 'package:rainbow_challenge/pages/registration/fields/email.dart';
@@ -78,6 +79,20 @@ class RegistrationBloc extends Bloc<RegEvent, RegState> {
           state.password,
           state.confirmPassword,
           rules
+        ]),
+      );
+    } else if (event is RegionChanged) {
+      final region = Region.dirty(event.region);
+
+      yield state.copyWith(
+        region: region,
+        status: Formz.validate([
+          //state.name,
+          state.email,
+          state.password,
+          state.confirmPassword,
+          state.rules,
+          state.region
         ]),
       );
     } else if (event is FormSubmitted) {

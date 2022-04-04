@@ -56,4 +56,13 @@ class RulesChanged extends RegEvent {
   List<Object> get props => [rules];
 }
 
+class RegionChanged extends RegEvent {
+  const RegionChanged({required this.region});
+
+  final String region;
+
+  @override
+  List<Object> get props => [region];
+}
+
 class FormSubmitted extends RegEvent {}
