@@ -13,19 +13,19 @@ import 'package:rainbow_challenge/pages/registration/fields/is_lgbtqia.dart';
 import 'package:rainbow_challenge/pages/registration/fields/rules.dart';
 
 class RegState extends Equatable {
-  const RegState({
-    this.name = const Name.pure(),
-    this.email = const Email.pure(),
-    this.password = const Password.pure(),
-    this.confirmPassword = const ConfirmPassword.pure(),
-    this.gender = const Gender.pure(),
-    this.gender_other = const GenderOther.pure(),
-    this.username = const Username.pure(),
-    this.region = const Region.pure(),
-    this.is_lgbtqia = const IsLgbtqia.pure(),
-    this.rules = const Rules.pure(),
-    this.status = FormzStatus.pure,
-  });
+  const RegState(
+      {this.name = const Name.pure(),
+      this.email = const Email.pure(),
+      this.password = const Password.pure(),
+      this.confirmPassword = const ConfirmPassword.pure(),
+      this.gender = const Gender.pure(),
+      this.gender_other = const GenderOther.pure(),
+      this.username = const Username.pure(),
+      this.region = const Region.pure(),
+      this.is_lgbtqia = const IsLgbtqia.pure(),
+      this.rules = const Rules.pure(),
+      this.status = FormzStatus.pure,
+      this.errorMessage = null});
 
   final Name name;
   final Email email;
@@ -38,48 +38,49 @@ class RegState extends Equatable {
   final IsLgbtqia is_lgbtqia;
   final Rules rules;
   final FormzStatus status;
+  final String? errorMessage;
 
   @override
   List<Object?> get props => [
-    name,
-    email,
-    password,
-    confirmPassword,
-    gender,
-    gender_other,
-    username,
-    region,
-    is_lgbtqia,
-    rules,
-    status
-  ];
+        name,
+        email,
+        password,
+        confirmPassword,
+        gender,
+        gender_other,
+        username,
+        region,
+        is_lgbtqia,
+        rules,
+        status
+      ];
 
-  RegState copyWith({
-    String? image,
-    Name? name,
-    Email? email,
-    Password? password,
-    ConfirmPassword? confirmPassword,
-    Gender? gender,
-    GenderOther? gender_other,
-    Username? username,
-    Region? region,
-    IsLgbtqia? is_lgbtqia,
-    Rules? rules,
-    FormzStatus? status,
-  }) {
+  RegState copyWith(
+      {String? image,
+      Name? name,
+      Email? email,
+      Password? password,
+      ConfirmPassword? confirmPassword,
+      Gender? gender,
+      GenderOther? gender_other,
+      Username? username,
+      Region? region,
+      IsLgbtqia? is_lgbtqia,
+      Rules? rules,
+      FormzStatus? status,
+      String? errorMessage}) {
     return RegState(
-      name: name ?? this.name,
-      email: email ?? this.email,
-      password: password ?? this.password,
-      confirmPassword: confirmPassword ?? this.confirmPassword,
-      gender: gender ?? this.gender,
-      gender_other: gender_other ?? this.gender_other,
-      username: username ?? this.username,
-      region: region ?? this.region,
-      is_lgbtqia: is_lgbtqia ?? this.is_lgbtqia,
-      rules: rules ?? this.rules,
-      status: status ?? this.status,
-    );
+        name: name ?? this.name,
+        email: email ?? this.email,
+        password: password ?? this.password,
+        confirmPassword: confirmPassword ?? this.confirmPassword,
+        gender: gender ?? this.gender,
+        gender_other: gender_other ?? this.gender_other,
+        username: username ?? this.username,
+        region: region ?? this.region,
+        is_lgbtqia: is_lgbtqia ?? this.is_lgbtqia,
+        rules: rules ?? this.rules,
+        status: status ?? this.status,
+        errorMessage: errorMessage);
   }
 }

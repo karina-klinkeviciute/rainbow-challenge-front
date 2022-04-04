@@ -8,9 +8,7 @@ abstract class RegEvent extends Equatable {
 }
 
 class NameChanged extends RegEvent {
-  const NameChanged({
-    required this.name
-  });
+  const NameChanged({required this.name});
 
   final String name;
 
@@ -30,9 +28,7 @@ class EmailChanged extends RegEvent {
 }
 
 class PasswordChanged extends RegEvent {
-  const PasswordChanged({
-    required this.password
-  });
+  const PasswordChanged({required this.password});
 
   final String password;
 
@@ -52,15 +48,12 @@ class ConfirmPasswordChanged extends RegEvent {
 }
 
 class RulesChanged extends RegEvent {
-  const RulesChanged({
-    required this.rules
-  });
+  const RulesChanged({required this.rules});
 
-  final String rules;
+  final bool rules;
 
   @override
   List<Object> get props => [rules];
 }
 
-
-class FormSubmitted extends RegEvent { }
+class FormSubmitted extends RegEvent {}

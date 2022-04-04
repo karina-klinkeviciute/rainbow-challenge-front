@@ -1,15 +1,13 @@
 import 'package:formz/formz.dart';
 
-enum RulesError {
-  empty, invalid
-}
+enum RulesError { empty, invalid }
 
-class Rules extends FormzInput<String, RulesError> {
-  const Rules.pure() : super.pure('');
-  const Rules.dirty({String value = ''}) : super.dirty(value);
+class Rules extends FormzInput<bool, RulesError> {
+  const Rules.pure() : super.pure(false);
+  const Rules.dirty({bool value = false}) : super.dirty(value);
 
   @override
-  RulesError? validator(String value) {
-    return value.isNotEmpty == true ? null : RulesError.empty;
+  RulesError? validator(bool value) {
+    return value == true ? null : RulesError.empty;
   }
 }

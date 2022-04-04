@@ -23,7 +23,7 @@ class UserRepository {
     return user;
   }
 
-  Future<regUser> register({
+  Future<String> register({
     required int year_of_birth,
     required String email,
     required String password,
@@ -46,7 +46,7 @@ class UserRepository {
       //is_lgbtqia: is_lgbtqia,
     );
 
-    await createUser(userReg);
+    var errorMessage = await createUser(userReg);
 
     regUser reguser = regUser(
       year_of_birth: year_of_birth,
@@ -59,7 +59,8 @@ class UserRepository {
       //region: region,
       //is_lgbtqia: is_lgbtqia
     );
-    return reguser;
+
+    return errorMessage ?? "";
   }
 
   Future<void> persistToken({required User user}) {

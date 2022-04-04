@@ -1,17 +1,12 @@
 import 'package:formz/formz.dart';
 
-enum PasswordValidationError {
-  invalid,
-  empty
-}
+enum PasswordValidationError { invalid, empty }
 
 class Password extends FormzInput<String, PasswordValidationError> {
   const Password.pure() : super.pure('');
   const Password.dirty([String value = '']) : super.dirty(value);
 
-  static final _passwordRegExp = RegExp(
-      r'^[A-Za-z\d@$!%*?&]{8,}$'
-  );
+  static final _passwordRegExp = RegExp(r'^[A-Za-z\d@$!%*?&]{8,}$');
 
   @override
   PasswordValidationError? validator(String value) {
@@ -25,10 +20,10 @@ class Password extends FormzInput<String, PasswordValidationError> {
 }
 
 extension Explanation on PasswordValidationError? {
-  String? get name {
-    switch(this) {
+  String? get title {
+    switch (this) {
       case PasswordValidationError.invalid:
-        return "Invalid condition";
+        return "Password should be from 8 symbols or longer";
       default:
         return null;
     }
