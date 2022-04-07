@@ -72,6 +72,7 @@ class _FileUploadWidgetState extends State<FileUploadWidget> {
     if (result != null) {
       File file = File(result.files.single.path ?? "");
       await filesRepository.uploadFile(file, uuid, challenge_type);
+      loadFiles();
     } else {
       // User canceled the picker
     }
