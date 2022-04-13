@@ -26,72 +26,51 @@ import 'package:rainbow_challenge/pages/challenges/cubit/challenges_cubit.dart';
 // One of use cases is with Navigator: `Navigator.pushNamed(context, routeName)`.
 
 class AppRouter {
-  RegionsRepository regionsRepository =
-      RegionsRepository(dioClient: DioClient());
+  RegionsRepository regionsRepository = RegionsRepository(dioClient: DioClient());
 
-  ProfileRepository profileRepository =
-      ProfileRepository(dioClient: DioClient());
+  ProfileRepository profileRepository = ProfileRepository(dioClient: DioClient());
 
-  ChallengesRepository challengesRepository =
-      ChallengesRepository(dioClient: DioClient());
+  ChallengesRepository challengesRepository = ChallengesRepository(dioClient: DioClient());
 
-  ChallengesEventParticipantRepository challengesEventParticipantRepository =
-      ChallengesEventParticipantRepository(dioClient: DioClient());
+  ChallengesEventParticipantRepository challengesEventParticipantRepository = ChallengesEventParticipantRepository(dioClient: DioClient());
 
-  ChallengesArticleRepository challengesArticleRepository =
-      ChallengesArticleRepository(dioClient: DioClient());
+  ChallengesArticleRepository challengesArticleRepository = ChallengesArticleRepository(dioClient: DioClient());
 
-  ChallengesCustomRepository challengesCustomRepository =
-      ChallengesCustomRepository(dioClient: DioClient());
+  ChallengesCustomRepository challengesCustomRepository = ChallengesCustomRepository(dioClient: DioClient());
 
-  ChallengesEventOrganizerRepository challengesEventOrganizerRepository =
-      ChallengesEventOrganizerRepository(dioClient: DioClient());
+  ChallengesEventOrganizerRepository challengesEventOrganizerRepository = ChallengesEventOrganizerRepository(dioClient: DioClient());
 
-  ChallengesProjectRepository challengesProjectRepository =
-      ChallengesProjectRepository(dioClient: DioClient());
+  ChallengesProjectRepository challengesProjectRepository = ChallengesProjectRepository(dioClient: DioClient());
 
-  ChallengesQuizRepository challengesQuizRepository =
-      ChallengesQuizRepository(dioClient: DioClient());
+  ChallengesQuizRepository challengesQuizRepository = ChallengesQuizRepository(dioClient: DioClient());
 
-  ChallengesReactingRepository challengesReactingRepository =
-      ChallengesReactingRepository(dioClient: DioClient());
+  ChallengesReactingRepository challengesReactingRepository = ChallengesReactingRepository(dioClient: DioClient());
 
-  ChallengesSchoolGsaRepository challengesSchoolGsaRepository =
-      ChallengesSchoolGsaRepository(dioClient: DioClient());
+  ChallengesSchoolGsaRepository challengesSchoolGsaRepository = ChallengesSchoolGsaRepository(dioClient: DioClient());
 
-  ChallengesStoryRepository challengesStoryRepository =
-      ChallengesStoryRepository(dioClient: DioClient());
+  ChallengesStoryRepository challengesStoryRepository = ChallengesStoryRepository(dioClient: DioClient());
 
-  ChallengesSupportRepository challengesSupportRepository =
-      ChallengesSupportRepository(dioClient: DioClient());
+  ChallengesSupportRepository challengesSupportRepository = ChallengesSupportRepository(dioClient: DioClient());
 
   AppRouter() {
     challengesRepository = ChallengesRepository(dioClient: DioClient());
 
-    challengesArticleRepository =
-        ChallengesArticleRepository(dioClient: DioClient());
-    challengesCustomRepository =
-        ChallengesCustomRepository(dioClient: DioClient());
+    challengesArticleRepository = ChallengesArticleRepository(dioClient: DioClient());
+    challengesCustomRepository = ChallengesCustomRepository(dioClient: DioClient());
 
-    challengesEventOrganizerRepository =
-        ChallengesEventOrganizerRepository(dioClient: DioClient());
+    challengesEventOrganizerRepository = ChallengesEventOrganizerRepository(dioClient: DioClient());
 
-    challengesEventParticipantRepository =
-        ChallengesEventParticipantRepository(dioClient: DioClient());
+    challengesEventParticipantRepository = ChallengesEventParticipantRepository(dioClient: DioClient());
 
-    challengesProjectRepository =
-        ChallengesProjectRepository(dioClient: DioClient());
+    challengesProjectRepository = ChallengesProjectRepository(dioClient: DioClient());
 
     challengesQuizRepository = ChallengesQuizRepository(dioClient: DioClient());
 
-    challengesSchoolGsaRepository =
-        ChallengesSchoolGsaRepository(dioClient: DioClient());
+    challengesSchoolGsaRepository = ChallengesSchoolGsaRepository(dioClient: DioClient());
 
-    challengesStoryRepository =
-        ChallengesStoryRepository(dioClient: DioClient());
+    challengesStoryRepository = ChallengesStoryRepository(dioClient: DioClient());
 
-    challengesSupportRepository =
-        ChallengesSupportRepository(dioClient: DioClient());
+    challengesSupportRepository = ChallengesSupportRepository(dioClient: DioClient());
   }
 
   Route? onGenerateRoute(RouteSettings routeSettings) {
@@ -101,19 +80,15 @@ class AppRouter {
       case AppRoute.challenges:
         return MaterialPageRoute(
             builder: (_) => BlocProvider(
-                  create: (BuildContext context) => ChallengesCubit(
-                      challengesRepository: challengesRepository),
+                  create: (BuildContext context) => ChallengesCubit(challengesRepository: challengesRepository),
                   child: ChallengesPage(),
                 ));
 
       case AppRoute.challengeEventParticipant:
-        final arguments =
-            routeSettings.arguments as SingleChallengePageArguments;
+        final arguments = routeSettings.arguments as SingleChallengePageArguments;
         return MaterialPageRoute(
             builder: (_) => BlocProvider(
-                  create: (context) => ChallengeEventParticipantCubit(
-                      challengesTypeRepository:
-                          challengesEventParticipantRepository),
+                  create: (context) => ChallengeEventParticipantCubit(challengesTypeRepository: challengesEventParticipantRepository),
                   child: ChallengeEventParticipantPage(
                     type_uuid: arguments.type_uuid,
                     uuid: arguments.uuid,
@@ -121,12 +96,10 @@ class AppRouter {
                 ));
 
       case AppRoute.challengeArticle:
-        final arguments =
-            routeSettings.arguments as SingleChallengePageArguments;
+        final arguments = routeSettings.arguments as SingleChallengePageArguments;
         return MaterialPageRoute(
             builder: (_) => BlocProvider(
-                  create: (context) => ChallengeArticleCubit(
-                      challengesTypeRepository: challengesArticleRepository),
+                  create: (context) => ChallengeArticleCubit(challengesTypeRepository: challengesArticleRepository),
                   child: ChallengeArticlePage(
                     type_uuid: arguments.type_uuid,
                     uuid: arguments.uuid,
@@ -134,12 +107,10 @@ class AppRouter {
                 ));
 
       case AppRoute.challengeCustom:
-        final arguments =
-            routeSettings.arguments as SingleChallengePageArguments;
+        final arguments = routeSettings.arguments as SingleChallengePageArguments;
         return MaterialPageRoute(
             builder: (_) => BlocProvider(
-                  create: (context) => ChallengeCustomCubit(
-                      challengesTypeRepository: challengesCustomRepository),
+                  create: (context) => ChallengeCustomCubit(challengesTypeRepository: challengesCustomRepository),
                   child: ChallengeCustomPage(
                     type_uuid: arguments.type_uuid,
                     uuid: arguments.uuid,
@@ -147,13 +118,10 @@ class AppRouter {
                 ));
 
       case AppRoute.challengeEventOrganizer:
-        final arguments =
-            routeSettings.arguments as SingleChallengePageArguments;
+        final arguments = routeSettings.arguments as SingleChallengePageArguments;
         return MaterialPageRoute(
             builder: (_) => BlocProvider(
-                  create: (context) => ChallengeEventOrganizerCubit(
-                      challengesTypeRepository:
-                          challengesEventOrganizerRepository),
+                  create: (context) => ChallengeEventOrganizerCubit(challengesTypeRepository: challengesEventOrganizerRepository),
                   child: ChallengeEventOrganizerPage(
                     type_uuid: arguments.type_uuid,
                     uuid: arguments.uuid,
@@ -161,12 +129,10 @@ class AppRouter {
                 ));
 
       case AppRoute.challengeProject:
-        final arguments =
-            routeSettings.arguments as SingleChallengePageArguments;
+        final arguments = routeSettings.arguments as SingleChallengePageArguments;
         return MaterialPageRoute(
             builder: (_) => BlocProvider(
-                  create: (context) => ChallengeProjectCubit(
-                      challengesTypeRepository: challengesProjectRepository),
+                  create: (context) => ChallengeProjectCubit(challengesTypeRepository: challengesProjectRepository),
                   child: ChallengeProjectPage(
                     type_uuid: arguments.type_uuid,
                     uuid: arguments.uuid,
@@ -174,12 +140,10 @@ class AppRouter {
                 ));
 
       case AppRoute.challengeQuiz:
-        final arguments =
-            routeSettings.arguments as SingleChallengePageArguments;
+        final arguments = routeSettings.arguments as SingleChallengePageArguments;
         return MaterialPageRoute(
             builder: (_) => BlocProvider(
-                  create: (context) => ChallengeQuizCubit(
-                      challengesTypeRepository: challengesQuizRepository),
+                  create: (context) => ChallengeQuizCubit(challengesTypeRepository: challengesQuizRepository),
                   child: ChallengeQuizPage(
                     type_uuid: arguments.type_uuid,
                     uuid: arguments.uuid,
@@ -187,12 +151,10 @@ class AppRouter {
                 ));
 
       case AppRoute.challengeReacting:
-        final arguments =
-            routeSettings.arguments as SingleChallengePageArguments;
+        final arguments = routeSettings.arguments as SingleChallengePageArguments;
         return MaterialPageRoute(
             builder: (_) => BlocProvider(
-                  create: (context) => ChallengeReactingCubit(
-                      challengesTypeRepository: challengesReactingRepository),
+                  create: (context) => ChallengeReactingCubit(challengesTypeRepository: challengesReactingRepository),
                   child: ChallengeReactingPage(
                     type_uuid: arguments.type_uuid,
                     uuid: arguments.uuid,
@@ -200,12 +162,10 @@ class AppRouter {
                 ));
 
       case AppRoute.challengeSchoolGsa:
-        final arguments =
-            routeSettings.arguments as SingleChallengePageArguments;
+        final arguments = routeSettings.arguments as SingleChallengePageArguments;
         return MaterialPageRoute(
             builder: (_) => BlocProvider(
-                  create: (context) => ChallengeSchoolGsaCubit(
-                      challengesTypeRepository: challengesSchoolGsaRepository),
+                  create: (context) => ChallengeSchoolGsaCubit(challengesTypeRepository: challengesSchoolGsaRepository),
                   child: ChallengeSchoolGsaPage(
                     type_uuid: arguments.type_uuid,
                     uuid: arguments.uuid,
@@ -213,12 +173,10 @@ class AppRouter {
                 ));
 
       case AppRoute.challengeStory:
-        final arguments =
-            routeSettings.arguments as SingleChallengePageArguments;
+        final arguments = routeSettings.arguments as SingleChallengePageArguments;
         return MaterialPageRoute(
             builder: (_) => BlocProvider(
-                  create: (context) => ChallengeStoryCubit(
-                      challengesTypeRepository: challengesStoryRepository),
+                  create: (context) => ChallengeStoryCubit(challengesTypeRepository: challengesStoryRepository),
                   child: ChallengeStoryPage(
                     type_uuid: arguments.type_uuid,
                     uuid: arguments.uuid,
@@ -226,12 +184,10 @@ class AppRouter {
                 ));
 
       case AppRoute.challengeSupport:
-        final arguments =
-            routeSettings.arguments as SingleChallengePageArguments;
+        final arguments = routeSettings.arguments as SingleChallengePageArguments;
         return MaterialPageRoute(
             builder: (_) => BlocProvider(
-                  create: (context) => ChallengeSupportCubit(
-                      challengesTypeRepository: challengesSupportRepository),
+                  create: (context) => ChallengeSupportCubit(challengesTypeRepository: challengesSupportRepository),
                   child: ChallengeSupportPage(
                     type_uuid: arguments.type_uuid,
                     uuid: arguments.uuid,
@@ -241,16 +197,14 @@ class AppRouter {
       case AppRoute.profile:
         return MaterialPageRoute(
             builder: (_) => BlocProvider(
-                  create: (BuildContext context) =>
-                      ProfileInfoCubit(profileRepository: profileRepository),
+                  create: (BuildContext context) => ProfileInfoCubit(profileRepository: profileRepository),
                   child: ProfilePage(),
                 ));
 
       case AppRoute.regions:
         return MaterialPageRoute(
             builder: (_) => BlocProvider(
-                  create: (BuildContext context) =>
-                      RegionsCubit(regionsRepository: regionsRepository),
+                  create: (BuildContext context) => RegionsCubit(regionsRepository: regionsRepository),
                   child: RegionsPage(),
                 ));
 

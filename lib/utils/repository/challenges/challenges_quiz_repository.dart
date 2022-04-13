@@ -14,9 +14,13 @@ class ChallengesQuizRepository {
   Future<ChallengeQuiz> fetchChallenge({required String uuid}) async {
     // BUG: Putting constant creates wrong URL. Should fix this later.
     //
-    // final String challengeTypePoint = Api.challengeQuizEndpoint;
-    final String challengeTypePoint = '/api/challenge/quiz_challenge/';
-    final challengeRaw = await dioClient.getItem('$challengeTypePoint$uuid/');
+    print('uuid is $uuid');
+    //final String challengeTypePoint = Api.challengeQuizEndpoint;
+    final String challengeTypePoint = '/api/challenge/quiz_challenge/$uuid';
+    print('ep is $challengeTypePoint');
+    final challengeRaw = await dioClient.getItem(challengeTypePoint);
+    //final challengeRaw = await dioClient.getItem('$challengeTypePoint$uuid/');
+    print('raw is $challengeRaw');
     return ChallengeQuiz.fromJson(challengeRaw!);
   }
 }

@@ -9,7 +9,6 @@ class RegionModel {
 
   RegionModel({this.name = "Lietuva", this.points = 0, required this.uuid});
 
-  factory RegionModel.fromJson(Map<String, dynamic> json) =>
-      _$RegionFromJson(json);
-  Map<String, dynamic> toJson() => _$RegionToJson(this);
+  factory RegionModel.fromJson(Map<String, dynamic> json) => _$RegionModelFromJson(json);
+  Map<String, dynamic> toJson() => _$RegionModelToJson(this);
 }

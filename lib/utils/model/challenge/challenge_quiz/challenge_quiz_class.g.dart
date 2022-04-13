@@ -8,8 +8,10 @@ part of 'challenge_quiz_class.dart';
 
 ChallengeQuiz _$ChallengeQuizFromJson(Map<String, dynamic> json) =>
     ChallengeQuiz(
-      uuid: json['uuid'] as String,
-      quiz: json['quiz'] as String,
+      uuid: json['uuid'] as String?,
+      questions: (json['questions'] as List<dynamic>)
+          .map((e) => Question.fromJson(e as Map<String, dynamic>))
+          .toList(),
       main_challenge:
           Challenge.fromJson(json['main_challenge'] as Map<String, dynamic>),
     );
@@ -18,5 +20,5 @@ Map<String, dynamic> _$ChallengeQuizToJson(ChallengeQuiz instance) =>
     <String, dynamic>{
       'uuid': instance.uuid,
       'main_challenge': instance.main_challenge.toJson(),
-      'quiz': instance.quiz,
+      'questions': instance.questions.map((e) => e.toJson()).toList(),
     };

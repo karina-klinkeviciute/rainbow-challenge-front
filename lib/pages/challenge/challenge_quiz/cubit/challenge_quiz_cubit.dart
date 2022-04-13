@@ -8,16 +8,14 @@ part 'challenge_quiz_state.dart';
 
 class ChallengeQuizCubit extends Cubit<ChallengeQuizState> {
   final ChallengesQuizRepository challengesTypeRepository;
-  ChallengeQuizCubit({required this.challengesTypeRepository})
-      : super(ChallengeQuizInitial());
+  ChallengeQuizCubit({required this.challengesTypeRepository}) : super(ChallengeQuizInitial());
 
-  void fetchChallenge({required String uuid}) {
-    Timer(Duration(seconds: 1), () {
-      challengesTypeRepository
-          .fetchChallenge(uuid: uuid)
-          .then((challengeTypeItem) {
-        emit(ChallengeQuizLoaded(challengeTypeItem: challengeTypeItem));
-      });
-    });
+  Future<ChallengeQuiz> fetchChallenge({required String uuid}) async {
+    print('start');
+    var challengeTypeItem = await challengesTypeRepository.fetchChallenge(uuid: uuid);
+    print('printing is $challengeTypeItem');
+    emit(ChallengeQuizLoaded(challengeTypeItem: challengeTypeItem));
+    //print('return');
+    return challengeTypeItem;
   }
 }

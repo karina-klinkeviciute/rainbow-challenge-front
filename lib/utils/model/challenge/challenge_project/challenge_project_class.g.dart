@@ -8,14 +8,14 @@ part of 'challenge_project_class.dart';
 
 ChallengeProject _$ChallengeProjectFromJson(Map<String, dynamic> json) =>
     ChallengeProject(
-        uuid: json['uuid'] as String,
-        main_challenge: json['main_challenge'] != null
-            ? Challenge.fromJson(json['main_challenge'] as Map<String, dynamic>)
-            : Challenge.empty(),
-        description: json['description'],
-        project_name: json['project_name'],
-        project_url: json['project_url'],
-        implemented_alone: json['implemented_alone']);
+      uuid: json['uuid'] as String,
+      main_challenge:
+          Challenge.fromJson(json['main_challenge'] as Map<String, dynamic>),
+      description: json['description'] as String?,
+      implemented_alone: json['implemented_alone'] as bool?,
+      project_name: json['project_name'] as String?,
+      project_url: json['project_url'] as String?,
+    );
 
 Map<String, dynamic> _$ChallengeProjectToJson(ChallengeProject instance) =>
     <String, dynamic>{
@@ -24,5 +24,5 @@ Map<String, dynamic> _$ChallengeProjectToJson(ChallengeProject instance) =>
       'description': instance.description,
       'project_name': instance.project_name,
       'project_url': instance.project_url,
-      'implemented_alone': instance.implemented_alone
+      'implemented_alone': instance.implemented_alone,
     };

@@ -8,14 +8,16 @@ Widget _challengeInfo = BlocBuilder<ChallengeQuizCubit, ChallengeQuizState>(
         padding: const EdgeInsets.symmetric(vertical: 20.0),
         child: CircularProgressIndicator(),
       ));
+
+    Text('${(state).challengeTypeItem.toString()}');
+
     final challengeTypeItem = (state).challengeTypeItem;
     return Column(children: [
       ChallengeHeadlineWidget(
         title: challengeTypeItem.main_challenge.name,
         points: challengeTypeItem.main_challenge.points,
       ),
-      ChallengeDescriptionWidget(
-          description: challengeTypeItem.main_challenge.description),
+      ChallengeDescriptionWidget(description: challengeTypeItem.main_challenge.description),
     ]);
   },
 );
