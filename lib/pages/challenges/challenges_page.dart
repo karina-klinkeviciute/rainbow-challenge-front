@@ -25,7 +25,7 @@ class _ChallengesPageState extends State<ChallengesPage>
   Widget build(BuildContext context) {
     super.build(context);
     BlocProvider.of<ChallengesCubit>(context).fetchChallenges();
-    return const WrapperMainWidget(mainArea: _MainArea(), useAppBar: false);
+    return const WrapperMainWidget(mainArea: _MainArea());
   }
 
   @override
@@ -168,9 +168,10 @@ class _challengeType extends StatelessWidget {
   Widget build(BuildContext context) {
     return ExpansionTile(
         title: Text(typeTitle,
-            style: Theme.of(context).textTheme.headline3!.merge(const TextStyle(
-                fontWeight: FontWeight.w400,
-                color: ThemeColors.neutralColorLight))),
+            style: Theme.of(context)
+                .textTheme
+                .headline4!
+                .merge(const TextStyle(color: ThemeColors.neutralColor))),
         controlAffinity: ListTileControlAffinity.leading,
         //  children: typeList.map((e) => _challenge(e)).toList());
         children: [
@@ -190,8 +191,11 @@ class _challengeType extends StatelessWidget {
   // Widget _challenge(Challenge challenge, context) - in case we would need it
   Widget _challenge(Challenge challenge, context) {
     return ListTile(
-      title:
-          Text(challenge.name, style: Theme.of(context).textTheme.headline4!),
+      title: Text(challenge.name,
+          style: Theme.of(context)
+              .textTheme
+              .bodyText2!
+              .merge(const TextStyle(color: ThemeColors.neutralColor))),
       // subtitle: Text(challenge.description),
       onTap: () {
         Navigator.push(

@@ -68,7 +68,8 @@ class _NavigationPageState extends State<NavigationPage>
                     itemIcon: ThemeIcons.challengesJoined,
                     itemTitle:
                         AppLocalizations.of(context)!.menu_challenges_joined,
-                    routeName: AppRoute.challengesJoined,
+                    // AppRoute.challengesJoined
+                    routeName: AppRoute.challenges,
                   ),
                   _GridItem(
                     itemIcon: ThemeIcons.shop,

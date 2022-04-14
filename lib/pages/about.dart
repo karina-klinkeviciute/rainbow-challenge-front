@@ -21,9 +21,9 @@ class _PageContent extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const ImageExternalWidget(
-            borderRadius: 0,
-            url: 'https://tja.lt/wp-content/uploads/2021/08/vidutinis.png'),
+        SizedBox(height: 40),
+        const ImageLocalWidget(
+            url: 'assets/images/dialogs/thanks.png', width: 300),
         Center(
           child: SizedBox(
             width: MediaQuery.of(context).size.width * 0.8,
@@ -33,19 +33,15 @@ class _PageContent extends StatelessWidget {
                 const HeadlineWidget(title: 'Apie projektą'),
                 const HtmlWidget(
                     data:
-                        '<p>Content with html tags comes here. <strong>This is bold text'
-                        '</strong> and <em>this is italics</em>.</p><p>Next paragraph comes here. '
-                        'Content with html tags comes here. Content with html tags comes here.'
-                        ' <strong>This is bold text'
-                        '</strong> and <em>this is italics</em>.</p><p>Next paragraph comes here. '
-                        'Here comes a <a href="https://rainbowchallenge.lt">link</a>.'),
+                        '<p style="text-align:center;">Turinys kuriamas!</p>'),
                 const SizedBox(height: 20),
-                ElevatedButton(
+                /*     ElevatedButton(
                   child: Text('Daugiau apie mus'.toUpperCase()),
                   onPressed: () {
                     _launchURL();
                   },
                 ),
+                */
               ],
             ),
           ),

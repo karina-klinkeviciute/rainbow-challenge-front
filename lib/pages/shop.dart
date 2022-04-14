@@ -33,7 +33,7 @@ class _MainArea extends StatelessWidget {
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.headline3!.merge(
                   const TextStyle(
-                      fontSize: 28, color: ThemeColors.primaryColorDark))),
+                      fontSize: 24, color: ThemeColors.primaryColor))),
         ],
       ),
     );
