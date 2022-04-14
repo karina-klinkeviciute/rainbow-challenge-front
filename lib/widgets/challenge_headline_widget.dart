@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rainbow_challenge/theme/colors.dart';
+import 'package:rainbow_challenge/widgets/widgets.dart';
 
 class ChallengeHeadlineWidget extends StatelessWidget {
   final String title;
@@ -22,7 +23,16 @@ class ChallengeHeadlineWidget extends StatelessWidget {
         SizedBox(
           width: 20,
         ),
-        Text(points.toString(), style: Theme.of(context).textTheme.headline3!)
+        Column(
+          children: [
+            ImageLocalWidget(
+              url: 'assets/images/rainbow.png',
+              width: 16,
+            ),
+            Text(points.toString(),
+                style: Theme.of(context).textTheme.headline3!)
+          ],
+        )
       ]),
     );
   }
