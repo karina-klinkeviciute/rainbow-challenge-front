@@ -80,10 +80,7 @@ class DesignTheme with ChangeNotifier {
               fontSize: 72.0,
               fontWeight: FontWeight.w600,
               fontStyle: FontStyle.italic),
-          headline2: TextStyle(
-              fontSize: 50.0,
-              fontWeight: FontWeight.w600,
-              fontStyle: FontStyle.italic),
+          headline2: TextStyle(fontSize: 50.0, fontWeight: FontWeight.w600),
           headline3:
               TextStyle(fontSize: 24.0, fontWeight: FontWeight.w600, height: 1),
           headline4: TextStyle(fontSize: 20.0, fontWeight: FontWeight.w600),

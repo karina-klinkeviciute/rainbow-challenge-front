@@ -19,19 +19,8 @@ class HeadlineWidget extends StatelessWidget {
           Text(
             title.toUpperCase(),
             style: Theme.of(context).textTheme.headline2!.merge(TextStyle(
-                    color: ThemeColors.primaryColor,
-                    shadows: <Shadow>[
-                      Shadow(
-                        offset: const Offset(2.0, 2.0),
-                        blurRadius: 0,
-                        color: ThemeColors.tetriaryColor.withOpacity(0.7),
-                      ),
-                      Shadow(
-                        offset: const Offset(-2.0, -2.0),
-                        blurRadius: 0,
-                        color: ThemeColors.secondaryColor.withOpacity(0.3),
-                      ),
-                    ])),
+                  color: ThemeColors.primaryColorDark,
+                )),
           ),
           // Show subtitle only if it exists
           if (subtitle != null)
