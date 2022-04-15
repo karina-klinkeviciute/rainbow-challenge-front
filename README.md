@@ -70,6 +70,16 @@ Custom widgets can be found in `lib > widgets`. They can be reused in different 
 
 - **ChallengeDescriptionWidget({ description })** - displays a description in single challenge page if it exists. Uses HtmlWidget(). UI work is in progress.
 
+**Notice about widgets**   
+Widget list above is not complete and will be updated.
+
+## Illustrations
+A group of illustrations for dialogs can be found in `assets/images/dialogs/` folder:
+- General error
+- Network error
+- Registration success
+- Rainbows exchange success/shop
+- Thank you - challenge completed!
 
 ## Constants
 
