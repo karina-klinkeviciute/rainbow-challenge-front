@@ -79,23 +79,44 @@ class DesignTheme with ChangeNotifier {
           headline1: TextStyle(
               fontSize: 72.0,
               fontWeight: FontWeight.w600,
+              fontFamily: ThemeFonts.primaryFontFamily,
               fontStyle: FontStyle.italic),
-          headline2: TextStyle(fontSize: 50.0, fontWeight: FontWeight.w600),
-          headline3:
-              TextStyle(fontSize: 24.0, fontWeight: FontWeight.w600, height: 1),
-          headline4: TextStyle(fontSize: 20.0, fontWeight: FontWeight.w600),
+          headline2: TextStyle(
+              fontSize: 50.0,
+              fontWeight: FontWeight.w600,
+              fontFamily: ThemeFonts.primaryFontFamily,
+              color: ThemeColors.primaryColorDark),
+          headline3: TextStyle(
+              fontSize: 24.0,
+              fontWeight: FontWeight.w600,
+              height: 1,
+              fontFamily: ThemeFonts.primaryFontFamily),
+          headline4: TextStyle(
+              fontSize: 18.0,
+              fontWeight: FontWeight.w600,
+              fontFamily: ThemeFonts.secondaryFontFamily),
           headline5: TextStyle(
-              fontSize: 16.0, fontWeight: FontWeight.w600, fontFamily: 'Asap'),
+              fontSize: 16.0,
+              fontWeight: FontWeight.w600,
+              fontFamily: ThemeFonts.secondaryFontFamily),
           headline6: TextStyle(
-              fontSize: 14.0, fontWeight: FontWeight.w600, fontFamily: 'Asap'),
-          subtitle1: TextStyle(fontSize: 24.0),
-          subtitle2: TextStyle(fontSize: 18.0),
+              fontSize: 14.0,
+              fontWeight: FontWeight.w600,
+              fontFamily: ThemeFonts.secondaryFontFamily),
+          subtitle1: TextStyle(
+              fontSize: 24.0, fontFamily: ThemeFonts.primaryFontFamily),
+          subtitle2: TextStyle(
+              fontSize: 18.0, fontFamily: ThemeFonts.primaryFontFamily),
           bodyText1: TextStyle(
               fontSize: 16.0, fontFamily: ThemeFonts.primaryFontFamily),
-          bodyText2: TextStyle(fontSize: 14.0, fontFamily: 'Asap'),
-          caption: TextStyle(fontSize: 12.0),
-          button: TextStyle(fontSize: 18.0),
-          overline: TextStyle(fontSize: 12.0),
+          bodyText2: TextStyle(
+              fontSize: 14.0, fontFamily: ThemeFonts.secondaryFontFamily),
+          caption: TextStyle(
+              fontSize: 12.0, fontFamily: ThemeFonts.secondaryFontFamily),
+          button: TextStyle(
+              fontSize: 18.0, fontFamily: ThemeFonts.secondaryFontFamily),
+          overline: TextStyle(
+              fontSize: 12.0, fontFamily: ThemeFonts.secondaryFontFamily),
         ));
   }
 

@@ -16,7 +16,6 @@ class RegionsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     BlocProvider.of<RegionsCubit>(context).fetchRegions();
     return WrapperMainWidget(
-      useAppBar: false,
       mainArea: _MainArea(),
       //  useAppBar: false,
     );

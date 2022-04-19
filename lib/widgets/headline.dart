@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rainbow_challenge/theme/colors.dart';
+import 'package:rainbow_challenge/theme/headings.dart';
 
 // This widget displays a standard headline that consist of page title and subtitle.
 
@@ -18,10 +19,9 @@ class HeadlineWidget extends StatelessWidget {
         children: [
           Text(
             title.toUpperCase(),
-            style: Theme.of(context).textTheme.headline2!.merge(TextStyle(
-                  color: ThemeColors.primaryColorDark,
-                )),
+            style: ThemeHeadings.themeHeading2,
           ),
+
           // Show subtitle only if it exists
           if (subtitle != null)
             Text(

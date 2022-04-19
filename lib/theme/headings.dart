@@ -46,6 +46,13 @@ class ThemeHeadings {
         ),
       ]);
 
+  static const themeHeading2 = TextStyle(
+    color: ThemeColors.primaryColorDark,
+    fontSize: 46,
+    fontWeight: FontWeight.bold,
+    fontFamily: ThemeFonts.primaryFontFamily,
+  );
+
   static const themeHeading3 = TextStyle(
       fontSize: 24.0,
       height: 1,
