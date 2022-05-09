@@ -7,7 +7,7 @@ part 'challenge_class.g.dart';
 @JsonSerializable()
 class Challenge {
   String uuid;
-  String concrete_challenge_uuid;
+  String? concrete_challenge_uuid;
   String type;
   String name;
   String description;

@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
@@ -133,8 +134,7 @@ class DioClient {
   }
 
   initializeInterceptors() {
-    _dio.interceptors.add(InterceptorsWrapper(
-        onError: (DioError e, ErrorInterceptorHandler handler) {
+    _dio.interceptors.add(InterceptorsWrapper(onError: (DioError e, ErrorInterceptorHandler handler) {
       print(e.message);
     }, onRequest: (options, handler) {
       print("Method: ${options.method}");
@@ -186,12 +186,14 @@ class DioClient {
     }
   }
 
-  Future<Map<String, dynamic>> addItem(
-      String endPoint, Map<String, dynamic> itemObject) async {
+  Future<Map<String, dynamic>> addItem(String endPoint, Map<String, dynamic> itemObject) async {
+    print('adding ...');
+    print(endPoint);
+    print(itemObject);
     try {
       await addAuthorizationHeader();
       final response = await _dio.post(endPoint, data: itemObject);
-      print('Item added ${response.data}');
+      print('results ${response.data}');
       return response.data;
     } on DioError catch (e) {
       print(e);
@@ -203,8 +205,27 @@ class DioClient {
     }
   }
 
-  Future<Map<String, dynamic>?> updateItem(
-      String endPoint, Map<String, dynamic> itemObject) async {
+  Future<Map<String, dynamic>> submitAnswer(String endPoint, Map<String, dynamic> itemObject) async {
+    print('submitting answer...$itemObject');
+    print(endPoint);
+    print(itemObject);
+    try {
+      await addAuthorizationHeader();
+      final response = await _dio.post(endPoint, data: itemObject);
+      print('results ${response.data}');
+      return response.data;
+    } on DioError catch (e) {
+      print(e);
+      return <String, dynamic>{"_error": e};
+    } on Exception catch (e) {
+      // Unhandled exception
+      print('did not work, error is $e');
+      //print('unhandled exception is $e');
+      return <String, dynamic>{"_exception": e};
+    }
+  }
+
+  Future<Map<String, dynamic>?> updateItem(String endPoint, Map<String, dynamic> itemObject) async {
     try {
       await addAuthorizationHeader();
       final response = await _dio.patch(endPoint, data: itemObject);
@@ -224,8 +245,7 @@ class DioClient {
     }
   }
 
-  Future<Map<String, dynamic>?> removeItem(
-      String endPoint, Map<String, dynamic> itemObject) async {
+  Future<Map<String, dynamic>?> removeItem(String endPoint, Map<String, dynamic> itemObject) async {
     try {
       await addAuthorizationHeader();
       final response = await _dio.delete(endPoint, data: itemObject);
@@ -239,8 +259,7 @@ class DioClient {
     }
   }
 
-  Future<Map<String, dynamic>?> uploadFile(
-      String endPoint, File file, String uuid, String challengeType) async {
+  Future<Map<String, dynamic>?> uploadFile(String endPoint, File file, String uuid, String challengeType) async {
     try {
       String fileName = file.path.split('/').last;
       FormData formData = FormData.fromMap({

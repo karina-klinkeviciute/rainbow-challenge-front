@@ -8,25 +8,27 @@ class JoinedChallengesRepository {
   final DioClient dioClient;
   JoinedChallengesRepository({required this.dioClient});
 
-  Future<ApiResponse<JoinedChallenge>> joinChallenge(
-      {required String uuid, required String challengeType}) async {
-    final challengeRaw = await dioClient
-        .addItem('/api/joined_challenge/${challengeType}_joined_challenge/', {
-      "main_joined_challenge": {"challenge": "${uuid}"}
-    });
+  Future<ApiResponse<JoinedChallenge>> joinChallenge({required String uuid, required String challengeType}) async {
+    print('uuid is $uuid');
+    final challengeRaw = await dioClient.addItem(
+      '/api/joined_challenge/${challengeType}_joined_challenge/',
+      {
+        "main_joined_challenge": {"challenge": "${uuid}", "status": "joined"}
+      },
+    );
+
+    print('raw is $challengeRaw');
 
     if (challengeRaw.isNotEmpty && challengeRaw.keys.contains("_error")) {
       var error = challengeRaw["_error"] as DioError;
       var responseData = error.response?.data as List;
-      var response = ApiResponse<JoinedChallenge>(
-          null, false, responseData.first as String);
+      var response = ApiResponse<JoinedChallenge>(null, false, responseData.first as String);
       return response;
     }
 
     if (challengeRaw.isNotEmpty && challengeRaw.keys.contains("_exception")) {
       var exception = challengeRaw["_exception"] as Exception;
-      var response =
-          ApiResponse<JoinedChallenge>(null, false, exception.toString());
+      var response = ApiResponse<JoinedChallenge>(null, false, exception.toString());
       return response;
     }
 
@@ -50,8 +52,7 @@ class JoinedChallengesRepository {
       };
 
     body.addEntries(bodyParams);
-    var url =
-        "/api/joined_challenge/${challengeType}_joined_challenge/${uuid}/";
+    var url = "/api/joined_challenge/${challengeType}_joined_challenge/${uuid}/";
 
     final challengeRaw = await dioClient.updateItem(url, body);
 

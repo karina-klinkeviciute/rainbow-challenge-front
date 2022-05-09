@@ -10,57 +10,38 @@ class Api {
   static const String regionsEndpoint = "/api/results/region/";
 
 // Files
-  static const String fileUploadEndpoint =
-      "/api/concrete_joined_challenge_file_upload/";
-  static const String fileListEndpoint =
-      "/api/concrete_joined_challenge_file_list/";
+  static const String fileUploadEndpoint = "/api/concrete_joined_challenge_file_upload/";
+  static const String fileListEndpoint = "/api/concrete_joined_challenge_file_list/";
 
   // News
   static const String newsEndpoint = '/api/news/';
 
   // Challenges
   static const String challengeEndpoint = '/api/challenge/challenge/';
-  static const String challengeArticleEndpoint =
-      '​/api​/challenge/article_challenge​/';
-  static const String challengeCustomEndpoint =
-      '​/api​/challenge/custom_challenge​/';
-  static const String challengeEventOrganizerEndpoint =
-      '​/api​/challenge/event_organizer_challenge​/';
-  static const String challengeEventParticipantEndpoint =
-      '/api/challenge/event_participant_challenge/';
-  static const String challengeProjectEndpoint =
-      '​/api​/challenge/project_challenge​/';
+  static const String challengeArticleEndpoint = '​/api​/challenge/article_challenge​/';
+  static const String challengeCustomEndpoint = '​/api​/challenge/custom_challenge​/';
+  static const String challengeEventOrganizerEndpoint = '​/api​/challenge/event_organizer_challenge​/';
+  static const String challengeEventParticipantEndpoint = '/api/challenge/event_participant_challenge/';
+  static const String challengeProjectEndpoint = '​/api​/challenge/project_challenge​/';
   static const String challengeQuizEndpoint = '/api/challenge/quiz_challenge/';
-  static const String challengeReactingEndpoint =
-      '/api/challenge/reacting_challenge/';
-  static const String challengeSchoolGsaEndpoint =
-      '​/api​/challenge/school_gsa_challenge​/';
-  static const String challengeSupportEndpoint =
-      '/api/challenge/support_challenge/';
-  static const String challengeStoryEndpoint =
-      '​/api​/challenge/story_challenge​/';
+  static const String challengeQuizAnswerEndpoint = '/api/joined_challenge/user_answer/';
+
+  static const String challengeReactingEndpoint = '/api/challenge/reacting_challenge/';
+  static const String challengeSchoolGsaEndpoint = '​/api​/challenge/school_gsa_challenge​/';
+  static const String challengeSupportEndpoint = '/api/challenge/support_challenge/';
+  static const String challengeStoryEndpoint = '​/api​/challenge/story_challenge​/';
 
 // Joined Challenges
-  static const String joinedChallengeArticleEndpoint =
-      '/api/joined_challenge/article_joined_challenge/';
-  static const String joinedChallengeCustomEndpoint =
-      '/api/joined_challenge/custom_joined_challenge/';
-  static const String joinedChallengeEventOrganizerEndpoint =
-      '​/api​/joined_challenge​/event_organizer_joined_challenge​/';
-  static const String joinedChallengeEventParticipantEndpoint =
-      '​api​/joined_challenge​/event_participant_joined_challenge​/';
-  static const String joinedChallengeProjectEndpoint =
-      '/api/joined_challenge/project_joined_challenge/';
-  static const String joinedChallengeQuizEndpoint =
-      '​/api​/joined_challenge​/quiz_joined_challenge​/';
-  static const String joinedChallengeReactingEndpoint =
-      '/api/joined_challenge/reacting_joined_challenge/';
-  static const String joinedChallengeSchoolGsaEndpoint =
-      '/api/joined_challenge/school_gsa_joined_challenge/';
-  static const String joinedChallengeStoryEndpoint =
-      '​/api​/joined_challenge​/story_joined_challenge​/';
-  static const String joinedChallengeSupportEndpoint =
-      '​/api​/joined_challenge​/support_joined_challenge​/';
+  static const String joinedChallengeArticleEndpoint = '/api/joined_challenge/article_joined_challenge/';
+  static const String joinedChallengeCustomEndpoint = '/api/joined_challenge/custom_joined_challenge/';
+  static const String joinedChallengeEventOrganizerEndpoint = '​/api​/joined_challenge​/event_organizer_joined_challenge​/';
+  static const String joinedChallengeEventParticipantEndpoint = '​api​/joined_challenge​/event_participant_joined_challenge​/';
+  static const String joinedChallengeProjectEndpoint = '/api/joined_challenge/project_joined_challenge/';
+  static const String joinedChallengeQuizEndpoint = '​/api​/joined_challenge​/quiz_joined_challenge​/';
+  static const String joinedChallengeReactingEndpoint = '/api/joined_challenge/reacting_joined_challenge/';
+  static const String joinedChallengeSchoolGsaEndpoint = '/api/joined_challenge/school_gsa_joined_challenge/';
+  static const String joinedChallengeStoryEndpoint = '​/api​/joined_challenge​/story_joined_challenge​/';
+  static const String joinedChallengeSupportEndpoint = '​/api​/joined_challenge​/support_joined_challenge​/';
 
   // Challenge types from backend
   static const challengeTypeArticle = "article";

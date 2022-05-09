@@ -16,11 +16,9 @@ class ChallengePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    JoinedChallengesRepository joinedChallengesRepository =
-        JoinedChallengesRepository(dioClient: DioClient());
+    JoinedChallengesRepository joinedChallengesRepository = JoinedChallengesRepository(dioClient: DioClient());
     return BlocProvider(
-      create: (_) => JoinChallengeCubit(
-          joinedChallengesRepository: joinedChallengesRepository),
+      create: (_) => JoinChallengeCubit(joinedChallengesRepository: joinedChallengesRepository),
       child: _Page(challengeInfo: challengeInfo),
     );
   }
@@ -42,30 +40,22 @@ class _Page extends StatelessWidget {
                 title: challengeInfo.name,
                 points: challengeInfo.points,
               ),
-              ChallengeDescriptionWidget(
-                  description: challengeInfo.description),
+              ChallengeDescriptionWidget(description: challengeInfo.description),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 40.0),
                 child: _joinChallengeButtonAction(context,
-                    actionText:
-                        AppLocalizations.of(context)!.action_join_challenge,
+                    actionText: AppLocalizations.of(context)!.action_join_challenge,
                     challengeType: challengeInfo.type,
                     uuid: challengeInfo.uuid,
-                    type_uuid: challengeInfo.concrete_challenge_uuid),
+                    type_uuid: challengeInfo!.concrete_challenge_uuid!),
               )
             ])));
   }
 
   Widget _joinChallengeButtonAction(context,
-      {required String actionText,
-      required String challengeType,
-      required String uuid,
-      required String type_uuid}) {
-    if (challengeInfo.can_be_joined == false &&
-        challengeInfo.multiple == false &&
-        challengeInfo.is_joined == false) {
-      return Text(AppLocalizations.of(context)!.challenge_completed_already,
-          style: TextStyle(color: ThemeColors.secondaryColor));
+      {required String actionText, required String challengeType, required String uuid, required String type_uuid}) {
+    if (challengeInfo.can_be_joined == false && challengeInfo.multiple == false && challengeInfo.is_joined == false) {
+      return Text(AppLocalizations.of(context)!.challenge_completed_already, style: TextStyle(color: ThemeColors.secondaryColor));
     }
 
     if (challengeInfo.is_joined && challengeInfo.can_be_joined == false) {
@@ -73,18 +63,14 @@ class _Page extends StatelessWidget {
         onPressed: () async {
           Api api = Api();
 
-          var concreteJoinedChallenge =
-              challengeInfo.concrete_joined_challenges.first;
+          var concreteJoinedChallenge = challengeInfo.concrete_joined_challenges.first;
 
-          Navigator.pushReplacementNamed(
-              context, api.getChallengeTypeRoute(challengeType),
-              arguments: SingleChallengePageArguments(
-                  type_uuid: type_uuid, uuid: concreteJoinedChallenge.uuid));
+          Navigator.pushReplacementNamed(context, api.getChallengeTypeRoute(challengeType),
+              arguments: SingleChallengePageArguments(type_uuid: type_uuid, uuid: concreteJoinedChallenge.uuid));
         },
         child: BlocBuilder<JoinChallengeCubit, JoinChallengeState>(
           builder: (context, state) {
-            if (state is JoinChallengeAdding)
-              return CircularProgressIndicator();
+            if (state is JoinChallengeAdding) return CircularProgressIndicator();
             return Text(
               AppLocalizations.of(context)!.challenge_continue_single,
               style: TextStyle(color: Colors.white),
@@ -100,16 +86,14 @@ class _Page extends StatelessWidget {
           Api api = Api();
 
           var joinedChallengeResponse =
-              await BlocProvider.of<JoinChallengeCubit>(context).joinChallenge(
-                  api.getChallengeTypeSubPath(challengeType), uuid);
+              await BlocProvider.of<JoinChallengeCubit>(context).joinChallenge(api.getChallengeTypeSubPath(challengeType), uuid);
 
           if (joinedChallengeResponse.isSuccess == false) {
             showDialog<String>(
               context: context,
               builder: (BuildContext context) => AlertDialog(
                 title: Text(AppLocalizations.of(context)!.error),
-                content: Text(
-                    joinedChallengeResponse.errorMessage ?? "Unknown error"),
+                content: Text(joinedChallengeResponse.errorMessage ?? "Unknown error"),
                 actions: <Widget>[
                   TextButton(
                     onPressed: () => Navigator.pop(context, 'OK'),
@@ -121,16 +105,12 @@ class _Page extends StatelessWidget {
             return;
           }
 
-          Navigator.pushReplacementNamed(
-              context, api.getChallengeTypeRoute(challengeType),
-              arguments: SingleChallengePageArguments(
-                  type_uuid: type_uuid,
-                  uuid: joinedChallengeResponse.result?.uuid ?? ""));
+          Navigator.pushReplacementNamed(context, api.getChallengeTypeRoute(challengeType),
+              arguments: SingleChallengePageArguments(type_uuid: type_uuid, uuid: joinedChallengeResponse.result?.uuid ?? ""));
         },
         child: BlocBuilder<JoinChallengeCubit, JoinChallengeState>(
           builder: (context, state) {
-            if (state is JoinChallengeAdding)
-              return CircularProgressIndicator();
+            if (state is JoinChallengeAdding) return CircularProgressIndicator();
             return Text(
               actionText,
               style: TextStyle(color: Colors.white),
@@ -147,10 +127,8 @@ class _Page extends StatelessWidget {
           onPressed: () {
             Api api = Api();
 
-            Navigator.pushReplacementNamed(
-                context, api.getChallengeTypeRoute(challengeType),
-                arguments: SingleChallengePageArguments(
-                    type_uuid: type_uuid, uuid: joinedChallenge.uuid));
+            Navigator.pushReplacementNamed(context, api.getChallengeTypeRoute(challengeType),
+                arguments: SingleChallengePageArguments(type_uuid: type_uuid, uuid: joinedChallenge.uuid));
           },
           child: Text(
             "${AppLocalizations.of(context)!.challenge_continue} ${joinedChallenge.date_joined}",
@@ -165,16 +143,14 @@ class _Page extends StatelessWidget {
           Api api = Api();
 
           var joinedChallengeResponse =
-              await BlocProvider.of<JoinChallengeCubit>(context).joinChallenge(
-                  api.getChallengeTypeSubPath(challengeType), uuid);
+              await BlocProvider.of<JoinChallengeCubit>(context).joinChallenge(api.getChallengeTypeSubPath(challengeType), uuid);
 
           if (joinedChallengeResponse.isSuccess == false) {
             showDialog<String>(
               context: context,
               builder: (BuildContext context) => AlertDialog(
                 title: Text(AppLocalizations.of(context)!.error),
-                content: Text(
-                    joinedChallengeResponse.errorMessage ?? "Unknown error"),
+                content: Text(joinedChallengeResponse.errorMessage ?? "Unknown error"),
                 actions: <Widget>[
                   TextButton(
                     onPressed: () => Navigator.pop(context, 'OK'),
@@ -186,16 +162,12 @@ class _Page extends StatelessWidget {
             return;
           }
 
-          Navigator.pushReplacementNamed(
-              context, api.getChallengeTypeRoute(challengeType),
-              arguments: SingleChallengePageArguments(
-                  type_uuid: type_uuid,
-                  uuid: joinedChallengeResponse.result?.uuid ?? ""));
+          Navigator.pushReplacementNamed(context, api.getChallengeTypeRoute(challengeType),
+              arguments: SingleChallengePageArguments(type_uuid: type_uuid, uuid: joinedChallengeResponse.result?.uuid ?? ""));
         },
         child: BlocBuilder<JoinChallengeCubit, JoinChallengeState>(
           builder: (context, state) {
-            if (state is JoinChallengeAdding)
-              return CircularProgressIndicator();
+            if (state is JoinChallengeAdding) return CircularProgressIndicator();
             return Text(
               actionText,
               style: TextStyle(color: Colors.white),
