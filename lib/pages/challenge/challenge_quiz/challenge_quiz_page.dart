@@ -32,6 +32,8 @@ class _ChallengeQuizPageState extends State<ChallengeQuizPage> with SingleTicker
   var r;
   bool selected = false;
   String? answerSelected;
+  late String correctAnswer = '';
+  bool afterSubmit = false;
   late int totalPages;
   PageController controller = PageController();
 
@@ -107,279 +109,274 @@ class _ChallengeQuizPageState extends State<ChallengeQuizPage> with SingleTicker
               pageSnapping: false,
               controller: controller,
               children: List.generate(data.length, (index) {
-                return Padding(
-                  padding: const EdgeInsets.only(left: 10, right: 10),
-                  child: Container(
-                    width: MediaQuery.of(context).size.width,
-                    height: double.maxFinite,
-                    color: Colors.white,
-                    child: SingleChildScrollView(
-                      child: Column(
-                        //mainAxisAlignment: MainAxisAlignment.center,
-                        //crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(left: 20.0),
-                            child: Container(
-                              height: 40,
-                              width: double.infinity,
-                              child: Stack(
-                                children: [
-                                  Align(
-                                    alignment: Alignment.centerLeft,
-                                    child: Container(
-                                        width: MediaQuery.of(context).size.width * 0.8,
-                                        height: 5,
-                                        decoration: BoxDecoration(
-                                          color: Colors.white54,
-                                          border: Border.all(color: Colors.red),
-                                          borderRadius: BorderRadius.circular(10),
-                                        )),
-                                  ),
-                                  Align(
-                                    alignment: Alignment.centerLeft,
-                                    child: Container(
-                                        width: (MediaQuery.of(context).size.width * 0.8) * ((index + 1) / data.length).toDouble(),
-                                        height: 5,
-                                        decoration: BoxDecoration(
-                                          color: Colors.red,
-                                          borderRadius: BorderRadius.circular(10),
-                                        )),
-                                  ),
-                                  // Align(
-                                  //   alignment: Alignment.bottomRight,
-                                  //   child: Row(
-                                  //     children: List.generate(
-                                  //         data.length,
-                                  //         (i) => Container(
-                                  //             decoration: BoxDecoration(
-                                  //                 color: Colors.transparent,
-                                  //                 border: Border.all(
-                                  //                   color: Colors.red,
-                                  //                 ),
-                                  //                 borderRadius: BorderRadius.all(Radius.circular(20))),
-                                  //             child: Text('$index'))).toList(),
-                                  //   ),
-                                  // )
-                                ],
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 4.0),
-                            child: Text(
-                              '${index + 1}. ${data[index].question}',
-                              style: Theme.of(context).textTheme.headline3!,
-                            ),
-                          ),
-                          Divider(),
-                          SizedBox(
-                            height: 50,
-                          ),
-
-                          ...?data[index]
-                              .answers
-                              ?.map((i) => InkWell(
-                                  onTap: () {
-                                    //todo perform ui changes
-                                    setState(() {
-                                      //selected = !selected;
-                                      answerSelected = i.uuid;
-                                    });
-                                    submitAnswer(i.uuid);
-
-                                    print(i.uuid);
-                                    print(i.answer);
-                                  },
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Container(
-                                      height: 60,
-                                      width: 280,
-                                      child: Center(
-                                        child: ListTile(
-                                          title: Text(
-                                            i.answer,
-                                            maxLines: 2,
-                                            softWrap: true,
-                                            style: TextStyle(color: selected ? Colors.teal : Colors.blueGrey, fontSize: 16),
-                                          ),
-                                          trailing: Container(
-                                            height: 15,
-                                            width: 15,
-                                            decoration: BoxDecoration(
-                                              color: answerSelected == i.uuid ? Colors.tealAccent : Colors.transparent,
-                                              border: Border.all(
-                                                color: answerSelected == i.uuid ? Colors.tealAccent : Colors.blueGrey,
-                                              ),
-                                              shape: BoxShape.circle,
-                                            ),
-                                          ),
+                return (data[index].is_answered)
+                    ? Container(
+                        width: MediaQuery.of(context).size.width,
+                        height: double.maxFinite,
+                        color: Colors.white,
+                        child: Center(
+                          child: Text('Question ${index + 1} has been answered\n Swipe To Left.'),
+                        ),
+                      )
+                    : Padding(
+                        padding: const EdgeInsets.only(left: 10, right: 10),
+                        child: Container(
+                          width: MediaQuery.of(context).size.width,
+                          height: double.maxFinite,
+                          color: Colors.white,
+                          child: SingleChildScrollView(
+                            child: Column(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 20.0),
+                                  child: Container(
+                                    height: 40,
+                                    width: double.infinity,
+                                    child: Stack(
+                                      children: [
+                                        Align(
+                                          alignment: Alignment.centerLeft,
+                                          child: Container(
+                                              width: MediaQuery.of(context).size.width * 0.8,
+                                              height: 5,
+                                              decoration: BoxDecoration(
+                                                color: Colors.white54,
+                                                border: Border.all(color: Colors.red),
+                                                borderRadius: BorderRadius.circular(10),
+                                              )),
                                         ),
-                                      ),
-                                      decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(5),
-                                          color: Colors.white,
-                                          border:
-                                              Border.all(width: 1, color: answerSelected == i.uuid ? Colors.tealAccent : Colors.blueGrey)),
+                                        Align(
+                                          alignment: Alignment.centerLeft,
+                                          child: Container(
+                                              width: (MediaQuery.of(context).size.width * 0.8) * ((index + 1) / data.length).toDouble(),
+                                              height: 5,
+                                              decoration: BoxDecoration(
+                                                color: Colors.red,
+                                                borderRadius: BorderRadius.circular(10),
+                                              )),
+                                        ),
+                                      ],
                                     ),
-                                  )))
-                              .toList(),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 4.0),
+                                  child: Text(
+                                    '${index + 1}. ${data[index].question}',
+                                    style: Theme.of(context).textTheme.headline3!,
+                                  ),
+                                ),
+                                Divider(),
+                                SizedBox(
+                                  height: 50,
+                                ),
 
-                          //component for answer
-                          // InkWell(
-                          //   onTap: () {
-                          //     //logic
-                          //     print('answer is $answer');
-                          //
+                                ...?data[index]
+                                    .answers
+                                    ?.map((i) => InkWell(
+                                        onTap: () {
+                                          //todo perform ui changes
+                                          // setState(() {
+                                          //   //selected = !selected;
+                                          //   answerSelected = i.uuid;
+                                          // });
+                                          submitAnswer(i.uuid);
 
-                          //     List<SelectedAnswer?> chosenAnswers = selectedOptions
-                          //         .where((element) => element.questionId == data[index].uuid && element.id == answer.uuid)
-                          //         .toList();
-                          //
-                          //     print('chosen answers is ${chosenAnswers.length}');
-                          //     //_questions[index].answers[i].chosen
-                          //
-                          //     List<OptionAnswer?> chosenOptions =
-                          //     data[index].answer.where((element) => element.chosen == true).cast<OptionAnswer?>().toList();
-                          //
-                          //     print('lenght of chosen options is $chosenOptions');
-                          //
-                          //     if (chosenOptions.isNotEmpty) {
-                          //       for (var x in chosenOptions) {
-                          //         if (x!.answerId == answer.uuid) {
-                          //           return;
-                          //         }
-                          //         print('x ids $x');
-                          //         var selectedAnswerIndex = selectedOptions.indexWhere(
-                          //                 (element) => element.questionId == data[index].uuid && element.id == x?.answerId);
-                          //         selectedOptions.removeAt(selectedAnswerIndex);
-                          //        // var chosenOptionIndex = _questions[index].answers.indexOf(x!);
-                          //
-                          //       //  _questions[index].answers[chosenOptionIndex].chosen = false;
-                          //
-                          //       //  print('not chosen is ${_questions[index].answers[chosenOptionIndex].chosen}');
-                          //         setState(() {});
-                          //       }
-                          //       setState(() {});
-                          //     } else {
-                          //       SelectedAnswer a =
-                          //       SelectedAnswer(questionId: data[index].uuid, id: answer.uuid, answer: answer.answer);
-                          //       selectedOptions.add(a);
-                          //
-                          //      // data[index].answer[i].chosen = true;
-                          //
-                          //       setState(() {});
-                          //       print('selectionOptions is $selectedOptions');
-                          //     }
-                          //
-                          //     // print('isChosen is $isChosen');
-                          //     //  switch (isChosen.id) {
-                          //     //    case 'false':
-                          //     //      SelectedAnswer a =
-                          //     //          SelectedAnswer(questionId: _questions[index].id, id: answer.id, answer: answer.answer);
-                          //     //      selectedOptions.add(a);
-                          //     //      _questions[index].answers[i].chosen = true;
-                          //     //      print('chosen is ${_questions[index].answers[i].chosen}');
-                          //     //      setState(() {});
-                          //     //      break;
-                          //     //
-                          //     //    default:
-                          //     //      var selectedAnswerIndex = selectedOptions.indexWhere(
-                          //     //          (element) => element.questionId == _questions[index].id && element.id == answer.id);
-                          //     //      selectedOptions.removeAt(selectedAnswerIndex);
-                          //     //      _questions[index].answers[i].chosen = false;
-                          //     //
-                          //     //      print('not chosen is ${_questions[index].answers[i].chosen}');
-                          //     //      setState(() {});
-                          //     //
-                          //     //      break;
-                          //     //  }
-                          //
-                          //     // print('touched');
-                          //     // print('item is ${_questions[index].answers}');
-                          //     // SelectedAnswer a = SelectedAnswer(id: _questions[index], answer: answer.answer);
-                          //     // if (selectedOptions.isEmpty) {
-                          //     //   print('empty so add new');
-                          //     //   print('id of a is ${a.id}  and answer is ${a.answer}');
-                          //     //   selectedOptions.add(a);
-                          //     // } else {
-                          //     //   // var result = selectedOptions.firstWhere((element) => element.id == a.id, orElse: () {
-                          //     //   //   return a;
-                          //     //   // });
-                          //     //
-                          //     //   //print('exist');
-                          //     //
-                          //     //   // print('result is $result');
-                          //     //   // if (result.id == _questions[index].id) {
-                          //     //   //   print('exists');
-                          //     //   //   setState(() {
-                          //     //   //     result.answer = answer;
-                          //     //   //   });
-                          //     //   // } else {
-                          //     //   //   print('does not exist');
-                          //     //   //   selectedOptions.add(a);
-                          //     //   // }
-                          //     // }
-                          //
-                          //     // print(selectedOptions);
-                          //   },
-                          //   child: Padding(
-                          //       padding: const EdgeInsets.all(8.0),
-                          //       child: Row(
-                          //         mainAxisAlignment: MainAxisAlignment.center,
-                          //         children: [
-                          //           // selectedOptions.contains(answer)
-                          //           //     ? Container(
-                          //           //         height: 50,
-                          //           //         width: 250,
-                          //           //         child: Center(
-                          //           //           child: Text(
-                          //           //             answer.answer,
-                          //           //             maxLines: 2,
-                          //           //             softWrap: true,
-                          //           //             style: TextStyle(color: Colors.white),
-                          //           //           ),
-                          //           //         ),
-                          //           //         decoration: BoxDecoration(
-                          //           //             borderRadius: BorderRadius.circular(5),
-                          //           //             color: Colors.deepPurpleAccent,
-                          //           //             border: Border.all(color: Colors.black26)),
-                          //           //       )
-                          //           Container(
-                          //             height: 50,
-                          //             width: 250,
-                          //             child: Center(
-                          //               child: Text(
-                          //                 answer.answer,
-                          //                 maxLines: 2,
-                          //                 softWrap: true,
-                          //                 style: Theme.of(context).textTheme.subtitle2!,
-                          //               ),
-                          //             ),
-                          //             decoration: BoxDecoration(
-                          //                 borderRadius: BorderRadius.circular(5),
-                          //                 color: answer.chosen ? Colors.purple : Colors.white,
-                          //                 border: Border.all(color: Colors.black26)),
-                          //           )
-                          //         ],
-                          //       )),
-                          // ),
-                          // ),
-                          SizedBox(
-                            height: 10,
+                                          print(i.uuid);
+                                          print(i.answer);
+                                        },
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Container(
+                                            height: 60,
+                                            width: 280,
+                                            child: Center(
+                                              child: ListTile(
+                                                title: Text(
+                                                  i.answer,
+                                                  maxLines: 2,
+                                                  softWrap: true,
+                                                  style: TextStyle(color: selected ? Colors.teal : Colors.blueGrey, fontSize: 16),
+                                                ),
+                                                trailing: Container(
+                                                  height: 15,
+                                                  width: 15,
+                                                  decoration: BoxDecoration(
+                                                    color: (answerSelected == i.uuid ? Colors.tealAccent : Colors.transparent),
+                                                    border: Border.all(
+                                                      color: (answerSelected == i.uuid ? Colors.tealAccent : Colors.blueGrey),
+                                                    ),
+                                                    shape: BoxShape.circle,
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                            decoration: BoxDecoration(
+                                                borderRadius: BorderRadius.circular(5),
+                                                color: Colors.white,
+                                                border: Border.all(
+                                                    width: 1, color: answerSelected == i.uuid ? Colors.tealAccent : Colors.blueGrey)),
+                                          ),
+                                        )))
+                                    .toList(),
+
+                                //component for answer
+                                // InkWell(
+                                //   onTap: () {
+                                //     //logic
+                                //     print('answer is $answer');
+                                //
+
+                                //     List<SelectedAnswer?> chosenAnswers = selectedOptions
+                                //         .where((element) => element.questionId == data[index].uuid && element.id == answer.uuid)
+                                //         .toList();
+                                //
+                                //     print('chosen answers is ${chosenAnswers.length}');
+                                //     //_questions[index].answers[i].chosen
+                                //
+                                //     List<OptionAnswer?> chosenOptions =
+                                //     data[index].answer.where((element) => element.chosen == true).cast<OptionAnswer?>().toList();
+                                //
+                                //     print('lenght of chosen options is $chosenOptions');
+                                //
+                                //     if (chosenOptions.isNotEmpty) {
+                                //       for (var x in chosenOptions) {
+                                //         if (x!.answerId == answer.uuid) {
+                                //           return;
+                                //         }
+                                //         print('x ids $x');
+                                //         var selectedAnswerIndex = selectedOptions.indexWhere(
+                                //                 (element) => element.questionId == data[index].uuid && element.id == x?.answerId);
+                                //         selectedOptions.removeAt(selectedAnswerIndex);
+                                //        // var chosenOptionIndex = _questions[index].answers.indexOf(x!);
+                                //
+                                //       //  _questions[index].answers[chosenOptionIndex].chosen = false;
+                                //
+                                //       //  print('not chosen is ${_questions[index].answers[chosenOptionIndex].chosen}');
+                                //         setState(() {});
+                                //       }
+                                //       setState(() {});
+                                //     } else {
+                                //       SelectedAnswer a =
+                                //       SelectedAnswer(questionId: data[index].uuid, id: answer.uuid, answer: answer.answer);
+                                //       selectedOptions.add(a);
+                                //
+                                //      // data[index].answer[i].chosen = true;
+                                //
+                                //       setState(() {});
+                                //       print('selectionOptions is $selectedOptions');
+                                //     }
+                                //
+                                //     // print('isChosen is $isChosen');
+                                //     //  switch (isChosen.id) {
+                                //     //    case 'false':
+                                //     //      SelectedAnswer a =
+                                //     //          SelectedAnswer(questionId: _questions[index].id, id: answer.id, answer: answer.answer);
+                                //     //      selectedOptions.add(a);
+                                //     //      _questions[index].answers[i].chosen = true;
+                                //     //      print('chosen is ${_questions[index].answers[i].chosen}');
+                                //     //      setState(() {});
+                                //     //      break;
+                                //     //
+                                //     //    default:
+                                //     //      var selectedAnswerIndex = selectedOptions.indexWhere(
+                                //     //          (element) => element.questionId == _questions[index].id && element.id == answer.id);
+                                //     //      selectedOptions.removeAt(selectedAnswerIndex);
+                                //     //      _questions[index].answers[i].chosen = false;
+                                //     //
+                                //     //      print('not chosen is ${_questions[index].answers[i].chosen}');
+                                //     //      setState(() {});
+                                //     //
+                                //     //      break;
+                                //     //  }
+                                //
+                                //     // print('touched');
+                                //     // print('item is ${_questions[index].answers}');
+                                //     // SelectedAnswer a = SelectedAnswer(id: _questions[index], answer: answer.answer);
+                                //     // if (selectedOptions.isEmpty) {
+                                //     //   print('empty so add new');
+                                //     //   print('id of a is ${a.id}  and answer is ${a.answer}');
+                                //     //   selectedOptions.add(a);
+                                //     // } else {
+                                //     //   // var result = selectedOptions.firstWhere((element) => element.id == a.id, orElse: () {
+                                //     //   //   return a;
+                                //     //   // });
+                                //     //
+                                //     //   //print('exist');
+                                //     //
+                                //     //   // print('result is $result');
+                                //     //   // if (result.id == _questions[index].id) {
+                                //     //   //   print('exists');
+                                //     //   //   setState(() {
+                                //     //   //     result.answer = answer;
+                                //     //   //   });
+                                //     //   // } else {
+                                //     //   //   print('does not exist');
+                                //     //   //   selectedOptions.add(a);
+                                //     //   // }
+                                //     // }
+                                //
+                                //     // print(selectedOptions);
+                                //   },
+                                //   child: Padding(
+                                //       padding: const EdgeInsets.all(8.0),
+                                //       child: Row(
+                                //         mainAxisAlignment: MainAxisAlignment.center,
+                                //         children: [
+                                //           // selectedOptions.contains(answer)
+                                //           //     ? Container(
+                                //           //         height: 50,
+                                //           //         width: 250,
+                                //           //         child: Center(
+                                //           //           child: Text(
+                                //           //             answer.answer,
+                                //           //             maxLines: 2,
+                                //           //             softWrap: true,
+                                //           //             style: TextStyle(color: Colors.white),
+                                //           //           ),
+                                //           //         ),
+                                //           //         decoration: BoxDecoration(
+                                //           //             borderRadius: BorderRadius.circular(5),
+                                //           //             color: Colors.deepPurpleAccent,
+                                //           //             border: Border.all(color: Colors.black26)),
+                                //           //       )
+                                //           Container(
+                                //             height: 50,
+                                //             width: 250,
+                                //             child: Center(
+                                //               child: Text(
+                                //                 answer.answer,
+                                //                 maxLines: 2,
+                                //                 softWrap: true,
+                                //                 style: Theme.of(context).textTheme.subtitle2!,
+                                //               ),
+                                //             ),
+                                //             decoration: BoxDecoration(
+                                //                 borderRadius: BorderRadius.circular(5),
+                                //                 color: answer.chosen ? Colors.purple : Colors.white,
+                                //                 border: Border.all(color: Colors.black26)),
+                                //           )
+                                //         ],
+                                //       )),
+                                // ),
+                                // ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                data.last == data[index]
+                                    ? ElevatedButton(
+                                        onPressed: () {
+                                          //
+                                          //todo: end of quiz and send request to api
+                                          //https://rainbowchallenge.lt/api/schema/swagger-ui/#/api/api_joined_challenge_user_answer_create
+                                        },
+                                        child: Text('COMPLETE'))
+                                    : SizedBox()
+                              ],
+                            ),
                           ),
-                          ElevatedButton(
-                              onPressed: () {
-                                //todo send request to api
-                                //https://rainbowchallenge.lt/api/schema/swagger-ui/#/api/api_joined_challenge_user_answer_create
-                              },
-                              child: Text('SUBMIT'))
-                        ],
-                      ),
-                    ),
-                  ),
-                );
+                        ),
+                      );
               })),
         ),
       ),
@@ -392,7 +389,15 @@ class _ChallengeQuizPageState extends State<ChallengeQuizPage> with SingleTicker
       {"answer": "${answerId}"},
     );
 
-    print(submission);
+    if (submission['correct_answer']['uuid'] != null) {
+      setState(() {
+        afterSubmit = true;
+      });
+      correctAnswer = submission['correct_answer']['uuid'];
+    }
+    print('submit result is ${submission['correct_answer']['uuid']}');
+    print('submit result is ${submission['correct_answer']['answer']}');
+    print('is answer correct? is ${submission['is_correct']}');
 
     // var body = {"answer": answerId};
     // //final endpoint = Api.baseUrl + Api.challengeQuizAnswerEndpoint;

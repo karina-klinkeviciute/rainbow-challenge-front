@@ -6,11 +6,12 @@ part 'challenge_quiz_question_model.g.dart';
 // explicitToJson lets using nested class Challenge
 @JsonSerializable(explicitToJson: true)
 class Question {
-  Question({required this.uuid, required this.question, this.answers});
+  Question({required this.uuid, required this.question, this.answers, required this.is_answered});
 
   String uuid;
   String question;
   List<Answer>? answers;
+  bool is_answered;
 
   factory Question.fromJson(Map<String, dynamic> json) => _$QuestionFromJson(json);
   Map<String, dynamic> toJson() => _$QuestionToJson(this);
