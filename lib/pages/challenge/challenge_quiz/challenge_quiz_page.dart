@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rainbow_challenge/constants/api.dart';
@@ -568,13 +569,17 @@ class _ChallengeQuizPageState extends State<ChallengeQuizPage> with SingleTicker
   }
 
   Future submitAnswer(String answerId) async {
+    print('submitting answer');
     final submission = await dio.submitAnswer(
       '/api/joined_challenge/user_answer/',
       {"answer": "${answerId}"},
     );
-    if (submission['correct_answer']['uuid'] != null) {
-      correctAnswerId = submission['correct_answer']['uuid'];
-    }
+    print('data is $submission');
+    print('...done');
+    correctAnswerId = submission['correct_answer']['uuid'];
+    // if (submission['correct_answer']['uuid'] != null) {
+    //
+    // }
   }
 
   Future completeQuiz() async {

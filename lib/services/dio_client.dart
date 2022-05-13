@@ -211,7 +211,7 @@ class DioClient {
     print(itemObject);
     try {
       await addAuthorizationHeader();
-      final response = await _dio.patch(endPoint, data: itemObject);
+      final response = await _dio.post(endPoint, data: itemObject);
       print('results ${response.data}');
       return response.data;
     } on DioError catch (e) {
