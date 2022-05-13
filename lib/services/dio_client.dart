@@ -211,7 +211,7 @@ class DioClient {
     print(itemObject);
     try {
       await addAuthorizationHeader();
-      final response = await _dio.post(endPoint, data: itemObject);
+      final response = await _dio.patch(endPoint, data: itemObject);
       print('results ${response.data}');
       return response.data;
     } on DioError catch (e) {
@@ -224,6 +224,45 @@ class DioClient {
       return <String, dynamic>{"_exception": e};
     }
   }
+
+  Future<Map<String, dynamic>> completeQuizChallenge(
+    String endPoint,
+    var body,
+  ) async {
+    print('complete quiz data is $body');
+    try {
+      final challengeRaw = await _dio.patch(endPoint, data: body);
+      print('results of complete quiz is ${challengeRaw.data}');
+      return challengeRaw.data;
+    } on DioError catch (e) {
+      print(e);
+      return <String, dynamic>{"_error": e};
+    } on Exception catch (e) {
+      // Unhandled exception
+      print('did not work, error is $e');
+      //print('unhandled exception is $e');
+      return <String, dynamic>{"_exception": e};
+    }
+  }
+
+  // Future<Map<String, dynamic>> completeQuiz(String endPoint, Map<String, dynamic> itemObject) async {
+  //   print('completing quiz');
+  //   print('item is $itemObject');
+  //   try {
+  //     await addAuthorizationHeader();
+  //     final response = await _dio.post(endPoint, data: itemObject);
+  //     print('results ${response.data}');
+  //     return response.data;
+  //   } on DioError catch (e) {
+  //     print(e);
+  //     return <String, dynamic>{"_error": e};
+  //   } on Exception catch (e) {
+  //     // Unhandled exception
+  //     print('failed to complete quiz, error is $e');
+  //     //print('unhandled exception is $e');
+  //     return <String, dynamic>{"_exception": e};
+  //   }
+  // }
 
   Future<Map<String, dynamic>?> updateItem(String endPoint, Map<String, dynamic> itemObject) async {
     try {

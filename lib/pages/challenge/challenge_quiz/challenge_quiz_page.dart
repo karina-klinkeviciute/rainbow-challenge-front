@@ -11,6 +11,7 @@ import 'package:rainbow_challenge/widgets/file_upload_widget.dart';
 import 'package:collection/collection.dart';
 import '../../../utils/model/challenge/challenge_quiz/challenge_quiz_class.dart';
 import 'package:http/http.dart' as http;
+import '../../../utils/repository/joined_challenges/joined_challenges_repository.dart';
 import 'cubit/challenge_quiz_cubit.dart';
 import 'package:rainbow_challenge/widgets/widgets.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -27,13 +28,13 @@ class ChallengeQuizPage extends StatefulWidget {
 }
 
 class _ChallengeQuizPageState extends State<ChallengeQuizPage> with SingleTickerProviderStateMixin {
-  List<SelectedAnswer> selectedOptions = [];
+  // List<SelectedAnswer> selectedOptions = [];
   final dio = DioClient();
   var r;
   bool selected = false;
-  String? answerSelected;
-  late String correctAnswer = '';
-  bool afterSubmit = false;
+  String? selectAnswerId;
+  late String correctAnswerId = '';
+  int? selectedIndex;
   late int totalPages;
   PageController controller = PageController();
 
@@ -109,15 +110,199 @@ class _ChallengeQuizPageState extends State<ChallengeQuizPage> with SingleTicker
               pageSnapping: false,
               controller: controller,
               children: List.generate(data.length, (index) {
+                print('selectedIndex is $selectedIndex');
                 return (data[index].is_answered)
-                    ? Container(
-                        width: MediaQuery.of(context).size.width,
-                        height: double.maxFinite,
-                        color: Colors.white,
-                        child: Center(
-                          child: Text('Question ${index + 1} has been answered\n Swipe To Left.'),
-                        ),
-                      )
+                    ? (selectedIndex == index
+                        ? Container(
+                            width: MediaQuery.of(context).size.width,
+                            height: double.maxFinite,
+                            child: SingleChildScrollView(
+                              child: Column(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 20.0),
+                                    child: Container(
+                                      height: 40,
+                                      width: double.infinity,
+                                      child: Stack(
+                                        children: [
+                                          Align(
+                                            alignment: Alignment.centerLeft,
+                                            child: Container(
+                                                width: MediaQuery.of(context).size.width * 0.8,
+                                                height: 5,
+                                                decoration: BoxDecoration(
+                                                  color: Colors.white54,
+                                                  border: Border.all(color: Colors.red),
+                                                  borderRadius: BorderRadius.circular(10),
+                                                )),
+                                          ),
+                                          Align(
+                                            alignment: Alignment.centerLeft,
+                                            child: Container(
+                                                width: (MediaQuery.of(context).size.width * 0.8) * ((index + 1) / data.length).toDouble(),
+                                                height: 5,
+                                                decoration: BoxDecoration(
+                                                  color: Colors.red,
+                                                  borderRadius: BorderRadius.circular(10),
+                                                )),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 4.0),
+                                    child: Text(
+                                      '${index + 1}. ${data[index].question}',
+                                      style: Theme.of(context).textTheme.headline3!,
+                                    ),
+                                  ),
+                                  Divider(),
+                                  SizedBox(
+                                    height: 50,
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(4.0),
+                                    child: Text('Answered!'),
+                                  ),
+                                  ...?data[index]
+                                      .answers
+                                      ?.map((i) => InkWell(
+                                          onTap: () {
+                                            print('already answered');
+                                          },
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: (correctAnswerId == i.uuid)
+                                                ? Container(
+                                                    height: 60,
+                                                    width: 280,
+                                                    child: Center(
+                                                        child: ListTile(
+                                                      title: Text(
+                                                        i.answer,
+                                                        maxLines: 2,
+                                                        softWrap: true,
+                                                        style: TextStyle(color: Colors.teal),
+                                                      ),
+                                                      trailing: Container(
+                                                        height: 15,
+                                                        width: 15,
+                                                        decoration: BoxDecoration(
+                                                          color: Colors.teal,
+                                                          border: Border.all(
+                                                            color: Colors.teal,
+                                                          ),
+                                                          shape: BoxShape.circle,
+                                                        ),
+                                                      ),
+                                                    )),
+                                                    decoration: BoxDecoration(
+                                                        borderRadius: BorderRadius.circular(5),
+                                                        color: Colors.white,
+                                                        border: Border.all(width: 1, color: Colors.teal)),
+                                                  )
+                                                : (selectAnswerId != i.uuid
+                                                    ? Container(
+                                                        height: 60,
+                                                        width: 280,
+                                                        child: Center(
+                                                            child: ListTile(
+                                                          title: Text(
+                                                            i.answer,
+                                                            maxLines: 2,
+                                                            softWrap: true,
+                                                            style: TextStyle(color: Colors.blueGrey),
+                                                          ),
+                                                          trailing: Container(
+                                                            height: 15,
+                                                            width: 15,
+                                                            decoration: BoxDecoration(
+                                                              color: Colors.transparent,
+                                                              border: Border.all(
+                                                                color: Colors.blueGrey,
+                                                              ),
+                                                              shape: BoxShape.circle,
+                                                            ),
+                                                          ),
+                                                        )),
+                                                        decoration: BoxDecoration(
+                                                            borderRadius: BorderRadius.circular(5),
+                                                            color: Colors.white,
+                                                            border: Border.all(width: 1, color: Colors.blueGrey)),
+                                                      )
+                                                    : Container(
+                                                        height: 60,
+                                                        width: 280,
+                                                        child: Center(
+                                                            child: ListTile(
+                                                          title: Text(
+                                                            i.answer,
+                                                            maxLines: 2,
+                                                            softWrap: true,
+                                                            style: TextStyle(color: Colors.blueGrey),
+                                                          ),
+                                                          trailing: Container(
+                                                            height: 15,
+                                                            width: 15,
+                                                            decoration: BoxDecoration(
+                                                              color: Colors.red,
+                                                              border: Border.all(
+                                                                color: Colors.red,
+                                                              ),
+                                                              shape: BoxShape.circle,
+                                                            ),
+                                                          ),
+                                                        )),
+                                                        decoration: BoxDecoration(
+                                                            borderRadius: BorderRadius.circular(5),
+                                                            color: Colors.white,
+                                                            border: Border.all(width: 1, color: Colors.red)),
+                                                      )),
+                                          )))
+                                      .toList(),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  data.last == data[index]
+                                      ? ElevatedButton(
+                                          onPressed: () {
+                                            //
+                                            //todo: end of quiz and send request to api
+                                            //https://rainbowchallenge.lt/api/schema/swagger-ui/#/api/api_joined_challenge_user_answer_create
+                                          },
+                                          child: Text('COMPLETE'))
+                                      : SizedBox()
+                                ],
+                              ),
+                            ),
+                          )
+                        : Container(
+                            width: MediaQuery.of(context).size.width,
+                            height: double.maxFinite,
+                            color: Colors.white,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Center(
+                                  child: data.last == data[index]
+                                      ? Text('Question ${index + 1} has been answered\n Click to Complete Quiz.')
+                                      : Text('Question ${index + 1} has been answered\n Swipe To Left.'),
+                                ),
+                                data.last == data[index]
+                                    ? Padding(
+                                        padding: const EdgeInsets.only(top: 8.0),
+                                        child: ElevatedButton(
+                                            onPressed: () {
+                                              completeQuiz();
+                                            },
+                                            child: Text('COMPLETE')),
+                                      )
+                                    : SizedBox()
+                              ],
+                            )))
                     : Padding(
                         padding: const EdgeInsets.only(left: 10, right: 10),
                         child: Container(
@@ -176,10 +361,11 @@ class _ChallengeQuizPageState extends State<ChallengeQuizPage> with SingleTicker
                                     ?.map((i) => InkWell(
                                         onTap: () {
                                           //todo perform ui changes
-                                          // setState(() {
-                                          //   //selected = !selected;
-                                          //   answerSelected = i.uuid;
-                                          // });
+                                          setState(() {
+                                            //selected = !selected;
+                                            selectAnswerId = i.uuid;
+                                            selectedIndex = index;
+                                          });
                                           submitAnswer(i.uuid);
 
                                           print(i.uuid);
@@ -202,9 +388,9 @@ class _ChallengeQuizPageState extends State<ChallengeQuizPage> with SingleTicker
                                                   height: 15,
                                                   width: 15,
                                                   decoration: BoxDecoration(
-                                                    color: (answerSelected == i.uuid ? Colors.tealAccent : Colors.transparent),
+                                                    color: (selectAnswerId == i.uuid ? Colors.tealAccent : Colors.transparent),
                                                     border: Border.all(
-                                                      color: (answerSelected == i.uuid ? Colors.tealAccent : Colors.blueGrey),
+                                                      color: (selectAnswerId == i.uuid ? Colors.tealAccent : Colors.blueGrey),
                                                     ),
                                                     shape: BoxShape.circle,
                                                   ),
@@ -215,7 +401,7 @@ class _ChallengeQuizPageState extends State<ChallengeQuizPage> with SingleTicker
                                                 borderRadius: BorderRadius.circular(5),
                                                 color: Colors.white,
                                                 border: Border.all(
-                                                    width: 1, color: answerSelected == i.uuid ? Colors.tealAccent : Colors.blueGrey)),
+                                                    width: 1, color: selectAnswerId == i.uuid ? Colors.tealAccent : Colors.blueGrey)),
                                           ),
                                         )))
                                     .toList(),
@@ -366,9 +552,7 @@ class _ChallengeQuizPageState extends State<ChallengeQuizPage> with SingleTicker
                                 data.last == data[index]
                                     ? ElevatedButton(
                                         onPressed: () {
-                                          //
-                                          //todo: end of quiz and send request to api
-                                          //https://rainbowchallenge.lt/api/schema/swagger-ui/#/api/api_joined_challenge_user_answer_create
+                                          completeQuiz();
                                         },
                                         child: Text('COMPLETE'))
                                     : SizedBox()
@@ -388,40 +572,20 @@ class _ChallengeQuizPageState extends State<ChallengeQuizPage> with SingleTicker
       '/api/joined_challenge/user_answer/',
       {"answer": "${answerId}"},
     );
-
     if (submission['correct_answer']['uuid'] != null) {
-      setState(() {
-        afterSubmit = true;
-      });
-      correctAnswer = submission['correct_answer']['uuid'];
+      correctAnswerId = submission['correct_answer']['uuid'];
     }
-    print('submit result is ${submission['correct_answer']['uuid']}');
-    print('submit result is ${submission['correct_answer']['answer']}');
-    print('is answer correct? is ${submission['is_correct']}');
-
-    // var body = {"answer": answerId};
-    // //final endpoint = Api.baseUrl + Api.challengeQuizAnswerEndpoint;
-    // final endpoint = 'https://rainbowchallenge.lt/api/schema/swagger-ui/#/api/joined_challenge/user_answer/';
-    //
-    // try {
-    //   var response = await Dio().post(endpoint, data: body);
-    //   print("response is $response");
-    // } catch (e) {
-    //   print("error is $e");
-    // }
-    // final response = await http.post(Uri.parse(endpoint), body: body);
-    // print('res is $response');
-    //
-    // if (response.statusCode == 201) {
-    //   var result = jsonDecode(response.body);
-    //   print('result is $result');
-    //   return result;
-    // } else {
-    //   throw Exception('Failed to get answer');
-    // }
   }
 
-  Widget _challengeForm = ElevatedButton(onPressed: () {}, child: Text('To be added here'));
+  Future completeQuiz() async {
+    final result = await dio.completeQuizChallenge(
+      '/api/joined_challenge/quiz_joined_challenge/${widget.uuid}',
+      {
+        "status": "completed",
+      },
+    );
+    print('result of complete quiz is $result');
+  }
 }
 
 // List<Questions> _questions = [
@@ -452,26 +616,26 @@ class _ChallengeQuizPageState extends State<ChallengeQuizPage> with SingleTicker
 // }
 
 //custom classes for the quiz logic
-class OptionAnswer {
-  final String answerId;
-  final String answer;
-  bool chosen;
-
-  OptionAnswer({required this.answerId, required this.answer, required this.chosen});
-}
-
-class SelectedAnswer extends Equatable {
-  final String questionId;
-  final String id;
-  late String answer;
-
-  SelectedAnswer({
-    required this.questionId,
-    required this.id,
-    required this.answer,
-  });
-
-  @override
-  // TODO: implement props
-  List<Object?> get props => [id, answer, questionId];
-}
+// class OptionAnswer {
+//   final String answerId;
+//   final String answer;
+//   bool chosen;
+//
+//   OptionAnswer({required this.answerId, required this.answer, required this.chosen});
+// }
+//
+// class SelectedAnswer extends Equatable {
+//   final String questionId;
+//   final String id;
+//   late String answer;
+//
+//   SelectedAnswer({
+//     required this.questionId,
+//     required this.id,
+//     required this.answer,
+//   });
+//
+//   @override
+//   // TODO: implement props
+//   List<Object?> get props => [id, answer, questionId];
+// }
