@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
@@ -36,20 +37,36 @@ class _ChallengeQuizPageState extends State<ChallengeQuizPage> with SingleTicker
   String? selectAnswerId;
   late String correctAnswerId = '';
   int? selectedIndex;
-  late int totalPages;
+
   PageController controller = PageController();
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    //data();
+    //controller = PageController(initialPage: 0, keepPage: true, viewportFraction: 1);
+    // controller.addListener(() {
+    //   setState(() {
+    //     _activeImageIndex = controller.page!.toInt();
+    //   });
+    // });
+  }
+
+  // @override
+  // void initState() {
+  //   // TODO: implement initState
+  //   super.initState();
+  //   //data();
+  // }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
   }
 
   Future<ChallengeQuiz> data(String id) async {
     ChallengeQuiz r = await BlocProvider.of<ChallengeQuizCubit>(context).fetchChallenge(uuid: id);
     print('length is ${r.questions.length}');
-    totalPages = r.questions.length;
     print('total is ${r.questions.length}');
     return r;
   }
@@ -103,8 +120,8 @@ class _ChallengeQuizPageState extends State<ChallengeQuizPage> with SingleTicker
         color: Colors.transparent,
         child: Center(
           child: PageView(
-              onPageChanged: (i) {
-                print('page changed to $i');
+              onPageChanged: (page) {
+                print('page is $page');
               },
               padEnds: true,
               scrollDirection: Axis.horizontal,
@@ -188,8 +205,15 @@ class _ChallengeQuizPageState extends State<ChallengeQuizPage> with SingleTicker
                                                         style: TextStyle(color: Colors.teal),
                                                       ),
                                                       trailing: Container(
-                                                        height: 15,
-                                                        width: 15,
+                                                        height: 20,
+                                                        width: 20,
+                                                        // child: Center(
+                                                        //   child: Icon(
+                                                        //     Icons.ma,
+                                                        //     color: Colors.white,
+                                                        //     size: 14,
+                                                        //   ),
+                                                        // ),
                                                         decoration: BoxDecoration(
                                                           color: Colors.teal,
                                                           border: Border.all(
@@ -245,8 +269,15 @@ class _ChallengeQuizPageState extends State<ChallengeQuizPage> with SingleTicker
                                                             style: TextStyle(color: Colors.blueGrey),
                                                           ),
                                                           trailing: Container(
-                                                            height: 15,
-                                                            width: 15,
+                                                            height: 20,
+                                                            width: 20,
+                                                            child: Center(
+                                                              child: Icon(
+                                                                Icons.close,
+                                                                color: Colors.white,
+                                                                size: 14,
+                                                              ),
+                                                            ),
                                                             decoration: BoxDecoration(
                                                               color: Colors.red,
                                                               border: Border.all(
@@ -266,15 +297,16 @@ class _ChallengeQuizPageState extends State<ChallengeQuizPage> with SingleTicker
                                   SizedBox(
                                     height: 10,
                                   ),
-                                  data.last == data[index]
-                                      ? ElevatedButton(
-                                          onPressed: () {
-                                            //
-                                            //todo: end of quiz and send request to api
-                                            //https://rainbowchallenge.lt/api/schema/swagger-ui/#/api/api_joined_challenge_user_answer_create
-                                          },
-                                          child: Text('COMPLETE'))
-                                      : SizedBox()
+
+                                  // data.last == data[index]
+                                  //     ? ElevatedButton(
+                                  //         onPressed: () {
+                                  //           //
+                                  //           //todo: end of quiz and send request to api
+                                  //           //https://rainbowchallenge.lt/api/schema/swagger-ui/#/api/api_joined_challenge_user_answer_create
+                                  //         },
+                                  //         child: Text('COMPLETE'))
+                                  //     : SizedBox()
                                 ],
                               ),
                             ),
@@ -356,7 +388,6 @@ class _ChallengeQuizPageState extends State<ChallengeQuizPage> with SingleTicker
                                 SizedBox(
                                   height: 50,
                                 ),
-
                                 ...?data[index]
                                     .answers
                                     ?.map((i) => InkWell(
@@ -367,7 +398,7 @@ class _ChallengeQuizPageState extends State<ChallengeQuizPage> with SingleTicker
                                             selectAnswerId = i.uuid;
                                             selectedIndex = index;
                                           });
-                                          submitAnswer(i.uuid);
+                                          submitAnswer(i.uuid, index);
 
                                           print(i.uuid);
                                           print(i.answer);
@@ -406,150 +437,18 @@ class _ChallengeQuizPageState extends State<ChallengeQuizPage> with SingleTicker
                                           ),
                                         )))
                                     .toList(),
-
-                                //component for answer
-                                // InkWell(
-                                //   onTap: () {
-                                //     //logic
-                                //     print('answer is $answer');
-                                //
-
-                                //     List<SelectedAnswer?> chosenAnswers = selectedOptions
-                                //         .where((element) => element.questionId == data[index].uuid && element.id == answer.uuid)
-                                //         .toList();
-                                //
-                                //     print('chosen answers is ${chosenAnswers.length}');
-                                //     //_questions[index].answers[i].chosen
-                                //
-                                //     List<OptionAnswer?> chosenOptions =
-                                //     data[index].answer.where((element) => element.chosen == true).cast<OptionAnswer?>().toList();
-                                //
-                                //     print('lenght of chosen options is $chosenOptions');
-                                //
-                                //     if (chosenOptions.isNotEmpty) {
-                                //       for (var x in chosenOptions) {
-                                //         if (x!.answerId == answer.uuid) {
-                                //           return;
-                                //         }
-                                //         print('x ids $x');
-                                //         var selectedAnswerIndex = selectedOptions.indexWhere(
-                                //                 (element) => element.questionId == data[index].uuid && element.id == x?.answerId);
-                                //         selectedOptions.removeAt(selectedAnswerIndex);
-                                //        // var chosenOptionIndex = _questions[index].answers.indexOf(x!);
-                                //
-                                //       //  _questions[index].answers[chosenOptionIndex].chosen = false;
-                                //
-                                //       //  print('not chosen is ${_questions[index].answers[chosenOptionIndex].chosen}');
-                                //         setState(() {});
-                                //       }
-                                //       setState(() {});
-                                //     } else {
-                                //       SelectedAnswer a =
-                                //       SelectedAnswer(questionId: data[index].uuid, id: answer.uuid, answer: answer.answer);
-                                //       selectedOptions.add(a);
-                                //
-                                //      // data[index].answer[i].chosen = true;
-                                //
-                                //       setState(() {});
-                                //       print('selectionOptions is $selectedOptions');
-                                //     }
-                                //
-                                //     // print('isChosen is $isChosen');
-                                //     //  switch (isChosen.id) {
-                                //     //    case 'false':
-                                //     //      SelectedAnswer a =
-                                //     //          SelectedAnswer(questionId: _questions[index].id, id: answer.id, answer: answer.answer);
-                                //     //      selectedOptions.add(a);
-                                //     //      _questions[index].answers[i].chosen = true;
-                                //     //      print('chosen is ${_questions[index].answers[i].chosen}');
-                                //     //      setState(() {});
-                                //     //      break;
-                                //     //
-                                //     //    default:
-                                //     //      var selectedAnswerIndex = selectedOptions.indexWhere(
-                                //     //          (element) => element.questionId == _questions[index].id && element.id == answer.id);
-                                //     //      selectedOptions.removeAt(selectedAnswerIndex);
-                                //     //      _questions[index].answers[i].chosen = false;
-                                //     //
-                                //     //      print('not chosen is ${_questions[index].answers[i].chosen}');
-                                //     //      setState(() {});
-                                //     //
-                                //     //      break;
-                                //     //  }
-                                //
-                                //     // print('touched');
-                                //     // print('item is ${_questions[index].answers}');
-                                //     // SelectedAnswer a = SelectedAnswer(id: _questions[index], answer: answer.answer);
-                                //     // if (selectedOptions.isEmpty) {
-                                //     //   print('empty so add new');
-                                //     //   print('id of a is ${a.id}  and answer is ${a.answer}');
-                                //     //   selectedOptions.add(a);
-                                //     // } else {
-                                //     //   // var result = selectedOptions.firstWhere((element) => element.id == a.id, orElse: () {
-                                //     //   //   return a;
-                                //     //   // });
-                                //     //
-                                //     //   //print('exist');
-                                //     //
-                                //     //   // print('result is $result');
-                                //     //   // if (result.id == _questions[index].id) {
-                                //     //   //   print('exists');
-                                //     //   //   setState(() {
-                                //     //   //     result.answer = answer;
-                                //     //   //   });
-                                //     //   // } else {
-                                //     //   //   print('does not exist');
-                                //     //   //   selectedOptions.add(a);
-                                //     //   // }
-                                //     // }
-                                //
-                                //     // print(selectedOptions);
-                                //   },
-                                //   child: Padding(
-                                //       padding: const EdgeInsets.all(8.0),
-                                //       child: Row(
-                                //         mainAxisAlignment: MainAxisAlignment.center,
-                                //         children: [
-                                //           // selectedOptions.contains(answer)
-                                //           //     ? Container(
-                                //           //         height: 50,
-                                //           //         width: 250,
-                                //           //         child: Center(
-                                //           //           child: Text(
-                                //           //             answer.answer,
-                                //           //             maxLines: 2,
-                                //           //             softWrap: true,
-                                //           //             style: TextStyle(color: Colors.white),
-                                //           //           ),
-                                //           //         ),
-                                //           //         decoration: BoxDecoration(
-                                //           //             borderRadius: BorderRadius.circular(5),
-                                //           //             color: Colors.deepPurpleAccent,
-                                //           //             border: Border.all(color: Colors.black26)),
-                                //           //       )
-                                //           Container(
-                                //             height: 50,
-                                //             width: 250,
-                                //             child: Center(
-                                //               child: Text(
-                                //                 answer.answer,
-                                //                 maxLines: 2,
-                                //                 softWrap: true,
-                                //                 style: Theme.of(context).textTheme.subtitle2!,
-                                //               ),
-                                //             ),
-                                //             decoration: BoxDecoration(
-                                //                 borderRadius: BorderRadius.circular(5),
-                                //                 color: answer.chosen ? Colors.purple : Colors.white,
-                                //                 border: Border.all(color: Colors.black26)),
-                                //           )
-                                //         ],
-                                //       )),
-                                // ),
-                                // ),
                                 SizedBox(
                                   height: 10,
                                 ),
+                                // !data[index].is_answered
+                                //     ? ElevatedButton(
+                                //         onPressed: () {
+                                //           if (selectAnswerId != null) {
+                                //             submitAnswer(selectAnswerId!, index);
+                                //           }
+                                //         },
+                                //         child: Text('SUMBIT'))
+                                //     : SizedBox(),
                                 data.last == data[index]
                                     ? ElevatedButton(
                                         onPressed: () {
@@ -568,7 +467,7 @@ class _ChallengeQuizPageState extends State<ChallengeQuizPage> with SingleTicker
     );
   }
 
-  Future submitAnswer(String answerId) async {
+  Future submitAnswer(String answerId, int index) async {
     print('submitting answer');
     final submission = await dio.submitAnswer(
       '/api/joined_challenge/user_answer/',
@@ -576,10 +475,16 @@ class _ChallengeQuizPageState extends State<ChallengeQuizPage> with SingleTicker
     );
     print('data is $submission');
     print('...done');
-    correctAnswerId = submission['correct_answer']['uuid'];
-    // if (submission['correct_answer']['uuid'] != null) {
-    //
-    // }
+
+    if (submission['correct_answer']['uuid'] != null) {
+      correctAnswerId = submission['correct_answer']['uuid'];
+    }
+
+    Timer(const Duration(milliseconds: 1500), () {
+      controller.jumpToPage(index);
+    });
+
+    //controller.nextPage(duration: Duration(milliseconds: 1000), curve: Curves.ease);
   }
 
   Future completeQuiz() async {
@@ -592,55 +497,3 @@ class _ChallengeQuizPageState extends State<ChallengeQuizPage> with SingleTicker
     print('result of complete quiz is $result');
   }
 }
-
-// List<Questions> _questions = [
-//   Questions(id: '1', question: 'Which Beach?', answers: [
-//     OptionAnswer(
-//       answerId: '1a',
-//       answer: 'Long Island.',
-//       chosen: false,
-//     ),
-//     OptionAnswer(answerId: '1b', answer: 'Long Month.', chosen: false),
-//   ]),
-//   Questions(id: '2', question: 'Which Place?', answers: [
-//     OptionAnswer(answerId: '2a', answer: 'Long Island.', chosen: false),
-//     OptionAnswer(answerId: '2b', answer: 'Long Osu.', chosen: false)
-//   ])
-// ];
-
-// class Questions {
-//   final String id;
-//   final String question;
-//   final List<OptionAnswer> answers;
-//
-//   Questions({
-//     required this.id,
-//     required this.question,
-//     required this.answers,
-//   });
-// }
-
-//custom classes for the quiz logic
-// class OptionAnswer {
-//   final String answerId;
-//   final String answer;
-//   bool chosen;
-//
-//   OptionAnswer({required this.answerId, required this.answer, required this.chosen});
-// }
-//
-// class SelectedAnswer extends Equatable {
-//   final String questionId;
-//   final String id;
-//   late String answer;
-//
-//   SelectedAnswer({
-//     required this.questionId,
-//     required this.id,
-//     required this.answer,
-//   });
-//
-//   @override
-//   // TODO: implement props
-//   List<Object?> get props => [id, answer, questionId];
-// }
