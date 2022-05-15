@@ -297,16 +297,15 @@ class _ChallengeQuizPageState extends State<ChallengeQuizPage> with SingleTicker
                                   SizedBox(
                                     height: 10,
                                   ),
-
-                                  // data.last == data[index]
-                                  //     ? ElevatedButton(
-                                  //         onPressed: () {
-                                  //           //
-                                  //           //todo: end of quiz and send request to api
-                                  //           //https://rainbowchallenge.lt/api/schema/swagger-ui/#/api/api_joined_challenge_user_answer_create
-                                  //         },
-                                  //         child: Text('COMPLETE'))
-                                  //     : SizedBox()
+                                  data.last == data[index]
+                                      ? ElevatedButton(
+                                          onPressed: () {
+                                            //
+                                            //todo: end of quiz and send request to api
+                                            //https://rainbowchallenge.lt/api/schema/swagger-ui/#/api/api_joined_challenge_user_answer_create
+                                          },
+                                          child: Text('COMPLETE'))
+                                      : SizedBox()
                                 ],
                               ),
                             ),
@@ -480,7 +479,7 @@ class _ChallengeQuizPageState extends State<ChallengeQuizPage> with SingleTicker
       correctAnswerId = submission['correct_answer']['uuid'];
     }
 
-    Timer(const Duration(milliseconds: 1500), () {
+    Timer(const Duration(milliseconds: 1000), () {
       controller.jumpToPage(index);
     });
 
