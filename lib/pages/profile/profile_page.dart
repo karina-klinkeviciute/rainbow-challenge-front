@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_html/shims/dart_ui_real.dart';
 import 'package:rainbow_challenge/theme/colors.dart';
 import 'package:rainbow_challenge/theme/headings.dart';
 import 'package:rainbow_challenge/widgets/wrapper_custom_appbar.dart';
