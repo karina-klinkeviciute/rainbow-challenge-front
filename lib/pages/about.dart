@@ -35,13 +35,6 @@ class _PageContent extends StatelessWidget {
                     data:
                         '<p style="text-align:center;">Turinys kuriamas!</p>'),
                 const SizedBox(height: 20),
-                /*     ElevatedButton(
-                  child: Text('Daugiau apie mus'.toUpperCase()),
-                  onPressed: () {
-                    _launchURL();
-                  },
-                ),
-                */
               ],
             ),
           ),
