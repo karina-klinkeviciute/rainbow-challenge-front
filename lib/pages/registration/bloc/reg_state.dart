@@ -11,6 +11,7 @@ import 'package:rainbow_challenge/pages/registration/fields/username.dart';
 import 'package:rainbow_challenge/pages/registration/fields/region.dart';
 import 'package:rainbow_challenge/pages/registration/fields/is_lgbtqia.dart';
 import 'package:rainbow_challenge/pages/registration/fields/rules.dart';
+import 'package:rainbow_challenge/pages/registration/fields/year_of_birth.dart';
 
 class RegState extends Equatable {
   const RegState(
@@ -21,6 +22,7 @@ class RegState extends Equatable {
       this.gender = const Gender.pure(),
       this.gender_other = const GenderOther.pure(),
       this.username = const Username.pure(),
+      this.year_of_birth = const YearOfBirth.pure(),
       this.region = const Region.pure(),
       this.is_lgbtqia = const IsLgbtqia.pure(),
       this.rules = const Rules.pure(),
@@ -34,6 +36,7 @@ class RegState extends Equatable {
   final Gender gender;
   final GenderOther gender_other;
   final Username username;
+  final YearOfBirth year_of_birth;
   final Region region;
   final IsLgbtqia is_lgbtqia;
   final Rules rules;
@@ -49,26 +52,29 @@ class RegState extends Equatable {
         gender,
         gender_other,
         username,
+        year_of_birth,
         region,
         is_lgbtqia,
         rules,
         status
       ];
 
-  RegState copyWith(
-      {String? image,
-      Name? name,
-      Email? email,
-      Password? password,
-      ConfirmPassword? confirmPassword,
-      Gender? gender,
-      GenderOther? gender_other,
-      Username? username,
-      Region? region,
-      IsLgbtqia? is_lgbtqia,
-      Rules? rules,
-      FormzStatus? status,
-      String? errorMessage}) {
+  RegState copyWith({
+    String? image,
+    Name? name,
+    Email? email,
+    Password? password,
+    ConfirmPassword? confirmPassword,
+    Gender? gender,
+    GenderOther? gender_other,
+    Username? username,
+    YearOfBirth? year_of_birth,
+    Region? region,
+    IsLgbtqia? is_lgbtqia,
+    Rules? rules,
+    FormzStatus? status,
+    String? errorMessage,
+  }) {
     return RegState(
         name: name ?? this.name,
         email: email ?? this.email,
@@ -77,6 +83,7 @@ class RegState extends Equatable {
         gender: gender ?? this.gender,
         gender_other: gender_other ?? this.gender_other,
         username: username ?? this.username,
+        year_of_birth: year_of_birth ?? this.year_of_birth,
         region: region ?? this.region,
         is_lgbtqia: is_lgbtqia ?? this.is_lgbtqia,
         rules: rules ?? this.rules,

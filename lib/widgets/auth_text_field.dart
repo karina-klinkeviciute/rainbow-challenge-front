@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rainbow_challenge/theme/colors.dart';
+
 class AuthTextField extends StatelessWidget {
   final String hint;
   final ValueChanged<String> onChanged;
@@ -23,17 +24,9 @@ class AuthTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     UnderlineInputBorder border = UnderlineInputBorder(
-        borderSide: new BorderSide(
-            color: ThemeColors.primaryColor,
-            width: 1
-        )
-    );
+        borderSide: new BorderSide(color: ThemeColors.primaryColor, width: 1));
     UnderlineInputBorder errorBorder = UnderlineInputBorder(
-        borderSide: new BorderSide(
-            color: ThemeColors.primaryColor,
-            width: 1
-        )
-    );
+        borderSide: new BorderSide(color: ThemeColors.primaryColor, width: 1));
     return Padding(
       padding: padding,
       child: TextFormField(

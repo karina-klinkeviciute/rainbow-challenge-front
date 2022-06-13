@@ -24,39 +24,39 @@ class UserRepository {
   }
 
   Future<String> register({
-    required int year_of_birth,
     required String email,
     required String password,
+    required String gender,
+    required String gender_other,
+    // required String username,
+    required String region,
+    required int year_of_birth,
     required String re_password,
-    //required String gender,
-    //required String gender_other,
-    //required String username,
-    //required String region,
     //required String is_lgbtqia
   }) async {
     UserRegister userReg = UserRegister(
-      year_of_birth: year_of_birth,
       email: email,
       password: password,
       re_password: re_password,
-      //gender: gender,
-      //gender_other: gender_other,
-      //username: username,
-      //region: region,
+      gender: gender,
+      gender_other: gender_other,
+      // username: username,
+      year_of_birth: year_of_birth,
+      region: region,
       //is_lgbtqia: is_lgbtqia,
     );
 
     var errorMessage = await createUser(userReg);
 
     regUser reguser = regUser(
-      year_of_birth: year_of_birth,
       email: email,
       password: password,
+      gender: gender,
+      gender_other: gender_other,
+      // username: username,
+      region: region,
+      year_of_birth: year_of_birth,
       re_password: re_password,
-      //gender: gender,
-      //gender_other: gender_other,
-      //username: username,
-      //region: region,
       //is_lgbtqia: is_lgbtqia
     );
 
