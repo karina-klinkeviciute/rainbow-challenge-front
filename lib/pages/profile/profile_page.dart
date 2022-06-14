@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:rainbow_challenge/pages/pages.dart';
 import 'package:rainbow_challenge/theme/colors.dart';
 import 'package:rainbow_challenge/theme/headings.dart';
+import 'package:rainbow_challenge/utils/repository/user_repository.dart';
 import 'package:rainbow_challenge/widgets/wrapper_custom_appbar.dart';
 import 'cubit/profile_info_cubit.dart';
 import 'package:rainbow_challenge/bloc/authentication_bloc.dart';
@@ -15,7 +17,10 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 // TODO: Lithuanian localizations for Vaivorykstes (word variations).
 
 class ProfilePage extends StatelessWidget {
-  const ProfilePage({Key? key}) : super(key: key);
+  final UserRepository _userRepository = UserRepository();
+  ProfilePage({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -35,6 +40,12 @@ class ProfilePage extends StatelessWidget {
             icon: Icon(Icons.logout),
             onPressed: () {
               BlocProvider.of<AuthenticationBloc>(context).add(LoggedOut());
+              Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => RegistrationPage(
+                            userRepository: _userRepository,
+                          )));
             },
           ),
         ],
@@ -84,10 +95,7 @@ class _MainArea extends StatelessWidget {
                 gradient: LinearGradient(
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
-                  stops: [
-                    0,
-                    0.8,
-                  ],
+                  stops: [0, 0.8],
                   colors: [
                     ThemeColors.bgColor,
                     Colors.white,
