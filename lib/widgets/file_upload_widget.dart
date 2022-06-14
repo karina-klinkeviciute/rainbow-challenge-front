@@ -24,7 +24,7 @@ class _FileUploadWidgetState extends State<FileUploadWidget> {
   String uuid;
   String challenge_type;
   List<FileModel> files = new List<FileModel>.empty();
-
+  bool error = false;
   _FileUploadWidgetState({required this.uuid, required this.challenge_type});
 
   @override
@@ -42,7 +42,8 @@ class _FileUploadWidgetState extends State<FileUploadWidget> {
           height: 20,
         ),
         ElevatedButton(
-            onPressed: onFileUploadPressed, child: Text("Pridėti failą"))
+            onPressed: onFileUploadPressed,
+            child: Text("Pridėti failą (Max 10MB)")),
       ],
     );
   }
@@ -71,17 +72,41 @@ class _FileUploadWidgetState extends State<FileUploadWidget> {
 
     if (result != null) {
       File file = File(result.files.single.path ?? "");
-      await filesRepository.uploadFile(file, uuid, challenge_type);
+      try {
+        await filesRepository.uploadFile(file, uuid, challenge_type);
+      } catch (e) {
+        _msg(context);
+      }
       loadFiles();
-    } else {
-      // User canceled the picker
-    }
+    } else {}
   }
+  // Future<Response?> getRequest(String endPoint) async {
+  //   Response response;
+  //   try {
+  //     response = await _dio.get(endPoint);
+  //   } on DioError catch (e) {
+  //     print(e.message);
+  //     throw Exception(e.message);
+  //   }
+  //   print(response.data);
+  //   return response;
+  // }
 
   Future loadFiles() async {
     var result = await filesRepository.getFiles(uuid, challenge_type);
+
     setState(() {
       files = result;
     });
+  }
+
+  void _msg(context) {
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      content: Text(
+        'Klaida. Failas, kurį bandėte įkelti, per didelis.',
+        textAlign: TextAlign.center,
+      ),
+      backgroundColor: Colors.redAccent,
+    ));
   }
 }

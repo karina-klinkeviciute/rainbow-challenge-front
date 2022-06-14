@@ -8,7 +8,6 @@ class RegistrationPageConfirm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        //  backgroundColor: ThemeColors.bgColorLight,
         body: Padding(
       padding: EdgeInsets.all(30.0),
       child: SafeArea(
