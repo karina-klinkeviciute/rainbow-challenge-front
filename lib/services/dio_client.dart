@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 import 'package:rainbow_challenge/constants/api.dart';
 import 'package:rainbow_challenge/utils/repository/repositories.dart';
 
@@ -144,7 +145,7 @@ class DioClient {
       print(response.data);
     }));
   }
-/*
+
   Future<Response?> getRequest(String endPoint) async {
     Response response;
     try {
@@ -155,7 +156,7 @@ class DioClient {
     }
     print(response.data);
     return response;
-  } */
+  }
 
   Future<List<dynamic>?> getList(String endPoint) async {
     try {
@@ -180,9 +181,12 @@ class DioClient {
     } on DioError catch (e) {
       print('Error');
       print(e);
+      return <String, dynamic>{"_exception": e};
     } on Exception catch (e) {
       // Unhandled exception
+
       print(e);
+      return <String, dynamic>{"_exception": e};
     }
   }
 
@@ -252,9 +256,11 @@ class DioClient {
       var response = await _dio.post(endPoint, data: formData);
       return response.data;
     } on DioError catch (e) {
-      print(e);
+      print('222');
+      // print(e);
+      throw (e);
     } on Exception catch (e) {
-      // Unhandled exception
+      print('333');
       print(e);
     }
   }
