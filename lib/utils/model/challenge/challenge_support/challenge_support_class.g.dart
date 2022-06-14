@@ -9,7 +9,7 @@ part of 'challenge_support_class.dart';
 ChallengeSupport _$ChallengeSupportFromJson(Map<String, dynamic> json) =>
     ChallengeSupport(
       uuid: json['uuid'] as String,
-      organization: json['organization'] as String?,
+      description: json['description'] as String?,
       main_challenge:
           Challenge.fromJson(json['main_challenge'] as Map<String, dynamic>),
     );
@@ -17,6 +17,6 @@ ChallengeSupport _$ChallengeSupportFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$ChallengeSupportToJson(ChallengeSupport instance) =>
     <String, dynamic>{
       'uuid': instance.uuid,
-      'organization': instance.organization,
+      'description': instance.description,
       'main_challenge': instance.main_challenge.toJson(),
     };

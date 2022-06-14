@@ -1,7 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'dart:async';
 import 'package:equatable/equatable.dart';
-import 'package:rainbow_challenge/pages/pages.dart';
 import 'package:rainbow_challenge/utils/model/models.dart';
 import 'package:rainbow_challenge/utils/repository/repositories.dart';
 
@@ -20,5 +19,12 @@ class ChallengeSupportCubit extends Cubit<ChallengeSupportState> {
         emit(ChallengeSupportLoaded(challengeTypeItem: challengeTypeItem));
       });
     });
+  }
+
+  Future<ChallengeSupport> fetchJoinedChallenge({required String uuid}) async {
+    var joinedChallenge =
+        await challengesTypeRepository.fetchJoinedChallenge(uuid: uuid);
+
+    return joinedChallenge;
   }
 }
