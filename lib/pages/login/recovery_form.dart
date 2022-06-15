@@ -16,9 +16,11 @@ class RecoveryEmailForm extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocListener<RegistrationBloc, RegState>(
         listener: (context, state) {
-          if (state.status.isSubmissionFailure) {
-            _msg(context, state.errorMessage);
-          } else if (state.status.isSubmissionSuccess) {
+          // if (state.status.isSubmissionFailure) {
+          //   _msg(context, state.errorMessage);
+          // } else
+          if (state.status.isSubmissionSuccess ||
+              state.status.isSubmissionFailure) {
             //Navigator.of(context).pushNamed('/success');
             Navigator.push(
                 context,
