@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
 import 'package:rainbow_challenge/constants/drop_down_lists.dart';
+import 'package:rainbow_challenge/pages/login/recovery_page.dart';
 import 'package:rainbow_challenge/pages/pages.dart';
 import 'package:rainbow_challenge/theme/colors.dart';
 import 'package:rainbow_challenge/utils/model/gender_model/gender_model.dart';
@@ -56,7 +57,8 @@ class RegistrationForm extends StatelessWidget {
               //_IsLgbtqiaInputField(),
               _RulesCheckbox(),
               _RegSubmit(),
-              _LoginButton(context)
+              _LoginButton(context),
+              _recoveryPassword(context)
             ],
           ),
         ));
@@ -74,6 +76,20 @@ Widget _LoginButton(BuildContext context) {
                   )));
     },
     child: const Text('Turi paskyrą? Prisijunk'), //TODO localizations
+  );
+}
+
+Widget _recoveryPassword(BuildContext context) {
+  return TextButton(
+    onPressed: () {
+      Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+              builder: (context) => RecoveryPage(
+                    userRepository: UserRepository(),
+                  )));
+    },
+    child: const Text('Užmiršai slaptažodį? Spausk čia'), //TODO localizations
   );
 }
 

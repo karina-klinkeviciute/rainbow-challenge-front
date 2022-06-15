@@ -36,6 +36,17 @@ class EmailChanged extends RegEvent {
   List<Object> get props => [email];
 }
 
+class RecoveryEmailChanged extends RegEvent {
+  const RecoveryEmailChanged({
+    required this.email_recovery,
+  });
+
+  final String email_recovery;
+
+  @override
+  List<Object> get props => [email_recovery];
+}
+
 class PasswordChanged extends RegEvent {
   const PasswordChanged({required this.password});
 
@@ -104,5 +115,7 @@ class YearOfBirthChanged extends RegEvent {
   @override
   List<Object> get props => [year_of_birth];
 }
+
+class EmailRecoverySubmitted extends RegEvent {}
 
 class FormSubmitted extends RegEvent {}
