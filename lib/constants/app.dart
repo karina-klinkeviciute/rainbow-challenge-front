@@ -18,6 +18,7 @@ class AppRoute {
   static const String challenge = 'challenge';
   static const String profile = 'profile';
   static const String shop = 'shop';
+  static const String shopItems = 'shop_items';
   static const String regions = 'regions';
   static const String navigation = 'navigation';
   static const String home = '/';

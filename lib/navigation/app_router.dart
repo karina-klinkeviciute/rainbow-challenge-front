@@ -6,6 +6,8 @@ import 'package:rainbow_challenge/pages/pages.dart';
 import 'package:rainbow_challenge/pages/profile/cubit/profile_info_cubit.dart';
 import 'package:rainbow_challenge/pages/regions/cubit/regions_cubit.dart';
 import 'package:rainbow_challenge/pages/regions/regions_page.dart';
+import 'package:rainbow_challenge/pages/shop/cubit/shop_info_cubit.dart';
+import 'package:rainbow_challenge/pages/shop/shop_page.dart';
 import 'package:rainbow_challenge/services/dio_client.dart';
 import 'package:rainbow_challenge/utils/repository/repositories.dart';
 
@@ -253,6 +255,13 @@ class AppRouter {
                       RegionsCubit(regionsRepository: regionsRepository),
                   child: RegionsPage(),
                 ));
+      case AppRoute.shopItems:
+        return MaterialPageRoute(
+            builder: (_) => BlocProvider(
+                  create: (BuildContext context) =>
+                      ShopInfoCubit(profileRepository: profileRepository),
+                  child: ShopItemsPage(),
+                ));
 
       case AppRoute.challengesJoined:
         return MaterialPageRoute(builder: (_) => ChallengesPage());
@@ -270,6 +279,9 @@ class AppRouter {
 
       case AppRoute.shop:
         return MaterialPageRoute(builder: (_) => ShopPage());
+
+      case AppRoute.shopItems:
+        return MaterialPageRoute(builder: (_) => ShopItemsPage());
 
       case AppRoute.qrCode:
         return MaterialPageRoute(builder: (_) => QrCodePage());

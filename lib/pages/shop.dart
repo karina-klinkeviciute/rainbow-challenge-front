@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:rainbow_challenge/constants/app.dart';
+import 'package:rainbow_challenge/pages/shop/shop_page.dart';
 import 'package:rainbow_challenge/widgets/widgets.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:rainbow_challenge/theme/colors.dart';
@@ -27,41 +29,26 @@ class _MainArea extends StatelessWidget {
       width: MediaQuery.of(context).size.width * 0.8,
       child: Column(
         children: [
-          HeadlineWidget(title: AppLocalizations.of(context)!.menu_shop),
+          SizedBox(height: 30),
           ImageLocalWidget(url: 'assets/images/dialogs/shop.png'),
-          Text(AppLocalizations.of(context)!.shop_welcome_text,
-              textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.headline3!.merge(
-                  const TextStyle(
-                      fontSize: 24, color: ThemeColors.primaryColor))),
+          Text(
+            AppLocalizations.of(context)!.shop_welcome_text,
+            textAlign: TextAlign.center,
+            style: Theme.of(context).textTheme.headline3!.merge(
+                const TextStyle(fontSize: 24, color: ThemeColors.primaryColor)),
+          ),
+          _goToShop(context)
         ],
       ),
     );
-    /*  return Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          //  ImageLocalWidget(url: 'assets/images/dialogs/shop.png'),
-          Text(AppLocalizations.of(context)!.shop_welcome_text,
-              style: Theme.of(context).textTheme.headline3!.merge(
-                  const TextStyle(
-                      fontSize: 28, color: ThemeColors.primaryColorDark))),
-        ]);
-*/
-    /*   return Center(
-      child: Container(
-        width: MediaQuery.of(context).size.width * 0.8,
-        child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              //  ImageLocalWidget(url: 'assets/images/dialogs/shop.png'),
-              Text(AppLocalizations.of(context)!.shop_welcome_text,
-                  style: Theme.of(context).textTheme.headline3!.merge(
-                      const TextStyle(
-                          fontSize: 28, color: ThemeColors.primaryColorDark))),
-            ]),
-      ),
-    ); */
   }
+}
+
+Widget _goToShop(BuildContext context) {
+  return Padding(
+    padding: EdgeInsets.only(top: 20),
+    child: ElevatedButton(
+        child: Text('NUKREIPIAME KAZKUR'),
+        onPressed: () => Navigator.pushNamed(context, AppRoute.shopItems)),
+  );
 }
