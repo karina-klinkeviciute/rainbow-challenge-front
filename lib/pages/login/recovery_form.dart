@@ -21,7 +21,6 @@ class RecoveryEmailForm extends StatelessWidget {
           // } else
           if (state.status.isSubmissionSuccess ||
               state.status.isSubmissionFailure) {
-            //Navigator.of(context).pushNamed('/success');
             Navigator.push(
                 context,
                 MaterialPageRoute(
