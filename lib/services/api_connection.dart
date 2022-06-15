@@ -8,7 +8,7 @@ final _base = "https://rainbowchallenge.lt";
 final _tokenEndpoint = "/auth/token/login/";
 final _tokenURL = _base + _tokenEndpoint;
 final _registerURL = _base + "/auth/users/";
-final _recoveryEmailURL = _base + "/auth/auth_users_reset_password_create";
+final _recoveryEmailURL = _base + "/auth/users/reset_password/";
 
 Future<Token> getToken(UserLogin userLogin) async {
   //print(_tokenURL);
