@@ -4,6 +4,7 @@ import 'package:rainbow_challenge/pages/registration/bloc/reg_bloc.dart';
 import 'package:rainbow_challenge/pages/registration/bloc/reg_event.dart';
 import 'package:rainbow_challenge/pages/registration/bloc/reg_state.dart';
 import 'package:rainbow_challenge/pages/registration/fields/email_recovery.dart';
+import 'package:rainbow_challenge/pages/registration/recovery_confirm.dart';
 import 'package:rainbow_challenge/widgets/auth_text_field.dart';
 import 'package:formz/formz.dart';
 import 'package:rainbow_challenge/widgets/headline.dart';
@@ -21,10 +22,8 @@ class RecoveryEmailForm extends StatelessWidget {
           // } else
           if (state.status.isSubmissionSuccess ||
               state.status.isSubmissionFailure) {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => RegistrationPageConfirm()));
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => RecoveryPageConfirm()));
           }
         },
         child: SingleChildScrollView(
