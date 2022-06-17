@@ -54,6 +54,7 @@ class App extends StatelessWidget {
           BlocProvider<BottomMenuCubit>(create: (context) => BottomMenuCubit()),
         ],
         child: MaterialApp(
+          debugShowCheckedModeBanner: false,
           theme: DesignTheme.lightTheme,
           darkTheme: DesignTheme.darkTheme,
           onGenerateTitle: (BuildContext context) =>

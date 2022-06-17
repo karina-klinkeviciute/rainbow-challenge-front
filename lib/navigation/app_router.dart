@@ -7,8 +7,11 @@ import 'package:rainbow_challenge/pages/profile/cubit/profile_info_cubit.dart';
 import 'package:rainbow_challenge/pages/regions/cubit/regions_cubit.dart';
 import 'package:rainbow_challenge/pages/regions/regions_page.dart';
 import 'package:rainbow_challenge/pages/shop/cubit/shop_info_cubit.dart';
+import 'package:rainbow_challenge/pages/shop/cubit/shop_prize_cubit.dart';
+import 'package:rainbow_challenge/pages/shop/shop_items.dart';
 import 'package:rainbow_challenge/pages/shop/shop_page.dart';
 import 'package:rainbow_challenge/services/dio_client.dart';
+import 'package:rainbow_challenge/utils/repository/joined_challenges/prize_repository.dart';
 import 'package:rainbow_challenge/utils/repository/repositories.dart';
 
 import 'package:rainbow_challenge/pages/challenge/challenge_article/cubit/challenge_article_cubit.dart';
@@ -33,6 +36,8 @@ class AppRouter {
 
   ProfileRepository profileRepository =
       ProfileRepository(dioClient: DioClient());
+
+  PrizeRepository prizeRepository = PrizeRepository(dioClient: DioClient());
 
   ChallengesRepository challengesRepository =
       ChallengesRepository(dioClient: DioClient());
@@ -255,11 +260,22 @@ class AppRouter {
                       RegionsCubit(regionsRepository: regionsRepository),
                   child: RegionsPage(),
                 ));
+
       case AppRoute.shopItems:
         return MaterialPageRoute(
-            builder: (_) => BlocProvider(
-                  create: (BuildContext context) =>
-                      ShopInfoCubit(profileRepository: profileRepository),
+            builder: (_) => MultiBlocProvider(
+                  providers: [
+                    BlocProvider<ShopInfoCubit>(
+                      create: (BuildContext context) => ShopInfoCubit(
+                        profileRepository: profileRepository,
+                      ),
+                    ),
+                    BlocProvider<ShopPrizeCubit>(
+                      create: (BuildContext context) => ShopPrizeCubit(
+                        prizeRepository: prizeRepository,
+                      ),
+                    )
+                  ],
                   child: ShopItemsPage(),
                 ));
 

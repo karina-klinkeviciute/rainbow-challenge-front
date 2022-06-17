@@ -6,7 +6,10 @@ import 'package:rainbow_challenge/utils/repository/repositories.dart';
 
 class ShopInfoCubit extends Cubit<ShopInfoState> {
   final ProfileRepository profileRepository;
-  ShopInfoCubit({required this.profileRepository}) : super(ShopInfoInitial());
+
+  ShopInfoCubit({
+    required this.profileRepository,
+  }) : super(ShopInfoInitial());
 
   void fetchProfile() {
     Timer(Duration(seconds: 1), () {
