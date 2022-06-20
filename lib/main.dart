@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -10,12 +12,18 @@ import 'package:rainbow_challenge/utils/repository/user_repository.dart';
 import 'package:rainbow_challenge/bloc/authentication_bloc.dart';
 
 //import 'package:rainbow_challenge/pages/splash.dart';
-import 'package:rainbow_challenge/pages/login/login_page.dart';
-import 'package:rainbow_challenge/pages/registration/registration_page.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import "package:flutter/services.dart";
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  ByteData data =
+      await PlatformAssetBundle().load('assets/ca/lets-encrypt-r3.pem');
+  SecurityContext.defaultContext
+      .setTrustedCertificatesBytes(data.buffer.asUint8List());
+
   runApp(App(
       userRepository: UserRepository(),
       appRouter: AppRouter(),
@@ -54,6 +62,7 @@ class App extends StatelessWidget {
           BlocProvider<BottomMenuCubit>(create: (context) => BottomMenuCubit()),
         ],
         child: MaterialApp(
+          debugShowCheckedModeBanner: false,
           theme: DesignTheme.lightTheme,
           darkTheme: DesignTheme.darkTheme,
           onGenerateTitle: (BuildContext context) =>

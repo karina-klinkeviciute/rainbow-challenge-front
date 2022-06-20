@@ -17,7 +17,9 @@ class Api {
 
   // News
   static const String newsEndpoint = '/api/news/';
-
+  // Prizes
+  static const String prizesEndpoint = '/api/results/available_prize/';
+  static const String claimPrizesEndpoint = '/api/results/claimed_prize/';
   // Challenges
   static const String challengeEndpoint = '/api/challenge/challenge/';
   static const String challengeArticleEndpoint =

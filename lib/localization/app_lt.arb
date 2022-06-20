@@ -9,7 +9,7 @@
     "menu_navigation": "Navigacija",
     "menu_challenges_joined": "Pradėtos užduotys",
     "menu_about": "Apie",
-    "menu_qr_code": "QR kodo skanavimas",
+    "menu_qr_code": "QR kodas",
     "menu_shop": "Parduotuvė",
     "menu_messages": "Susirašinėjimai",
     "challenge_type_article": "Straipsniai",
@@ -37,5 +37,6 @@
     "profile_page_achievements": "Pasiekimai",
     "action_login": "Prisijungti",
     "action_logout": "Atsijungti",
-    "shop_welcome_text": "Čia galėsi keisti vaivorykštes į mielus daikčiukus"
+    "shop_welcome_text": "Čia galėsi keisti vaivorykštes į mielus daikčiukus",
+    "shop_subtitle_text": "Keisk vaivorykštes į mielus daikčiukus"
 }
