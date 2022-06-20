@@ -16,6 +16,9 @@ Widget _challengeInfo = BlocBuilder<ChallengeQuizCubit, ChallengeQuizState>(
       ),
       ChallengeDescriptionWidget(
           description: challengeTypeItem.main_challenge.description),
+      // QuizQuestionWidget(
+      //   questions: challengeTypeItem.questions,
+      // )
     ]);
   },
 );
