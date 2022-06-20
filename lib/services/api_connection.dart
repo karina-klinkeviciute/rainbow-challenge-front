@@ -8,6 +8,7 @@ final _base = "https://rainbowchallenge.lt";
 final _tokenEndpoint = "/auth/token/login/";
 final _tokenURL = _base + _tokenEndpoint;
 final _registerURL = _base + "/auth/users/";
+final _recoveryEmailURL = _base + "/auth/users/reset_password/";
 
 Future<Token> getToken(UserLogin userLogin) async {
   //print(_tokenURL);
@@ -34,6 +35,24 @@ Future<String?> createUser(UserRegister userRegister) async {
       'Content-Type': 'application/json; charset=UTF-8'
     },
     body: jsonEncode(userRegister.toDatabaseJson()),
+  );
+
+  final jsonString = response.body.toString();
+  Map<String, dynamic> msg = jsonDecode(jsonString);
+
+  if (response.statusCode == 201) return null;
+
+  return msg.entries.first.value.toString();
+}
+
+Future<String?> createUserRecoveryEmail(
+    UserRecoveryEmail userRecoveryEmail) async {
+  final http.Response response = await http.post(
+    Uri.parse(_recoveryEmailURL),
+    headers: <String, String>{
+      'Content-Type': 'application/json; charset=UTF-8'
+    },
+    body: jsonEncode(userRecoveryEmail.toDatabaseJson()),
   );
 
   final jsonString = response.body.toString();

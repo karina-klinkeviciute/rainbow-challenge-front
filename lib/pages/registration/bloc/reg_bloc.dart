@@ -1,6 +1,12 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
+import 'package:flutter/material.dart';
 import 'package:formz/formz.dart';
+import 'package:rainbow_challenge/pages/registration/fields/email_recovery.dart';
+import 'package:rainbow_challenge/pages/registration/fields/gender.dart';
+import 'package:rainbow_challenge/pages/registration/fields/gender_other.dart';
+import 'package:rainbow_challenge/pages/registration/fields/region.dart';
+import 'package:rainbow_challenge/pages/registration/fields/year_of_birth.dart';
 import 'package:rainbow_challenge/utils/repository/user_repository.dart';
 import 'package:rainbow_challenge/pages/registration/fields/confirm_password.dart';
 import 'package:rainbow_challenge/pages/registration/fields/email.dart';
@@ -32,6 +38,8 @@ class RegistrationBloc extends Bloc<RegEvent, RegState> {
         status: Formz.validate([
           //state.name,
           email,
+          // state.username,
+          // state.gender,
           state.password,
           state.confirmPassword,
           state.rules
@@ -47,6 +55,8 @@ class RegistrationBloc extends Bloc<RegEvent, RegState> {
         password: password,
         status: Formz.validate([
           //state.name,
+          // state.username,
+          // state.gender,
           state.email,
           password,
           confirm,
@@ -61,6 +71,8 @@ class RegistrationBloc extends Bloc<RegEvent, RegState> {
         confirmPassword: password,
         status: Formz.validate([
           //state.name,
+          // state.username,
+          // state.gender,
           state.email,
           state.password,
           password,
@@ -74,12 +86,114 @@ class RegistrationBloc extends Bloc<RegEvent, RegState> {
         rules: rules,
         status: Formz.validate([
           //state.name,
+          // state.username,
+          // state.gender,
           state.email,
           state.password,
           state.confirmPassword,
           rules
         ]),
       );
+    } else if (event is GenderChanged) {
+      final gender = Gender.dirty(event.gender);
+
+      yield state.copyWith(
+        gender: gender,
+        status: Formz.validate([
+          //state.name,
+          // state.username,
+          state.gender,
+          // state.email,
+          // state.password,
+          // state.confirmPassword,
+          // rules
+        ]),
+      );
+    } else if (event is GenderOtherChanged) {
+      final gender_other = GenderOther.dirty(event.genderOther);
+
+      yield state.copyWith(
+        gender_other: gender_other,
+        status: Formz.validate([
+          //state.name,
+          // state.username,
+          state.gender_other,
+          // state.email,
+          // state.password,
+          // state.confirmPassword,
+          // rules
+        ]),
+      );
+    } else if (event is RegionChanged) {
+      final region = Region.dirty(event.regionId);
+
+      yield state.copyWith(
+        region: region,
+        status: Formz.validate([
+          //state.name,
+          // state.username,
+          state.region,
+          // state.email,
+          // state.password,
+          // state.confirmPassword,
+          // rules
+        ]),
+      );
+    } else if (event is YearOfBirthChanged) {
+      final year_of_birth = YearOfBirth.dirty(event.year_of_birth);
+
+      yield state.copyWith(
+        year_of_birth: year_of_birth,
+        status: Formz.validate([
+          //state.name,
+          // state.username,
+          state.year_of_birth,
+          // state.email,
+          // state.password,
+          // state.confirmPassword,
+          // rules
+        ]),
+      );
+    } else if (event is RecoveryEmailChanged) {
+      final email_recovery = EmailRecovery.dirty(event.email_recovery);
+      yield state.copyWith(
+        email_recovery: email_recovery,
+        status: Formz.validate([
+          //state.name,
+          state.email_recovery,
+          // state.username,
+          // state.gender,
+          // state.password,
+          // state.confirmPassword,
+          // state.rules
+        ]),
+      );
+    } else if (event is EmailRecoverySubmitted) {
+      if (!state.status.isValidated) return;
+
+      yield state.copyWith(status: FormzStatus.submissionInProgress);
+
+      try {
+        var errorMessage = await userRepository.registerRecoveryEmail(
+          email_recovery: state.email_recovery.value,
+        );
+
+        if (errorMessage == "")
+          yield state.copyWith(status: FormzStatus.submissionSuccess);
+        else
+          yield state.copyWith(
+              status: FormzStatus.submissionFailure,
+              errorMessage: errorMessage);
+      } catch (error) {
+        //print(error.toString());
+        //yield RegFailure(error: error.toString());
+        //_msg(error.toString());
+        yield state.copyWith(
+            status: FormzStatus.submissionFailure,
+            errorMessage: error.toString());
+      }
+      //} on Exception {}
+
     } else if (event is FormSubmitted) {
       if (!state.status.isValidated) return;
 
@@ -87,9 +201,13 @@ class RegistrationBloc extends Bloc<RegEvent, RegState> {
 
       try {
         var errorMessage = await userRepository.register(
-            year_of_birth: 2021,
+            year_of_birth: state.year_of_birth.value,
             email: state.email.value,
             password: state.password.value,
+            gender_other: state.gender_other.value,
+            gender: state.gender.value,
+            // username: 'qw',
+            region: state.region.value,
             re_password: state.confirmPassword.value);
 
         if (errorMessage == "")

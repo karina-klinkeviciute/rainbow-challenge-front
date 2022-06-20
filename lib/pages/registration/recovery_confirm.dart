@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:rainbow_challenge/pages/login/login_page.dart';
 import 'package:rainbow_challenge/utils/repository/user_repository.dart';
 
-class RegistrationPageConfirm extends StatelessWidget {
-  const RegistrationPageConfirm({Key? key}) : super(key: key);
+class RecoveryPageConfirm extends StatelessWidget {
+  const RecoveryPageConfirm({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +16,7 @@ class RegistrationPageConfirm extends StatelessWidget {
         child: Column(
           children: [
             Text(
-              'Registracija sėkminga. Prisijungti galėsi po to, kai aktyvuosi paskyrą. Aktyvavimo nuorodą nusiuntėme nurodytu el. pašto adresu.',
+              'Slaptažodžio atstatymo nuoroda nusiųsta nurodytu el. pašto adresu',
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 20),
             ),
