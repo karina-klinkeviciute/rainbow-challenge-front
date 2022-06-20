@@ -19,25 +19,24 @@ class _QuizQuestionWidgetState extends State<QuizQuestionWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.end,
-      children: [
-        const SizedBox(
-          height: 32,
-        ),
-        Text('Question $_questionNumber/${questions.length}'),
-        const Divider(),
-        Expanded(
-          child: PageView.builder(
-            itemCount: questions.length,
-            physics: NeverScrollableScrollPhysics(),
-            itemBuilder: (BuildContext context, int index) {
-              final _question = questions[index];
-              return buildQuestion(_question);
-            },
-          ),
-        )
-      ],
+    return Container(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: [
+          Text('Question $_questionNumber/${questions.length}'),
+          const Divider(),
+          Expanded(
+            child: PageView.builder(
+              itemCount: questions.length,
+              physics: NeverScrollableScrollPhysics(),
+              itemBuilder: (BuildContext context, int index) {
+                final _question = questions[index];
+                return buildQuestion(_question);
+              },
+            ),
+          )
+        ],
+      ),
     );
   }
 

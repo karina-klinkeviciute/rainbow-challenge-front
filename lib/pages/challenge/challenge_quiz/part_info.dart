@@ -10,15 +10,12 @@ Widget _challengeInfo = BlocBuilder<ChallengeQuizCubit, ChallengeQuizState>(
       ));
     final challengeTypeItem = (state).challengeTypeItem;
     return Column(children: [
-      ChallengeHeadlineWidget(
-        title: challengeTypeItem.main_challenge.name,
-        points: challengeTypeItem.main_challenge.points,
-      ),
-      ChallengeDescriptionWidget(
-          description: challengeTypeItem.main_challenge.description),
-      // QuizQuestionWidget(
-      //   questions: challengeTypeItem.questions,
-      // )
+      Container(
+        height: MediaQuery.of(context).size.height * 0.8,
+        child: QuizQuestionWidget(
+          questions: challengeTypeItem.questions,
+        ),
+      )
     ]);
   },
 );
