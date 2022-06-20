@@ -8,6 +8,14 @@ class UserLogin {
       {"email": this.email, "password": this.password};
 }
 
+class UserRecoveryEmail {
+  String email_recovery;
+
+  UserRecoveryEmail({required this.email_recovery});
+
+  Map<String, dynamic> toDatabaseJson() => {"email": this.email_recovery};
+}
+
 class UserRegister {
   String email;
   String password;

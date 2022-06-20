@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:formz/formz.dart';
+import 'package:rainbow_challenge/pages/registration/fields/email_recovery.dart';
 import 'package:rainbow_challenge/pages/registration/fields/gender.dart';
 import 'package:rainbow_challenge/pages/registration/fields/gender_other.dart';
 import 'package:rainbow_challenge/pages/registration/fields/region.dart';
@@ -153,6 +154,46 @@ class RegistrationBloc extends Bloc<RegEvent, RegState> {
           // rules
         ]),
       );
+    } else if (event is RecoveryEmailChanged) {
+      final email_recovery = EmailRecovery.dirty(event.email_recovery);
+      yield state.copyWith(
+        email_recovery: email_recovery,
+        status: Formz.validate([
+          //state.name,
+          state.email_recovery,
+          // state.username,
+          // state.gender,
+          // state.password,
+          // state.confirmPassword,
+          // state.rules
+        ]),
+      );
+    } else if (event is EmailRecoverySubmitted) {
+      if (!state.status.isValidated) return;
+
+      yield state.copyWith(status: FormzStatus.submissionInProgress);
+
+      try {
+        var errorMessage = await userRepository.registerRecoveryEmail(
+          email_recovery: state.email_recovery.value,
+        );
+
+        if (errorMessage == "")
+          yield state.copyWith(status: FormzStatus.submissionSuccess);
+        else
+          yield state.copyWith(
+              status: FormzStatus.submissionFailure,
+              errorMessage: errorMessage);
+      } catch (error) {
+        //print(error.toString());
+        //yield RegFailure(error: error.toString());
+        //_msg(error.toString());
+        yield state.copyWith(
+            status: FormzStatus.submissionFailure,
+            errorMessage: error.toString());
+      }
+      //} on Exception {}
+
     } else if (event is FormSubmitted) {
       if (!state.status.isValidated) return;
 

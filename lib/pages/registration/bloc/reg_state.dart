@@ -2,6 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:formz/formz.dart';
 
 import 'package:rainbow_challenge/pages/registration/fields/email.dart';
+import 'package:rainbow_challenge/pages/registration/fields/email_recovery.dart';
 import 'package:rainbow_challenge/pages/registration/fields/name.dart';
 import 'package:rainbow_challenge/pages/registration/fields/password.dart';
 import 'package:rainbow_challenge/pages/registration/fields/confirm_password.dart';
@@ -17,6 +18,7 @@ class RegState extends Equatable {
   const RegState(
       {this.name = const Name.pure(),
       this.email = const Email.pure(),
+      this.email_recovery = const EmailRecovery.pure(),
       this.password = const Password.pure(),
       this.confirmPassword = const ConfirmPassword.pure(),
       this.gender = const Gender.pure(),
@@ -31,6 +33,7 @@ class RegState extends Equatable {
 
   final Name name;
   final Email email;
+  final EmailRecovery email_recovery;
   final Password password;
   final ConfirmPassword confirmPassword;
   final Gender gender;
@@ -47,6 +50,7 @@ class RegState extends Equatable {
   List<Object?> get props => [
         name,
         email,
+        email_recovery,
         password,
         confirmPassword,
         gender,
@@ -63,6 +67,7 @@ class RegState extends Equatable {
     String? image,
     Name? name,
     Email? email,
+    EmailRecovery? email_recovery,
     Password? password,
     ConfirmPassword? confirmPassword,
     Gender? gender,
@@ -78,6 +83,7 @@ class RegState extends Equatable {
     return RegState(
         name: name ?? this.name,
         email: email ?? this.email,
+        email_recovery: email_recovery ?? this.email_recovery,
         password: password ?? this.password,
         confirmPassword: confirmPassword ?? this.confirmPassword,
         gender: gender ?? this.gender,

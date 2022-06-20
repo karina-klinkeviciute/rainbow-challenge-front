@@ -48,18 +48,28 @@ class UserRepository {
 
     var errorMessage = await createUser(userReg);
 
-    regUser reguser = regUser(
-      email: email,
-      password: password,
-      gender: gender,
-      gender_other: gender_other,
-      // username: username,
-      region: region,
-      year_of_birth: year_of_birth,
-      re_password: re_password,
-      //is_lgbtqia: is_lgbtqia
-    );
+    // regUser reguser = regUser(
+    //   email: email,
+    //   password: password,
+    //   gender: gender,
+    //   gender_other: gender_other,
+    //   // username: username,
+    //   region: region,
+    //   year_of_birth: year_of_birth,
+    //   re_password: re_password,
+    //   //is_lgbtqia: is_lgbtqia
+    // );
 
+    return errorMessage ?? "";
+  }
+
+  Future<String> registerRecoveryEmail({
+    required String email_recovery,
+  }) async {
+    UserRecoveryEmail userRecoveryEmail = UserRecoveryEmail(
+      email_recovery: email_recovery,
+    );
+    var errorMessage = await createUserRecoveryEmail(userRecoveryEmail);
     return errorMessage ?? "";
   }
 
