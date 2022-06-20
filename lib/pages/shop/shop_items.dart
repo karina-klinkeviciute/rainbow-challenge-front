@@ -81,7 +81,7 @@ class _ShopItemPageState extends State<ShopItemPage> {
                                 children: [
                                   Container(
                                       padding:
-                                          EdgeInsets.symmetric(vertical: 10),
+                                          EdgeInsets.symmetric(horizontal: 10),
                                       color: Colors.grey.shade300,
                                       height: 30,
                                       width: 2),
@@ -99,9 +99,15 @@ class _ShopItemPageState extends State<ShopItemPage> {
                         padding: const EdgeInsets.symmetric(vertical: 20),
                         child: HtmlWidget(data: widget.description),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(110, 0, 80, 10),
-                        child: chooseAmount(_selectedValue, _remainingAmount),
+                      Row(
+                        children: [
+                          Expanded(flex: 1, child: SizedBox()),
+                          Expanded(
+                              flex: 2,
+                              child: chooseAmount(
+                                  _selectedValue, _remainingAmount)),
+                          Expanded(flex: 1, child: SizedBox())
+                        ],
                       ),
                       Center(
                         child: ElevatedButton(

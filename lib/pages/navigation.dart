@@ -74,7 +74,7 @@ class _NavigationPageState extends State<NavigationPage>
                   _GridItem(
                     itemIcon: ThemeIcons.shop,
                     itemTitle: AppLocalizations.of(context)!.menu_shop,
-                    routeName: AppRoute.shop,
+                    routeName: AppRoute.shopItems,
                   ),
                   _GridItem(
                     itemIcon: ThemeIcons.about,
@@ -138,6 +138,8 @@ class _GridItem extends StatelessWidget {
               Container(
                   padding: const EdgeInsets.only(top: 5),
                   child: Text(itemTitle,
+                      maxLines: 1,
+                      textAlign: TextAlign.center,
                       // Theme of context not working.
                       style: ThemeHeadings.themeHeading4)),
             ]),

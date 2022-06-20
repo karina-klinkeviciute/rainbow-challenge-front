@@ -69,8 +69,8 @@ class _ProfileInfo extends StatelessWidget {
           return Column(children: [
             Stack(alignment: AlignmentDirectional.bottomCenter, children: [
               Container(
-                width: 150,
-                height: 150,
+                width: MediaQuery.of(context).size.width * 0.8,
+                height: MediaQuery.of(context).size.height * 0.25,
                 decoration: BoxDecoration(
                     gradient: LinearGradient(
                       begin: Alignment.topCenter,
@@ -115,11 +115,11 @@ class _PrizeList extends StatelessWidget {
             // scrollDirection: Axis.horizontal,
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
-            gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                maxCrossAxisExtent: 300,
-                childAspectRatio: 1 / 1.4,
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                childAspectRatio: 0.65,
                 crossAxisSpacing: 20,
-                mainAxisSpacing: 20),
+                mainAxisSpacing: 20,
+                crossAxisCount: 2),
             itemCount: prizesList.length,
             itemBuilder: (BuildContext context, int index) {
               return prizesList
@@ -131,7 +131,6 @@ class _PrizeList extends StatelessWidget {
     });
   }
 
-  // TODO research: Should this widget be rewritten as stless widget?
   Widget _prizesItem(Prize prizeItem, context, index) {
     return InkWell(
       splashColor: Colors.transparent,
@@ -170,22 +169,22 @@ class _PrizeList extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               if (prizeItem.image != null)
-                Hero(
-                    tag: prizeItem.name,
-                    child: ImageExternalWidget(
-                      url: prizeItem.image!,
-                      width: MediaQuery.of(context).size.width * 0.4,
-                      height: MediaQuery.of(context).size.width * 0.3,
-                    ))
+                ImageExternalWidget(
+                  url: prizeItem.image!,
+                  width: MediaQuery.of(context).size.width * 0.4,
+                  height: MediaQuery.of(context).size.width * 0.3,
+                )
               else
-                Hero(tag: prizeItem.name, child: _RandomPlaceholderImage()),
+                _RandomPlaceholderImage(),
               Padding(
                 padding: const EdgeInsets.only(top: 5),
                 child: Text(prizeItem.name,
                     textAlign: TextAlign.start,
                     maxLines: 1,
-                    style: Theme.of(context).textTheme.bodyMedium!.merge(
-                        TextStyle(fontWeight: FontWeight.bold, fontSize: 18))),
+                    style:
+                        Theme.of(context).textTheme.bodyMedium!.merge(TextStyle(
+                              fontWeight: FontWeight.bold,
+                            ))),
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 3),

@@ -25,6 +25,5 @@ export 'messages/messages_page.dart';
 export 'navigation.dart';
 export 'qr_code.dart';
 export 'regions/regions_page.dart';
-export 'shop.dart';
 export 'splash.dart';
 export 'welcome.dart';

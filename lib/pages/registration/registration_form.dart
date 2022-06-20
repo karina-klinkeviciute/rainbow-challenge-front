@@ -89,7 +89,10 @@ Widget _recoveryPassword(BuildContext context) {
                     userRepository: UserRepository(),
                   )));
     },
-    child: const Text('Užmiršai slaptažodį? Spausk čia'), //TODO localizations
+    child: const Text(
+      'Užmiršai slaptažodį? Spausk čia',
+      textAlign: TextAlign.center,
+    ), //TODO localizations
   );
 }
 
@@ -114,11 +117,11 @@ class _AgeInputField extends StatelessWidget {
           padding: const EdgeInsets.only(bottom: 16.0),
           child: DropdownButtonFormField<int>(
             decoration: InputDecoration(
-                contentPadding: EdgeInsets.symmetric(horizontal: 12),
+                contentPadding: EdgeInsets.fromLTRB(12, 0, 12, 3),
                 enabledBorder: UnderlineInputBorder(
                     borderSide:
                         BorderSide(color: ThemeColors.primaryColor, width: 1))),
-            hint: Text('Amžius*'),
+            hint: Text('Gimimo metai*'),
             value: _selectedValue,
             key: const Key('Age_textField'),
             onChanged: (year_of_birth) => context
@@ -244,7 +247,7 @@ class _GenderInputField extends StatelessWidget {
           padding: const EdgeInsets.only(bottom: 16.0),
           child: DropdownButtonFormField<String>(
             decoration: InputDecoration(
-              contentPadding: EdgeInsets.symmetric(horizontal: 12),
+              contentPadding: EdgeInsets.fromLTRB(12, 0, 12, 3),
               enabledBorder: UnderlineInputBorder(
                 borderSide:
                     BorderSide(color: ThemeColors.primaryColor, width: 1),
@@ -332,12 +335,16 @@ class _RegionInputField extends StatelessWidget {
           padding: const EdgeInsets.only(bottom: 16.0),
           child: DropdownButtonFormField<String>(
             decoration: InputDecoration(
-                contentPadding: EdgeInsets.symmetric(horizontal: 12),
+                contentPadding: EdgeInsets.fromLTRB(12, 0, 12, 3),
                 enabledBorder: UnderlineInputBorder(
                     borderSide:
                         BorderSide(color: ThemeColors.primaryColor, width: 1))),
             value: _selectedValue,
-            hint: Text('Regionas*'),
+            hint: Text(
+              'Regionas*',
+              textHeightBehavior:
+                  TextHeightBehavior(applyHeightToFirstAscent: true),
+            ),
             key: const Key('Region_textField'),
             items: _regions,
             onChanged: (regionID) => context

@@ -22,7 +22,6 @@ class DesignTheme with ChangeNotifier {
               const IconThemeData(color: ThemeColors.neutralColorLight),
         ),
         primaryColor: ThemeColors.primaryColor,
-        primaryColorBrightness: Brightness.light,
         primaryColorLight: ThemeColors.primaryColor,
         primaryColorDark: ThemeColors.primaryColorDark,
         canvasColor: ThemeColors.bgColor,

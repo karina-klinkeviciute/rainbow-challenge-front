@@ -293,9 +293,6 @@ class AppRouter {
       case AppRoute.logout:
         return MaterialPageRoute(builder: (_) => LogoutPage());
 
-      case AppRoute.shop:
-        return MaterialPageRoute(builder: (_) => ShopPage());
-
       case AppRoute.shopItems:
         return MaterialPageRoute(builder: (_) => ShopItemsPage());
 

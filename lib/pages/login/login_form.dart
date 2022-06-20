@@ -37,69 +37,72 @@ class _LoginFormState extends State<LoginForm> {
       },
       child: BlocBuilder<LoginBloc, LoginState>(
         builder: (context, state) {
-          return Container(
-            child: Form(
-              child: Padding(
-                padding: EdgeInsets.all(40.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    TextFormField(
-                      decoration: InputDecoration(
-                          labelText: 'El. paštas', icon: Icon(Icons.person)),
-                      controller: _usernameController,
-                    ),
-                    TextFormField(
-                      decoration: InputDecoration(
-                          labelText: 'Slaptažodis', icon: Icon(Icons.security)),
-                      controller: _passwordController,
-                      obscureText: true,
-                    ),
-                    Container(
-                      width: MediaQuery.of(context).size.width * 0.85,
-                      height: MediaQuery.of(context).size.width * 0.22,
-                      child: Padding(
-                        padding: EdgeInsets.only(top: 30.0),
-                        child: RaisedButton(
-                          onPressed: state is! LoginLoading
-                              ? _onLoginButtonPressed
-                              : null,
-                          child: Text(
-                            'Prisijungti',
-                            style: TextStyle(
-                              fontSize: 24.0,
+          return SingleChildScrollView(
+            child: Container(
+              child: Form(
+                child: Padding(
+                  padding: EdgeInsets.fromLTRB(40, 100, 40, 40),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      TextFormField(
+                        decoration: InputDecoration(
+                            labelText: 'El. paštas', icon: Icon(Icons.person)),
+                        controller: _usernameController,
+                      ),
+                      TextFormField(
+                        decoration: InputDecoration(
+                            labelText: 'Slaptažodis',
+                            icon: Icon(Icons.security)),
+                        controller: _passwordController,
+                        obscureText: true,
+                      ),
+                      Container(
+                        width: MediaQuery.of(context).size.width * 0.85,
+                        height: MediaQuery.of(context).size.width * 0.22,
+                        child: Padding(
+                          padding: EdgeInsets.only(top: 30.0),
+                          child: RaisedButton(
+                            onPressed: state is! LoginLoading
+                                ? _onLoginButtonPressed
+                                : null,
+                            child: Text(
+                              'Prisijungti',
+                              style: TextStyle(
+                                fontSize: 24.0,
+                              ),
                             ),
-                          ),
-                          shape: StadiumBorder(
-                            side: BorderSide(
-                              color: Colors.black,
-                              width: 2,
+                            shape: StadiumBorder(
+                              side: BorderSide(
+                                color: Colors.black,
+                                width: 2,
+                              ),
                             ),
                           ),
                         ),
                       ),
-                    ),
-                    Container(
-                      child: state is LoginLoading
-                          ? CircularProgressIndicator()
-                          : null,
-                    ),
-                    Padding(
-                        padding: EdgeInsets.only(top: 20),
-                        child: TextButton(
-                          onPressed: () {
-                            Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => RegistrationPage(
-                                          userRepository: UserRepository(),
-                                        )));
-                          },
-                          child: const Text(
-                              'Neturi paskyros? Registruokis'), //TODO add localizations
-                        ))
-                  ],
+                      Container(
+                        child: state is LoginLoading
+                            ? CircularProgressIndicator()
+                            : null,
+                      ),
+                      Padding(
+                          padding: EdgeInsets.only(top: 20),
+                          child: TextButton(
+                            onPressed: () {
+                              Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => RegistrationPage(
+                                            userRepository: UserRepository(),
+                                          )));
+                            },
+                            child: const Text(
+                                'Neturi paskyros? Registruokis'), //TODO add localizations
+                          ))
+                    ],
+                  ),
                 ),
               ),
             ),

@@ -45,6 +45,7 @@ flutter:
 
   assets:
     - assets/fonts/
+    - assets/ca/
     - assets/images/
     - assets/images/achievements/
     - assets/images/dialogs/
