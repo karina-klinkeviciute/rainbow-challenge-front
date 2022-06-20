@@ -17,6 +17,7 @@ class ChallengeQuizCubit extends Cubit<ChallengeQuizState> {
           .fetchChallenge(uuid: uuid)
           .then((challengeTypeItem) {
         emit(ChallengeQuizLoaded(challengeTypeItem: challengeTypeItem));
+        // print('!!!!!!!me${challengeTypeItem.questions.toString()}');
       });
     });
   }

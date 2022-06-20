@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rainbow_challenge/constants/api.dart';
+import 'package:rainbow_challenge/utils/model/quiz/quiz_page.dart';
 import 'package:rainbow_challenge/widgets/file_upload_widget.dart';
 import 'cubit/challenge_quiz_cubit.dart';
 import 'package:rainbow_challenge/widgets/widgets.dart';
@@ -25,12 +26,12 @@ class ChallengeQuizPage extends StatelessWidget {
             child: Column(
               children: [
                 _challengeInfo,
-                _challengeForm,
-                Container(
-                  height: 24,
-                ),
-                new FileUploadWidget(
-                    uuid: uuid, challenge_type: Api.challengeTypeQuiz)
+                // _challengeForm,
+                // Container(
+                //   height: 24,
+                // ),
+                // new FileUploadWidget(
+                //     uuid: uuid, challenge_type: Api.challengeTypeQuiz)
               ],
             )));
   }

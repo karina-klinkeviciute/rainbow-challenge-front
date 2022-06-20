@@ -17,6 +17,7 @@ class ChallengesQuizRepository {
     // final String challengeTypePoint = Api.challengeQuizEndpoint;
     final String challengeTypePoint = '/api/challenge/quiz_challenge/';
     final challengeRaw = await dioClient.getItem('$challengeTypePoint$uuid/');
+    print('111$challengeRaw');
     return ChallengeQuiz.fromJson(challengeRaw!);
   }
 }
