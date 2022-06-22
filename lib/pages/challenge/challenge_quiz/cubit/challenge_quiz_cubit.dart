@@ -21,4 +21,18 @@ class ChallengeQuizCubit extends Cubit<ChallengeQuizState> {
       });
     });
   }
+  Future<ChallengeQuiz> fetchJoinedChallenge({required String uuid}) async {
+    var joinedChallenge =
+        await challengesTypeRepository.fetchJoinedChallenge(uuid: uuid);
+
+    return joinedChallenge;
+  }
+  // void fetchAnswer({required String uuid}) {
+  // Timer(Duration(seconds: 1), () {
+  //   challengesTypeRepository
+  //       .fetchAnswer(uuid: uuid);
+
+  //     // print('!!!!!!!me${challengeTypeItem.questions.toString()}');
+  //   });
+  // }
 }

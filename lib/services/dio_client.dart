@@ -5,6 +5,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:rainbow_challenge/constants/api.dart';
 import 'package:rainbow_challenge/utils/model/api_model.dart';
+import 'package:rainbow_challenge/utils/model/quiz/correct_answer.dart';
 import 'package:rainbow_challenge/utils/repository/repositories.dart';
 
 // TO DO: Add interceptors
@@ -216,6 +217,26 @@ class DioClient {
       final response = await _dio.post(endPoint, data: itemObject);
       print('Prize claimed ${response}');
       return response;
+    } on DioError catch (e) {
+      print(e.response);
+      throw e.response?.data.values;
+      // return <String, dynamic>{"_error": e};
+    } on Exception catch (e) {
+      // Unhandled exception
+
+      print(e);
+      throw Exception(e);
+      // return <String, dynamic>{"_exception": e};
+    }
+  }
+
+  Future<String> getAnswer(
+      String endPoint, Map<String, dynamic> itemObject) async {
+    try {
+      await addAuthorizationHeader();
+      final response = await _dio.post(endPoint, data: itemObject);
+      print('Prize claimed ${response}');
+      return CorrectAnswer.fromJson(response.data).correctAnswer.uuid;
     } on DioError catch (e) {
       print(e.response);
       throw e.response?.data.values;

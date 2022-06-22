@@ -9,7 +9,8 @@ class Question {
   final String uuid;
   final String question;
   final List<Answer> answers;
-  final bool isAnswered;
+  bool isAnswered;
+  Answer? selectedAnswer;
 
   factory Question.fromJson(Map<String, dynamic> json) => Question(
         uuid: json["uuid"],

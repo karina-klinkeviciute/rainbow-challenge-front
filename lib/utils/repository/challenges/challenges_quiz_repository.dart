@@ -20,4 +20,21 @@ class ChallengesQuizRepository {
     print('111$challengeRaw');
     return ChallengeQuiz.fromJson(challengeRaw!);
   }
+ Future<ChallengeQuiz> fetchJoinedChallenge({required String uuid}) async {
+    // BUG: Putting constant creates wrong URL. Should fix this later.
+    //
+    // final String challengeTypePoint = Api.challengeCustomEndpoint;
+    final String challengeTypePoint =
+        '/api/joined_challenge/quiz_joined_challenge/';
+    final challengeRaw = await dioClient.getItem('$challengeTypePoint$uuid/');
+    return ChallengeQuiz.fromJson(challengeRaw!);
+  }
+  fetchAnswer({required String uuid}) async {
+    //https://rainbowchallenge.lt/api/joined_challenge/user_answer/
+    // final String challengeTypePoint = Api.challengeQuizEndpoint;
+    final String challengeTypePoint = '/api/joined_challenge/user_answer/';
+    final challengeRaw = await dioClient.getItem('$challengeTypePoint$uuid/');
+    print('111$challengeRaw');
+    return ChallengeQuiz.fromJson(challengeRaw!);
+  }
 }

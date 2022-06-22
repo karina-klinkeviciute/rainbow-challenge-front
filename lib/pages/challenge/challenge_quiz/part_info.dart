@@ -12,9 +12,9 @@ Widget _challengeInfo = BlocBuilder<ChallengeQuizCubit, ChallengeQuizState>(
     return Column(children: [
       Container(
         height: MediaQuery.of(context).size.height * 0.8,
-        child: QuizQuestionWidget(
-          questions: challengeTypeItem.questions,
-        ),
+        // child: QuizQuestionWidget(
+        //   questions: challengeTypeItem.questions,
+        // ),
       )
     ]);
   },
