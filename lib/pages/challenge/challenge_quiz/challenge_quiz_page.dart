@@ -37,6 +37,8 @@ class _ChallengeQuizPageState extends State<ChallengeQuizPage> {
     BlocProvider.of<ChallengeQuizCubit>(context)
         .fetchChallenge(uuid: widget.type_uuid);
     return WrapperMainWidget(
+        useAppBar: false,
+        index: 2,
         mainArea: SizedBox(
             width: MediaQuery.of(context).size.width * 0.8,
             child: Column(

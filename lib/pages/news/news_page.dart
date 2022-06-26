@@ -22,7 +22,9 @@ import 'cubit/news_cubit.dart';
 // TODO: make placeholder persistent for same news item
 
 class NewsPage extends StatelessWidget {
-  NewsPage({Key? key}) : super(key: key);
+  int index;
+
+  NewsPage({Key? key, this.index = 0}) : super(key: key);
 
   final ChallengesRepository challengesRepository =
       ChallengesRepository(dioClient: DioClient());
@@ -39,6 +41,7 @@ class NewsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 5,
+      initialIndex: index,
       child: Scaffold(
           body: TabBarView(
             children: [
