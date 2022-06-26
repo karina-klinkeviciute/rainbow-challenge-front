@@ -14,7 +14,9 @@ Profile _$ProfileFromJson(Map<String, dynamic> json) => Profile(
           : RegionModel.fromJson(json['region'] as Map<String, dynamic>),
       all_points: json['all_points'] as int? ?? 0,
       remaining_points: json['remaining_points'] as int,
-      streak: Streak.fromJson(json['streak'] as Map<String, dynamic>),
+      streak: json['streak'] == null
+          ? null
+          : Streak.fromJson(json['streak'] as Map<String, dynamic>),
       medals: (json['medals'] as List<dynamic>)
           .map((e) => Medal.fromJson(e as Map<String, dynamic>))
           .toList(),
