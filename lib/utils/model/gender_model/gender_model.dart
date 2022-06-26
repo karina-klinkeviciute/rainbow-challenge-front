@@ -2,9 +2,9 @@ class Genders {
   Genders({
     this.woman = "woman",
     this.man = "man",
-    this.nonBinary = "nonBinary",
+    this.nonBinary = "non-binary",
     this.other = "other",
-    this.preferNotToSay = "preferNotToSay",
+    this.preferNotToSay = "prefer_not_to_say",
   });
 
   final String woman;

@@ -11,7 +11,7 @@ class Profile {
   RegionModel? region;
   int all_points;
   int remaining_points;
-  Streak streak;
+  Streak? streak;
   List<Medal> medals;
 
   Profile(

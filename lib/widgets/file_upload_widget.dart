@@ -43,7 +43,7 @@ class _FileUploadWidgetState extends State<FileUploadWidget> {
         ),
         ElevatedButton(
             onPressed: onFileUploadPressed,
-            child: Text("Pridėti failą (Max 10MB)")),
+            child: Text("Pridėti failą (Max 20MB)")),
       ],
     );
   }

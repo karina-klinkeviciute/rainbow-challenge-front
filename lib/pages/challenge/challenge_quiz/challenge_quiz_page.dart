@@ -10,22 +10,38 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 // Single challenge page of type Event Participant.
 part 'part_info.dart';
 
-class ChallengeQuizPage extends StatelessWidget {
+class ChallengeQuizPage extends StatefulWidget {
   ChallengeQuizPage({Key? key, required this.type_uuid, required this.uuid})
       : super(key: key);
   final String type_uuid;
   final String uuid;
 
   @override
+  State<ChallengeQuizPage> createState() =>
+      _ChallengeQuizPageState(type_uuid: type_uuid, uuid: uuid);
+}
+
+class _ChallengeQuizPageState extends State<ChallengeQuizPage> {
+  final String type_uuid;
+  final String uuid;
+
+  _ChallengeQuizPageState({required this.type_uuid, required this.uuid});
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     BlocProvider.of<ChallengeQuizCubit>(context)
-        .fetchChallenge(uuid: type_uuid);
+        .fetchChallenge(uuid: widget.type_uuid);
     return WrapperMainWidget(
         mainArea: SizedBox(
             width: MediaQuery.of(context).size.width * 0.8,
             child: Column(
               children: [
-                _challengeInfo,
+                ChallengeInfo(uuid: widget.uuid),
                 // _challengeForm,
                 // Container(
                 //   height: 24,

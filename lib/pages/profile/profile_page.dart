@@ -151,7 +151,7 @@ class _MainArea extends StatelessWidget {
             StatsWidget(
                 icon: Icons.rotate_right,
                 //  number: profile.streak.toString(),
-                number: profile.streak.streak.toString(),
+                number: profile.streak?.streak.toString() ?? '0',
                 label: AppLocalizations.of(context)!
                     .profile_page_stats_active_weeks),
           ],

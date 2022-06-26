@@ -41,6 +41,8 @@ class Api {
       '/api/challenge/support_challenge/';
   static const String challengeStoryEndpoint =
       '​/api​/challenge/story_challenge​/';
+  static const String challengeGetRightAnswer =
+      "https://rainbowchallenge.lt/api/joined_challenge/user_answer/";
 
 // Joined Challenges
   static const String joinedChallengeArticleEndpoint =

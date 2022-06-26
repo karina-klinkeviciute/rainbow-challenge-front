@@ -85,7 +85,7 @@ class _ProfileInfo extends StatelessWidget {
               ),
               StatsWidget(
                   localIcon: 'assets/images/rainbow.png',
-                  number: profile.all_points.toString(),
+                  number: profile.remaining_points.toString(),
                   label:
                       AppLocalizations.of(context)!.profile_page_stats_rainbows)
             ]),
