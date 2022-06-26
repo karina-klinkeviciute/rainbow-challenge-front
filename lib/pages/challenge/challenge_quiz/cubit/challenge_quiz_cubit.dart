@@ -21,6 +21,7 @@ class ChallengeQuizCubit extends Cubit<ChallengeQuizState> {
       });
     });
   }
+
   Future<ChallengeQuiz> fetchJoinedChallenge({required String uuid}) async {
     var joinedChallenge =
         await challengesTypeRepository.fetchJoinedChallenge(uuid: uuid);

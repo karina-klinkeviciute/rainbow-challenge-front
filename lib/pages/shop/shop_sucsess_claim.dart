@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:rainbow_challenge/constants/app.dart';
+import 'package:rainbow_challenge/pages/pages.dart';
 
 class ShopSuccessPage extends StatelessWidget {
   const ShopSuccessPage({Key? key}) : super(key: key);
@@ -21,9 +21,16 @@ class ShopSuccessPage extends StatelessWidget {
             ),
             SizedBox(height: 50),
             ElevatedButton(
-              child: Text('Grįžkime prie prizų'),
+              child: Text('Grįžti'),
               onPressed: () {
-                Navigator.pushNamed(context, AppRoute.shopItems);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return NewsPage();
+                    },
+                  ),
+                );
               },
             ),
           ],

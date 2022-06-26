@@ -10,6 +10,9 @@ class DesignTheme with ChangeNotifier {
   // Light mode theme for the app
   static ThemeData get lightTheme {
     return ThemeData(
+        scrollbarTheme: ScrollbarThemeData(
+            radius: Radius.circular(20),
+            thumbColor: MaterialStateProperty.all(ThemeColors.secondaryColor)),
         appBarTheme: AppBarTheme(
           backgroundColor: Colors.white,
           shape: Border(
