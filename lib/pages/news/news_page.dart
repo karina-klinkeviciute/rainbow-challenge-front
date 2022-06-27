@@ -4,11 +4,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rainbow_challenge/pages/profile/cubit/profile_info_cubit.dart';
 import 'package:rainbow_challenge/pages/regions/cubit/regions_cubit.dart';
 import 'package:rainbow_challenge/pages/regions/regions_page.dart';
+import 'package:rainbow_challenge/pages/shop/cubit/shop_info_cubit.dart';
+import 'package:rainbow_challenge/pages/shop/cubit/shop_prize_cubit.dart';
+import 'package:rainbow_challenge/pages/shop/shop_page.dart';
 import 'package:rainbow_challenge/services/dio_client.dart';
 import 'package:rainbow_challenge/theme/colors.dart';
 import 'package:rainbow_challenge/theme/fonts.dart' as ThemeFonts;
 import 'package:rainbow_challenge/theme/icons.dart';
 import 'package:rainbow_challenge/utils/model/models.dart';
+import 'package:rainbow_challenge/utils/repository/joined_challenges/prize_repository.dart';
 import '../pages.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:rainbow_challenge/widgets/widgets.dart';
@@ -35,6 +39,8 @@ class NewsPage extends StatelessWidget {
   final ProfileRepository profileRepository =
       ProfileRepository(dioClient: DioClient());
 
+  PrizeRepository prizeRepository = PrizeRepository(dioClient: DioClient());
+
   final NewsRepository newsRepository = NewsRepository(dioClient: DioClient());
 
   @override
@@ -60,11 +66,16 @@ class NewsPage extends StatelessWidget {
                     ChallengesCubit(challengesRepository: challengesRepository),
                 child: ChallengesPage(),
               ),
-              BlocProvider(
-                create: (BuildContext context) =>
-                    RegionsCubit(regionsRepository: regionsRepository),
-                child: RegionsPage(),
-              ),
+              MultiBlocProvider(providers: [
+                BlocProvider(
+                  create: (BuildContext context) =>
+                      ShopInfoCubit(profileRepository: profileRepository),
+                ),
+                BlocProvider(
+                  create: (BuildContext context) =>
+                      ShopPrizeCubit(prizeRepository: prizeRepository),
+                )
+              ], child: ShopItemsPage()),
               NavigationPage(),
             ],
           ),
@@ -204,8 +215,8 @@ class _BottomTabs extends StatelessWidget {
                   iconMargin: EdgeInsets.zero,
                 ),
                 Tab(
-                  text: AppLocalizations.of(context)!.menu_regions,
-                  icon: Icon(Icons.place),
+                  text: AppLocalizations.of(context)!.menu_shop,
+                  icon: Icon(ThemeIcons.shop),
                   iconMargin: EdgeInsets.zero,
                 ),
                 Tab(
