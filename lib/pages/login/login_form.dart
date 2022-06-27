@@ -87,20 +87,24 @@ class _LoginFormState extends State<LoginForm> {
                             ? CircularProgressIndicator()
                             : null,
                       ),
-                      Padding(
-                          padding: EdgeInsets.only(top: 20),
-                          child: TextButton(
-                            onPressed: () {
-                              Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => RegistrationPage(
-                                            userRepository: UserRepository(),
-                                          )));
-                            },
-                            child: const Text(
-                                'Neturi paskyros? Registruokis'), //TODO add localizations
-                          ))
+                      Center(
+                        child: Padding(
+                            padding: EdgeInsets.only(top: 20),
+                            child: TextButton(
+                              onPressed: () {
+                                Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => RegistrationPage(
+                                              userRepository: UserRepository(),
+                                            )));
+                              },
+                              child: const Text(
+                                'Neturi paskyros? Registruokis',
+                                textAlign: TextAlign.center,
+                              ), //TODO add localizations
+                            )),
+                      )
                     ],
                   ),
                 ),

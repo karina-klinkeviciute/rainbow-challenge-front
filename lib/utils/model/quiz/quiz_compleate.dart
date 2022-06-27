@@ -22,7 +22,7 @@ class QuizPageConfirm extends StatelessWidget {
           top: true,
           child: Column(children: [
             Text(
-              'Slaptažodžio atstatymo nuoroda nusiųsta nurodytu el. pašto adresu',
+              'Tau įskaičiuota ${count - 1} vaivorykščių',
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 20),
             ),
