@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:rainbow_challenge/constants/app.dart';
+import 'package:rainbow_challenge/services/dio_client.dart';
 import 'package:rainbow_challenge/theme/colors.dart';
 import 'package:rainbow_challenge/theme/headings.dart';
 import 'package:rainbow_challenge/theme/icons.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
+import 'package:badges/badges.dart';
+import 'package:rainbow_challenge/utils/repository/messages_repository.dart';
 // A page that consists of all main pages displayed in a grid.
 // TO DO: functionality
 
@@ -19,6 +21,13 @@ class NavigationPage extends StatefulWidget {
 
 class _NavigationPageState extends State<NavigationPage>
     with AutomaticKeepAliveClientMixin<NavigationPage> {
+  String _count = '';
+  @override
+  void initState() {
+    super.initState();
+    loadData();
+  }
+
   @override
   Widget build(BuildContext context) {
     super.build(context);
@@ -55,6 +64,8 @@ class _NavigationPageState extends State<NavigationPage>
                     routeName: AppRoute.profile,
                   ),
                   _GridItem(
+                    showBadge: true,
+                    count: _count,
                     itemIcon: ThemeIcons.chat,
                     itemTitle: AppLocalizations.of(context)!.menu_messages,
                     routeName: AppRoute.messages,
@@ -91,9 +102,20 @@ class _NavigationPageState extends State<NavigationPage>
 
   @override
   bool get wantKeepAlive => true;
+
+  Future loadData() async {
+    var fetchedMessages =
+        await MessagesRepository(dioClient: DioClient()).fetchMessages();
+
+    setState(() {
+      _count = fetchedMessages.length.toString();
+    });
+  }
 }
 
 class _GridItem extends StatelessWidget {
+  final bool showBadge;
+  final String count;
   final IconData itemIcon;
   final String itemTitle;
   final String routeName;
@@ -102,7 +124,9 @@ class _GridItem extends StatelessWidget {
       {Key? key,
       required this.itemIcon,
       required this.itemTitle,
-      required this.routeName})
+      required this.routeName,
+      this.showBadge = false,
+      this.count = ''})
       : super(key: key);
 
   @override
@@ -134,7 +158,16 @@ class _GridItem extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Icon(itemIcon, color: ThemeColors.secondaryColor),
+              Badge(
+                  badgeColor: Colors.transparent,
+                  elevation: 0,
+                  position: BadgePosition(bottom: 20, start: 20),
+                  showBadge: showBadge,
+                  badgeContent: Text(
+                    '$count',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  child: Icon(itemIcon, color: ThemeColors.secondaryColor)),
               Container(
                   padding: const EdgeInsets.only(top: 5),
                   child: Text(itemTitle,
