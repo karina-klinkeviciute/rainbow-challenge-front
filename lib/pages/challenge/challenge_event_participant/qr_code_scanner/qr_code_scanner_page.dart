@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rainbow_challenge/pages/challenge/challenge_event_participant/qr_code_scanner/cubit/qr_code_scanner_cubit.dart';
+import 'package:rainbow_challenge/widgets/auth_text_field.dart';
 import 'package:rainbow_challenge/widgets/widgets.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
@@ -20,9 +21,10 @@ class QrCodeScannerPageState extends State<QrCodeScannerPage> {
   String uuid;
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
   Barcode? result;
+  String? qrCode;
   QRViewController? controller;
 
-  QrCodeScannerPageState({required this.uuid});
+  QrCodeScannerPageState({required this.uuid, this.qrCode});
 
   @override
   void reassemble() {
@@ -43,20 +45,36 @@ class QrCodeScannerPageState extends State<QrCodeScannerPage> {
         body: Column(
           children: <Widget>[
             Expanded(
-              flex: 5,
+              flex: 10,
               child: QRView(
                 key: qrKey,
                 onQRViewCreated: _onQRViewCreated,
               ),
             ),
             Expanded(
-              flex: 1,
+              flex: 2,
               child: Center(
                 child: (result != null)
-                    ? CircularProgressIndicator()
-                    : Text('Scan a code'),
+                    ? Text('QR kodas neteisingas')
+                    : Text('Skenuok QR kodą'),
               ),
-            )
+            ),
+            //in case we need to add manually qr code
+            // Expanded(
+            //   flex: 1,
+            //   child: AuthTextField(
+            //       padding: EdgeInsets.symmetric(
+            //         horizontal: MediaQuery.of(context).size.width * 0.35,
+            //       ),
+            //       hint: 'Lytis, jei kita',
+            //       key: const Key('GenderOther_textField'),
+            //       isRequiredField: false,
+            //       keyboardType: TextInputType.text,
+            //       onChanged: (value) => setState(() async {
+            //             qrCode = value;
+            //             await completeChallenge();
+            //           })),
+            // )
           ],
         ));
   }

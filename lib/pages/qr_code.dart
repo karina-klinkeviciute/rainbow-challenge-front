@@ -3,9 +3,6 @@ import 'package:rainbow_challenge/theme/colors.dart';
 import 'package:rainbow_challenge/theme/icons.dart';
 import 'package:rainbow_challenge/widgets/widgets.dart';
 
-// Shop page.
-// To do everything.
-
 class QrCodePage extends StatelessWidget {
   const QrCodePage({Key? key}) : super(key: key);
 
