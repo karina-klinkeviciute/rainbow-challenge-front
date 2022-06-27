@@ -7,6 +7,7 @@ import 'package:rainbow_challenge/pages/login/login_page.dart';
 import 'package:rainbow_challenge/pages/pages.dart';
 import 'package:rainbow_challenge/utils/model/challenge/challenge_class.dart';
 import 'package:rainbow_challenge/utils/repository/user_repository.dart';
+import 'package:rainbow_challenge/widgets/widgets.dart';
 
 class QuizPageConfirm extends StatelessWidget {
   final int count;
@@ -14,34 +15,37 @@ class QuizPageConfirm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Padding(
-        padding: EdgeInsets.all(30.0),
-        child: SafeArea(
-          bottom: true,
-          top: true,
-          child: Column(children: [
-            Text(
-              'Slaptažodžio atstatymo nuoroda nusiųsta nurodytu el. pašto adresu',
-              textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 20),
-            ),
-            SizedBox(height: 50),
-            ElevatedButton(
-              child: Text('You answer correct on ${count - 1} question'),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return NewsPage(index: 2);
-                    },
-                  ),
-                );
-              },
-            ),
-          ]),
-        ),
+    return WrapperMainWidget(
+      useAppBar: false,
+      index: 2,
+      mainArea: SizedBox(
+        width: MediaQuery.of(context).size.width * 0.8,
+        child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
+          Text(
+            'Teisingai atsakei ${count - 1} klausimų',
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 20),
+          ),
+          Text(
+            'Tau įskaičiuota ${count - 1} vaivorykščių',
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 20),
+          ),
+          SizedBox(height: 50),
+          ElevatedButton(
+            child: Text('Grįžti į užduotis'),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) {
+                    return NewsPage(index: 2);
+                  },
+                ),
+              );
+            },
+          ),
+        ]),
       ),
     );
   }

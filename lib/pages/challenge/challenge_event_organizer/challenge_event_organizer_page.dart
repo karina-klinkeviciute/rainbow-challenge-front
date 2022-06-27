@@ -48,6 +48,8 @@ class _ChallengeEventOrganizerPageState
   @override
   Widget build(BuildContext context) {
     return WrapperMainWidget(
+        useAppBar: false,
+        index: 2,
         mainArea: SizedBox(
             width: MediaQuery.of(context).size.width * 0.8,
             child: Column(

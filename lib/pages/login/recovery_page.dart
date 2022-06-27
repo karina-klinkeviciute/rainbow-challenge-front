@@ -8,6 +8,7 @@ import 'package:rainbow_challenge/pages/registration/fields/email.dart';
 import 'package:rainbow_challenge/utils/repository/user_repository.dart';
 import 'package:rainbow_challenge/widgets/auth_text_field.dart';
 import 'package:rainbow_challenge/utils/repository/repositories.dart';
+import 'package:rainbow_challenge/widgets/widgets.dart';
 
 class RecoveryPage extends StatelessWidget {
   final UserRepository userRepository;
@@ -18,12 +19,14 @@ class RecoveryPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: SafeArea(
-      top: false,
-      child: BlocProvider(
-          create: (_) => RegistrationBloc(userRepository: userRepository),
-          child: RecoveryEmailForm()),
-    ));
+    return WrapperMainWidget(
+      useAppBar: true,
+      mainArea: SafeArea(
+        top: true,
+        child: BlocProvider(
+            create: (_) => RegistrationBloc(userRepository: userRepository),
+            child: RecoveryEmailForm()),
+      ),
+    );
   }
 }

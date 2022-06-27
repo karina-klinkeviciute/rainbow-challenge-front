@@ -5,6 +5,8 @@ import 'package:rainbow_challenge/pages/registration/bloc/reg_event.dart';
 import 'package:rainbow_challenge/pages/registration/bloc/reg_state.dart';
 import 'package:rainbow_challenge/pages/registration/fields/email_recovery.dart';
 import 'package:rainbow_challenge/pages/registration/recovery_confirm.dart';
+import 'package:rainbow_challenge/pages/registration/registration_page.dart';
+import 'package:rainbow_challenge/utils/repository/repositories.dart';
 import 'package:rainbow_challenge/widgets/auth_text_field.dart';
 import 'package:formz/formz.dart';
 import 'package:rainbow_challenge/widgets/headline.dart';
@@ -31,9 +33,27 @@ class RecoveryEmailForm extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              const HeadlineWidget(title: 'Naujas vartotojas'),
+              Center(child: const HeadlineWidget(title: 'Naujas vartotojas')),
               _RecoveryEmailInputField(),
               _RecoverySubmit(),
+              Center(
+                child: Padding(
+                    padding: EdgeInsets.only(top: 20),
+                    child: TextButton(
+                      onPressed: () {
+                        Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => RegistrationPage(
+                                      userRepository: UserRepository(),
+                                    )));
+                      },
+                      child: const Text(
+                        'Neturi paskyros? Registruokis',
+                        textAlign: TextAlign.center,
+                      ), //TODO add localizations
+                    )),
+              )
             ],
           ),
         ));
