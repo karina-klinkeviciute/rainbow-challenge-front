@@ -132,16 +132,26 @@ class _ChallengesList extends StatelessWidget {
       ];
 
       final List<String> challengeTypeNames = <String>[
-        AppLocalizations.of(context)!.challenge_type_article,
-        AppLocalizations.of(context)!.challenge_type_custom,
-        AppLocalizations.of(context)!.challenge_type_event,
-        AppLocalizations.of(context)!.challenge_type_event_org,
-        AppLocalizations.of(context)!.challenge_type_project,
-        AppLocalizations.of(context)!.challenge_type_quiz,
-        AppLocalizations.of(context)!.challenge_type_reacting,
-        AppLocalizations.of(context)!.challenge_type_school_gsa,
-        AppLocalizations.of(context)!.challenge_type_story,
-        AppLocalizations.of(context)!.challenge_type_support
+        AppLocalizations.of(context)!.challenge_type_article +
+            ' (${challengesTypeArticle.length})',
+        AppLocalizations.of(context)!.challenge_type_custom +
+            ' (${challengesTypeCustom.length})',
+        AppLocalizations.of(context)!.challenge_type_event +
+            ' (${challengesTypeEvent.length})',
+        AppLocalizations.of(context)!.challenge_type_event_org +
+            ' (${challengesTypeEventOrg.length})',
+        AppLocalizations.of(context)!.challenge_type_project +
+            ' (${challengesTypeProject.length})',
+        AppLocalizations.of(context)!.challenge_type_quiz +
+            ' (${challengesTypeQuiz.length})',
+        AppLocalizations.of(context)!.challenge_type_reacting +
+            ' (${challengesTypeReacting.length})',
+        AppLocalizations.of(context)!.challenge_type_school_gsa +
+            ' (${challengesTypeSchoolGsa.length})',
+        AppLocalizations.of(context)!.challenge_type_story +
+            ' (${challengesTypeStory.length})',
+        AppLocalizations.of(context)!.challenge_type_support +
+            ' (${challengesTypeSupport.length})',
       ];
 
       return ListView.builder(

@@ -17,7 +17,7 @@ class MessagesPage extends StatefulWidget {
 }
 
 class _MessagesPageState extends State<MessagesPage> {
-  List<Message> messages = List<Message>.empty(growable: true);
+  List<Message> messages = [];
   bool isLoading = true;
 
   @override
