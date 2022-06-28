@@ -24,7 +24,7 @@ class ShopItemsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return WrapperCustomAppbarWidget(
-      appBar: AppBar(),
+      appBar: AppBar(automaticallyImplyLeading: false,),
       mainArea: _MainArea(),
       //  useAppBar: false,
     );
