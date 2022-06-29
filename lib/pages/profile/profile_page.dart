@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:rainbow_challenge/pages/login/change_password_form.dart';
 import 'package:rainbow_challenge/pages/pages.dart';
+import 'package:rainbow_challenge/pages/registration/bloc/reg_bloc.dart';
 import 'package:rainbow_challenge/theme/colors.dart';
 import 'package:rainbow_challenge/theme/headings.dart';
 import 'package:rainbow_challenge/utils/repository/user_repository.dart';
@@ -141,20 +143,33 @@ class _MainArea extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             StatsWidget(
-              // To do: fix loading the asset
               icon: ThemeIcons.shop,
               number: profile.remaining_points.toString(),
-              // number: '5',
               label: AppLocalizations.of(context)!.profile_page_stats_rainbows,
             ),
             SizedBox(width: 20),
             StatsWidget(
                 icon: Icons.rotate_right,
-                //  number: profile.streak.toString(),
                 number: profile.streak?.streak.toString() ?? '0',
                 label: AppLocalizations.of(context)!
                     .profile_page_stats_active_weeks),
           ],
+        ),
+        TextButton(
+          onPressed: () {
+            final UserRepository _userRepository = UserRepository();
+            BlocProvider.of<AuthenticationBloc>(context).add(LoggedOut());
+            Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => BlocProvider(
+                    create: (_) =>
+                        RegistrationBloc(userRepository: _userRepository),
+                    child: ChangePasswordForm(),
+                  ),
+                ));
+          },
+          child: Text('Change password'),
         )
       ]);
     },

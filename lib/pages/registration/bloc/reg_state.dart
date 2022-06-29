@@ -1,13 +1,16 @@
 import 'package:equatable/equatable.dart';
 import 'package:formz/formz.dart';
+import 'package:rainbow_challenge/pages/registration/fields/current_password.dart';
 
 import 'package:rainbow_challenge/pages/registration/fields/email.dart';
 import 'package:rainbow_challenge/pages/registration/fields/email_recovery.dart';
 import 'package:rainbow_challenge/pages/registration/fields/name.dart';
+import 'package:rainbow_challenge/pages/registration/fields/new_password.dart';
 import 'package:rainbow_challenge/pages/registration/fields/password.dart';
 import 'package:rainbow_challenge/pages/registration/fields/confirm_password.dart';
 import 'package:rainbow_challenge/pages/registration/fields/gender.dart';
 import 'package:rainbow_challenge/pages/registration/fields/gender_other.dart';
+import 'package:rainbow_challenge/pages/registration/fields/re_new_password.dart';
 import 'package:rainbow_challenge/pages/registration/fields/username.dart';
 import 'package:rainbow_challenge/pages/registration/fields/region.dart';
 import 'package:rainbow_challenge/pages/registration/fields/is_lgbtqia.dart';
@@ -21,6 +24,9 @@ class RegState extends Equatable {
       this.email_recovery = const EmailRecovery.pure(),
       this.password = const Password.pure(),
       this.confirmPassword = const ConfirmPassword.pure(),
+      this.newPassword = const NewPassword.pure(),
+      this.reNewPassword = const ReNewPassword.pure(),
+      this.currentPassword = const CurrentPassword.pure(),
       this.gender = const Gender.pure(),
       this.gender_other = const GenderOther.pure(),
       this.username = const Username.pure(),
@@ -36,6 +42,9 @@ class RegState extends Equatable {
   final EmailRecovery email_recovery;
   final Password password;
   final ConfirmPassword confirmPassword;
+  final NewPassword newPassword;
+  final ReNewPassword reNewPassword;
+  final CurrentPassword currentPassword;
   final Gender gender;
   final GenderOther gender_other;
   final Username username;
@@ -53,6 +62,9 @@ class RegState extends Equatable {
         email_recovery,
         password,
         confirmPassword,
+        newPassword,
+        reNewPassword,
+        currentPassword,
         gender,
         gender_other,
         username,
@@ -70,6 +82,9 @@ class RegState extends Equatable {
     EmailRecovery? email_recovery,
     Password? password,
     ConfirmPassword? confirmPassword,
+    NewPassword? newPassword,
+    ReNewPassword? reNewPassword,
+    CurrentPassword? currentPassword,
     Gender? gender,
     GenderOther? gender_other,
     Username? username,
@@ -86,6 +101,9 @@ class RegState extends Equatable {
         email_recovery: email_recovery ?? this.email_recovery,
         password: password ?? this.password,
         confirmPassword: confirmPassword ?? this.confirmPassword,
+        newPassword: newPassword ?? this.newPassword,
+        reNewPassword: reNewPassword ?? this.reNewPassword,
+        currentPassword: currentPassword ?? this.currentPassword,
         gender: gender ?? this.gender,
         gender_other: gender_other ?? this.gender_other,
         username: username ?? this.username,

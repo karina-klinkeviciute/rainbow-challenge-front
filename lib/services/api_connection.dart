@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 //import 'dart:developer';
 import 'package:http/http.dart' as http;
+import 'package:rainbow_challenge/services/dio_client.dart';
 import 'package:rainbow_challenge/utils/model/api_model.dart';
 
 final _base = "https://rainbowchallenge.lt";
@@ -9,6 +10,7 @@ final _tokenEndpoint = "/auth/token/login/";
 final _tokenURL = _base + _tokenEndpoint;
 final _registerURL = _base + "/auth/users/";
 final _recoveryEmailURL = _base + "/auth/users/reset_password/";
+final _reSetPasswordURL = _base + "/auth/users/set_password/";
 
 Future<Token> getToken(UserLogin userLogin) async {
   //print(_tokenURL);
@@ -62,6 +64,19 @@ Future<String?> createUserRecoveryEmail(
 
   return msg.entries.first.value.toString();
 }
+
+// Future<String?> createReSetPassword(UserReSetPassword userReSetPassword) async {
+//   DioClient dio = DioClient();
+
+//   final response =
+//       await dio.addItem(_reSetPasswordURL, userReSetPassword.toDatabaseJson());
+//   ;
+
+//   final jsonString = response.toString();
+//   Map<String, dynamic> msg = jsonDecode(jsonString);
+
+//   return msg.entries.first.value.toString();
+// }
 
 class HttpException implements Exception {
   final String message;

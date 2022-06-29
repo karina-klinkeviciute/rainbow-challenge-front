@@ -16,6 +16,23 @@ class UserRecoveryEmail {
   Map<String, dynamic> toDatabaseJson() => {"email": this.email_recovery};
 }
 
+class UserReSetPassword {
+  String new_password;
+  String re_new_password;
+  String current_password;
+
+  UserReSetPassword(
+      {required this.new_password,
+      required this.re_new_password,
+      required this.current_password});
+
+  Map<String, dynamic> toDatabaseJson() => {
+        "new_password": this.re_new_password,
+        "re_new_password": this.new_password,
+        "current_password": this.current_password
+      };
+}
+
 class UserRegister {
   String email;
   String password;
