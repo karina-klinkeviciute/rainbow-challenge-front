@@ -40,12 +40,14 @@ class ChangePasswordForm extends StatelessWidget {
                 _ReNewPasswordInput(),
                 _CurrentPasswordInputField(),
                 _PassworsSetSubmit()
+
               ],
             ),
           ),
         ));
   }
 }
+
 
 class _NewPasswordInputField extends StatelessWidget {
   @override
@@ -158,6 +160,7 @@ class _CurrentPasswordInputField extends StatelessWidget {
     );
   }
 }
+
 
 void _msg(_, txt) {
   ScaffoldMessenger.of(_).showSnackBar(SnackBar(

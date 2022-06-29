@@ -54,9 +54,7 @@ class QrCodeScannerPageState extends State<QrCodeScannerPage> {
             Expanded(
               flex: 2,
               child: Center(
-                child: (result != null)
-                    ? Text('QR kodas neteisingas')
-                    : Text('Skenuok QR kodą'),
+                child: Text('Paliesk viršuje, kad skenuotum QR kodą'),
               ),
             ),
             //in case we need to add manually qr code
@@ -95,18 +93,39 @@ class QrCodeScannerPageState extends State<QrCodeScannerPage> {
   Future<void> completeChallenge() async {
     var qrCodeScannerCubit = BlocProvider.of<QrCodeScannerCubit>(context);
     String qrCode = result?.code ?? "";
-    var completedChallenge = await qrCodeScannerCubit.challengeRepository
-        .completeChallenge(uuid: uuid, qr_code: qrCode);
-
-    bool success = false;
-    if (completedChallenge.main_joined_challenge.status == "confirmed") {
-      success = true;
+    try {
+      var completedChallenge = await qrCodeScannerCubit.challengeRepository
+          .completeChallenge(uuid: uuid, qr_code: qrCode);
+      bool success = false;
+      if (completedChallenge.main_joined_challenge.status == "confirmed") {
+        success = true;
+        setState(() {});
+        await showDialog<String>(
+          context: context,
+          builder: (BuildContext context) => AlertDialog(
+            elevation: 80,
+            title: const Text('Ačiū'),
+            content: const Text(
+                'Ačiū už atliktą užduotį! Jums įskaičiuota vaivorykščių.'), //TODO add localizations
+            actions: <Widget>[
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context, 'OK');
+                },
+                child: const Text('OK'),
+              ),
+            ],
+          ),
+        );
+        Navigator.pop(context, success);
+      }
+    } catch (e) {
       await showDialog<String>(
         context: context,
         builder: (BuildContext context) => AlertDialog(
+          elevation: 80,
           title: const Text('Ačiū'),
-          content: const Text(
-              'Ačiū už atliktą užduotį! Jums įskaičiuota vaivorykščių.'), //TODO add localizations
+          content: const Text('QR kodas neteisingas'), //TODO add localizations
           actions: <Widget>[
             TextButton(
               onPressed: () {
@@ -117,8 +136,7 @@ class QrCodeScannerPageState extends State<QrCodeScannerPage> {
           ],
         ),
       );
-
-      Navigator.pop(context, success);
+      Navigator.pop(context);
     }
   }
 
