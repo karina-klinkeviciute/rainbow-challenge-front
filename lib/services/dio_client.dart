@@ -121,6 +121,14 @@ class Logging extends Interceptor {
 
 class DioClient {
   // TO DO: Get current user token here
+  Future<String> getAccessToken() async {
+    if (_token.isNotEmpty) return _token;
+
+    var token = await UserRepository().getUserToken();
+    if (token != null) _token = token;
+    return _token;
+  }
+
   String _token = "";
   Dio _dio = Dio();
   static String baseUrl = Api.baseUrl;
@@ -281,6 +289,26 @@ class DioClient {
           .correct_answers_count;
     } on DioError catch (e) {
       print(e);
+    } on Exception catch (e) {
+      // Unhandled exception
+      print(e);
+    }
+  }
+
+  Future sendRePassword(
+      String endPoint, Map<String, dynamic> itemObject) async {
+    try {
+      await addAuthorizationHeader();
+      final response = await _dio.post(endPoint, data: itemObject);
+      return response.data;
+    } on DioError catch (e) {
+      print(e);
+
+      if (e.response?.data is Map<String, dynamic>) {
+        Map<String, dynamic> dataMap = e.response?.data as Map<String, dynamic>;
+        ;
+        return dataMap.toString();
+      }
     } on Exception catch (e) {
       // Unhandled exception
       print(e);
