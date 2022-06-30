@@ -7,6 +7,7 @@ import 'package:rainbow_challenge/pages/registration/bloc/reg_state.dart';
 import 'package:rainbow_challenge/pages/registration/fields/current_password.dart';
 import 'package:rainbow_challenge/pages/registration/fields/new_password.dart';
 import 'package:rainbow_challenge/pages/registration/fields/re_new_password.dart';
+import 'package:rainbow_challenge/pages/registration/password_change_confirm.dart';
 import 'package:rainbow_challenge/pages/registration/registration_confirm.dart';
 import 'package:rainbow_challenge/pages/registration/registration_form.dart';
 import 'package:rainbow_challenge/widgets/auth_text_field.dart';
@@ -23,10 +24,10 @@ class ChangePasswordForm extends StatelessWidget {
             _msg(context, state.errorMessage);
           } else if (state.status.isSubmissionSuccess) {
             //Navigator.of(context).pushNamed('/success');
-            Navigator.push(
+            Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => RegistrationPageConfirm()));
+                    builder: (context) => PasswordChangeConfirm()));
           }
         },
         child: WrapperMainWidget(
@@ -35,7 +36,7 @@ class ChangePasswordForm extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                const HeadlineWidget(title: 'Change Password'),
+                const HeadlineWidget(title: 'Keisti slaptažodį'),
                 _NewPasswordInputField(),
                 _ReNewPasswordInput(),
                 _CurrentPasswordInputField(),
@@ -116,7 +117,7 @@ class _PassworsSetSubmit extends StatelessWidget {
         return Padding(
           padding: EdgeInsets.only(top: 20),
           child: ElevatedButton(
-            child: Text('Submit Password Reset'),
+            child: Text('Keisti slaptažodį'),
             onPressed: state.status.isValidated
                 ? () => context
                     .read<RegistrationBloc>()
@@ -139,7 +140,7 @@ class _CurrentPasswordInputField extends StatelessWidget {
         return Padding(
           padding: const EdgeInsets.only(bottom: 16.0),
           child: AuthTextField(
-            hint: 'Current Password',
+            hint: 'Dabartinis slaptažodis',
             key: const Key('Password_textField'),
             isPasswordField: true,
             isRequiredField: true,

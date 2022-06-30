@@ -27,7 +27,7 @@ extension Explanation on ReNewPasswordValidationError? {
   String? get name {
     switch (this) {
       case ReNewPasswordValidationError.mismatch:
-        return 'passwords must match';
+        return 'Slaptažodžiai turi sutapti';
       default:
         return null;
     }

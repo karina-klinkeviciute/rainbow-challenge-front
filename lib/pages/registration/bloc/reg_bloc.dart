@@ -220,9 +220,6 @@ class RegistrationBloc extends Bloc<RegEvent, RegState> {
               status: FormzStatus.submissionFailure,
               errorMessage: errorMessage);
       } catch (error) {
-        //print(error.toString());
-        //yield RegFailure(error: error.toString());
-        //_msg(error.toString());
         yield state.copyWith(
             status: FormzStatus.submissionFailure,
             errorMessage: error.toString());
@@ -248,9 +245,6 @@ class RegistrationBloc extends Bloc<RegEvent, RegState> {
               status: FormzStatus.submissionFailure,
               errorMessage: errorMessage);
       } catch (error) {
-        //print(error.toString());
-        //yield RegFailure(error: error.toString());
-        //_msg(error.toString());
         yield state.copyWith(
             status: FormzStatus.submissionFailure,
             errorMessage: error.toString());

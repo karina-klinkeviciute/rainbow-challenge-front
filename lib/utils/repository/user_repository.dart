@@ -7,7 +7,8 @@ import 'package:rainbow_challenge/services/api_connection.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class UserRepository {
-  final _reSetPasswordURL = "https://rainbowchallenge.lt" + "/auth/users/set_password/";
+  final _reSetPasswordURL =
+      "https://rainbowchallenge.lt" + "/auth/users/set_password/";
   final String _userAccessTokenKey = "userAccessToken";
   final storage = new FlutterSecureStorage();
 
@@ -85,8 +86,10 @@ class UserRepository {
         current_password: current_password,
         new_password: new_password,
         re_new_password: re_new_password);
-    var errorMessage = await dio.addItem(_reSetPasswordURL,userReSetPassword.toDatabaseJson());
-    return errorMessage.toString();
+    var errorMessage = await dio.postPrize(
+        _reSetPasswordURL, userReSetPassword.toDatabaseJson());
+
+    return errorMessage.data;
   }
 
   Future<void> persistToken({required User user}) {

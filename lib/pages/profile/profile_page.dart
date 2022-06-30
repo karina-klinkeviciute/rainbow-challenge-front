@@ -158,16 +158,17 @@ class _MainArea extends StatelessWidget {
         TextButton(
           onPressed: () {
             final UserRepository _userRepository = UserRepository();
-            BlocProvider.of<AuthenticationBloc>(context).add(LoggedOut());
+            BlocProvider.of<AuthenticationBloc>(context);
             Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => BlocProvider(
-                    create: (_) =>
-                        RegistrationBloc(userRepository: _userRepository),
-                    child: ChangePasswordForm(),
-                  ),
-                ));
+              context,
+              MaterialPageRoute(
+                builder: (context) => BlocProvider(
+                  create: (_) =>
+                      RegistrationBloc(userRepository: _userRepository),
+                  child: ChangePasswordForm(),
+                ),
+              ),
+            );
           },
           child: Text('Change password'),
         )
