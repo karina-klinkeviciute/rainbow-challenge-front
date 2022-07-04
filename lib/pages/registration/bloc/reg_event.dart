@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:rainbow_challenge/utils/model/reg_user_model.dart';
 
 abstract class RegEvent extends Equatable {
   const RegEvent();
@@ -143,8 +144,27 @@ class YearOfBirthChanged extends RegEvent {
   List<Object> get props => [year_of_birth];
 }
 
+class GetOldData extends RegEvent {
+  const GetOldData(
+      {required this.gender,
+      required this.username,
+      required this.genderOther,
+      required this.regionName,
+      required this.year_of_birth});
+  final String gender;
+  final String username;
+  final String genderOther;
+  final String regionName;
+  final int year_of_birth;
+  @override
+  List<Object> get props =>
+      [regionName, genderOther, username, year_of_birth, gender];
+}
+
 class EmailRecoverySubmitted extends RegEvent {}
 
 class PasswordResetSubmitted extends RegEvent {}
 
 class FormSubmitted extends RegEvent {}
+
+class SendNewUserData extends RegEvent {}

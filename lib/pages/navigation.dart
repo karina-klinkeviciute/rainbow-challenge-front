@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rainbow_challenge/constants/app.dart';
+import 'package:rainbow_challenge/pages/pages.dart';
 import 'package:rainbow_challenge/services/dio_client.dart';
 import 'package:rainbow_challenge/theme/colors.dart';
 import 'package:rainbow_challenge/theme/headings.dart';
@@ -51,46 +52,50 @@ class _NavigationPageState extends State<NavigationPage>
                   _GridItem(
                     itemIcon: ThemeIcons.challenges,
                     itemTitle: AppLocalizations.of(context)!.menu_challenges,
-                    routeName: AppRoute.challenges,
+                    page: 2,
                   ),
                   _GridItem(
+                    isAppRoute: true,
                     itemIcon: ThemeIcons.regions,
                     itemTitle: AppLocalizations.of(context)!.menu_regions,
-                    routeName: AppRoute.regions,
+                    pageRoute: AppRoute.regions,
                   ),
                   _GridItem(
                     itemIcon: ThemeIcons.profile,
                     itemTitle: AppLocalizations.of(context)!.menu_profile,
-                    routeName: AppRoute.profile,
+                    page: 1,
                   ),
                   _GridItem(
+                    isAppRoute: true,
                     showBadge: true,
                     count: _count,
                     itemIcon: ThemeIcons.chat,
                     itemTitle: AppLocalizations.of(context)!.menu_messages,
-                    routeName: AppRoute.messages,
+                    pageRoute: AppRoute.messages,
                   ),
                   _GridItem(
+                    isAppRoute: true,
                     itemIcon: ThemeIcons.qrCode,
                     itemTitle: AppLocalizations.of(context)!.menu_qr_code,
-                    routeName: AppRoute.qrCode,
+                    pageRoute: AppRoute.qrCode,
                   ),
                   _GridItem(
                     itemIcon: ThemeIcons.challengesJoined,
                     itemTitle:
                         AppLocalizations.of(context)!.menu_challenges_joined,
                     // AppRoute.challengesJoined
-                    routeName: AppRoute.challenges,
+                    page: 2,
                   ),
                   _GridItem(
                     itemIcon: ThemeIcons.shop,
                     itemTitle: AppLocalizations.of(context)!.menu_shop,
-                    routeName: AppRoute.shopItems,
+                    page: 3,
                   ),
                   _GridItem(
+                    isAppRoute: true,
                     itemIcon: ThemeIcons.about,
                     itemTitle: AppLocalizations.of(context)!.menu_about,
-                    routeName: AppRoute.about,
+                    pageRoute: AppRoute.about,
                   ),
                   //  _gridItem(Icons.favorite, 'Apie projektą'),
                 ],
@@ -118,22 +123,32 @@ class _GridItem extends StatelessWidget {
   final String count;
   final IconData itemIcon;
   final String itemTitle;
-  final String routeName;
+  final int page;
+  final bool isAppRoute;
+  final String pageRoute;
 
   const _GridItem(
       {Key? key,
       required this.itemIcon,
       required this.itemTitle,
-      required this.routeName,
+      this.page = 0,
       this.showBadge = false,
-      this.count = ''})
+      this.count = '',
+      this.isAppRoute = false,
+      this.pageRoute = AppRoute.home})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.pushNamed(context, routeName);
+        if (isAppRoute == false) {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => NewsPage(index: page)));
+        }
+        if (isAppRoute == true) {
+          Navigator.pushNamed(context, pageRoute);
+        }
       },
       child: Container(
         decoration: BoxDecoration(

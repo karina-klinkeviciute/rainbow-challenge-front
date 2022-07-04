@@ -1,4 +1,6 @@
-class DropDownLists {
+// this static list for registration only and origin database on api
+
+class RegionDropDownLists {
   static const regionList = [
     {
       "name": "Kauno rajonas",

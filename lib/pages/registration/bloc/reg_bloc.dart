@@ -9,6 +9,7 @@ import 'package:rainbow_challenge/pages/registration/fields/gender_other.dart';
 import 'package:rainbow_challenge/pages/registration/fields/new_password.dart';
 import 'package:rainbow_challenge/pages/registration/fields/re_new_password.dart';
 import 'package:rainbow_challenge/pages/registration/fields/region.dart';
+import 'package:rainbow_challenge/pages/registration/fields/username.dart';
 import 'package:rainbow_challenge/pages/registration/fields/year_of_birth.dart';
 import 'package:rainbow_challenge/utils/repository/user_repository.dart';
 import 'package:rainbow_challenge/pages/registration/fields/confirm_password.dart';
@@ -34,7 +35,20 @@ class RegistrationBloc extends Bloc<RegEvent, RegState> {
 
   @override
   Stream<RegState> mapEventToState(RegEvent event) async* {
-    if (event is EmailChanged) {
+    if (event is GetOldData) {
+      final username = Username.pure(event.username);
+      final year_of_birth = YearOfBirth.pure(event.year_of_birth);
+      final gender = Gender.pure(event.gender);
+      final gender_other = GenderOther.pure(event.genderOther);
+      final region = Region.pure(event.regionName);
+      yield state.copyWith(
+        year_of_birth: year_of_birth,
+        gender_other: gender_other,
+        gender: gender,
+        username: username,
+        region: region,
+      );
+    } else if (event is EmailChanged) {
       final email = Email.dirty(event.email);
       yield state.copyWith(
         email: email,
@@ -251,7 +265,31 @@ class RegistrationBloc extends Bloc<RegEvent, RegState> {
       }
       //} on Exception {}
 
+    } else if (event is SendNewUserData) {
+      try {
+        var errorMessage = await userRepository.patchNewUserData(
+          year_of_birth: state.year_of_birth.value.toString(),
+          gender_other: state.gender_other.value,
+          gender: state.gender.value,
+          username: state.username.value,
+          regionId: state.region.value,
+        );
+
+        if (errorMessage == "")
+          yield state.copyWith(status: FormzStatus.submissionSuccess);
+        else
+          yield state.copyWith(
+              status: FormzStatus.submissionFailure,
+              errorMessage: errorMessage);
+      } catch (error) {
+        yield state.copyWith(
+            status: FormzStatus.submissionFailure,
+            errorMessage: error.toString());
+      }
+      //} on Exception {}
+
     }
+
     if (event is FormSubmitted) {
       if (!state.status.isValidated) return;
 

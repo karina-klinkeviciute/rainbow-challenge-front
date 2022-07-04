@@ -1,14 +1,17 @@
 import 'dart:async';
 import 'package:rainbow_challenge/services/dio_client.dart';
 import 'package:rainbow_challenge/utils/model/user_model.dart';
-import 'package:rainbow_challenge/utils/model/reg_model.dart';
+import 'package:rainbow_challenge/utils/model/reg_user_model.dart';
 import 'package:rainbow_challenge/utils/model/api_model.dart';
 import 'package:rainbow_challenge/services/api_connection.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class UserRepository {
+  final _patchUserDataURL = "/auth/users/me/";
+
   final _reSetPasswordURL =
       "https://rainbowchallenge.lt" + "/auth/users/set_password/";
+  final _getUserDataURL = "/auth/users/me/";
   final String _userAccessTokenKey = "userAccessToken";
   final storage = new FlutterSecureStorage();
 
@@ -50,19 +53,6 @@ class UserRepository {
     );
 
     var errorMessage = await createUser(userReg);
-
-    // regUser reguser = regUser(
-    //   email: email,
-    //   password: password,
-    //   gender: gender,
-    //   gender_other: gender_other,
-    //   // username: username,
-    //   region: region,
-    //   year_of_birth: year_of_birth,
-    //   re_password: re_password,
-    //   //is_lgbtqia: is_lgbtqia
-    // );
-
     return errorMessage ?? "";
   }
 
@@ -90,6 +80,33 @@ class UserRepository {
         _reSetPasswordURL, userReSetPassword.toDatabaseJson());
 
     return errorMessage.data;
+  }
+
+  Future<String?> patchNewUserData(
+      {required String year_of_birth,
+      required String gender_other,
+      required String gender,
+      required String username,
+      required String regionId}) async {
+    DioClient dio = DioClient();
+    UserUpdateData userUpdateData = UserUpdateData(
+        gender: gender,
+        gender_other: gender_other,
+        username: username,
+        regionId: regionId,
+        year_of_birth: year_of_birth);
+    var errorMessage =
+        await dio.patchUser(_patchUserDataURL, userUpdateData.toDatabaseJson());
+
+    return errorMessage.data;
+  }
+
+  Future<RegUser> getOldUserData() async {
+    DioClient dio = DioClient();
+
+    var errorMessage = await dio.getUser(_getUserDataURL);
+
+    return errorMessage;
   }
 
   Future<void> persistToken({required User user}) {

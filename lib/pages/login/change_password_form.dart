@@ -31,6 +31,8 @@ class ChangePasswordForm extends StatelessWidget {
           }
         },
         child: WrapperMainWidget(
+          useAppBar: false,
+          index: 1,
           mainArea: SizedBox(
             width: MediaQuery.of(context).size.width * 0.8,
             child: Column(
@@ -41,14 +43,12 @@ class ChangePasswordForm extends StatelessWidget {
                 _ReNewPasswordInput(),
                 _CurrentPasswordInputField(),
                 _PassworsSetSubmit()
-
               ],
             ),
           ),
         ));
   }
 }
-
 
 class _NewPasswordInputField extends StatelessWidget {
   @override
@@ -161,7 +161,6 @@ class _CurrentPasswordInputField extends StatelessWidget {
     );
   }
 }
-
 
 void _msg(_, txt) {
   ScaffoldMessenger.of(_).showSnackBar(SnackBar(

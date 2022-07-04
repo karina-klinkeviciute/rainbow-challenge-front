@@ -272,20 +272,23 @@ class _GenderOtherInputField extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<RegistrationBloc, RegState>(
       buildWhen: (previous, current) =>
-          previous.gender_other != current.gender_other,
+          current.gender_other.value != '' || current.gender.value == 'other',
       builder: (context, state) {
-        return Padding(
-          padding: const EdgeInsets.only(bottom: 16.0),
-          child: AuthTextField(
-            hint: 'Lytis, jei kita',
-            key: const Key('GenderOther_textField'),
-            isRequiredField: false,
-            keyboardType: TextInputType.text,
-            onChanged: (genderOther) => context
-                .read<RegistrationBloc>()
-                .add(GenderOtherChanged(genderOther: genderOther)),
-          ),
-        );
+        if (state.gender_other.value != '' || state.gender.value == 'other') {
+          return Padding(
+            padding: const EdgeInsets.only(bottom: 16.0),
+            child: AuthTextField(
+              hint: 'Lytis, jei kita',
+              key: const Key('GenderOther_textField'),
+              isRequiredField: false,
+              keyboardType: TextInputType.text,
+              onChanged: (genderOther) => context
+                  .read<RegistrationBloc>()
+                  .add(GenderOtherChanged(genderOther: genderOther)),
+            ),
+          );
+        }
+        return SizedBox.shrink();
       },
     );
   }
@@ -318,8 +321,9 @@ class _RegionInputField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<DropdownMenuItem<String>> _regions = [];
-    var regi =
-        DropDownLists.regionList.map((e) => RegionModel.fromJson(e)).toList();
+    var regi = RegionDropDownLists.regionList
+        .map((e) => RegionModel.fromJson(e))
+        .toList();
     var regionsList = regi.forEach((element) {
       _regions.add(DropdownMenuItem(
         child: Text(element.name),

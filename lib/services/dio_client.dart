@@ -7,6 +7,7 @@ import 'package:rainbow_challenge/constants/api.dart';
 import 'package:rainbow_challenge/utils/model/api_model.dart';
 import 'package:rainbow_challenge/utils/model/challenge/challenge_quiz/quiz_correct_answers_class.dart';
 import 'package:rainbow_challenge/utils/model/quiz/correct_answer.dart';
+import 'package:rainbow_challenge/utils/model/reg_user_model.dart';
 import 'package:rainbow_challenge/utils/repository/repositories.dart';
 
 // TO DO: Add interceptors
@@ -259,6 +260,25 @@ class DioClient {
     }
   }
 
+  Future<RegUser> getUser(String endPoint) async {
+    try {
+      await addAuthorizationHeader();
+      final response = await _dio.get(endPoint);
+      print('Prize claimed ${response}');
+      return RegUser.fromJson(response.data);
+    } on DioError catch (e) {
+      print(e.response);
+      throw e.response?.data.values;
+      // return <String, dynamic>{"_error": e};
+    } on Exception catch (e) {
+      // Unhandled exception
+
+      print(e);
+      throw Exception(e);
+      // return <String, dynamic>{"_exception": e};
+    }
+  }
+
   Future<Map<String, dynamic>?> updateItem(
       String endPoint, Map<String, dynamic> itemObject) async {
     try {
@@ -287,6 +307,20 @@ class DioClient {
       print('Item updated ${response.data}');
       return ChallengeQuizCorrectAnswers.fromJson(response.data)
           .correct_answers_count;
+    } on DioError catch (e) {
+      print(e);
+    } on Exception catch (e) {
+      // Unhandled exception
+      print(e);
+    }
+  }
+
+  patchUser(String endPoint, Map<String, dynamic> itemObject) async {
+    try {
+      await addAuthorizationHeader();
+      final response = await _dio.patch(endPoint, data: itemObject);
+      print('Item updated ${response.data}');
+      return response.data;
     } on DioError catch (e) {
       print(e);
     } on Exception catch (e) {
