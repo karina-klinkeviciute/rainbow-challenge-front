@@ -38,7 +38,7 @@ class UserUpdateData {
   String gender_other;
   String username;
   String regionId;
-  String year_of_birth;
+  int year_of_birth;
 
   UserUpdateData({
     required this.gender,
@@ -52,8 +52,8 @@ class UserUpdateData {
         "username": this.username,
         "gender": this.gender,
         "gender_other": this.gender_other,
-        "region": {"name": this.regionId},
-        "year_of_birth": this.year_of_birth,
+        "region": {"uuid": this.regionId},
+        "year_of_birth": this.year_of_birth
       };
 }
 

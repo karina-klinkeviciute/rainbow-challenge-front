@@ -201,8 +201,18 @@ class _challengeType extends StatelessWidget {
   // Widget _challenge(Challenge challenge, context) - in case we would need it
   Widget _challenge(Challenge challenge, context) {
     return ListTile(
+      // subtitle: Text('can be joined ${challenge.can_be_joined}'),
+      trailing: (challenge.is_joined)
+          ? Icon(
+              Icons.check_box_outline_blank,
+              color: Colors.green,
+            )
+          : null,
       title: Text(challenge.name,
-          style: Theme.of(context)
+          style:(!challenge.can_be_joined&&!challenge.is_joined)? Theme.of(context)
+              .textTheme
+              .bodyText2!
+              .merge(const TextStyle(color: Colors.grey)): Theme.of(context)
               .textTheme
               .bodyText2!
               .merge(const TextStyle(color: ThemeColors.neutralColor))),

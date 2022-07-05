@@ -26,6 +26,7 @@ class UserSettingsForm extends StatelessWidget {
         .add(GetOldData(
             genderOther: value.genderOther,
             regionName: value.region?.name ?? '',
+            regionUuid: value.region?.uuid??'',
             username: value.username,
             year_of_birth: value.yearOfBirth,
             gender: value.gender)));
@@ -35,14 +36,15 @@ class UserSettingsForm extends StatelessWidget {
           if (state.status.isSubmissionFailure) {
             _msg(context, state.errorMessage);
           } else if (state.status.isSubmissionSuccess) {
-            //Navigator.of(context).pushNamed('/success');
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => RegistrationPageConfirm()));
+             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+    content: Text('Data Changed',textAlign: TextAlign.center,),
+    backgroundColor: Colors.green,
+  ));
           }
         },
         child: WrapperMainWidget(
+          useAppBar: false,
+          index: 1,
           mainArea: SizedBox(
             width: MediaQuery.of(context).size.width * 0.8,
             child: Column(
@@ -83,7 +85,7 @@ class _AgeInputField extends StatelessWidget {
           padding: const EdgeInsets.only(bottom: 16.0),
           child: DropdownButtonFormField<int>(
             decoration: InputDecoration(
-                contentPadding: EdgeInsets.fromLTRB(12, 0, 12, 3),
+                contentPadding: EdgeInsets.fromLTRB(12, 0, 0, 3),
                 enabledBorder: UnderlineInputBorder(
                     borderSide:
                         BorderSide(color: ThemeColors.primaryColor, width: 1))),
@@ -135,7 +137,7 @@ class _GenderInputField extends StatelessWidget {
           padding: const EdgeInsets.only(bottom: 16.0),
           child: DropdownButtonFormField<String>(
             decoration: InputDecoration(
-              contentPadding: EdgeInsets.fromLTRB(12, 0, 12, 3),
+              contentPadding: EdgeInsets.fromLTRB(12, 0, 0, 3),
               enabledBorder: UnderlineInputBorder(
                 borderSide:
                     BorderSide(color: ThemeColors.primaryColor, width: 1),
@@ -230,13 +232,13 @@ class _RegionInputField extends StatelessWidget {
           padding: const EdgeInsets.only(bottom: 16.0),
           child: DropdownButtonFormField<String>(
             decoration: InputDecoration(
-                contentPadding: EdgeInsets.fromLTRB(12, 0, 12, 3),
+                contentPadding: EdgeInsets.fromLTRB(12, 0, 0, 3),
                 enabledBorder: UnderlineInputBorder(
                     borderSide:
                         BorderSide(color: ThemeColors.primaryColor, width: 1))),
             value: _selectedValue,
             hint: Text(
-              'Regionas: ${state.region.value}',
+              'Regionas: ${state.region.value.length > 22 ? '${state.region.value.substring(0, 22)}' : state.region.value}',
               textHeightBehavior:
                   TextHeightBehavior(applyHeightToFirstAscent: true),
             ),
@@ -273,6 +275,7 @@ class _RegSubmit extends StatelessWidget {
 }
 
 void _msg(_, txt) {
+  if(txt)
   ScaffoldMessenger.of(_).showSnackBar(SnackBar(
     content: Text(txt),
     backgroundColor: Colors.redAccent,

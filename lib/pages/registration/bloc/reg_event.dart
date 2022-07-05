@@ -150,7 +150,9 @@ class GetOldData extends RegEvent {
       required this.username,
       required this.genderOther,
       required this.regionName,
-      required this.year_of_birth});
+      required this.year_of_birth,
+      required this.regionUuid});
+   final String regionUuid;   
   final String gender;
   final String username;
   final String genderOther;
@@ -158,7 +160,7 @@ class GetOldData extends RegEvent {
   final int year_of_birth;
   @override
   List<Object> get props =>
-      [regionName, genderOther, username, year_of_birth, gender];
+      [regionName, genderOther, username, year_of_birth, gender,regionUuid];
 }
 
 class EmailRecoverySubmitted extends RegEvent {}

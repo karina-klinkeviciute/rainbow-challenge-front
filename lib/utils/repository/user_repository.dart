@@ -83,7 +83,7 @@ class UserRepository {
   }
 
   Future<String?> patchNewUserData(
-      {required String year_of_birth,
+      {required int year_of_birth,
       required String gender_other,
       required String gender,
       required String username,
@@ -98,7 +98,7 @@ class UserRepository {
     var errorMessage =
         await dio.patchUser(_patchUserDataURL, userUpdateData.toDatabaseJson());
 
-    return errorMessage.data;
+    return errorMessage;
   }
 
   Future<RegUser> getOldUserData() async {

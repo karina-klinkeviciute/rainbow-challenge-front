@@ -117,7 +117,7 @@ class _AgeInputField extends StatelessWidget {
           padding: const EdgeInsets.only(bottom: 16.0),
           child: DropdownButtonFormField<int>(
             decoration: InputDecoration(
-                contentPadding: EdgeInsets.fromLTRB(12, 0, 12, 3),
+                contentPadding: EdgeInsets.fromLTRB(12, 0, 0, 3),
                 enabledBorder: UnderlineInputBorder(
                     borderSide:
                         BorderSide(color: ThemeColors.primaryColor, width: 1))),
@@ -247,7 +247,7 @@ class _GenderInputField extends StatelessWidget {
           padding: const EdgeInsets.only(bottom: 16.0),
           child: DropdownButtonFormField<String>(
             decoration: InputDecoration(
-              contentPadding: EdgeInsets.fromLTRB(12, 0, 12, 3),
+              contentPadding: EdgeInsets.fromLTRB(12, 0, 0, 3),
               enabledBorder: UnderlineInputBorder(
                 borderSide:
                     BorderSide(color: ThemeColors.primaryColor, width: 1),
@@ -326,7 +326,7 @@ class _RegionInputField extends StatelessWidget {
         .toList();
     var regionsList = regi.forEach((element) {
       _regions.add(DropdownMenuItem(
-        child: Text(element.name),
+        child: Text(element.name,style: TextStyle(fontSize: 20),),
         value: element.uuid,
       ));
     });
@@ -338,8 +338,9 @@ class _RegionInputField extends StatelessWidget {
         return Padding(
           padding: const EdgeInsets.only(bottom: 16.0),
           child: DropdownButtonFormField<String>(
+            isExpanded: false,
             decoration: InputDecoration(
-                contentPadding: EdgeInsets.fromLTRB(12, 0, 12, 3),
+                contentPadding: EdgeInsets.fromLTRB(12, 0, 0, 3),
                 enabledBorder: UnderlineInputBorder(
                     borderSide:
                         BorderSide(color: ThemeColors.primaryColor, width: 1))),
@@ -417,7 +418,7 @@ class _RulesCheckbox extends StatelessWidget {
               //mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 SizedBox(
-                  width: 225,
+                  width: MediaQuery.of(context).size.width * 0.5,
                   child: Padding(
                     padding: const EdgeInsets.all(5.0),
                     child: HtmlWidget(
@@ -469,9 +470,17 @@ class _RegSubmit extends StatelessWidget {
   }
 }
 
+
+
 void _msg(_, txt) {
+      var er = txt.toString();
+      if (er.contains(RegExp('[)]|[(]|[}]|[{]|\\]|[[]'))) {
+        er = er.replaceAll(RegExp('[)]|[(]|[}]|[{]|\\]|[[]'), '');
+      }
+        er = er.replaceAll(RegExp('Å¡'), 'š');
+
   ScaffoldMessenger.of(_).showSnackBar(SnackBar(
-    content: Text(txt),
+    content: Text(er),
     backgroundColor: Colors.redAccent,
   ));
 }

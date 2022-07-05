@@ -26,7 +26,7 @@ class JoinedChallengesEventParticipantRepository {
     final endPoint = '/api/qr_code_scan/';
 
     final response =
-        await dioClient.getAnswer(endPoint, {"qr_code": "${qr_code}"});
+        await dioClient.getQrCode(endPoint, {"qr_code": "${qr_code}"});
     return response;
   }
 }
