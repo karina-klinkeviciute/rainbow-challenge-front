@@ -2,10 +2,14 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:formz/formz.dart';
+import 'package:rainbow_challenge/pages/registration/fields/current_password.dart';
 import 'package:rainbow_challenge/pages/registration/fields/email_recovery.dart';
 import 'package:rainbow_challenge/pages/registration/fields/gender.dart';
 import 'package:rainbow_challenge/pages/registration/fields/gender_other.dart';
+import 'package:rainbow_challenge/pages/registration/fields/new_password.dart';
+import 'package:rainbow_challenge/pages/registration/fields/re_new_password.dart';
 import 'package:rainbow_challenge/pages/registration/fields/region.dart';
+import 'package:rainbow_challenge/pages/registration/fields/username.dart';
 import 'package:rainbow_challenge/pages/registration/fields/year_of_birth.dart';
 import 'package:rainbow_challenge/utils/repository/user_repository.dart';
 import 'package:rainbow_challenge/pages/registration/fields/confirm_password.dart';
@@ -31,7 +35,20 @@ class RegistrationBloc extends Bloc<RegEvent, RegState> {
 
   @override
   Stream<RegState> mapEventToState(RegEvent event) async* {
-    if (event is EmailChanged) {
+    if (event is GetOldData) {
+      final username = Username.pure(event.username);
+      final year_of_birth = YearOfBirth.pure(event.year_of_birth);
+      final gender = Gender.pure(event.gender);
+      final gender_other = GenderOther.pure(event.genderOther);
+      final region = Region.pure(event.regionName);
+      yield state.copyWith(
+        year_of_birth: year_of_birth,
+        gender_other: gender_other,
+        gender: gender,
+        username: username,
+        region: region,
+      );
+    } else if (event is EmailChanged) {
       final email = Email.dirty(event.email);
       yield state.copyWith(
         email: email,
@@ -63,6 +80,19 @@ class RegistrationBloc extends Bloc<RegEvent, RegState> {
           state.rules
         ]),
       );
+    } else if (event is NewPasswordChanged) {
+      final newPassword = NewPassword.dirty(event.newPassword);
+      final confirm = ReNewPassword.dirty(
+        newPassword: newPassword.value,
+        value: state.reNewPassword.value,
+      );
+      yield state.copyWith(
+        newPassword: newPassword,
+        status: Formz.validate([
+          newPassword,
+          confirm,
+        ]),
+      );
     } else if (event is ConfirmPasswordChanged) {
       final password = ConfirmPassword.dirty(
           password: state.password.value, value: event.confirmPassword);
@@ -77,6 +107,25 @@ class RegistrationBloc extends Bloc<RegEvent, RegState> {
           state.password,
           password,
           state.rules
+        ]),
+      );
+    } else if (event is ReNewPasswordChanged) {
+      final newPassword = ReNewPassword.dirty(
+          newPassword: state.newPassword.value, value: event.reNewPassword);
+
+      yield state.copyWith(
+        reNewPassword: newPassword,
+        status: Formz.validate([
+          state.newPassword,
+          newPassword,
+        ]),
+      );
+    } else if (event is CurrentPasswordChanged) {
+      final currentPassword = CurrentPassword.dirty(event.currentPassword);
+      yield state.copyWith(
+        currentPassword: currentPassword,
+        status: Formz.validate([
+          currentPassword,
         ]),
       );
     } else if (event is RulesChanged) {
@@ -185,16 +234,63 @@ class RegistrationBloc extends Bloc<RegEvent, RegState> {
               status: FormzStatus.submissionFailure,
               errorMessage: errorMessage);
       } catch (error) {
-        //print(error.toString());
-        //yield RegFailure(error: error.toString());
-        //_msg(error.toString());
         yield state.copyWith(
             status: FormzStatus.submissionFailure,
             errorMessage: error.toString());
       }
       //} on Exception {}
 
-    } else if (event is FormSubmitted) {
+    } else if (event is PasswordResetSubmitted) {
+      if (!state.status.isValidated) return;
+
+      yield state.copyWith(status: FormzStatus.submissionInProgress);
+
+      try {
+        var errorMessage = await userRepository.registerReSetPassword(
+          current_password: state.currentPassword.value,
+          new_password: state.newPassword.value,
+          re_new_password: state.reNewPassword.value,
+        );
+
+        if (errorMessage == "")
+          yield state.copyWith(status: FormzStatus.submissionSuccess);
+        else
+          yield state.copyWith(
+              status: FormzStatus.submissionFailure,
+              errorMessage: errorMessage);
+      } catch (error) {
+        yield state.copyWith(
+            status: FormzStatus.submissionFailure,
+            errorMessage: error.toString());
+      }
+      //} on Exception {}
+
+    } else if (event is SendNewUserData) {
+      try {
+        var errorMessage = await userRepository.patchNewUserData(
+          year_of_birth: state.year_of_birth.value.toString(),
+          gender_other: state.gender_other.value,
+          gender: state.gender.value,
+          username: state.username.value,
+          regionId: state.region.value,
+        );
+
+        if (errorMessage == "")
+          yield state.copyWith(status: FormzStatus.submissionSuccess);
+        else
+          yield state.copyWith(
+              status: FormzStatus.submissionFailure,
+              errorMessage: errorMessage);
+      } catch (error) {
+        yield state.copyWith(
+            status: FormzStatus.submissionFailure,
+            errorMessage: error.toString());
+      }
+      //} on Exception {}
+
+    }
+
+    if (event is FormSubmitted) {
       if (!state.status.isValidated) return;
 
       yield state.copyWith(status: FormzStatus.submissionInProgress);

@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:rainbow_challenge/utils/model/reg_user_model.dart';
 
 abstract class RegEvent extends Equatable {
   const RegEvent();
@@ -56,6 +57,24 @@ class PasswordChanged extends RegEvent {
   List<Object> get props => [password];
 }
 
+class NewPasswordChanged extends RegEvent {
+  const NewPasswordChanged({required this.newPassword});
+
+  final String newPassword;
+
+  @override
+  List<Object> get props => [newPassword];
+}
+
+class ReNewPasswordChanged extends RegEvent {
+  const ReNewPasswordChanged({required this.reNewPassword});
+
+  final String reNewPassword;
+
+  @override
+  List<Object> get props => [reNewPassword];
+}
+
 class ConfirmPasswordChanged extends RegEvent {
   const ConfirmPasswordChanged({
     required this.confirmPassword,
@@ -65,6 +84,15 @@ class ConfirmPasswordChanged extends RegEvent {
 
   @override
   List<Object> get props => [confirmPassword];
+}
+
+class CurrentPasswordChanged extends RegEvent {
+  const CurrentPasswordChanged({required this.currentPassword});
+
+  final String currentPassword;
+
+  @override
+  List<Object> get props => [currentPassword];
 }
 
 class RulesChanged extends RegEvent {
@@ -116,6 +144,27 @@ class YearOfBirthChanged extends RegEvent {
   List<Object> get props => [year_of_birth];
 }
 
+class GetOldData extends RegEvent {
+  const GetOldData(
+      {required this.gender,
+      required this.username,
+      required this.genderOther,
+      required this.regionName,
+      required this.year_of_birth});
+  final String gender;
+  final String username;
+  final String genderOther;
+  final String regionName;
+  final int year_of_birth;
+  @override
+  List<Object> get props =>
+      [regionName, genderOther, username, year_of_birth, gender];
+}
+
 class EmailRecoverySubmitted extends RegEvent {}
 
+class PasswordResetSubmitted extends RegEvent {}
+
 class FormSubmitted extends RegEvent {}
+
+class SendNewUserData extends RegEvent {}

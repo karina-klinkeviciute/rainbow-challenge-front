@@ -16,6 +16,71 @@ class UserRecoveryEmail {
   Map<String, dynamic> toDatabaseJson() => {"email": this.email_recovery};
 }
 
+class UserReSetPassword {
+  String new_password;
+  String re_new_password;
+  String current_password;
+
+  UserReSetPassword(
+      {required this.new_password,
+      required this.re_new_password,
+      required this.current_password});
+
+  Map<String, dynamic> toDatabaseJson() => {
+        "new_password": this.re_new_password,
+        "re_new_password": this.new_password,
+        "current_password": this.current_password
+      };
+}
+
+class UserUpdateData {
+  String gender;
+  String gender_other;
+  String username;
+  String regionId;
+  String year_of_birth;
+
+  UserUpdateData({
+    required this.gender,
+    required this.gender_other,
+    required this.username,
+    required this.regionId,
+    required this.year_of_birth,
+  });
+
+  Map<String, dynamic> toDatabaseJson() => {
+        "username": this.username,
+        "gender": this.gender,
+        "gender_other": this.gender_other,
+        "region": {"name": this.regionId},
+        "year_of_birth": this.year_of_birth,
+      };
+}
+
+class Region {
+  Region({
+    required this.name,
+    required this.uuid,
+    required this.points,
+  });
+
+  String name;
+  String uuid;
+  String points;
+
+  factory Region.fromJson(Map<String, dynamic> json) => Region(
+        name: json["name"],
+        uuid: json["uuid"],
+        points: json["points"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "name": name,
+        "uuid": uuid,
+        "points": points,
+      };
+}
+
 class UserRegister {
   String email;
   String password;
