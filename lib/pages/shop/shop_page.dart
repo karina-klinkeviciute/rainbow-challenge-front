@@ -115,8 +115,8 @@ class _PrizeList extends StatelessWidget {
             // scrollDirection: Axis.horizontal,
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                childAspectRatio: 0.65,
+            gridDelegate:  SliverGridDelegateWithFixedCrossAxisCount(
+                childAspectRatio: MediaQuery.of(context).size.width * 0.002,
                 crossAxisSpacing: 20,
                 mainAxisSpacing: 20,
                 crossAxisCount: 2),
@@ -172,7 +172,7 @@ class _PrizeList extends StatelessWidget {
                 ImageExternalWidget(
                   url: prizeItem.image!,
                   width: MediaQuery.of(context).size.width * 0.4,
-                  height: MediaQuery.of(context).size.width * 0.3,
+                  height: MediaQuery.of(context).size.height * 0.12,
                 )
               else
                 _RandomPlaceholderImage(),

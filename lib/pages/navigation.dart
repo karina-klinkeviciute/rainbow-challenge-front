@@ -47,7 +47,7 @@ class _NavigationPageState extends State<NavigationPage>
                 crossAxisSpacing: 10,
                 mainAxisSpacing: 10,
                 crossAxisCount: 2,
-                childAspectRatio: (2 / 1.3),
+                childAspectRatio: MediaQuery.of(context).size.height * 0.002,
                 children: <Widget>[
                   _GridItem(
                     itemIcon: ThemeIcons.challenges,

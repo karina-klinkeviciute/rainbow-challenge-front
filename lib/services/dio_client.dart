@@ -260,6 +260,26 @@ class DioClient {
     }
   }
 
+  Future<String> getQrCode(
+      String endPoint, Map<String, dynamic> itemObject) async {
+    try {
+      await addAuthorizationHeader();
+      final response = await _dio.post(endPoint, data: itemObject);
+      print('Prize claimed ${response}');
+      return response.data;
+    } on DioError catch (e) {
+      print(e.response);
+      throw e.response?.data.values;
+      // return <String, dynamic>{"_error": e};
+    } on Exception catch (e) {
+      // Unhandled exception
+
+      print(e);
+      throw Exception(e);
+      // return <String, dynamic>{"_exception": e};
+    }
+  }
+
   Future<RegUser> getUser(String endPoint) async {
     try {
       await addAuthorizationHeader();
@@ -319,8 +339,8 @@ class DioClient {
     try {
       await addAuthorizationHeader();
       final response = await _dio.patch(endPoint, data: itemObject);
-      print('Item updated ${response.data}');
-      return response.data;
+      print( response.statusMessage);
+      return response.statusMessage;
     } on DioError catch (e) {
       print(e);
     } on Exception catch (e) {

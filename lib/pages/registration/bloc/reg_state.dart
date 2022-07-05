@@ -16,6 +16,7 @@ import 'package:rainbow_challenge/pages/registration/fields/region.dart';
 import 'package:rainbow_challenge/pages/registration/fields/is_lgbtqia.dart';
 import 'package:rainbow_challenge/pages/registration/fields/rules.dart';
 import 'package:rainbow_challenge/pages/registration/fields/year_of_birth.dart';
+import 'package:rainbow_challenge/pages/registration/fields/reg_id.dart';
 
 class RegState extends Equatable {
   const RegState(
@@ -32,6 +33,7 @@ class RegState extends Equatable {
       this.username = const Username.pure(),
       this.year_of_birth = const YearOfBirth.pure(),
       this.region = const Region.pure(),
+      this.regionId = const RegionId.pure(),
       this.is_lgbtqia = const IsLgbtqia.pure(),
       this.rules = const Rules.pure(),
       this.status = FormzStatus.pure,
@@ -50,6 +52,7 @@ class RegState extends Equatable {
   final Username username;
   final YearOfBirth year_of_birth;
   final Region region;
+  final RegionId regionId;
   final IsLgbtqia is_lgbtqia;
   final Rules rules;
   final FormzStatus status;
@@ -70,6 +73,7 @@ class RegState extends Equatable {
         username,
         year_of_birth,
         region,
+        regionId,
         is_lgbtqia,
         rules,
         status
@@ -90,14 +94,16 @@ class RegState extends Equatable {
     Username? username,
     YearOfBirth? year_of_birth,
     Region? region,
+    RegionId? regionId,
     IsLgbtqia? is_lgbtqia,
     Rules? rules,
     FormzStatus? status,
-    String? errorMessage,
+    String? errorMessage
   }) {
     return RegState(
         name: name ?? this.name,
         email: email ?? this.email,
+        regionId: regionId??this.regionId,
         email_recovery: email_recovery ?? this.email_recovery,
         password: password ?? this.password,
         confirmPassword: confirmPassword ?? this.confirmPassword,

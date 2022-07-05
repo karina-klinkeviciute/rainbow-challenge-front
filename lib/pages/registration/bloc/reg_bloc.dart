@@ -8,6 +8,7 @@ import 'package:rainbow_challenge/pages/registration/fields/gender.dart';
 import 'package:rainbow_challenge/pages/registration/fields/gender_other.dart';
 import 'package:rainbow_challenge/pages/registration/fields/new_password.dart';
 import 'package:rainbow_challenge/pages/registration/fields/re_new_password.dart';
+import 'package:rainbow_challenge/pages/registration/fields/reg_id.dart';
 import 'package:rainbow_challenge/pages/registration/fields/region.dart';
 import 'package:rainbow_challenge/pages/registration/fields/username.dart';
 import 'package:rainbow_challenge/pages/registration/fields/year_of_birth.dart';
@@ -41,12 +42,14 @@ class RegistrationBloc extends Bloc<RegEvent, RegState> {
       final gender = Gender.pure(event.gender);
       final gender_other = GenderOther.pure(event.genderOther);
       final region = Region.pure(event.regionName);
+      final regionId = RegionId.pure(event.regionUuid);
       yield state.copyWith(
         year_of_birth: year_of_birth,
         gender_other: gender_other,
         gender: gender,
         username: username,
         region: region,
+        regionId:regionId,
       );
     } else if (event is EmailChanged) {
       final email = Email.dirty(event.email);
@@ -268,19 +271,21 @@ class RegistrationBloc extends Bloc<RegEvent, RegState> {
     } else if (event is SendNewUserData) {
       try {
         var errorMessage = await userRepository.patchNewUserData(
-          year_of_birth: state.year_of_birth.value.toString(),
+          year_of_birth: state.year_of_birth.value,
           gender_other: state.gender_other.value,
           gender: state.gender.value,
           username: state.username.value,
-          regionId: state.region.value,
+          regionId: state.regionId.value,
         );
-
-        if (errorMessage == "")
-          yield state.copyWith(status: FormzStatus.submissionSuccess);
+        print(errorMessage);
+        if (errorMessage == "OK")
+        
+          yield state.copyWith(status: FormzStatus.submissionSuccess,
+          errorMessage: 'Data Sended'
+          );
         else
           yield state.copyWith(
-              status: FormzStatus.submissionFailure,
-              errorMessage: errorMessage);
+              status: FormzStatus.submissionFailure);
       } catch (error) {
         yield state.copyWith(
             status: FormzStatus.submissionFailure,

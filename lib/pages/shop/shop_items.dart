@@ -103,10 +103,10 @@ class _ShopItemPageState extends State<ShopItemPage> {
                         children: [
                           Expanded(flex: 1, child: SizedBox()),
                           Expanded(
-                              flex: 2,
+                              flex: 3,
                               child: chooseAmount(
                                   _selectedValue, _remainingAmount)),
-                          Expanded(flex: 1, child: SizedBox())
+                          
                         ],
                       ),
                       Center(
