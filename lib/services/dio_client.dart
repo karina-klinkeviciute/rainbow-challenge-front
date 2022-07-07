@@ -260,13 +260,16 @@ class DioClient {
     }
   }
 
-  Future<String> getQrCode(
+  Future<String?> getQrCode(
       String endPoint, Map<String, dynamic> itemObject) async {
     try {
       await addAuthorizationHeader();
       final response = await _dio.post(endPoint, data: itemObject);
       print('Prize claimed ${response}');
-      return response.data;
+      if(response.statusCode == 201){
+        return 'Užduotis atlikta';
+      }
+      return response.statusMessage;
     } on DioError catch (e) {
       print(e.response);
       throw e.response?.data.values;

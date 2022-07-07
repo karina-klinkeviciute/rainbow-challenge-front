@@ -7,12 +7,10 @@ import 'package:rainbow_challenge/theme/colors.dart';
 import 'package:rainbow_challenge/utils/model/gender_model/gender_model.dart';
 import 'package:rainbow_challenge/utils/model/region/region_class.dart';
 import 'package:rainbow_challenge/utils/repository/user_repository.dart';
-import 'package:rainbow_challenge/widgets/headline.dart';
 import 'package:rainbow_challenge/widgets/auth_text_field.dart';
 import 'package:rainbow_challenge/pages/registration/bloc/reg_bloc.dart';
 import 'package:rainbow_challenge/pages/registration/bloc/reg_event.dart';
 import 'package:rainbow_challenge/pages/registration/bloc/reg_state.dart';
-import 'package:rainbow_challenge/pages/registration/registration_confirm.dart';
 import 'package:rainbow_challenge/widgets/widgets.dart';
 
 class UserSettingsForm extends StatelessWidget {
@@ -26,7 +24,7 @@ class UserSettingsForm extends StatelessWidget {
         .add(GetOldData(
             genderOther: value.genderOther,
             regionName: value.region?.name ?? '',
-            regionUuid: value.region?.uuid??'',
+            regionUuid: value.region?.uuid ?? '',
             username: value.username,
             year_of_birth: value.yearOfBirth,
             gender: value.gender)));
@@ -36,10 +34,13 @@ class UserSettingsForm extends StatelessWidget {
           if (state.status.isSubmissionFailure) {
             _msg(context, state.errorMessage);
           } else if (state.status.isSubmissionSuccess) {
-             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-    content: Text('Data Changed',textAlign: TextAlign.center,),
-    backgroundColor: Colors.green,
-  ));
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+              content: Text(
+                'Data Changed',
+                textAlign: TextAlign.center,
+              ),
+              backgroundColor: Colors.green,
+            ));
           }
         },
         child: WrapperMainWidget(
@@ -237,10 +238,14 @@ class _RegionInputField extends StatelessWidget {
                     borderSide:
                         BorderSide(color: ThemeColors.primaryColor, width: 1))),
             value: _selectedValue,
-            hint: Text(
-              'Regionas: ${state.region.value.length > 22 ? '${state.region.value.substring(0, 22)}' : state.region.value}',
-              textHeightBehavior:
-                  TextHeightBehavior(applyHeightToFirstAscent: true),
+            hint: SingleChildScrollView(
+              child: Text(
+                'Regionas: ${state.region.value.length > 22 ? '${state.region.value.substring(0, 22)}' : state.region.value}',
+                textScaleFactor:
+                    MediaQuery.of(context).size.width < 350 ? 0.75 : 1,
+                textHeightBehavior:
+                    TextHeightBehavior(applyHeightToFirstAscent: true),
+              ),
             ),
             key: const Key('Region_textField'),
             items: _regions,
@@ -275,11 +280,11 @@ class _RegSubmit extends StatelessWidget {
 }
 
 void _msg(_, txt) {
-  if(txt)
-  ScaffoldMessenger.of(_).showSnackBar(SnackBar(
-    content: Text(txt),
-    backgroundColor: Colors.redAccent,
-  ));
+  if (txt)
+    ScaffoldMessenger.of(_).showSnackBar(SnackBar(
+      content: Text(txt),
+      backgroundColor: Colors.redAccent,
+    ));
 }
 
 String _translate(String text) {
@@ -298,5 +303,5 @@ String _translate(String text) {
   if (text == 'preferNotToSay') {
     return "Nenoriu nurodyti";
   }
-  return 'No Gender';
+  return '';
 }

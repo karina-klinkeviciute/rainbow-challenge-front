@@ -2,10 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rainbow_challenge/pages/login/change_password_form.dart';
 import 'package:rainbow_challenge/pages/pages.dart';
+import 'package:rainbow_challenge/pages/profile/profile_balance_form.dart';
 import 'package:rainbow_challenge/pages/registration/bloc/reg_bloc.dart';
 import 'package:rainbow_challenge/pages/registration/user_setting_page.dart';
+import 'package:rainbow_challenge/services/dio_client.dart';
 import 'package:rainbow_challenge/theme/colors.dart';
 import 'package:rainbow_challenge/theme/headings.dart';
+import 'package:rainbow_challenge/utils/repository/user_profile_repository.dart';
 import 'package:rainbow_challenge/utils/repository/user_repository.dart';
 import 'package:rainbow_challenge/widgets/wrapper_custom_appbar.dart';
 import 'cubit/profile_info_cubit.dart';
@@ -183,7 +186,24 @@ class _MainArea extends StatelessWidget {
               ),
             );
           },
-          child: Text('Change password'),
+          child: Text('Keisti slaptažodį'),
+        ),
+        TextButton(
+          onPressed: () {
+            final ProfileRepository _profileRepository =
+                ProfileRepository(dioClient: DioClient());
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => BlocProvider(
+                  create: (_) =>
+                      ProfileInfoCubit(profileRepository: _profileRepository),
+                  child: ProfileRainbowForm(),
+                ),
+              ),
+            );
+          },
+          child: Text('Vaivorykščių suvestinė'),
         )
       ]);
     },
