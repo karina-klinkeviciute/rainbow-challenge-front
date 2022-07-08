@@ -6,30 +6,26 @@ import 'package:rainbow_challenge/theme/colors.dart';
 import 'package:rainbow_challenge/widgets/widgets.dart';
 import 'package:rainbow_challenge/utils/model/models.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:rainbow_challenge/widgets/wrapper_custom_appbar.dart';
 
-// TO DO: design _challenge
-// TO DO: replace front end filtering with backend endpoints
-
-class ChallengesPage extends StatefulWidget {
-  const ChallengesPage({Key? key}) : super(key: key);
+class JoinedChallengesPage extends StatefulWidget {
+  const JoinedChallengesPage({Key? key}) : super(key: key);
 
   @override
-  _ChallengesPageState createState() {
-    return _ChallengesPageState();
+  _JoinedChallengesPageState createState() {
+    return _JoinedChallengesPageState();
   }
 }
 
-class _ChallengesPageState extends State<ChallengesPage>
-    with AutomaticKeepAliveClientMixin<ChallengesPage> {
+class _JoinedChallengesPageState extends State<JoinedChallengesPage>
+    with AutomaticKeepAliveClientMixin<JoinedChallengesPage> {
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    BlocProvider.of<ChallengesCubit>(context).fetchChallenges();
-    return WrapperCustomAppbarWidget(
-      appBar: AppBar(automaticallyImplyLeading: false),
+    BlocProvider.of<ChallengesCubit>(context).fetchJoinedChallenges();
+    return const WrapperMainWidget(
+      useAppBar: false,
+      index: 4,
       mainArea: _MainArea(),
-      //  useAppBar: false,
     );
   }
 
@@ -47,49 +43,14 @@ class _MainArea extends StatelessWidget {
       child: Column(
         children: [
           HeadlineWidget(
-            title: AppLocalizations.of(context)!.menu_challenges,
+            title: AppLocalizations.of(context)!.menu_challenges_joined,
           ),
-          //    _LocalNavigation(),
-          //  _AllChallenges(challenges: []),
           _ChallengesList(),
-          //  _ChallengesList()
         ],
       ),
     );
   }
 }
-
-/*
-class _LocalNavigation extends StatefulWidget {
-  const _LocalNavigation({Key? key}) : super(key: key);
-
-  @override
-  __LocalNavigationState createState() => __LocalNavigationState();
-}
-
-class __LocalNavigationState extends State<_LocalNavigation> {
-  List<bool> isSelected = [true, false];
-  @override
-  Widget build(BuildContext context) {
-    return ToggleButtons(
-      children: const <Widget>[
-        Icon(Icons.ac_unit),
-        Icon(Icons.call),
-      ],
-      onPressed: (int index) {
-        setState(() {
-          isSelected[index] = !isSelected[index];
-        });
-      },
-      isSelected: isSelected,
-    );
-  }
-}
-*/
-
-// Code below could be shorter, I tried using `lib/constants/enum`, but
-// localizations don't work there without context.
-// ChallengeType? challengeType;
 
 class _ChallengesList extends StatelessWidget {
   const _ChallengesList({Key? key}) : super(key: key);
@@ -98,30 +59,30 @@ class _ChallengesList extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<ChallengesCubit, ChallengesState>(
         builder: (context, state) {
-      if (!(state is ChallengesLoaded))
+      if (!(state is JoinedChallengesLoaded))
         return Center(child: CircularProgressIndicator());
-      final challengesList = (state).challengesList;
-      final challengesListJoinable = challengesList
-        ..where((e) => e.can_be_joined == true);
-      final challengesTypeQuiz = challengesList.where((e) => e.type == 'quiz');
+      final challengesList = (state).joinedChallengesList;
+      final challengesListJoined = challengesList.map((e) => e.challengeData);
+      final challengesTypeQuiz =
+          challengesListJoined.where((e) => e.type == 'quiz');
       final challengesTypeArticle =
-          challengesListJoinable.where((e) => e.type == 'article');
+          challengesListJoined.where((e) => e.type == 'article');
       final challengesTypeEvent =
-          challengesListJoinable.where((e) => e.type == 'event');
+          challengesListJoined.where((e) => e.type == 'event');
       final challengesTypeCustom =
-          challengesListJoinable.where((e) => e.type == 'custom');
+          challengesListJoined.where((e) => e.type == 'custom');
       final challengesTypeSchoolGsa =
-          challengesListJoinable.where((e) => e.type == 'school_gsa');
+          challengesListJoined.where((e) => e.type == 'school_gsa');
       final challengesTypeEventOrg =
-          challengesListJoinable.where((e) => e.type == 'event_org');
+          challengesListJoined.where((e) => e.type == 'event_org');
       final challengesTypeStory =
-          challengesListJoinable.where((e) => e.type == 'story');
+          challengesListJoined.where((e) => e.type == 'story');
       final challengesTypeProject =
-          challengesListJoinable.where((e) => e.type == 'project');
+          challengesListJoined.where((e) => e.type == 'project');
       final challengesTypeReacting =
-          challengesListJoinable.where((e) => e.type == 'reacting');
+          challengesListJoined.where((e) => e.type == 'reacting');
       final challengesTypeSupport =
-          challengesListJoinable.where((e) => e.type == 'support');
+          challengesListJoined.where((e) => e.type == 'support');
 
       final List<dynamic> filteredChallengeTypes = [
         challengesTypeArticle,
@@ -134,7 +95,7 @@ class _ChallengesList extends StatelessWidget {
         challengesTypeSchoolGsa,
         challengesTypeStory,
         challengesTypeSupport
-      ];
+      ].where((e) => e.length != 0).toList();
 
       final List<String> challengeTypeNames = <String>[
         AppLocalizations.of(context)!.challenge_type_article +
@@ -157,7 +118,7 @@ class _ChallengesList extends StatelessWidget {
             ' (${challengesTypeStory.length})',
         AppLocalizations.of(context)!.challenge_type_support +
             ' (${challengesTypeSupport.length})',
-      ];
+      ].where((e) => !e.contains('(0)')).toList();
 
       return ListView.builder(
           shrinkWrap: true,
@@ -188,10 +149,8 @@ class _challengeType extends StatelessWidget {
                 .headline4!
                 .merge(const TextStyle(color: ThemeColors.neutralColor))),
         controlAffinity: ListTileControlAffinity.leading,
-        //  children: typeList.map((e) => _challenge(e)).toList());
         children: [
           ListView.builder(
-              //  scrollDirection: Axis.horizontal,
               shrinkWrap: true,
               itemCount: typeList.length,
               physics: const NeverScrollableScrollPhysics(),
@@ -203,10 +162,8 @@ class _challengeType extends StatelessWidget {
         ]);
   }
 
-  // Widget _challenge(Challenge challenge, context) - in case we would need it
   Widget _challenge(Challenge challenge, context) {
     return ListTile(
-      // subtitle: Text('can be joined ${challenge.can_be_joined}'),
       trailing: (challenge.is_joined)
           ? Icon(
               Icons.check_box_outline_blank,
@@ -223,20 +180,12 @@ class _challengeType extends StatelessWidget {
                   .textTheme
                   .bodyText2!
                   .merge(const TextStyle(color: ThemeColors.neutralColor))),
-      // subtitle: Text(challenge.description),
       onTap: () {
         Navigator.push(
             context,
             MaterialPageRoute(
                 builder: (context) => ChallengePage(challengeInfo: challenge)));
       },
-
-      /*
-      onTap: () {
-        Navigator.pushNamed(context, AppRoute.challenge,
-            arguments: ChallengesPageArguments(
-                description: 'ths', title: 'tr', uuid: 'rrr', points: 4));
-      },*/
     );
   }
 }

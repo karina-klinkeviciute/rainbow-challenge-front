@@ -36,7 +36,7 @@ class UserSettingsForm extends StatelessWidget {
           } else if (state.status.isSubmissionSuccess) {
             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
               content: Text(
-                'Data Changed',
+                'Nustatymai pakeisti',
                 textAlign: TextAlign.center,
               ),
               backgroundColor: Colors.green,
@@ -51,7 +51,7 @@ class UserSettingsForm extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                const HeadlineWidget(title: 'User settings'),
+                const HeadlineWidget(title: 'Naudotojo nustatymai'),
                 _AgeInputField(),
                 _RegionInputField(),
                 _GenderInputField(),
