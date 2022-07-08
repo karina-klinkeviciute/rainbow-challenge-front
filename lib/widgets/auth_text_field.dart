@@ -32,6 +32,7 @@ class AuthTextField extends StatelessWidget {
       child: TextFormField(
         keyboardType: keyboardType,
         decoration: InputDecoration(
+          errorMaxLines: 2,
           fillColor: Colors.white,
           contentPadding: EdgeInsets.symmetric(horizontal: 12),
           filled: true,

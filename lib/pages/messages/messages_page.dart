@@ -29,7 +29,17 @@ class _MessagesPageState extends State<MessagesPage> {
   @override
   Widget build(BuildContext context) {
     return WrapperMainWidget(
-      mainArea: getMainAreaView(context),
+      useAppBar: false,
+      index: 4,
+      useScroll: false,
+      mainArea: SizedBox(
+          width: MediaQuery.of(context).size.width * 0.8,
+          child: Column(
+            children: [
+              const HeadlineWidget(title: 'Naudotojo nustatymai'),
+              Expanded(child: getMainAreaView(context)),
+            ],
+          )),
       title: "Pranešimai",
     );
   }
@@ -99,7 +109,8 @@ class _MessagesPageState extends State<MessagesPage> {
         await MessagesRepository(dioClient: DioClient()).fetchMessages();
 
     setState(() {
-      messages = fetchedMessages;
+      messages = fetchedMessages
+        ..sort((a, b) => a.timeSent.compareTo(b.timeSent));
       isLoading = false;
     });
   }

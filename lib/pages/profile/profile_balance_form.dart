@@ -14,84 +14,122 @@ class ProfileRainbowForm extends StatelessWidget {
     return WrapperMainWidget(
       useAppBar: false,
       index: 1,
-      mainArea: FutureBuilder<RainbowBalance>(
-          future: getData(),
-          builder: (context, AsyncSnapshot<RainbowBalance> snapshot) {
-            if (!snapshot.hasData) {
-              return CircularProgressIndicator();
-            } else {
-              var earnings = snapshot.data?.earning;
-              var spendings = snapshot.data?.spending;
-              return SizedBox(
-                width: MediaQuery.of(context).size.width * 0.8,
-                child: Column(
-                  children: [
-                    Center(child: const HeadlineWidget(title: 'Vaivorykštės')),
-                    Padding(
-                      padding: const EdgeInsets.all(10),
-                      child: Text(
-                        'Gautos vaivorykštės:      ${snapshot.data!.earnedRainbows.toString()}',
-                        style: TextStyle(fontSize: 18),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(10),
-                      child: Text(
-                        'Aktyvios vaivorykštės:  ${snapshot.data!.remainingRainbows.toString()}',
-                        style: TextStyle(fontSize: 18),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(10, 30, 10, 10),
-                      child: Text(
-                        'Vaivorykštės gavai už šias užduotis:',
-                        style: TextStyle(fontSize: 20),
-                      ),
-                    ),
-                    DataTable(
-                      border: TableBorder.all(
-                          borderRadius: BorderRadius.circular(20)),
-                      columns: [
-                        DataColumn(
-                          label: Expanded(
-                            child: Text('Užduoties Pavadinimas'),
+      mainArea: SizedBox(
+        width: MediaQuery.of(context).size.width * 0.8,
+        child: Column(
+          children: [
+            const HeadlineWidget(title: 'Vaivorykštės'),
+            FutureBuilder<RainbowBalance>(
+                future: getData(),
+                builder: (context, AsyncSnapshot<RainbowBalance> snapshot) {
+                  if (!snapshot.hasData) {
+                    return Center(child: CircularProgressIndicator());
+                  } else {
+                    var _earnings = snapshot.data?.earning;
+                    var _spendings = snapshot.data?.spending;
+                    return Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(10),
+                          child: Text(
+                            'Gautos vaivorykštės:      ${snapshot.data!.earnedRainbows.toString()}',
+                            style: TextStyle(fontSize: 18),
                           ),
                         ),
-                        DataColumn(
-                            label: ImageLocalWidget(
-                          url: 'assets/images/rainbow.png',
-                          height: MediaQuery.of(context).size.height * 0.05,
-                        ))
+                        Padding(
+                          padding: const EdgeInsets.all(10),
+                          child: Text(
+                            'Aktyvios vaivorykštės:  ${snapshot.data!.remainingRainbows.toString()}',
+                            style: TextStyle(fontSize: 18),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(10, 30, 10, 10),
+                          child: Text(
+                            'Vaivorykštės gavai už šias užduotis:',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                        DataTable(
+                          border: TableBorder.all(
+                              borderRadius: BorderRadius.circular(20)),
+                          columns: [
+                            DataColumn(
+                              label: Expanded(
+                                child: Text(
+                                  'Užduoties Pavadinimas',
+                                  style: TextStyle(fontStyle: FontStyle.italic),
+                                ),
+                              ),
+                            ),
+                            DataColumn(
+                                label: Expanded(
+                              child: ImageLocalWidget(
+                                url: 'assets/images/rainbow.png',
+                                height:
+                                    MediaQuery.of(context).size.height * 0.05,
+                              ),
+                            ))
+                          ],
+                          rows: _earnings!
+                              .map((e) => DataRow(cells: [
+                                    DataCell(
+                                        Row(
+                                          children: [
+                                            Expanded(
+                                              child: Text(e.name,
+                                                  softWrap: false,
+                                                  overflow: TextOverflow.clip),
+                                            ),
+                                            Icon(
+                                              Icons.chevron_right_outlined,
+                                              color: ThemeColors.secondaryColor
+                                                  .withOpacity(0.7),
+                                              size: 24.0,
+                                            ),
+                                          ],
+                                        ),
+                                        onTap: (() => showDialog(
+                                            context: context,
+                                            builder: (context) => AlertDialog(
+                                                  shape: RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.all(
+                                                              Radius.circular(
+                                                                  20.0))),
+                                                  content: Text(e.name),
+                                                )))),
+                                    DataCell(Text(e.points.toString()))
+                                  ]))
+                              .toList(),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(10, 30, 10, 10),
+                          child: Text(
+                            'Vaivorykštes išleidai:',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                        ListView.builder(
+                            padding: EdgeInsets.symmetric(horizontal: 20),
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            itemCount: _spendings?.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              return _challengeType(
+                                  typeTitle: _spendings![index]);
+                            })
                       ],
-                      rows: earnings!
-                          .map((e) => DataRow(cells: [
-                                DataCell(Text(e.name)),
-                                DataCell(Text(
-                                  e.points.toString(),
-                                ))
-                              ]))
-                          .toList(),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(10, 30, 10, 10),
-                      child: Text(
-                        'Vaivorykštes išleidai:',
-                        style: TextStyle(fontSize: 20),
-                      ),
-                    ),
-                    ListView.builder(
-                        padding: EdgeInsets.symmetric(horizontal: 20),
-                        shrinkWrap: true,
-                        physics: const NeverScrollableScrollPhysics(),
-                        itemCount: spendings?.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          return _challengeType(typeTitle: spendings![index]);
-                        })
-                  ],
-                ),
-              );
-            }
-          }),
+                    );
+                  }
+                }),
+          ],
+        ),
+      ),
     );
   }
 
@@ -112,6 +150,8 @@ class _challengeType extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ExpansionTile(
+        collapsedIconColor: ThemeColors.secondaryColor,
+        iconColor: ThemeColors.secondaryColor,
         initiallyExpanded: false,
         title: Text(typeTitle.name,
             style: Theme.of(context)

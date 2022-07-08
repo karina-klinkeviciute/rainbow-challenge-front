@@ -182,6 +182,8 @@ class _challengeType extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ExpansionTile(
+        collapsedIconColor: ThemeColors.secondaryColor,
+        iconColor: ThemeColors.secondaryColor,
         title: Text(typeTitle,
             style: Theme.of(context)
                 .textTheme

@@ -24,7 +24,7 @@ extension Explanation on CurrentPasswordValidationError? {
   String? get title {
     switch (this) {
       case CurrentPasswordValidationError.invalid:
-        return "Slaptažodis turi būti ne trumpesnis negu 8 simboliai,\niš jų bent 1 skaičius";
+        return "Slaptažodis turi būti ne trumpesnis negu 8 simboliai, iš jų bent 1 skaičius";
       default:
         return null;
     }

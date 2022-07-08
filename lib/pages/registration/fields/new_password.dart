@@ -23,7 +23,7 @@ extension Explanation on NewPasswordValidationError? {
   String? get title {
     switch (this) {
       case NewPasswordValidationError.invalid:
-        return "Slaptažodis turi būti ne trumpesnis negu 8 simboliai,\niš jų bent 1 skaičius";
+        return "Slaptažodis turi būti ne trumpesnis negu 8 simboliai, iš jų bent 1 skaičius";
       default:
         return null;
     }

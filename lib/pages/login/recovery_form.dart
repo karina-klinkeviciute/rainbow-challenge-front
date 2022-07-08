@@ -64,7 +64,8 @@ class _RecoveryEmailInputField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<RegistrationBloc, RegState>(
-      buildWhen: (previous, current) => previous.email != current.email,
+      buildWhen: (previous, current) =>
+          previous.email_recovery != current.email_recovery,
       builder: (context, state) {
         return Padding(
           padding: const EdgeInsets.only(bottom: 16.0),
@@ -72,8 +73,9 @@ class _RecoveryEmailInputField extends StatelessWidget {
             hint: 'Įvesk el. pašto adresą',
             key: const Key('Recovery_email_textField'),
             isRequiredField: true,
-            error: state.email.error != null
-                ? (state.email.error as EmailRecoveryValidationError).title
+            error: state.email_recovery.error != null
+                ? (state.email_recovery.error as EmailRecoveryValidationError)
+                    .title
                 : null,
             keyboardType: TextInputType.emailAddress,
             onChanged: (email_recovery) => context

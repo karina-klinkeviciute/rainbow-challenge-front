@@ -46,6 +46,8 @@ class _ShopItemPageState extends State<ShopItemPage> {
           Padding(
             padding: const EdgeInsets.fromLTRB(40, 20, 40, 0),
             child: Hero(
+                placeholderBuilder: (context, heroSize, child) =>
+                    CircularProgressIndicator(),
                 tag: widget.name,
                 child: ImageExternalWidget(
                   url: widget.image!,
@@ -106,7 +108,6 @@ class _ShopItemPageState extends State<ShopItemPage> {
                               flex: 3,
                               child: chooseAmount(
                                   _selectedValue, _remainingAmount)),
-                          
                         ],
                       ),
                       Center(
