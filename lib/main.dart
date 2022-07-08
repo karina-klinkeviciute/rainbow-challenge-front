@@ -64,7 +64,7 @@ class App extends StatelessWidget {
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
           theme: DesignTheme.lightTheme,
-          darkTheme: DesignTheme.darkTheme,
+          darkTheme: DesignTheme.lightTheme,
           onGenerateTitle: (BuildContext context) =>
               AppLocalizations.of(context)!.app_title,
           localizationsDelegates: [
