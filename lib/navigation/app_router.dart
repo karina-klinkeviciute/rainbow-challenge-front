@@ -4,6 +4,8 @@ import 'package:rainbow_challenge/constants/app.dart';
 import 'package:rainbow_challenge/navigation/route_arguments/single_challenge_arguments.dart';
 import 'package:rainbow_challenge/pages/challenge/challenge_event_participant/qr_code_scanner/cubit/qr_code_scanner_cubit.dart';
 import 'package:rainbow_challenge/pages/challenge/challenge_event_participant/qr_code_scanner/qr_code_scanner_page.dart';
+import 'package:rainbow_challenge/pages/challenges/completed_challenges_page.dart';
+import 'package:rainbow_challenge/pages/challenges/joined_challenges_page.dart';
 import 'package:rainbow_challenge/pages/pages.dart';
 import 'package:rainbow_challenge/pages/profile/cubit/profile_info_cubit.dart';
 import 'package:rainbow_challenge/pages/regions/cubit/regions_cubit.dart';
@@ -117,6 +119,22 @@ class AppRouter {
                   create: (BuildContext context) => ChallengesCubit(
                       challengesRepository: challengesRepository),
                   child: ChallengesPage(),
+                ));
+
+      case AppRoute.challengesJoined:
+        return MaterialPageRoute(
+            builder: (_) => BlocProvider(
+                  create: (BuildContext context) => ChallengesCubit(
+                      challengesRepository: challengesRepository),
+                  child: JoinedChallengesPage(),
+                ));
+
+      case AppRoute.challengesCompleted:
+        return MaterialPageRoute(
+            builder: (_) => BlocProvider(
+                  create: (BuildContext context) => ChallengesCubit(
+                      challengesRepository: challengesRepository),
+                  child: CompletedChallengesPage(),
                 ));
 
       case AppRoute.challengeEventParticipant:
@@ -293,9 +311,10 @@ class AppRouter {
                 ));
 
       case AppRoute.challengesJoined:
-        return MaterialPageRoute(builder: (_) => ChallengesPage());
-      //  case AppRoute.challenge:
-      //    return MaterialPageRoute(builder: (_) => ChallengePage());
+        return MaterialPageRoute(builder: (_) => JoinedChallengesPage());
+
+      case AppRoute.challengesCompleted:
+        return MaterialPageRoute(builder: (_) => CompletedChallengesPage());
 
       case AppRoute.regions:
         return MaterialPageRoute(builder: (_) => RegionsPage());

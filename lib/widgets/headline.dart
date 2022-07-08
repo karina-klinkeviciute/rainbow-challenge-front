@@ -20,6 +20,7 @@ class HeadlineWidget extends StatelessWidget {
           Text(
             title.toUpperCase(),
             style: ThemeHeadings.themeHeading2,
+            textAlign: TextAlign.center,
           ),
 
           // Show subtitle only if it exists

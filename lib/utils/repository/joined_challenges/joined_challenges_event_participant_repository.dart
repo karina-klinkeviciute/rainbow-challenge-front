@@ -21,7 +21,7 @@ class JoinedChallengesEventParticipantRepository {
     return JoinedChallengeEventParticipant.fromJson(challengeRaw!);
   }
 
-  Future<String> scanChallenge({required String qr_code}) async {
+  Future<String?> scanChallenge({required String qr_code}) async {
     Api api = Api();
     final endPoint = '/api/qr_code_scan/';
 

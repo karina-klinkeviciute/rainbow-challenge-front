@@ -32,8 +32,7 @@ class _PageContent extends StatelessWidget {
               children: [
                 const HeadlineWidget(title: 'Apie projektą'),
                 const HtmlWidget(
-                    data:
-                        '<p style="text-align:center;">Turinys kuriamas!</p>'),
+                    data: '<p style="text-align:center;">info@tja.lt</p>'),
                 const SizedBox(height: 20),
               ],
             ),

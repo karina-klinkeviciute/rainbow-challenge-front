@@ -80,16 +80,18 @@ class _NavigationPageState extends State<NavigationPage>
                     pageRoute: AppRoute.qrCode,
                   ),
                   _GridItem(
+                    isAppRoute: true,
                     itemIcon: ThemeIcons.challengesJoined,
                     itemTitle:
                         AppLocalizations.of(context)!.menu_challenges_joined,
-                    // AppRoute.challengesJoined
-                    page: 2,
+                    pageRoute: AppRoute.challengesJoined,
                   ),
                   _GridItem(
-                    itemIcon: ThemeIcons.shop,
-                    itemTitle: AppLocalizations.of(context)!.menu_shop,
-                    page: 3,
+                    isAppRoute: true,
+                    itemIcon: ThemeIcons.challengesCompleted,
+                    itemTitle:
+                        AppLocalizations.of(context)!.challenge_type_completed,
+                    pageRoute: AppRoute.challengesCompleted,
                   ),
                   _GridItem(
                     isAppRoute: true,

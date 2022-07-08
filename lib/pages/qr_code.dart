@@ -105,7 +105,7 @@ class QrCodePageState extends State<QrCodePage> {
         builder: (BuildContext context) => AlertDialog(
           elevation: 80,
           title: const Text('Ačiū'),
-          content: Text('$response'), //TODO add localizations
+          content: Text('$response',textAlign: TextAlign.center), //TODO add localizations
           actions: <Widget>[
             TextButton(
               onPressed: () {
@@ -121,6 +121,13 @@ class QrCodePageState extends State<QrCodePage> {
       var er = e.toString();
       if (er.contains(RegExp('[)]|[(]|[}]|[{]|\\]|[[]'))) {
         er = er.replaceAll(RegExp('[)]|[(]|[}]|[{]|\\]|[[]'), '');
+        print(er);
+        if(er=="You have already completed this challenge"){
+          er='Jūs jau atlikote šią užduotį anksčiau';
+        }        if(er=="QR code is invalid."){
+          er='QR kodas negaliojantis';
+        }
+        
         setState(() {});
       }
       await showDialog<String>(
@@ -128,7 +135,7 @@ class QrCodePageState extends State<QrCodePage> {
         builder: (BuildContext context) => AlertDialog(
           elevation: 80,
           title: const Text('Ačiū'),
-          content: Text('${er}'), //TODO add localizations
+          content: Text('${er}',textAlign: TextAlign.center), //TODO add localizations
           actions: <Widget>[
             TextButton(
               onPressed: () {

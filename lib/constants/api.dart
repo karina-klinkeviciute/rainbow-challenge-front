@@ -65,6 +65,9 @@ class Api {
       '​/api​/joined_challenge​/story_joined_challenge​/';
   static const String joinedChallengeSupportEndpoint =
       '​/api​/joined_challenge​/support_joined_challenge​/';
+  static const String usersJoinedChallenges = '/api/user/joined_challenges';
+  static const String usersCompletedChallenges =
+      '/api/user/completed_challenges';
 
   // Challenge types from backend
   static const challengeTypeArticle = "article";

@@ -14,6 +14,7 @@ class AppRoute {
   static const String challengeStory = "challenge_story";
   static const String challengeSupport = "challenge_support";
   static const String challengesJoined = 'challenges_joined';
+  static const String challengesCompleted = 'challenges_completed';
   static const String challenge = 'challenge';
 
   static const String profile = 'profile';
