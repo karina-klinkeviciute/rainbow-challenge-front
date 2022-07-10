@@ -24,7 +24,9 @@ class ShopItemsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return WrapperCustomAppbarWidget(
-      appBar: AppBar(automaticallyImplyLeading: false,),
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+      ),
       mainArea: _MainArea(),
       //  useAppBar: false,
     );
@@ -86,7 +88,7 @@ class _ProfileInfo extends StatelessWidget {
               StatsWidget(
                   localIcon: 'assets/images/rainbow.png',
                   number: profile.remaining_points.toString(),
-                  label:
+                  label: 'Aktyvios ' +
                       AppLocalizations.of(context)!.profile_page_stats_rainbows)
             ]),
           ]);
@@ -115,7 +117,7 @@ class _PrizeList extends StatelessWidget {
             // scrollDirection: Axis.horizontal,
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
-            gridDelegate:  SliverGridDelegateWithFixedCrossAxisCount(
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 childAspectRatio: MediaQuery.of(context).size.width * 0.002,
                 crossAxisSpacing: 20,
                 mainAxisSpacing: 20,

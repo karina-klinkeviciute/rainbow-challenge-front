@@ -92,6 +92,7 @@ class _AgeInputField extends StatelessWidget {
                         BorderSide(color: ThemeColors.primaryColor, width: 1))),
             hint: Text('Amžius: ${state.year_of_birth.value}'),
             value: _selectedValue,
+            isDense: false,
             key: const Key('Age_textField'),
             onChanged: (year_of_birth) => context
                 .read<RegistrationBloc>()
@@ -144,6 +145,7 @@ class _GenderInputField extends StatelessWidget {
                     BorderSide(color: ThemeColors.primaryColor, width: 1),
               ),
             ),
+            isDense: false,
             hint: Text('Lytis: ${_translate(state.gender.value)}'),
             value: _selectedValue,
             key: const Key('Gender_textField'),
@@ -238,6 +240,7 @@ class _RegionInputField extends StatelessWidget {
                     borderSide:
                         BorderSide(color: ThemeColors.primaryColor, width: 1))),
             value: _selectedValue,
+            isDense: false,
             hint: SingleChildScrollView(
               child: Text(
                 'Regionas: ${state.region.value.length > 22 ? '${state.region.value.substring(0, 22)}' : state.region.value}',

@@ -11,6 +11,7 @@ class WrapperMainWidget extends StatelessWidget {
   final bool useAppBar;
   final String title;
   final int index;
+  final bool useScroll;
 
   const WrapperMainWidget(
       {Key? key,
@@ -18,7 +19,8 @@ class WrapperMainWidget extends StatelessWidget {
       this.bodyBackgroundColor = Colors.white,
       this.useAppBar = true,
       this.title = "",
-      this.index = 0})
+      this.index = 0,
+      this.useScroll = true})
       : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -46,11 +48,18 @@ class WrapperMainWidget extends StatelessWidget {
                 ),
               ),
         backgroundColor: bodyBackgroundColor,
-        body: SingleChildScrollView(
-          child: Center(
-            child: Padding(
-                padding: const EdgeInsets.only(bottom: 30), child: mainArea),
-          ),
-        ));
+        body: (useScroll)
+            ? SingleChildScrollView(
+                child: Center(
+                  child: Padding(
+                      padding: const EdgeInsets.only(bottom: 30),
+                      child: mainArea),
+                ),
+              )
+            : Center(
+                child: Padding(
+                    padding: const EdgeInsets.only(bottom: 30),
+                    child: mainArea),
+              ));
   }
 }

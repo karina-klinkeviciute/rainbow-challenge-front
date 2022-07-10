@@ -122,6 +122,7 @@ class _AgeInputField extends StatelessWidget {
                     borderSide:
                         BorderSide(color: ThemeColors.primaryColor, width: 1))),
             hint: Text('Gimimo metai*'),
+            isDense: false,
             value: _selectedValue,
             key: const Key('Age_textField'),
             onChanged: (year_of_birth) => context
@@ -254,6 +255,7 @@ class _GenderInputField extends StatelessWidget {
               ),
             ),
             hint: Text('Lytis*'),
+            isDense: false,
             value: _selectedValue,
             key: const Key('Gender_textField'),
             onChanged: (gender) => context
@@ -326,7 +328,10 @@ class _RegionInputField extends StatelessWidget {
         .toList();
     var regionsList = regi.forEach((element) {
       _regions.add(DropdownMenuItem(
-        child: Text(element.name,style: TextStyle(fontSize: 20),),
+        child: Text(
+          element.name,
+          style: TextStyle(fontSize: 20),
+        ),
         value: element.uuid,
       ));
     });
@@ -345,6 +350,7 @@ class _RegionInputField extends StatelessWidget {
                     borderSide:
                         BorderSide(color: ThemeColors.primaryColor, width: 1))),
             value: _selectedValue,
+            isDense: false,
             hint: Text(
               'Regionas*',
               textHeightBehavior:
@@ -470,14 +476,12 @@ class _RegSubmit extends StatelessWidget {
   }
 }
 
-
-
 void _msg(_, txt) {
-      var er = txt.toString();
-      if (er.contains(RegExp('[)]|[(]|[}]|[{]|\\]|[[]'))) {
-        er = er.replaceAll(RegExp('[)]|[(]|[}]|[{]|\\]|[[]'), '');
-      }
-        er = er.replaceAll(RegExp('Å¡'), 'š');
+  var er = txt.toString();
+  if (er.contains(RegExp('[)]|[(]|[}]|[{]|\\]|[[]'))) {
+    er = er.replaceAll(RegExp('[)]|[(]|[}]|[{]|\\]|[[]'), '');
+  }
+  er = er.replaceAll(RegExp('Å¡'), 'š');
 
   ScaffoldMessenger.of(_).showSnackBar(SnackBar(
     content: Text(er),

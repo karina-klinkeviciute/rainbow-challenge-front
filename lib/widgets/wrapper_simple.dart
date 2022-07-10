@@ -11,7 +11,7 @@ class WrapperSimpleWidget extends StatelessWidget {
   const WrapperSimpleWidget(
       {Key? key,
       required this.mainArea,
-      this.bodyBackgroundColor = ThemeColors.bgColorLight})
+      this.bodyBackgroundColor = Colors.white})
       : super(key: key);
   @override
   Widget build(BuildContext context) {

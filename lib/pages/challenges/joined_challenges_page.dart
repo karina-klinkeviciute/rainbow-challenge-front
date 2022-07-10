@@ -120,15 +120,21 @@ class _ChallengesList extends StatelessWidget {
             ' (${challengesTypeSupport.length})',
       ].where((e) => !e.contains('(0)')).toList();
 
-      return ListView.builder(
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          itemCount: challengeTypeNames.length,
-          itemBuilder: (BuildContext context, int index) {
-            return _challengeType(
-                typeTitle: challengeTypeNames[index],
-                typeList: filteredChallengeTypes[index]);
-          });
+      return (challengeTypeNames.isEmpty)
+          ? Center(
+              child: Text(
+              'Pradėtų užduočių nėra',
+              style: Theme.of(context).textTheme.headline3,
+            ))
+          : ListView.builder(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: challengeTypeNames.length,
+              itemBuilder: (BuildContext context, int index) {
+                return _challengeType(
+                    typeTitle: challengeTypeNames[index],
+                    typeList: filteredChallengeTypes[index]);
+              });
     });
   }
 }
@@ -143,6 +149,8 @@ class _challengeType extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ExpansionTile(
+        collapsedIconColor: ThemeColors.secondaryColor,
+        iconColor: ThemeColors.secondaryColor,
         title: Text(typeTitle,
             style: Theme.of(context)
                 .textTheme

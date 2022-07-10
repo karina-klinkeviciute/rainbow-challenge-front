@@ -22,7 +22,7 @@ extension Explanation on EmailValidationError {
   String? get title {
     switch (this) {
       case EmailValidationError.invalid:
-        return "This is not a valid email";
+        return "Prašom įvesti tinkamą el. pašto adresą";
       default:
         return null;
     }

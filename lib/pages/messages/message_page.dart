@@ -37,13 +37,9 @@ class _MessagePageState extends State<MessagePage> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Text(DateFormat('yyyy-MM-dd kk:mm').format(message.timeSent)),
-              Container(
-                height: 24,
-              ),
+              Container(height: 24),
               Text(message.messageText ?? ""),
-              Container(
-                height: 24,
-              ),
+              Container(height: 24),
               Text(message.adminSender ?? ""),
             ],
           )),

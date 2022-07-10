@@ -34,7 +34,6 @@ class ProfilePage extends StatelessWidget {
     return WrapperCustomAppbarWidget(
       appBar: AppBar(
         leading: IconButton(
-          color: ThemeColors.neutralColorLight,
           icon: Icon(Icons.settings),
           // TODO: go to user settings
           onPressed: () {

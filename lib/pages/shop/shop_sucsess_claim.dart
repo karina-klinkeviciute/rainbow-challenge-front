@@ -27,7 +27,7 @@ class ShopSuccessPage extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                     builder: (context) {
-                      return NewsPage(index: 4);
+                      return NewsPage(index: 3);
                     },
                   ),
                 );
