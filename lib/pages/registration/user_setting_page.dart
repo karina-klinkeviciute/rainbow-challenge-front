@@ -90,7 +90,7 @@ class _AgeInputField extends StatelessWidget {
                 enabledBorder: UnderlineInputBorder(
                     borderSide:
                         BorderSide(color: ThemeColors.primaryColor, width: 1))),
-            hint: Text('Amžius: ${state.year_of_birth.value}'),
+            hint: Text('Gimimo metai: ${state.year_of_birth.value}'),
             value: _selectedValue,
             isDense: false,
             key: const Key('Age_textField'),
@@ -273,7 +273,7 @@ class _RegSubmit extends StatelessWidget {
         return Padding(
           padding: EdgeInsets.only(top: 20),
           child: ElevatedButton(
-              child: Text('Send new data'),
+              child: Text('Atnaujinti nustatymus'),
               onPressed: () =>
                   context.read<RegistrationBloc>().add(SendNewUserData())),
         );

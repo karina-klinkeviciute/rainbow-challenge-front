@@ -54,7 +54,7 @@ class QrCodeScannerPageState extends State<QrCodeScannerPage> {
             Expanded(
               flex: 2,
               child: Center(
-                child: Text('Paliesk viršuje, kad skenuotum QR kodą'),
+                child: Text('Paliesk juodą ekraną QR kodo skenavimui”'),
               ),
             ),
             //in case we need to add manually qr code
