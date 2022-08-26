@@ -283,6 +283,16 @@ class RegionDropDownLists {
       "points": 0
     },
     {
+      "name": "Vilnius",
+      "uuid": "e3f37d13-abee-4159-a5f4-a85162fccba8",
+      "points": 0
+    },
+    {
+      "name": "Vilniaus rajonas",
+      "uuid": "612e6940-09c4-47cc-8f42-8f7c8c480c38",
+      "points": 0
+    },
+    {
       "name": "Visaginas",
       "uuid": "104b0c68-e192-4ae0-9b55-88792ebc0af4",
       "points": 0
