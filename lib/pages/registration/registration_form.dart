@@ -219,12 +219,12 @@ class _GenderInputField extends StatelessWidget {
   Widget build(BuildContext context) {
     List<DropdownMenuItem<String>> _genders = [
       DropdownMenuItem(
-        child: Text('Vyras'),
-        value: Genders().man,
-      ),
-      DropdownMenuItem(
         child: Text('Moteris'),
         value: Genders().woman,
+      ),
+      DropdownMenuItem(
+        child: Text('Vyras'),
+        value: Genders().man,
       ),
       DropdownMenuItem(
         child: Text('Nebinarinė'),

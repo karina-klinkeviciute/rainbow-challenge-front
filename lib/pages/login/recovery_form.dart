@@ -99,7 +99,7 @@ class _RecoverySubmit extends StatelessWidget {
         return Padding(
           padding: EdgeInsets.only(top: 20),
           child: ElevatedButton(
-            child: Text('Submit Email'),
+            child: Text('Įvesk el. pašto adresą'),
             onPressed: state.status.isValidated
                 ? () => context
                     .read<RegistrationBloc>()
