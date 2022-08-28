@@ -209,6 +209,20 @@ class _challengeType extends StatelessWidget {
   Widget _challenge(Challenge challenge, context) {
     return ListTile(
       // subtitle: Text('can be joined ${challenge.can_be_joined}'),
+      leading: Container(
+        height: double.infinity,
+        child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              ImageLocalWidget(
+                url: 'assets/images/rainbow.png',
+                width: 16,
+              ),
+              Text(challenge.points.toString())
+            ]),
+      ),
       trailing: (challenge.is_joined)
           ? Icon(
               Icons.check_box_outline_blank,
