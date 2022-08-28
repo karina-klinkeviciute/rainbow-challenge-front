@@ -99,8 +99,12 @@ Widget _recoveryPassword(BuildContext context) {
 class _AgeInputField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    List<DropdownMenuItem<int>> _years =
-        <int>[for (var i = 1930; i <= 2030; i++) i].map((int value) {
+    DateTime dateTime = DateTime.now();
+    int currentYear = dateTime.year;
+    int oldestYear = currentYear - 100;
+    List<DropdownMenuItem<int>> _years = <int>[
+      for (var i = currentYear; i >= oldestYear; i--) i
+    ].map((int value) {
       return new DropdownMenuItem<int>(
         value: value,
         child: new Text(value.toString()),
