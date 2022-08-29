@@ -67,7 +67,7 @@ class _NavigationPageState extends State<NavigationPage>
                   ),
                   _GridItem(
                     isAppRoute: true,
-                    showBadge: true,
+                    showBadge: (_count != '' && _count != '0') ? true : false,
                     count: _count,
                     itemIcon: ThemeIcons.chat,
                     itemTitle: AppLocalizations.of(context)!.menu_messages,
@@ -115,7 +115,10 @@ class _NavigationPageState extends State<NavigationPage>
         await MessagesRepository(dioClient: DioClient()).fetchMessages();
 
     setState(() {
-      _count = fetchedMessages.length.toString();
+      _count = fetchedMessages
+          .where((message) => message.seen == false)
+          .length
+          .toString();
     });
   }
 }
@@ -176,13 +179,14 @@ class _GridItem extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Badge(
-                  badgeColor: Colors.transparent,
+                  badgeColor: ThemeColors.primaryColor,
                   elevation: 0,
                   position: BadgePosition(bottom: 20, start: 20),
                   showBadge: showBadge,
                   badgeContent: Text(
                     '$count',
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold, color: Colors.white),
                   ),
                   child: Icon(itemIcon, color: ThemeColors.secondaryColor)),
               Container(
