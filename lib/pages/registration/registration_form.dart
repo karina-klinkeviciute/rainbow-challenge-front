@@ -330,6 +330,7 @@ class _RegionInputField extends StatelessWidget {
     var regi = RegionDropDownLists.regionList
         .map((e) => RegionModel.fromJson(e))
         .toList();
+    regi.sort((a, b) => a.name.compareTo(b.name));
     var regionsList = regi.forEach((element) {
       _regions.add(DropdownMenuItem(
         child: Text(
