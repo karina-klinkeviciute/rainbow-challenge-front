@@ -38,6 +38,7 @@
     "profile_page_achievements": "Achievements",
     "action_login": "Login",
     "action_logout": "Logout",
+    "action_challenge_end": "Accomplish the challenge until",
     "shop_welcome_text" : "Exchange rainbows to nice little things!",
     "shop_subtitle_text": "Exchange rainbows"
 }

@@ -42,6 +42,7 @@ class _Page extends StatelessWidget {
                 title: challengeInfo.name,
                 points: challengeInfo.points,
               ),
+              ChallengeEndDateWidget(endDate: challengeInfo.end_date),
               ChallengeDescriptionWidget(
                   description: challengeInfo.description),
               Padding(
