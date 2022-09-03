@@ -15,6 +15,8 @@ Widget _challengeInfo =
         title: challengeTypeItem.main_challenge.name,
         points: challengeTypeItem.main_challenge.points,
       ),
+      ChallengeEndDateWidget(
+          endDate: challengeTypeItem.main_challenge.end_date),
       ChallengeDescriptionWidget(
           description: challengeTypeItem.main_challenge.description),
     ]);
