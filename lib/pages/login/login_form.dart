@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rainbow_challenge/pages/login/bloc/login_bloc.dart';
+import 'package:rainbow_challenge/pages/login/recovery_page.dart';
 import 'package:rainbow_challenge/pages/pages.dart';
 import 'package:rainbow_challenge/pages/registration/registration_page.dart';
 import 'package:rainbow_challenge/utils/repository/user_repository.dart';
@@ -84,19 +85,40 @@ class _LoginFormState extends State<LoginForm> {
                       Center(
                         child: Padding(
                             padding: EdgeInsets.only(top: 20),
-                            child: TextButton(
-                              onPressed: () {
-                                Navigator.pushReplacement(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => RegistrationPage(
-                                              userRepository: UserRepository(),
-                                            )));
-                              },
-                              child: const Text(
-                                'Neturi paskyros? Registruokis',
-                                textAlign: TextAlign.center,
-                              ), //TODO add localizations
+                            child: Column(
+                              children: [
+                                TextButton(
+                                  onPressed: () {
+                                    Navigator.pushReplacement(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                RegistrationPage(
+                                                  userRepository:
+                                                      UserRepository(),
+                                                )));
+                                  },
+                                  child: const Text(
+                                    'Neturi paskyros? Registruokis',
+                                    textAlign: TextAlign.center,
+                                  ), //TODO add localizations
+                                ),
+                                TextButton(
+                                  onPressed: () {
+                                    Navigator.pushReplacement(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => RecoveryPage(
+                                                  userRepository:
+                                                      UserRepository(),
+                                                )));
+                                  },
+                                  child: const Text(
+                                    'Užmiršai slaptažodį? Spausk čia',
+                                    textAlign: TextAlign.center,
+                                  ), //TODO localizations
+                                )
+                              ],
                             )),
                       )
                     ],
