@@ -22,12 +22,12 @@ class QuizPageConfirm extends StatelessWidget {
         width: MediaQuery.of(context).size.width * 0.8,
         child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
           Text(
-            'Teisingai atsakei ${count - 1} klausimų',
+            'Teisingai atsakei ${count} klausimų',
             textAlign: TextAlign.center,
             style: TextStyle(fontSize: 20),
           ),
           Text(
-            'Tau įskaičiuota ${count - 1} vaivorykščių',
+            'Tau įskaičiuota ${count} vaivorykščių',
             textAlign: TextAlign.center,
             style: TextStyle(fontSize: 20),
           ),
