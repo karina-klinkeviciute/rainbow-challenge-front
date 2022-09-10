@@ -40,6 +40,7 @@ class _PageContent extends StatelessWidget {
                 const HtmlWidget(
                     data: '<p style="text-align:center;">info@tja.lt</p>'),
                 const SizedBox(height: 20),
+                _Logos(),
               ],
             ),
           ),
@@ -62,6 +63,24 @@ class _About extends StatelessWidget {
       final about = (state).text;
       return HtmlWidget(data: about.body);
     });
+  }
+}
+
+class _Logos extends StatelessWidget {
+  const _Logos({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Row(
+        children: [
+          Image.asset(
+            '',
+            width: 100,
+          ),
+        ],
+      ),
+    );
   }
 }
 
