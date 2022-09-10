@@ -11,8 +11,6 @@ class AboutPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    BlocProvider.of<AboutCubit>(context)
-        .fetchText('b2197f44-b4ce-491b-b1aa-9852a44845fa');
     return const WrapperMainWidget(mainArea: _PageContent());
   }
 }
@@ -58,7 +56,11 @@ class _About extends StatelessWidget {
         .fetchText('b2197f44-b4ce-491b-b1aa-9852a44845fa');
     return BlocBuilder<AboutCubit, AboutState>(builder: (context, state) {
       if (!(state is AboutLoaded))
-        return Center(child: CircularProgressIndicator());
+        return Center(
+            child: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: CircularProgressIndicator(),
+        ));
       final about = (state).text;
       return HtmlWidget(data: about.body);
     });
@@ -85,7 +87,7 @@ class _Logos extends StatelessWidget {
                 'assets/images/logo_ac.png',
                 width: 120,
               ),
-              const SizedBox(width: 15),
+              const SizedBox(width: 20),
               Image.asset(
                 'assets/images/tja.jpg',
                 width: 120,
@@ -101,7 +103,7 @@ class _Logos extends StatelessWidget {
                 'assets/images/logo_rosa.png',
                 width: 120,
               ),
-              const SizedBox(width: 15),
+              const SizedBox(width: 20),
               Image.asset(
                 'assets/images/logo_frida.png',
                 width: 120,
