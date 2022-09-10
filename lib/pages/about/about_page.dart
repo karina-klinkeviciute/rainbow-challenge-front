@@ -4,9 +4,7 @@ import 'package:rainbow_challenge/widgets/widgets.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'cubit/about_cubit.dart';
-
-// About page
-// TO DO: further functionality, create and add LogosWidget(), API connection
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AboutPage extends StatelessWidget {
   AboutPage({Key? key}) : super(key: key);
@@ -35,7 +33,8 @@ class _PageContent extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const HeadlineWidget(title: 'Apie projektą'),
+                HeadlineWidget(
+                    title: AppLocalizations.of(context)!.about_page_title),
                 _About(),
                 const HtmlWidget(
                     data: '<p style="text-align:center;">info@tja.lt</p>'),
@@ -72,11 +71,42 @@ class _Logos extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Row(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Image.asset(
-            '',
-            width: 100,
+          HeadingLinedWidget(
+              title: AppLocalizations.of(context)!.about_page_logos),
+          Row(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Image.asset(
+                'assets/images/logo_ac.png',
+                width: 120,
+              ),
+              const SizedBox(width: 15),
+              Image.asset(
+                'assets/images/tja.jpg',
+                width: 120,
+              ),
+            ],
+          ),
+          Row(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Image.asset(
+                'assets/images/logo_rosa.png',
+                width: 120,
+              ),
+              const SizedBox(width: 15),
+              Image.asset(
+                'assets/images/logo_frida.png',
+                width: 120,
+              ),
+            ],
           ),
         ],
       ),

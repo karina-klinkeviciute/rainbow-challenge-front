@@ -9,7 +9,7 @@ class AboutCubit extends Cubit<AboutState> {
   AboutCubit({required this.textsRepository}) : super(AboutInitial());
 
   void fetchText(String uuid) {
-    Timer(Duration(seconds: 0), () {
+    Timer(Duration(milliseconds: 500), () {
       textsRepository.fetchText(uuid).then((text) {
         emit(AboutLoaded(text: text));
       });

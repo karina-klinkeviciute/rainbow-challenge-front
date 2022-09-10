@@ -40,5 +40,7 @@
     "action_logout": "Logout",
     "action_challenge_end": "Accomplish the challenge until",
     "shop_welcome_text" : "Exchange rainbows to nice little things!",
-    "shop_subtitle_text": "Exchange rainbows"
+    "shop_subtitle_text": "Exchange rainbows",
+    "about_page_title": "About the project",
+    "about_page_logos": "Project partners and sponsors"
 }

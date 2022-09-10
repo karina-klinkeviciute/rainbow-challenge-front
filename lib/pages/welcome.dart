@@ -60,7 +60,7 @@ class WelcomePage extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Image.asset('assets/images/active-citizens.png', height: 50),
+                  Image.asset('assets/images/logo_ac.png', height: 50),
                   const SizedBox(width: 15),
                   Image.asset('assets/images/tja.jpg'),
                 ],
