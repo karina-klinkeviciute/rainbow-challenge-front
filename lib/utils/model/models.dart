@@ -4,6 +4,7 @@ export 'region/region_class.dart';
 export 'medal/medal_class.dart';
 
 export 'news/news_class.dart';
+export 'text/text_model_class.dart';
 
 export 'challenge/challenge_class.dart';
 export 'challenge/challenge_article/challenge_article_class.dart';

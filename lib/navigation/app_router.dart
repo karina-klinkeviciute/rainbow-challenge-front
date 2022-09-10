@@ -9,6 +9,7 @@ import 'package:rainbow_challenge/pages/challenges/joined_challenges_page.dart';
 import 'package:rainbow_challenge/pages/pages.dart';
 import 'package:rainbow_challenge/pages/profile/cubit/profile_info_cubit.dart';
 import 'package:rainbow_challenge/pages/regions/cubit/regions_cubit.dart';
+import 'package:rainbow_challenge/pages/about/cubit/about_cubit.dart';
 import 'package:rainbow_challenge/pages/regions/regions_page.dart';
 import 'package:rainbow_challenge/pages/shop/cubit/shop_info_cubit.dart';
 import 'package:rainbow_challenge/pages/shop/cubit/shop_prize_cubit.dart';
@@ -35,6 +36,8 @@ import 'package:rainbow_challenge/pages/challenges/cubit/challenges_cubit.dart';
 // One of use cases is with Navigator: `Navigator.pushNamed(context, routeName)`.
 
 class AppRouter {
+  TextsRepository textsRepository = TextsRepository(dioClient: DioClient());
+
   RegionsRepository regionsRepository =
       RegionsRepository(dioClient: DioClient());
 
@@ -290,6 +293,14 @@ class AppRouter {
                   create: (BuildContext context) =>
                       RegionsCubit(regionsRepository: regionsRepository),
                   child: RegionsPage(),
+                ));
+
+      case AppRoute.about:
+        return MaterialPageRoute(
+            builder: (_) => BlocProvider(
+                  create: (BuildContext context) =>
+                      AboutCubit(textsRepository: textsRepository),
+                  child: AboutPage(),
                 ));
 
       case AppRoute.shopItems:
