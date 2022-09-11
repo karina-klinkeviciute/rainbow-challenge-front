@@ -2,7 +2,7 @@ export 'user_repository.dart';
 export 'user_profile_repository.dart';
 
 export 'news_repository.dart';
-
+export 'texts_repository.dart';
 export 'regions_repository.dart';
 
 export 'challenges/challenges_repository.dart';

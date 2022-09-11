@@ -14,7 +14,7 @@ export 'challenges/challenges_page.dart';
 export 'login/login_page.dart';
 export 'profile/profile_page.dart';
 export 'registration/registration_page.dart';
-export 'about.dart';
+export 'about/about_page.dart';
 export 'news/news_item_page.dart';
 export 'news/news_page.dart';
 

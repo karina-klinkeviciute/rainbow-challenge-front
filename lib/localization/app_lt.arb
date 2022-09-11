@@ -40,5 +40,7 @@
     "action_logout": "Atsijungti",
     "action_challenge_end": "Atlik šią užduotį iki",
     "shop_welcome_text": "Čia galėsi keisti vaivorykštes į mielus daikčiukus",
-    "shop_subtitle_text": "Keisk vaivorykštes į mielus daikčiukus"
+    "shop_subtitle_text": "Keisk vaivorykštes į mielus daikčiukus",
+    "about_page_title": "Apie projektą",
+    "about_page_logos": "Projekto partneriai ir rėmėjai"
 }
