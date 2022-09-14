@@ -72,6 +72,7 @@ class _Logos extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final double _width = 110;
     return Container(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -84,13 +85,24 @@ class _Logos extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Image.asset(
+                'assets/images/tja.jpg',
+                width: _width,
+              )
+            ],
+          ),
+          Row(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Image.asset(
                 'assets/images/logo_ac.png',
-                width: 120,
+                width: _width,
               ),
               const SizedBox(width: 20),
               Image.asset(
-                'assets/images/tja.jpg',
-                width: 120,
+                'assets/images/logo_jra.png',
+                width: _width,
               ),
             ],
           ),
@@ -101,12 +113,12 @@ class _Logos extends StatelessWidget {
             children: [
               Image.asset(
                 'assets/images/logo_rosa.png',
-                width: 120,
+                width: _width,
               ),
               const SizedBox(width: 20),
               Image.asset(
                 'assets/images/logo_frida.png',
-                width: 120,
+                width: _width,
               ),
             ],
           ),
