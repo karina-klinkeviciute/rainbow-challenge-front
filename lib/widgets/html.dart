@@ -30,9 +30,7 @@ class HtmlWidget extends StatelessWidget {
       onLinkTap: (url, _, __, ___) async {
         // print('url launched');
         if (await canLaunchUrl(Uri.parse(url!))) {
-          await launchUrl(
-            Uri.parse(url),
-          );
+          await launchUrl(Uri.parse(url), mode: LaunchMode.externalApplication);
         }
       },
     );
