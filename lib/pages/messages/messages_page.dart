@@ -112,7 +112,7 @@ class _MessagesPageState extends State<MessagesPage> {
 
     setState(() {
       messages = fetchedMessages
-        ..sort((a, b) => a.timeSent.compareTo(b.timeSent));
+        ..sort((a, b) => b.timeSent.compareTo(a.timeSent));
       isLoading = false;
     });
   }
