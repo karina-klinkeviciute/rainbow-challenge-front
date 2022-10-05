@@ -69,7 +69,7 @@ class _AgeInputField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<DropdownMenuItem<int>> _years =
-        <int>[for (var i = 1930; i <= 2030; i++) i].map((int value) {
+        <int>[for (var i = DateTime.now().year; i >= 1930; i--) i].map((int value) {
       return new DropdownMenuItem<int>(
         value: value,
         child: new Text(value.toString()),
