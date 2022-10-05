@@ -297,13 +297,13 @@ String _translate(String text) {
   if (text == 'woman') {
     return "Moteris";
   }
-  if (text == 'nonBinary') {
+  if (text == 'non-binary') {
     return "Nebinarinė";
   }
   if (text == 'other') {
     return "Kita";
   }
-  if (text == 'preferNotToSay') {
+  if (text == 'prefer_not_to_say') {
     return "Nenoriu nurodyti";
   }
   return '';
