@@ -281,7 +281,7 @@ class RegistrationBloc extends Bloc<RegEvent, RegState> {
         if (errorMessage == "OK")
         
           yield state.copyWith(status: FormzStatus.submissionSuccess,
-          errorMessage: 'Data Sended'
+          errorMessage: 'Data Sent'
           );
         else
           yield state.copyWith(

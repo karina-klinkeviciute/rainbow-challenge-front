@@ -160,7 +160,7 @@ class GetOldData extends RegEvent {
   final int year_of_birth;
   @override
   List<Object> get props =>
-      [regionName, genderOther, username, year_of_birth, gender,regionUuid];
+      [regionName, genderOther, username, year_of_birth, gender, regionUuid];
 }
 
 class EmailRecoverySubmitted extends RegEvent {}
