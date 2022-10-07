@@ -55,8 +55,8 @@ class UserSettingsForm extends StatelessWidget {
                 _AgeInputField(),
                 _RegionInputField(),
                 _GenderInputField(),
-                _GenderOtherInputField(),
-                _UsernameInputField(),
+                // _GenderOtherInputField(),
+                // _UsernameInputField(),
                 _RegSubmit()
               ],
             ),
@@ -163,55 +163,55 @@ class _GenderInputField extends StatelessWidget {
   }
 }
 
-class _GenderOtherInputField extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<RegistrationBloc, RegState>(
-      buildWhen: (previous, current) =>
-          current.gender_other.value != '' || current.gender.value == 'other',
-      builder: (context, state) {
-        if (state.gender_other.value != '' || state.gender.value == 'other') {
-          return Padding(
-            padding: const EdgeInsets.only(bottom: 16.0),
-            child: AuthTextField(
-              hint: 'Lytis, jei kita: ${state.gender_other.value}',
-              key: const Key('GenderOther_textField'),
-              isRequiredField: false,
-              keyboardType: TextInputType.text,
-              onChanged: (genderOther) => context
-                  .read<RegistrationBloc>()
-                  .add(GenderOtherChanged(genderOther: genderOther)),
-            ),
-          );
-        }
-        return SizedBox.shrink();
-      },
-    );
-  }
-}
+// class _GenderOtherInputField extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return BlocBuilder<RegistrationBloc, RegState>(
+//       buildWhen: (previous, current) =>
+//           current.gender_other.value != '' || current.gender.value == 'other',
+//       builder: (context, state) {
+//         if (state.gender_other.value != '' || state.gender.value == 'other') {
+//           return Padding(
+//             padding: const EdgeInsets.only(bottom: 16.0),
+//             child: AuthTextField(
+//               hint: 'Lytis, jei kita: ${state.gender_other.value}',
+//               key: const Key('GenderOther_textField'),
+//               isRequiredField: false,
+//               keyboardType: TextInputType.text,
+//               onChanged: (genderOther) => context
+//                   .read<RegistrationBloc>()
+//                   .add(GenderOtherChanged(genderOther: genderOther)),
+//             ),
+//           );
+//         }
+//         return SizedBox.shrink();
+//       },
+//     );
+//   }
+// }
 
-class _UsernameInputField extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<RegistrationBloc, RegState>(
-      buildWhen: (previous, current) => previous.username != current.username,
-      builder: (context, state) {
-        return Padding(
-          padding: const EdgeInsets.only(bottom: 16.0),
-          child: AuthTextField(
-            hint: 'Naudotojo vardas: ${state.username.value}',
-            key: const Key('Username_textField'),
-            isRequiredField: false,
-            keyboardType: TextInputType.text,
-            onChanged: (username) => context
-                .read<RegistrationBloc>()
-                .add(UserNameChanged(username: username)),
-          ),
-        );
-      },
-    );
-  }
-}
+// class _UsernameInputField extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return BlocBuilder<RegistrationBloc, RegState>(
+//       buildWhen: (previous, current) => previous.username != current.username,
+//       builder: (context, state) {
+//         return Padding(
+//           padding: const EdgeInsets.only(bottom: 16.0),
+//           child: AuthTextField(
+//             hint: 'Naudotojo vardas: ${state.username.value}',
+//             key: const Key('Username_textField'),
+//             isRequiredField: false,
+//             keyboardType: TextInputType.text,
+//             onChanged: (username) => context
+//                 .read<RegistrationBloc>()
+//                 .add(UserNameChanged(username: username)),
+//           ),
+//         );
+//       },
+//     );
+//   }
+// }
 
 class _RegionInputField extends StatelessWidget {
   @override

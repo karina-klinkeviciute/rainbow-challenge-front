@@ -342,7 +342,9 @@ class DioClient {
     try {
       await addAuthorizationHeader();
       final response = await _dio.patch(endPoint, data: itemObject);
-      print( response.statusMessage);
+      print(response.statusMessage);
+      print("Data sent: $itemObject");
+      print("User updated $response.data");
       return response.statusMessage;
     } on DioError catch (e) {
       print(e);

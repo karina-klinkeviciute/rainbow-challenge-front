@@ -49,7 +49,7 @@ class RegistrationBloc extends Bloc<RegEvent, RegState> {
         gender: gender,
         username: username,
         region: region,
-        regionId:regionId,
+        regionId: regionId,
       );
     } else if (event is EmailChanged) {
       final email = Email.dirty(event.email);
@@ -177,14 +177,14 @@ class RegistrationBloc extends Bloc<RegEvent, RegState> {
         ]),
       );
     } else if (event is RegionChanged) {
-      final region = Region.dirty(event.regionId);
+      final regionId = RegionId.dirty(event.regionId);
 
       yield state.copyWith(
-        region: region,
+        regionId: regionId,
         status: Formz.validate([
           //state.name,
           // state.username,
-          state.region,
+          state.regionId,
           // state.email,
           // state.password,
           // state.confirmPassword,
