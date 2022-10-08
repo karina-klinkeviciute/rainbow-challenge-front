@@ -308,7 +308,7 @@ class RegistrationBloc extends Bloc<RegEvent, RegState> {
             gender_other: state.gender_other.value,
             gender: state.gender.value,
             // username: 'qw',
-            region: state.region.value,
+            region: state.regionId.value,
             re_password: state.confirmPassword.value);
 
         if (errorMessage == "")

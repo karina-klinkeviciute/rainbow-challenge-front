@@ -363,9 +363,9 @@ class _RegionInputField extends StatelessWidget {
             ),
             key: const Key('Region_textField'),
             items: _regions,
-            onChanged: (regionID) => context
+            onChanged: (regionId) => context
                 .read<RegistrationBloc>()
-                .add(RegionChanged(regionId: regionID!)),
+                .add(RegionChanged(regionId: regionId!)),
           ),
         );
       },

@@ -220,6 +220,7 @@ class _RegionInputField extends StatelessWidget {
     var regi = RegionDropDownLists.regionList
         .map((e) => RegionModel.fromJson(e))
         .toList();
+    regi.sort((a, b) => a.name.compareTo(b.name));
     var regionsList = regi.forEach((element) {
       _regions.add(DropdownMenuItem(
         child: Text(element.name),
@@ -252,9 +253,9 @@ class _RegionInputField extends StatelessWidget {
             ),
             key: const Key('Region_textField'),
             items: _regions,
-            onChanged: (regionID) => context
+            onChanged: (regionId) => context
                 .read<RegistrationBloc>()
-                .add(RegionChanged(regionId: regionID!)),
+                .add(RegionChanged(regionId: regionId!)),
           ),
         );
       },
