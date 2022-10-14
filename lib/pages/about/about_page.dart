@@ -83,7 +83,7 @@ class _Logos extends StatelessWidget {
             children: [
               Image.asset(
                 'assets/images/logo_ac.png',
-                width: _width,
+                width: 220,
               )
             ],
           ),
