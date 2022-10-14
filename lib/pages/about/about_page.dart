@@ -34,9 +34,6 @@ class _PageContent extends StatelessWidget {
                 HeadlineWidget(
                     title: AppLocalizations.of(context)!.about_page_title),
                 _About(),
-                const HtmlWidget(
-                    data: '<p style="text-align:center;">info@tja.lt</p>'),
-                const SizedBox(height: 20),
                 _Logos(),
               ],
             ),
@@ -85,7 +82,7 @@ class _Logos extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Image.asset(
-                'assets/images/tja.jpg',
+                'assets/images/logo_ac.png',
                 width: _width,
               )
             ],
@@ -96,7 +93,7 @@ class _Logos extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Image.asset(
-                'assets/images/logo_ac.png',
+                'assets/images/tja.jpg',
                 width: _width,
               ),
               const SizedBox(width: 20),
