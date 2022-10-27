@@ -108,6 +108,9 @@ class _NewsList extends StatelessWidget {
 
   // TODO research: Should this widget be rewritten as stless widget?
   Widget _newsItem(News newsItem, context, index) {
+    String _itemText = newsItem.body.truncate(max: 85);
+    String _strippedHtml =
+        _itemText.replaceAll(RegExp(r'<[^>]*>|&[^;]+;'), ' ');
     return InkWell(
       onTap: () {
         Navigator.push(context, MaterialPageRoute(builder: (context) {
@@ -153,7 +156,7 @@ class _NewsList extends StatelessWidget {
                 Container(
                     //  height: 36,
                     child: Text(
-                  newsItem.body.truncate(max: 70),
+                  _strippedHtml,
                   overflow: TextOverflow.fade,
                   softWrap: true,
                 )),
