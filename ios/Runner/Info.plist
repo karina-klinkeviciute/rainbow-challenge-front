@@ -40,11 +40,13 @@
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<true/>
 	<key>io.flutter.embedded_views_preview</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
 	<string>This app needs camera access to scan QR codes</string>
-	<false/>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>This app needs access to the photo library</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 	<string>https</string>
