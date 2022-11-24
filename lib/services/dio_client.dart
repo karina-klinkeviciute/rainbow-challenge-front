@@ -358,9 +358,9 @@ class DioClient {
     try {
       await addAuthorizationHeader();
       final response = await _dio.delete(endPoint, data: itemObject);
-      print(response.statusMessage);
+      print("Status message: ${response.statusMessage}");
       print("Data sent: $itemObject");
-      print("User info: $response.data");
+      print("User info: ${response.data}");
       return response.statusMessage;
     } on DioError catch (e) {
       print(e);

@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
 import 'package:rainbow_challenge/constants/drop_down_lists.dart';
+import 'package:rainbow_challenge/pages/registration/delete_account_confirm.dart';
 import 'package:rainbow_challenge/pages/registration/fields/current_password.dart';
 import 'package:rainbow_challenge/theme/colors.dart';
 import 'package:rainbow_challenge/utils/repository/user_repository.dart';
@@ -42,13 +43,17 @@ class DeleteAccountPage extends StatelessWidget {
           if (state.status.isSubmissionFailure) {
             _msg(context, state.errorMessage);
           } else if (state.status.isSubmissionSuccess) {
-            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-              content: Text(
-                'Užklausa pavyko',
-                textAlign: TextAlign.center,
-              ),
-              backgroundColor: Colors.green,
-            ));
+            // ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            //   content: Text(
+            //     'Užklausa pavyko',
+            //     textAlign: TextAlign.center,
+            //   ),
+            //   backgroundColor: Colors.green,
+            // ));
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => DeleteAccountConfirm()));
           }
         },
         child: WrapperMainWidget(
@@ -60,7 +65,6 @@ class DeleteAccountPage extends StatelessWidget {
               children: [
                 HeadlineWidget(
                     title: AppLocalizations.of(context)!.delete_account),
-                // _UsernameInputField(),
                 _CurrentPasswordInputField(),
                 _DeleteSubmit(),
               ],

@@ -296,7 +296,7 @@ class RegistrationBloc extends Bloc<RegEvent, RegState> {
           current_password: state.currentPassword.value,
         );
         print(errorMessage);
-        if (errorMessage == "OK")
+        if (errorMessage == "" || errorMessage == "No Content")
           yield state.copyWith(
               status: FormzStatus.submissionSuccess, errorMessage: 'Data Sent');
         else
