@@ -4,7 +4,7 @@ description: Rainbow challenge
 version: 1.0.17+18
 
 environment:
-  sdk: ">=2.13.4 <3.0.0"
+  sdk: ">=2.17.0 <3.0.0"
 
 dependencies:
   badges: ^2.0.3
