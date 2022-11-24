@@ -44,5 +44,7 @@
     "about_page_title": "About the project",
     "about_page_logos": "Project partners and sponsors",
     "delete_account": "Delete account",
-    "delete_account_confirm": "Your account will be deleted in 7 days. Changed your mind? Contact info@rainbowchallenge.lt during next 3 days."
+    "delete_account_confirm": "Your account will be deleted in 7 days. Changed your mind? Contact info@rainbowchallenge.lt during next 3 days.",
+    "wrong_password": "Wrong password!"
+
 }

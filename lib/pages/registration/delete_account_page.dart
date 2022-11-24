@@ -126,7 +126,7 @@ class _DeleteSubmit extends StatelessWidget {
 
 void _msg(_, txt) {
   ScaffoldMessenger.of(_).showSnackBar(SnackBar(
-    content: Text(txt),
+    content: Text(AppLocalizations.of(_)!.wrong_password),
     backgroundColor: Colors.redAccent,
   ));
 }
