@@ -152,7 +152,7 @@ class GetOldData extends RegEvent {
       required this.regionName,
       required this.year_of_birth,
       required this.regionUuid});
-   final String regionUuid;   
+  final String regionUuid;
   final String gender;
   final String username;
   final String genderOther;
@@ -170,3 +170,5 @@ class PasswordResetSubmitted extends RegEvent {}
 class FormSubmitted extends RegEvent {}
 
 class SendNewUserData extends RegEvent {}
+
+class SendDeleteRequest extends RegEvent {}

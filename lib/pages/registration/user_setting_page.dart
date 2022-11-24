@@ -12,6 +12,8 @@ import 'package:rainbow_challenge/pages/registration/bloc/reg_bloc.dart';
 import 'package:rainbow_challenge/pages/registration/bloc/reg_event.dart';
 import 'package:rainbow_challenge/pages/registration/bloc/reg_state.dart';
 import 'package:rainbow_challenge/widgets/widgets.dart';
+import 'package:rainbow_challenge/pages/registration/delete_account_page.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class UserSettingsForm extends StatelessWidget {
   const UserSettingsForm({Key? key}) : super(key: key);
@@ -57,7 +59,22 @@ class UserSettingsForm extends StatelessWidget {
                 _GenderInputField(),
                 // _GenderOtherInputField(),
                 // _UsernameInputField(),
-                _RegSubmit()
+                _RegSubmit(),
+                TextButton(
+                    onPressed: () {
+                      final UserRepository _userRepository = UserRepository();
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => BlocProvider(
+                            create: (_) => RegistrationBloc(
+                                userRepository: _userRepository),
+                            child: DeleteAccountPage(),
+                          ),
+                        ),
+                      );
+                    },
+                    child: Text(AppLocalizations.of(context)!.delete_account)),
               ],
             ),
           ),
@@ -68,8 +85,9 @@ class UserSettingsForm extends StatelessWidget {
 class _AgeInputField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    List<DropdownMenuItem<int>> _years =
-        <int>[for (var i = DateTime.now().year; i >= 1930; i--) i].map((int value) {
+    List<DropdownMenuItem<int>> _years = <int>[
+      for (var i = DateTime.now().year; i >= 1930; i--) i
+    ].map((int value) {
       return new DropdownMenuItem<int>(
         value: value,
         child: new Text(value.toString()),

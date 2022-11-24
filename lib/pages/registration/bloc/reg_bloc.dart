@@ -279,13 +279,10 @@ class RegistrationBloc extends Bloc<RegEvent, RegState> {
         );
         print(errorMessage);
         if (errorMessage == "OK")
-        
-          yield state.copyWith(status: FormzStatus.submissionSuccess,
-          errorMessage: 'Data Sent'
-          );
-        else
           yield state.copyWith(
-              status: FormzStatus.submissionFailure);
+              status: FormzStatus.submissionSuccess, errorMessage: 'Data Sent');
+        else
+          yield state.copyWith(status: FormzStatus.submissionFailure);
       } catch (error) {
         yield state.copyWith(
             status: FormzStatus.submissionFailure,
@@ -293,6 +290,23 @@ class RegistrationBloc extends Bloc<RegEvent, RegState> {
       }
       //} on Exception {}
 
+    } else if (event is SendDeleteRequest) {
+      try {
+        var errorMessage = await userRepository.deleteUserRequest(
+          current_password: state.currentPassword.value,
+        );
+        print(errorMessage);
+        if (errorMessage == "" || errorMessage == "No Content")
+          yield state.copyWith(
+              status: FormzStatus.submissionSuccess, errorMessage: 'Data Sent');
+        else
+          yield state.copyWith(status: FormzStatus.submissionFailure);
+      } catch (error) {
+        yield state.copyWith(
+            status: FormzStatus.submissionFailure,
+            errorMessage: error.toString());
+      }
+      //} on Exception {}
     }
 
     if (event is FormSubmitted) {

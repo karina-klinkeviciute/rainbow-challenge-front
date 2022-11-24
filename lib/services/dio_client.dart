@@ -266,7 +266,7 @@ class DioClient {
       await addAuthorizationHeader();
       final response = await _dio.post(endPoint, data: itemObject);
       print('Prize claimed ${response}');
-      if(response.statusCode == 201){
+      if (response.statusCode == 201) {
         return 'Užduotis atlikta';
       }
       return response.statusMessage;
@@ -345,6 +345,22 @@ class DioClient {
       print(response.statusMessage);
       print("Data sent: $itemObject");
       print("User updated $response.data");
+      return response.statusMessage;
+    } on DioError catch (e) {
+      print(e);
+    } on Exception catch (e) {
+      // Unhandled exception
+      print(e);
+    }
+  }
+
+  deleteUser(String endPoint, Map<String, dynamic> itemObject) async {
+    try {
+      await addAuthorizationHeader();
+      final response = await _dio.delete(endPoint, data: itemObject);
+      print("Status message: ${response.statusMessage}");
+      print("Data sent: $itemObject");
+      print("User info: ${response.data}");
       return response.statusMessage;
     } on DioError catch (e) {
       print(e);

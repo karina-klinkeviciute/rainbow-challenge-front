@@ -42,5 +42,8 @@
     "shop_welcome_text": "Čia galėsi keisti vaivorykštes į mielus daikčiukus",
     "shop_subtitle_text": "Keisk vaivorykštes į mielus daikčiukus",
     "about_page_title": "Apie projektą",
-    "about_page_logos": "Projekto partneriai ir rėmėjai"
+    "about_page_logos": "Projekto partneriai ir rėmėjai",
+    "delete_account": "Ištrinti paskyrą",
+    "delete_account_confirm": "Paskyra bus ištrinta per 7 dienas. Apsigalvojai? Susisiek su info@rainbowchallenge.lt per 3 dienas.",
+    "wrong_password": "Neteisingas slaptažodis!"
 }

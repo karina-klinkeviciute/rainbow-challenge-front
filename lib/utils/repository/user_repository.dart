@@ -101,6 +101,16 @@ class UserRepository {
     return errorMessage;
   }
 
+  Future<String> deleteUserRequest({required String current_password}) async {
+    DioClient dio = DioClient();
+    CurrentPassword currentPassword =
+        CurrentPassword(current_password: current_password);
+    var errorMessage = await dio.deleteUser(
+        _patchUserDataURL, currentPassword.toDatabaseJson());
+
+    return errorMessage;
+  }
+
   Future<RegUser> getOldUserData() async {
     DioClient dio = DioClient();
 
