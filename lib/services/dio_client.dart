@@ -139,8 +139,8 @@ class DioClient {
       baseUrl: baseUrl,
       responseType: ResponseType.json,
       contentType: 'application/json', // Added contentType here
-      connectTimeout: 30000,
-      receiveTimeout: 30000,
+      connectTimeout: Duration(seconds: 30),
+      receiveTimeout: Duration(seconds: 30),
     ));
 
     //  initializeInterceptors();

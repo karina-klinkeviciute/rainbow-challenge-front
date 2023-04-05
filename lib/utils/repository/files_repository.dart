@@ -17,7 +17,7 @@ class FilesRepository {
         return response.map((e) => FileModel.fromJson(e)).toList();
       }
     } on DioError catch (e) {
-      print(e.message + '1111');
+      print(e.message! + '1111');
     }
 
     return List<FileModel>.empty();
