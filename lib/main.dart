@@ -3,6 +3,11 @@ import 'dart:io';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
+
+
 import 'package:rainbow_challenge/bloc/bottom_menu_cubit.dart';
 import 'package:rainbow_challenge/bloc/internet_cubit.dart';
 import 'package:rainbow_challenge/navigation/app_router.dart';
@@ -23,6 +28,10 @@ void main() async {
       await PlatformAssetBundle().load('assets/ca/lets-encrypt-r3.pem');
   SecurityContext.defaultContext
       .setTrustedCertificatesBytes(data.buffer.asUint8List());
+
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
 
   runApp(App(
       userRepository: UserRepository(),
