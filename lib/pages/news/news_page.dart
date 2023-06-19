@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rainbow_challenge/pages/profile/cubit/profile_info_cubit.dart';
@@ -28,7 +29,13 @@ import 'cubit/news_cubit.dart';
 class NewsPage extends StatelessWidget {
   int index;
 
-  NewsPage({Key? key, this.index = 0}) : super(key: key);
+  final fcmToken = FirebaseMessaging.instance.getToken();
+
+  NewsPage({Key? key, this.index = 0}) : super(key: key)
+  {
+
+    print(fcmToken);
+  }
 
   final ChallengesRepository challengesRepository =
       ChallengesRepository(dioClient: DioClient());
@@ -42,6 +49,8 @@ class NewsPage extends StatelessWidget {
   PrizeRepository prizeRepository = PrizeRepository(dioClient: DioClient());
 
   final NewsRepository newsRepository = NewsRepository(dioClient: DioClient());
+
+
 
   @override
   Widget build(BuildContext context) {
