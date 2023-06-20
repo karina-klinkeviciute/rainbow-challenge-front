@@ -34,6 +34,11 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
+  final fcmToken = await FirebaseMessaging.instance.getToken();
+
+  print("FCM TOKEN:");
+  print(fcmToken);
+
   runApp(App(
       userRepository: UserRepository(),
       appRouter: AppRouter(),

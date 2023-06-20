@@ -29,13 +29,9 @@ import 'cubit/news_cubit.dart';
 class NewsPage extends StatelessWidget {
   int index;
 
-  final fcmToken = FirebaseMessaging.instance.getToken();
 
-  NewsPage({Key? key, this.index = 0}) : super(key: key)
-  {
+  NewsPage({Key? key, this.index = 0}) : super(key: key);
 
-    print(fcmToken);
-  }
 
   final ChallengesRepository challengesRepository =
       ChallengesRepository(dioClient: DioClient());
