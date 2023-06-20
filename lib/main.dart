@@ -52,11 +52,13 @@ class App extends StatelessWidget {
   // Connectivity: to check if mobile
   // is connected to Wifi or Mobile Data
   final Connectivity connectivity;
+  final fcmToken;
 
   App(
       {Key? key,
       required this.userRepository,
       required this.connectivity,
+      required this.fcmToken,
       required this.appRouter})
       : assert(userRepository != null),
         super(key: key);
@@ -101,6 +103,7 @@ class App extends StatelessWidget {
                 //return SplashPage();
               }
               if (state is AuthenticationAuthenticated) {
+
                 return NewsPage();
               } else {
                 return RegistrationPage(userRepository: userRepository);
