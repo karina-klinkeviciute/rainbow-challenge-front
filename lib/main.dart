@@ -42,7 +42,9 @@ void main() async {
   runApp(App(
       userRepository: UserRepository(),
       appRouter: AppRouter(),
-      connectivity: Connectivity()));
+      connectivity: Connectivity()),
+      // fcmToken
+  );
 }
 
 // Perhaps App could be added as an import
@@ -52,13 +54,13 @@ class App extends StatelessWidget {
   // Connectivity: to check if mobile
   // is connected to Wifi or Mobile Data
   final Connectivity connectivity;
-  final fcmToken;
+  // final fcmToken;
 
   App(
       {Key? key,
       required this.userRepository,
       required this.connectivity,
-      required this.fcmToken,
+      // required this.fcmToken,
       required this.appRouter})
       : assert(userRepository != null),
         super(key: key);
