@@ -20,7 +20,7 @@ class Api {
       "/api/concrete_joined_challenge_file_list/";
 
   static const String fcmTokenEndpoint =
-      "/api/concrete_joined_challenge_file_list/";
+      "/api/fcm_device";
 
   // News
   static const String newsEndpoint = '/api/news/';

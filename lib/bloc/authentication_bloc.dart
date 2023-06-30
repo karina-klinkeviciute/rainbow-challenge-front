@@ -26,6 +26,9 @@ class AuthenticationBloc
       final bool hasToken = await userRepository.hasToken();
 
       if (hasToken) {
+        if(userRepository.fcmToken != null){
+          userRepository.sendFCMToken(fcmToken: userRepository.fcmToken);
+        }
         yield AuthenticationAuthenticated();
       } else {
         yield AuthenticationUnauthenticated();
@@ -37,6 +40,11 @@ class AuthenticationBloc
 
       //print(event.user);
       await userRepository.persistToken(user: event.user);
+
+      // Register FCM token after auth
+      if(userRepository.fcmToken != null){
+        userRepository.sendFCMToken(fcmToken: userRepository.fcmToken);
+      }
 
       yield AuthenticationAuthenticated();
     }

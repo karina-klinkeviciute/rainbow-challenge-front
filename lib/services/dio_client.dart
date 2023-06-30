@@ -432,6 +432,24 @@ class DioClient {
     _dio.options.headers = {"Authorization": "Token $token"};
   }
 
+  Future<String?> registerFCMToken({required dynamic endPoint, required dynamic itemObject}) async {
+    try {
+      await addAuthorizationHeader();
+      
+      print("Sending FCM token to Backend ${endPoint}");
+      final response = await _dio.post(endPoint, data: itemObject);
+
+      print("FCM token sent to Backend! Response: ${response.statusMessage}");
+
+      return response.statusMessage; 
+    } on DioError catch (e) {
+      print(e);
+      print(e.response);
+    } on Exception catch (e) {
+      print(e);
+    }
+  }
+
   Future<String> _getAccessToken() async {
     if (_token.isNotEmpty) return _token;
 

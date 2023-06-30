@@ -1,7 +1,9 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:io' show Platform;
 //import 'dart:developer';
 import 'package:http/http.dart' as http;
+import 'package:rainbow_challenge/constants/api.dart';
 import 'package:rainbow_challenge/services/dio_client.dart';
 import 'package:rainbow_challenge/utils/model/api_model.dart';
 
@@ -11,6 +13,18 @@ final _tokenURL = _base + _tokenEndpoint;
 final _registerURL = _base + "/auth/users/";
 final _recoveryEmailURL = _base + "/auth/users/reset_password/";
 final _reSetPasswordURL = _base + "/auth/users/set_password/";
+
+final _registerFCMTokenEndpoint = _base + Api.fcmTokenEndpoint;
+
+String _getDeviceType(){
+  if(Platform.isAndroid){
+    return "android";
+  }else if(Platform.isIOS){
+    return "ios";
+  }
+
+  return "unknown";
+}
 
 Future<Token> getToken(UserLogin userLogin) async {
   //print(_tokenURL);
@@ -64,6 +78,17 @@ Future<String?> createUserRecoveryEmail(
 
   return msg.entries.first.value.toString();
 }
+
+Future<String?> registerFCMToken({required dynamic fcmToken}) async {
+  DioClient dio = DioClient();
+  dynamic itemObject = 
+    {
+      "registration_id": fcmToken,
+      "type": _getDeviceType()
+    };
+  return dio.registerFCMToken(endPoint: _registerFCMTokenEndpoint, itemObject: itemObject);
+}
+
 
 // Future<String?> createReSetPassword(UserReSetPassword userReSetPassword) async {
 //   DioClient dio = DioClient();

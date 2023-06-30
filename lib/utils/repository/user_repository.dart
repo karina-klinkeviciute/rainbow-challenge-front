@@ -15,6 +15,14 @@ class UserRepository {
   final String _userAccessTokenKey = "userAccessToken";
   final storage = new FlutterSecureStorage();
 
+  final dynamic fcmToken;
+
+  UserRepository([this.fcmToken]);
+
+  Future<String?> sendFCMToken({required dynamic fcmToken}){
+    return registerFCMToken(fcmToken: fcmToken);
+  }
+
   Future<User> authenticate(
       {required String email, required String password}) async {
     UserLogin userLogin = UserLogin(email: email, password: password);
