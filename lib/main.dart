@@ -1,8 +1,14 @@
 import 'dart:io';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
+
+
 import 'package:rainbow_challenge/bloc/bottom_menu_cubit.dart';
 import 'package:rainbow_challenge/bloc/internet_cubit.dart';
 import 'package:rainbow_challenge/navigation/app_router.dart';
@@ -15,6 +21,7 @@ import 'package:rainbow_challenge/bloc/authentication_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import "package:flutter/services.dart";
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -24,10 +31,54 @@ void main() async {
   SecurityContext.defaultContext
       .setTrustedCertificatesBytes(data.buffer.asUint8List());
 
-  runApp(App(
-      userRepository: UserRepository(),
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
+  FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+    FlutterLocalNotificationsPlugin();
+  const AndroidInitializationSettings initializationSettingsAndroid =
+    AndroidInitializationSettings("@drawable/notif_icon");
+  final DarwinInitializationSettings initializationSettingsDarwin =
+    DarwinInitializationSettings();
+    
+  final InitializationSettings initializationSettings = InitializationSettings(
+      android: initializationSettingsAndroid,
+      iOS: initializationSettingsDarwin);
+  await flutterLocalNotificationsPlugin.initialize(initializationSettings);
+
+  final fcmToken = await FirebaseMessaging.instance.getToken();
+
+  print("FCM TOKEN:");
+  print(fcmToken);
+
+  FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
+    print('Got a message whilst in the foreground!');
+
+    if (message.notification != null) {
+      AndroidNotificationDetails notificationAndroidSpecifics =
+        AndroidNotificationDetails(
+            'default_channel_id', 'Miscellaneous',
+            importance: Importance.max,
+            priority: Priority.high);
+
+      NotificationDetails notificationPlatformSpecifics =
+          NotificationDetails(android: notificationAndroidSpecifics);
+
+      await flutterLocalNotificationsPlugin.show(
+          1,
+          message.notification?.title,
+          message.notification?.body,
+          notificationPlatformSpecifics);
+      }
+  });
+
+  runApp(
+    App(
+      userRepository: UserRepository(fcmToken),
       appRouter: AppRouter(),
-      connectivity: Connectivity()));
+      connectivity: Connectivity())
+  );
 }
 
 // Perhaps App could be added as an import
@@ -37,7 +88,7 @@ class App extends StatelessWidget {
   // Connectivity: to check if mobile
   // is connected to Wifi or Mobile Data
   final Connectivity connectivity;
-
+  
   App(
       {Key? key,
       required this.userRepository,
@@ -86,6 +137,7 @@ class App extends StatelessWidget {
                 //return SplashPage();
               }
               if (state is AuthenticationAuthenticated) {
+
                 return NewsPage();
               } else {
                 return RegistrationPage(userRepository: userRepository);

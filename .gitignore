@@ -8,6 +8,8 @@
 .buildlog/
 .history
 .svn/
+**/.vscode
+**/google-services.json
 
 # IntelliJ related
 *.iml
