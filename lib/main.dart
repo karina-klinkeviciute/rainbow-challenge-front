@@ -21,6 +21,7 @@ import 'package:rainbow_challenge/bloc/authentication_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import "package:flutter/services.dart";
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -34,10 +35,43 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
+  FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+    FlutterLocalNotificationsPlugin();
+  const AndroidInitializationSettings initializationSettingsAndroid =
+    AndroidInitializationSettings("@drawable/notif_icon");
+  final DarwinInitializationSettings initializationSettingsDarwin =
+    DarwinInitializationSettings();
+    
+  final InitializationSettings initializationSettings = InitializationSettings(
+      android: initializationSettingsAndroid,
+      iOS: initializationSettingsDarwin);
+  await flutterLocalNotificationsPlugin.initialize(initializationSettings);
+
   final fcmToken = await FirebaseMessaging.instance.getToken();
 
   print("FCM TOKEN:");
   print(fcmToken);
+
+  FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
+    print('Got a message whilst in the foreground!');
+
+    if (message.notification != null) {
+      AndroidNotificationDetails notificationAndroidSpecifics =
+        AndroidNotificationDetails(
+            'default_channel_id', 'Miscellaneous',
+            importance: Importance.max,
+            priority: Priority.high);
+
+      NotificationDetails notificationPlatformSpecifics =
+          NotificationDetails(android: notificationAndroidSpecifics);
+
+      await flutterLocalNotificationsPlugin.show(
+          1,
+          message.notification?.title,
+          message.notification?.body,
+          notificationPlatformSpecifics);
+      }
+  });
 
   runApp(App(
       userRepository: UserRepository(),
