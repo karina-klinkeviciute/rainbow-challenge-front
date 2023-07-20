@@ -27,6 +27,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     if (event is LoginButtonPressed) {
       yield LoginInitial();
 
+      // TODO: insert Google login/registration
+
       try {
         final user = await userRepository.authenticate(
           email: event.email,

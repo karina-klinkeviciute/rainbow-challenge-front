@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:formz/formz.dart';
 import 'package:rainbow_challenge/constants/drop_down_lists.dart';
 import 'package:rainbow_challenge/pages/login/recovery_page.dart';
@@ -57,12 +58,21 @@ class RegistrationForm extends StatelessWidget {
               //_IsLgbtqiaInputField(),
               _RulesCheckbox(),
               _RegSubmit(),
+              SignInButton(
+                Buttons.Google,
+                text: "Registruotis su Google", // TODO: localisations
+                onPressed: () => _handleGoogleRegister(context),
+              ),
               _LoginButton(context),
               _recoveryPassword(context)
             ],
           ),
         ));
   }
+}
+
+_handleGoogleRegister (BuildContext ctx) {
+  print("wassup");
 }
 
 Widget _LoginButton(BuildContext context) {

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_html/shims/dart_ui_real.dart';
+import 'package:flutter_signin_button/button_view.dart';
+import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:rainbow_challenge/pages/login/bloc/login_bloc.dart';
 import 'package:rainbow_challenge/pages/login/recovery_page.dart';
 import 'package:rainbow_challenge/pages/pages.dart';
@@ -75,6 +78,14 @@ class _LoginFormState extends State<LoginForm> {
                               ),
                             ),
                           ),
+                        ),
+                      ),
+                      Container(
+                        width: MediaQuery.of(context).size.width,
+                        child: SignInButton(
+                          Buttons.Google,
+                          text: "Prisijungti su Google", //TODO: localisationss
+                          onPressed: (){}
                         ),
                       ),
                       Container(
