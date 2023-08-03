@@ -1,13 +1,10 @@
 import 'dart:io';
-
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:firebase_core/firebase_core.dart';
-import 'firebase_options.dart';
-
+import 'package:rainbow_challenge/services/firebase_service.dart';
 
 import 'package:rainbow_challenge/bloc/bottom_menu_cubit.dart';
 import 'package:rainbow_challenge/bloc/internet_cubit.dart';
@@ -21,95 +18,74 @@ import 'package:rainbow_challenge/bloc/authentication_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import "package:flutter/services.dart";
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await FirebaseService.initializeFirebase();
 
   ByteData data =
       await PlatformAssetBundle().load('assets/ca/lets-encrypt-r3.pem');
   SecurityContext.defaultContext
       .setTrustedCertificatesBytes(data.buffer.asUint8List());
 
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
-
-  FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-    FlutterLocalNotificationsPlugin();
-  const AndroidInitializationSettings initializationSettingsAndroid =
-    AndroidInitializationSettings("@drawable/notif_icon");
-  final DarwinInitializationSettings initializationSettingsDarwin =
-    DarwinInitializationSettings();
-    
-  final InitializationSettings initializationSettings = InitializationSettings(
-      android: initializationSettingsAndroid,
-      iOS: initializationSettingsDarwin);
-  await flutterLocalNotificationsPlugin.initialize(initializationSettings);
-
-  final fcmToken = await FirebaseMessaging.instance.getToken();
+  final fcmToken = await FirebaseService.getDeviceToken();
+  final RemoteMessage? _message = await FirebaseService.firebaseMessaging.getInitialMessage();
+  final dynamic _pushNotifCategory = _message?.data["category"] ?? null;
 
   print("FCM TOKEN:");
   print(fcmToken);
 
-  FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
-    print('Got a message whilst in the foreground!');
-
-    if (message.notification != null) {
-      AndroidNotificationDetails notificationAndroidSpecifics =
-        AndroidNotificationDetails(
-            'default_channel_id', 'Miscellaneous',
-            importance: Importance.max,
-            priority: Priority.high);
-
-      NotificationDetails notificationPlatformSpecifics =
-          NotificationDetails(android: notificationAndroidSpecifics);
-
-      await flutterLocalNotificationsPlugin.show(
-          1,
-          message.notification?.title,
-          message.notification?.body,
-          notificationPlatformSpecifics);
-      }
-  });
+  print("Initial message category: ");
+  print(_message?.data["category"]);
 
   runApp(
     App(
       userRepository: UserRepository(fcmToken),
       appRouter: AppRouter(),
-      connectivity: Connectivity())
+      connectivity: Connectivity(), 
+      pushNotifCategory: _pushNotifCategory
+      )
   );
 }
 
 // Perhaps App could be added as an import
-class App extends StatelessWidget {
+
+class App extends StatefulWidget {
   final UserRepository userRepository;
   final AppRouter appRouter;
-  // Connectivity: to check if mobile
-  // is connected to Wifi or Mobile Data
   final Connectivity connectivity;
-  
-  App(
-      {Key? key,
-      required this.userRepository,
-      required this.connectivity,
-      required this.appRouter})
-      : assert(userRepository != null),
-        super(key: key);
-  // A video guide about bloc, https://www.youtube.com/watch?v=THCkkQ-V1-8
-  // 1h:48min - explains how to provide bloc globally by
-  // wrapping MaterialApp()
-  // A MultiProvider that combines different providers comes here
+  final dynamic pushNotifCategory;
+
+  App({
+    Key? key,
+    required this.userRepository,
+    required this.connectivity,
+    required this.appRouter,
+    this.pushNotifCategory = null,
+  }) : assert(userRepository != null),
+       super(key: key);
+
+  @override
+  _AppState createState() => _AppState();
+}
+
+class _AppState extends State<App> {
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
         providers: [
           BlocProvider<AuthenticationBloc>(
               create: (context) =>
-                  AuthenticationBloc(userRepository: userRepository)
+                  AuthenticationBloc(userRepository: widget.userRepository)
                     ..add(AppStarted())),
           BlocProvider<InternetCubit>(
-              create: (context) => InternetCubit(connectivity: connectivity)),
+              create: (context) => InternetCubit(connectivity: widget.connectivity)),
           BlocProvider<BottomMenuCubit>(create: (context) => BottomMenuCubit()),
         ],
         child: MaterialApp(
@@ -128,7 +104,7 @@ class App extends StatelessWidget {
             Locale('lt', ''),
             // Locale('en', '')
           ],
-          onGenerateRoute: appRouter.onGenerateRoute,
+          onGenerateRoute: widget.appRouter.onGenerateRoute,
           initialRoute: '/',
           // Home value can be removed after we define the default route in AppRoute()
           home: BlocBuilder<AuthenticationBloc, AuthenticationState>(
@@ -137,10 +113,31 @@ class App extends StatelessWidget {
                 //return SplashPage();
               }
               if (state is AuthenticationAuthenticated) {
+                // Adding context to allow changing route whole in foreground
+                WidgetsBinding.instance.addPostFrameCallback((_) {
+                  FCMProvider.setContext(context);
+                });
 
+                //If the notification opened the app
+                if(widget.pushNotifCategory != null){
+                  WidgetsBinding.instance.addPostFrameCallback((_) async {
+                    Future.delayed(const Duration(milliseconds: 4000), () async {
+                      await Navigator.of(context).pushNamed(getNotificationCategoryRoute(widget.pushNotifCategory));
+                    });
+                  });
+                }
+
+                // If app received notification while in background
+                Stream<RemoteMessage> _stream = FirebaseMessaging.onMessageOpenedApp;
+                _stream.listen((RemoteMessage event) async {
+                  if (event.data != null) {
+                    print("Handling category from stream: " + event.data["category"].toString());
+                    await Navigator.of(context).pushNamed(getNotificationCategoryRoute(event.data["category"].toString()));
+                  }
+                });
                 return NewsPage();
               } else {
-                return RegistrationPage(userRepository: userRepository);
+                return RegistrationPage(userRepository: widget.userRepository);
               }
             },
           ),
