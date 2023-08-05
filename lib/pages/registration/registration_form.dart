@@ -6,6 +6,7 @@ import 'package:formz/formz.dart';
 import 'package:rainbow_challenge/constants/drop_down_lists.dart';
 import 'package:rainbow_challenge/pages/login/recovery_page.dart';
 import 'package:rainbow_challenge/pages/pages.dart';
+import 'package:rainbow_challenge/services/api_connection.dart';
 import 'package:rainbow_challenge/theme/colors.dart';
 import 'package:rainbow_challenge/utils/model/gender_model/gender_model.dart';
 import 'package:rainbow_challenge/utils/model/region/region_class.dart';
@@ -23,11 +24,36 @@ import 'package:rainbow_challenge/pages/registration/registration_confirm.dart';
 
 import 'fields/email.dart';
 
-class RegistrationForm extends StatelessWidget {
+// Google Oauth flow
+import 'package:flutter_web_auth/flutter_web_auth.dart';
+
+class RegistrationForm extends StatefulWidget {
   const RegistrationForm({Key? key}) : super(key: key);
+  
+  @override
+  State<StatefulWidget> createState() => _RegistrationFormState();
+}
+
+class _RegistrationFormState extends State<RegistrationForm> {
+
+  List<StatelessWidget> emailFields = [
+    _EmailInputField(),
+    _PasswordInputField(),
+    _ConfirmPasswordInput()
+  ];
+
+  bool withGoogle = true;
+
+  void _setGoogle(flag){
+    print("current $withGoogle , setting to $flag");
+    setState(() {
+      withGoogle = flag;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
+
     return BlocListener<RegistrationBloc, RegState>(
         listener: (context, state) {
           if (state.status.isSubmissionFailure) {
@@ -46,9 +72,10 @@ class RegistrationForm extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               const HeadlineWidget(title: 'Naujas vartotojas'),
-              _EmailInputField(),
-              _PasswordInputField(),
-              _ConfirmPasswordInput(),
+              
+              if(!withGoogle)
+                ...emailFields,
+
               //_NameInputField(),
               _AgeInputField(),
               _GenderInputField(),
@@ -57,12 +84,26 @@ class RegistrationForm extends StatelessWidget {
               _RegionInputField(),
               //_IsLgbtqiaInputField(),
               _RulesCheckbox(),
-              _RegSubmit(),
-              SignInButton(
-                Buttons.Google,
-                text: "Registruotis su Google", // TODO: localisations
-                onPressed: () => _handleGoogleRegister(context),
-              ),
+
+              if(withGoogle)
+                ...[
+                  _RegGoogleSubmit(),
+                  SignInButton(
+                    Buttons.Email,
+                    text: "Registruotis su el. paštu", // TODO: localisations
+                    onPressed: () => _setGoogle(false)
+                  )
+                ]
+              else if(!withGoogle)
+                ...[
+                  _RegSubmit(),
+                  SignInButton(
+                    Buttons.Google,
+                    text: "Registruotis su Google", // TODO: localisations
+                    onPressed: () => _setGoogle(true),
+                  ),
+                ],
+
               _LoginButton(context),
               _recoveryPassword(context)
             ],
@@ -71,9 +112,22 @@ class RegistrationForm extends StatelessWidget {
   }
 }
 
-_handleGoogleRegister (BuildContext ctx) {
-  print("wassup");
-}
+Future<void> _handleGoogleRegister(BuildContext context) async {
+    try {
+      print("requesting authorization url...");
+
+      // TODO: Send request to get authorization url
+
+      final String authURL = await getGoogleOauthAuthorizationUrl();
+
+      print("Got authorization_url:");
+      print(authURL);
+
+    } catch (error) {
+      print('Google Register Error:');
+      print(error);
+    }
+  }
 
 Widget _LoginButton(BuildContext context) {
   return TextButton(
@@ -488,6 +542,21 @@ class _RegSubmit extends StatelessWidget {
         );
       },
     );
+  }
+}
+
+class _RegGoogleSubmit extends StatelessWidget {
+  const _RegGoogleSubmit({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+          padding: EdgeInsets.only(top: 20),
+          child: ElevatedButton(
+            child: Text('Registruotis'),
+            onPressed: () => _handleGoogleRegister(context),
+          ),
+        );
   }
 }
 

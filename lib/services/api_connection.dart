@@ -89,6 +89,11 @@ Future<String?> registerFCMToken({required dynamic fcmToken}) async {
   return dio.registerFCMToken(endPoint: _registerFCMTokenEndpoint, itemObject: itemObject);
 }
 
+Future<String> getGoogleOauthAuthorizationUrl() async {
+  DioClient dio = DioClient();
+
+  return await dio.getGoogleOauthAuthorizationUrl();
+}
 
 // Future<String?> createReSetPassword(UserReSetPassword userReSetPassword) async {
 //   DioClient dio = DioClient();

@@ -450,6 +450,31 @@ class DioClient {
     }
   }
 
+  Future<String> getGoogleOauthAuthorizationUrl() async {
+    final String endpoint = Api.googleOauthFlowInitial;
+
+    String _returnUrl = "Error: Could not get authorization_url";
+
+    try {
+      final response = await _dio.get(endpoint);
+
+      final resCode = response.statusCode;
+
+      print(response.statusCode);
+      print(response.data.toString());
+
+      if(resCode == 200){
+        // TODO: extract authorization_url from data received
+        _returnUrl = response.data.toString();
+      }
+    }on DioError catch(err){
+      print("Sent request to: $endpoint");
+      throw err;
+    }
+    
+    return _returnUrl;
+  }
+
   Future<String> _getAccessToken() async {
     if (_token.isNotEmpty) return _token;
 

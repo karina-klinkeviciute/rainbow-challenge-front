@@ -22,6 +22,9 @@ class Api {
   static const String fcmTokenEndpoint =
       "/api/fcm_device";
 
+  static const String googleOauthFlowInitial =
+      "/auth/o/google-oauth2/?redirect_uri=https://rainbowchallenge.lt/api/user/oauth_token/";
+
   // News
   static const String newsEndpoint = '/api/news/';
   // Prizes

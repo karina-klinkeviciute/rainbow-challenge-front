@@ -1,3 +1,18 @@
+buildscript {
+ext.kotlin_version = '1.7.10'
+repositories {
+    jcenter()
+    google()
+    mavenCentral()
+}
+
+dependencies {
+    classpath 'com.android.tools.build:gradle:7.4.2'
+    classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+}
+
+}
+
 def localProperties = new Properties()
 def localPropertiesFile = rootProject.file('local.properties')
 if (localPropertiesFile.exists()) {
@@ -44,8 +59,8 @@ android {
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
         applicationId "rainbowchallenge.lt.rainbow_challenge"
-        minSdkVersion 20
-        targetSdkVersion 32
+        minSdkVersion 25
+        targetSdkVersion 33
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
         multiDexEnabled true
@@ -82,23 +97,11 @@ flutter {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'androidx.multidex:multidex: 2.0.1'
+    implementation 'androidx.multidex:multidex:2.0.1'
+    implementation 'com.google.android.gms:play-services-auth:20.6.0'
 
     // Support local notifications (when app is opened)
     coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.1.5'
     implementation 'androidx.window:window:1.0.0'
     implementation 'androidx.window:window-java:1.0.0'
-}
-
-buildscript {
-ext.kotlin_version = '1.4.21'
-repositories {
-    jcenter()
-    google()
-}
-
-dependencies {
-    classpath 'com.android.tools.build:gradle:4.1.0'
-    classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-}
 }
