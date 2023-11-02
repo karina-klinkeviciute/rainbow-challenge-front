@@ -461,11 +461,11 @@ class DioClient {
       final resCode = response.statusCode;
 
       print(response.statusCode);
-      print(response.data.toString());
+      print(response.data["authorization_url"] as String);
 
       if(resCode == 200){
         // TODO: extract authorization_url from data received
-        _returnUrl = response.data.toString();
+        _returnUrl = response.data["authorization_url"] as String;
       }
     }on DioError catch(err){
       print("Sent request to: $endpoint");

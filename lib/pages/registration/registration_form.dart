@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'dart:convert';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:formz/formz.dart';
@@ -113,20 +114,35 @@ class _RegistrationFormState extends State<RegistrationForm> {
 }
 
 Future<void> _handleGoogleRegister(BuildContext context) async {
-    try {
+    // try {
       print("requesting authorization url...");
 
       // TODO: Send request to get authorization url
 
-      final String authURL = await getGoogleOauthAuthorizationUrl();
+      final String authUrl = await getGoogleOauthAuthorizationUrl();
+
+      if(authUrl == null){
+        print("Error! authorization_url not found");
+        return;
+      }
 
       print("Got authorization_url:");
-      print(authURL);
+      print(authUrl);
 
-    } catch (error) {
-      print('Google Register Error:');
-      print(error);
-    }
+      print("Opening external auth flow overlay: ");
+      // Present the dialog to the user
+      final dynamic result = await FlutterWebAuth.authenticate(
+        url: authUrl, 
+        callbackUrlScheme: "rainbowchallenge");
+
+      // print(result.toString());
+      // Extract token from resulting url
+      // final token = Uri.parse(result).queryParameters['token']
+
+    // } catch (error) {
+    //   print('Google Register Error:');
+    //   print(error);
+    // }
   }
 
 Widget _LoginButton(BuildContext context) {
