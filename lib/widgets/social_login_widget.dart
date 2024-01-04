@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rainbow_challenge/bloc/authentication_bloc.dart';
+import 'package:rainbow_challenge/pages/news/news_page.dart';
 import 'package:rainbow_challenge/social_signin_config.dart';
 
 import 'package:sign_in_button/sign_in_button.dart';
@@ -44,6 +45,7 @@ class _SocialLoginWidgetState extends State<SocialLoginWidget> {
     try {
       final user = await authBloc.userRepository.authenticateSocial(type: widget.type, authCode: token);
       authBloc.add(LoggedIn(user: user));
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => NewsPage()));
     } catch (e) {
       onError(e);
     }

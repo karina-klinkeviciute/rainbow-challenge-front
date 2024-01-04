@@ -5,6 +5,7 @@ import 'package:rainbow_challenge/pages/login/recovery_page.dart';
 import 'package:rainbow_challenge/pages/pages.dart';
 import 'package:rainbow_challenge/pages/registration/registration_page.dart';
 import 'package:rainbow_challenge/utils/repository/user_repository.dart';
+import 'package:rainbow_challenge/widgets/social_login_widget.dart';
 
 class LoginForm extends StatefulWidget {
   @override
@@ -75,6 +76,13 @@ class _LoginFormState extends State<LoginForm> {
                               ),
                             ),
                           ),
+                        ),
+                      ),
+                      Container(
+                        width: MediaQuery.of(context).size.width * 0.85,
+                        child: Padding(
+                          padding: EdgeInsets.only(top: 16.0),
+                          child: SocialLoginWidget(type: SocialLoginWidgetType.google),
                         ),
                       ),
                       Container(
