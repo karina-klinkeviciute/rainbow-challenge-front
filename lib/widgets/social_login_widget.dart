@@ -1,7 +1,9 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:rainbow_challenge/pages/news/news_page.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:rainbow_challenge/bloc/authentication_bloc.dart';
+import 'package:rainbow_challenge/social_signin_config.dart';
 
 import 'package:sign_in_button/sign_in_button.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -32,16 +34,22 @@ class _SocialLoginWidgetState extends State<SocialLoginWidget> {
   Widget build(BuildContext context) {
     switch (widget.type) {
       case SocialLoginWidgetType.google:
-        return _GoogleButton(onAuthToken: onAuthToken, onError: onError);
+        return _GoogleButton(onAuthCode: onAuthCode, onError: onError);
     }
   }
 
-  void onAuthToken(String token) {
-    //FIXME authenticate with API first and start app session before calling this
-    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => NewsPage()));
+  void onAuthCode(String token) async {
+    AuthenticationBloc authBloc = BlocProvider.of<AuthenticationBloc>(context);
+
+    try {
+      final user = await authBloc.userRepository.authenticateSocial(type: widget.type, authCode: token);
+      authBloc.add(LoggedIn(user: user));
+    } catch (e) {
+      onError(e);
+    }
   }
 
-  void onError() {
+  void onError(Object error) {
     ScaffoldMessenger.of(context).showSnackBar(new SnackBar(
       content: new Text(AppLocalizations.of(context)!.social_sign_in_failed(widget.type.displayName)),
       backgroundColor: Colors.red,
@@ -51,14 +59,14 @@ class _SocialLoginWidgetState extends State<SocialLoginWidget> {
 }
 
 abstract class _SocialLoginButton extends StatelessWidget {
-  final VoidCallback onError;
-  final ValueSetter<String> onAuthToken;
+  final ValueSetter<Object> onError;
+  final ValueSetter<String> onAuthCode;
 
-  const _SocialLoginButton({Key? key, required this.onAuthToken, required this.onError}) : super(key: key);
+  const _SocialLoginButton({Key? key, required this.onAuthCode, required this.onError}) : super(key: key);
 }
 
 class _GoogleButton extends _SocialLoginButton {
-  _GoogleButton({required super.onAuthToken, required super.onError});
+  _GoogleButton({required super.onAuthCode, required super.onError});
 
   void _handleSignIn() async {
     var scopes = [
@@ -70,8 +78,8 @@ class _GoogleButton extends _SocialLoginButton {
       googleSignIn = GoogleSignIn(scopes: scopes);
     } else if (Platform.isIOS) {
       googleSignIn = GoogleSignIn(
-          clientId: "",
-          serverClientId: "",
+          clientId: SignInConfig.GOOGLE_IOS_CLIENT_ID,
+          serverClientId: SignInConfig.GOOGLE_SERVER_CLIENT_ID,
           scopes: scopes
       );
     }
@@ -79,15 +87,19 @@ class _GoogleButton extends _SocialLoginButton {
     try {
       if (googleSignIn != null) {
         final GoogleSignInAccount? googleAccount = await googleSignIn.signIn();
-
-        if (googleAccount != null && googleAccount.serverAuthCode != null) {
-          onAuthToken(googleAccount.serverAuthCode!);
-        } else {
+        if (googleAccount == null) {
           throw new Exception("Google Account not available");
+        }
+
+        var auth = await googleAccount.authentication;
+        if (auth.idToken != null) {
+          onAuthCode(auth.idToken!);
+        } else {
+          throw new Exception("Google Authentication not available");
         }
       }
     } catch (error) {
-      onError();
+      onError(error);
     }
   }
 

@@ -13,6 +13,7 @@ final _tokenURL = _base + _tokenEndpoint;
 final _registerURL = _base + "/auth/users/";
 final _recoveryEmailURL = _base + "/auth/users/reset_password/";
 final _reSetPasswordURL = _base + "/auth/users/set_password/";
+final _socialLoginURL = _base + "/api/user/oauth_token_id";
 
 final _registerFCMTokenEndpoint = _base + Api.fcmTokenEndpoint;
 
@@ -40,6 +41,18 @@ Future<Token> getToken(UserLogin userLogin) async {
     return Token.fromJson(json.decode(response.body));
   } else {
     //print(json.decode(response.body).toString());
+    throw Exception(json.decode(response.body));
+  }
+}
+
+Future<SocialLoginToken> getTokenFromSocial(String authCode) async {
+  final http.Response response = await http.post(
+    Uri.parse(_socialLoginURL),
+    body: {"token": authCode},
+  );
+  if (response.statusCode == 200) {
+    return SocialLoginToken.fromJson(json.decode(response.body));
+  } else {
     throw Exception(json.decode(response.body));
   }
 }

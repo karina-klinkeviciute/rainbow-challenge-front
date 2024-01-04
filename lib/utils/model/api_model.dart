@@ -134,6 +134,16 @@ class Token {
   }
 }
 
+class SocialLoginToken extends Token {
+  String email;
+
+  SocialLoginToken({required super.token, required this.email});
+
+  factory SocialLoginToken.fromJson(Map<String, dynamic> json) {
+    return SocialLoginToken(token: json['auth_token'], email: json['email']);
+  }
+}
+
 class UserID {
   String uid;
   UserID({required this.uid});
