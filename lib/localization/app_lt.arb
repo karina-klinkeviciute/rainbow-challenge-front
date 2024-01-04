@@ -45,5 +45,14 @@
     "about_page_logos": "Projekto partneriai ir rėmėjai",
     "delete_account": "Ištrinti paskyrą",
     "delete_account_confirm": "Paskyra bus ištrinta per 7 dienas. Apsigalvojai? Susisiek su info@rainbowchallenge.lt per 3 dienas.",
-    "wrong_password": "Neteisingas slaptažodis!"
+    "wrong_password": "Neteisingas slaptažodis!",
+    "sign_in_with_google": "Prisijungti su Google",
+    "social_sign_in_failed": "Prisijungimas su {provider} nepavyko",
+    "@social_sign_in_failed": {
+        "placeholders": {
+            "provider": {
+                "type": "String"
+            }
+        }
+    }
 }

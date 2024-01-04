@@ -45,6 +45,15 @@
     "about_page_logos": "Project partners and sponsors",
     "delete_account": "Delete account",
     "delete_account_confirm": "Your account will be deleted in 7 days. Changed your mind? Contact info@rainbowchallenge.lt during next 3 days.",
-    "wrong_password": "Wrong password!"
+    "wrong_password": "Wrong password!",
+    "sign_in_with_google": "Sign in with Google",
+    "social_sign_in_failed": "Sign in with {provider} failed",
+    "@social_sign_in_failed": {
+        "placeholders": {
+            "provider": {
+                "type": "String"
+            }
+        }
+    }
 
 }
