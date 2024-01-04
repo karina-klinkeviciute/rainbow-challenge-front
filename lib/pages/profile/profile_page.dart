@@ -58,12 +58,6 @@ class ProfilePage extends StatelessWidget {
             icon: Icon(Icons.logout),
             onPressed: () {
               BlocProvider.of<AuthenticationBloc>(context).add(LoggedOut());
-              Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => RegistrationPage(
-                            userRepository: _userRepository,
-                          )));
             },
           ),
         ],
