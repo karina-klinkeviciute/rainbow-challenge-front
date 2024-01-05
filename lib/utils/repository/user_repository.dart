@@ -5,6 +5,7 @@ import 'package:rainbow_challenge/utils/model/reg_user_model.dart';
 import 'package:rainbow_challenge/utils/model/api_model.dart';
 import 'package:rainbow_challenge/services/api_connection.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:rainbow_challenge/widgets/social_login_widget.dart';
 
 class UserRepository {
   final _patchUserDataURL = "/auth/users/me/";
@@ -35,6 +36,11 @@ class UserRepository {
       token: token.token,
     );
     return user;
+  }
+
+  Future<User> authenticateSocial({required SocialLoginWidgetType type, required String authCode}) async {
+    SocialLoginToken token = await getTokenFromSocial(authCode);
+    return User(id: 0, email: token.email, token: token.token);
   }
 
   Future<String> register({

@@ -19,6 +19,7 @@ import 'package:rainbow_challenge/pages/registration/bloc/reg_bloc.dart';
 import 'package:rainbow_challenge/pages/registration/bloc/reg_event.dart';
 import 'package:rainbow_challenge/pages/registration/bloc/reg_state.dart';
 import 'package:rainbow_challenge/pages/registration/registration_confirm.dart';
+import 'package:rainbow_challenge/widgets/social_login_widget.dart';
 
 import 'fields/email.dart';
 
@@ -57,6 +58,7 @@ class RegistrationForm extends StatelessWidget {
               //_IsLgbtqiaInputField(),
               _RulesCheckbox(),
               _RegSubmit(),
+              SocialLoginWidget(type: SocialLoginWidgetType.google),
               _LoginButton(context),
               _recoveryPassword(context)
             ],

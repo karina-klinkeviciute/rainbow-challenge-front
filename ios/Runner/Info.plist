@@ -52,5 +52,18 @@
 	<string>https</string>
 	<string>http</string>
 	</array>
+	<key>CFBundleURLTypes</key>
+    <array>
+        <dict>
+            <key>CFBundleTypeRole</key>
+            <string>Editor</string>
+            <key>CFBundleURLSchemes</key>
+            <array>
+                <string></string>
+            </array>
+        </dict>
+    </array>
+    <key>CADisableMinimumFrameDurationOnPhone</key>
+    <true/>
 </dict>
 </plist>
