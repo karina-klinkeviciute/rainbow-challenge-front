@@ -54,5 +54,6 @@
                 "type": "String"
             }
         }
-    }
+    },
+    "sign_in_with_apple": "Prisijungti su Apple"
 }

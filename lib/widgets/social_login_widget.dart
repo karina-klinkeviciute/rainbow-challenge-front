@@ -9,9 +9,11 @@ import 'package:rainbow_challenge/social_signin_config.dart';
 import 'package:sign_in_button/sign_in_button.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
 enum SocialLoginWidgetType {
-  google("google", "Google");
+  google("google", "Google"),
+  apple("apple", "Apple");
 
   const SocialLoginWidgetType(this.name, this.displayName);
   final String name;
@@ -36,6 +38,8 @@ class _SocialLoginWidgetState extends State<SocialLoginWidget> {
     switch (widget.type) {
       case SocialLoginWidgetType.google:
         return _GoogleButton(onAuthCode: onAuthCode, onError: onError);
+      case SocialLoginWidgetType.apple:
+        return _AppleButton(onAuthCode: onAuthCode, onError: onError);
     }
   }
 
@@ -112,6 +116,45 @@ class _GoogleButton extends _SocialLoginButton {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
       padding: EdgeInsets.all(3),
       text: AppLocalizations.of(context)!.sign_in_with_google,
+      onPressed: () {
+        _handleSignIn();
+      },
+    );
+  }
+}
+
+class _AppleButton extends _SocialLoginButton {
+  _AppleButton({required super.onAuthCode, required super.onError});
+
+  void _handleSignIn() async {
+    try {
+      final credential = await SignInWithApple.getAppleIDCredential(
+        scopes: [
+          AppleIDAuthorizationScopes.email
+        ],
+        webAuthenticationOptions: WebAuthenticationOptions(
+          clientId: SignInConfig.APPLE_ANDROID_CLIENT_ID,
+          redirectUri: Uri.parse(SignInConfig.APPLE_ANDROID_REDIRECT_URI)
+        ),
+      );
+
+      if (credential.identityToken != null) {
+        onAuthCode(credential.identityToken!);
+      } else {
+        throw new Exception("Apple Token not available");
+      }
+    } catch (error) {
+      onError(error);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return SignInButton(
+      Buttons.apple,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+      padding: EdgeInsets.all(3),
+      text: AppLocalizations.of(context)!.sign_in_with_apple,
       onPressed: () {
         _handleSignIn();
       },
