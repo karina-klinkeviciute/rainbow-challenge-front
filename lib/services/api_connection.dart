@@ -6,6 +6,7 @@ import 'package:http/http.dart' as http;
 import 'package:rainbow_challenge/constants/api.dart';
 import 'package:rainbow_challenge/services/dio_client.dart';
 import 'package:rainbow_challenge/utils/model/api_model.dart';
+import 'package:rainbow_challenge/widgets/social_login_widget.dart';
 
 final _base = "https://rainbowchallenge.lt";
 final _tokenEndpoint = "/auth/token/login/";
@@ -45,10 +46,13 @@ Future<Token> getToken(UserLogin userLogin) async {
   }
 }
 
-Future<SocialLoginToken> getTokenFromSocial(String authCode) async {
+Future<SocialLoginToken> getTokenFromSocial(SocialLoginWidgetType type, String authCode) async {
   final http.Response response = await http.post(
     Uri.parse(_socialLoginURL),
-    body: {"token": authCode},
+    body: {
+      "type": type.name,
+      "token": authCode,
+    },
   );
   if (response.statusCode == 200) {
     return SocialLoginToken.fromJson(json.decode(response.body));
