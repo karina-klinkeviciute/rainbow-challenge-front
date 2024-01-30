@@ -86,6 +86,13 @@ class _LoginFormState extends State<LoginForm> {
                         ),
                       ),
                       Container(
+                        width: MediaQuery.of(context).size.width * 0.85,
+                        child: Padding(
+                          padding: EdgeInsets.only(top: 8.0),
+                          child: SocialLoginWidget(type: SocialLoginWidgetType.apple),
+                        ),
+                      ),
+                      Container(
                         child: state is LoginLoading
                             ? CircularProgressIndicator()
                             : null,

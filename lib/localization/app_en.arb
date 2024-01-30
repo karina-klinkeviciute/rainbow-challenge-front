@@ -24,7 +24,7 @@
     "challenge_type_support": "Support",
     "challenge_type_completed": "Completed challenges",
     "action_join_challenge": "Join the challenge",
-    "joined_challenge_event_field_qr_code": "Scan QR code", 
+    "joined_challenge_event_field_qr_code": "Scan QR code",
     "joined_challenge_event_field_qr_code_wrong": "Sorry! Wrong QR code",
     "joined_challenge_event_field_qr_code_right": "Challenge accomplished!",
     "error": "Error",
@@ -54,6 +54,7 @@
                 "type": "String"
             }
         }
-    }
+    },
+    "sign_in_with_apple": "Sign in with Apple"
 
 }

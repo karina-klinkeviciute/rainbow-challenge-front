@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:meta/meta.dart';
 import 'package:equatable/equatable.dart';
 
@@ -53,6 +54,12 @@ class AuthenticationBloc
       yield AuthenticationLoading();
 
       await userRepository.deleteToken(id: 0);
+
+      try {
+        await GoogleSignIn().signOut();
+      } catch (e) {
+        // Ignoring
+      }
 
       yield AuthenticationUnauthenticated();
     }

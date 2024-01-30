@@ -59,6 +59,7 @@ class RegistrationForm extends StatelessWidget {
               _RulesCheckbox(),
               _RegSubmit(),
               SocialLoginWidget(type: SocialLoginWidgetType.google),
+              SocialLoginWidget(type: SocialLoginWidgetType.apple),
               _LoginButton(context),
               _recoveryPassword(context)
             ],

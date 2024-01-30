@@ -39,7 +39,7 @@ class UserRepository {
   }
 
   Future<User> authenticateSocial({required SocialLoginWidgetType type, required String authCode}) async {
-    SocialLoginToken token = await getTokenFromSocial(authCode);
+    SocialLoginToken token = await getTokenFromSocial(type, authCode);
     return User(id: 0, email: token.email, token: token.token);
   }
 
