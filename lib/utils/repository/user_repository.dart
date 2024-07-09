@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:rainbow_challenge/bloc/language_cubit.dart';
 import 'package:rainbow_challenge/services/dio_client.dart';
 import 'package:rainbow_challenge/utils/model/user_model.dart';
 import 'package:rainbow_challenge/utils/model/reg_user_model.dart';
@@ -14,13 +15,14 @@ class UserRepository {
       "https://rainbowchallenge.lt" + "/auth/users/set_password/";
   final _getUserDataURL = "/auth/users/me/";
   final String _userAccessTokenKey = "userAccessToken";
+  final String _languageKey = "language";
   final storage = new FlutterSecureStorage();
 
   final dynamic fcmToken;
 
   UserRepository([this.fcmToken]);
 
-  Future<String?> sendFCMToken({required dynamic fcmToken}){
+  Future<String?> sendFCMToken({required dynamic fcmToken}) {
     return registerFCMToken(fcmToken: fcmToken);
   }
 
@@ -38,7 +40,8 @@ class UserRepository {
     return user;
   }
 
-  Future<User> authenticateSocial({required SocialLoginWidgetType type, required String authCode}) async {
+  Future<User> authenticateSocial(
+      {required SocialLoginWidgetType type, required String authCode}) async {
     SocialLoginToken token = await getTokenFromSocial(type, authCode);
     return User(id: 0, email: token.email, token: token.token);
   }
@@ -96,12 +99,11 @@ class UserRepository {
     return errorMessage.data;
   }
 
-  Future<String?> patchNewUserData(
-      {required int year_of_birth,
-      required String gender_other,
-      required String gender,
-      required String username,
-      required String regionId}) async {
+  Future<String?> patchNewUserData({required int year_of_birth,
+    required String gender_other,
+    required String gender,
+    required String username,
+    required String regionId}) async {
     DioClient dio = DioClient();
     UserUpdateData userUpdateData = UserUpdateData(
         gender: gender,
@@ -110,7 +112,7 @@ class UserRepository {
         regionId: regionId,
         year_of_birth: year_of_birth);
     var errorMessage =
-        await dio.patchUser(_patchUserDataURL, userUpdateData.toDatabaseJson());
+    await dio.patchUser(_patchUserDataURL, userUpdateData.toDatabaseJson());
 
     return errorMessage;
   }
@@ -118,7 +120,7 @@ class UserRepository {
   Future<String> deleteUserRequest({required String current_password}) async {
     DioClient dio = DioClient();
     CurrentPassword currentPassword =
-        CurrentPassword(current_password: current_password);
+    CurrentPassword(current_password: current_password);
     var errorMessage = await dio.deleteUser(
         _patchUserDataURL, currentPassword.toDatabaseJson());
 
@@ -147,5 +149,21 @@ class UserRepository {
 
   Future<String?> getUserToken() {
     return storage.read(key: _userAccessTokenKey);
+  }
+
+  Future<AppLanguage> getLanguage() async {
+    final langCode = await storage.read(key: _languageKey);
+    final defaultLang = AppLanguage.supported['lt']!;
+
+    if (langCode == null) {
+      setLanguage(defaultLang);
+      return defaultLang;
+    }
+
+    return AppLanguage.supported[langCode] ?? defaultLang;
+  }
+
+  Future<void> setLanguage(AppLanguage lang) async {
+    return storage.write(key: _languageKey, value: lang.locale.languageCode);
   }
 }

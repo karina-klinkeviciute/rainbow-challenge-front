@@ -3,6 +3,7 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:rainbow_challenge/bloc/language_cubit.dart';
 
 import 'package:rainbow_challenge/services/firebase_service.dart';
 
@@ -38,11 +39,15 @@ void main() async {
   print("Initial message category: ");
   print(_message?.data["category"]);
 
+  final userRepo = UserRepository(fcmToken);
+  final initLanguage = await userRepo.getLanguage();
+
   runApp(
     App(
-      userRepository: UserRepository(fcmToken),
+      userRepository: userRepo,
       appRouter: AppRouter(),
-      connectivity: Connectivity(), 
+      connectivity: Connectivity(),
+      initLanguage: initLanguage,
       pushNotifCategory: _pushNotifCategory
       )
   );
@@ -54,6 +59,7 @@ class App extends StatefulWidget {
   final UserRepository userRepository;
   final AppRouter appRouter;
   final Connectivity connectivity;
+  final AppLanguage initLanguage;
   final dynamic pushNotifCategory;
 
   App({
@@ -61,6 +67,7 @@ class App extends StatefulWidget {
     required this.userRepository,
     required this.connectivity,
     required this.appRouter,
+    required this.initLanguage,
     this.pushNotifCategory = null,
   }) : assert(userRepository != null),
        super(key: key);
@@ -87,60 +94,66 @@ class _AppState extends State<App> {
           BlocProvider<InternetCubit>(
               create: (context) => InternetCubit(connectivity: widget.connectivity)),
           BlocProvider<BottomMenuCubit>(create: (context) => BottomMenuCubit()),
+          BlocProvider<LanguageCubit>(create: (context) => LanguageCubit(
+              userRepository: widget.userRepository,
+              initLanguage: widget.initLanguage), lazy: false),
         ],
-        child: MaterialApp(
-          debugShowCheckedModeBanner: false,
-          theme: DesignTheme.lightTheme,
-          darkTheme: DesignTheme.lightTheme,
-          onGenerateTitle: (BuildContext context) =>
+        child: BlocBuilder<LanguageCubit, AppLanguage>(
+          builder: (context, language) {
+            return MaterialApp(
+              debugShowCheckedModeBanner: false,
+              theme: DesignTheme.lightTheme,
+              darkTheme: DesignTheme.lightTheme,
+              onGenerateTitle: (BuildContext context) =>
               AppLocalizations.of(context)!.app_title,
-          localizationsDelegates: [
-            AppLocalizations.delegate,
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
-          ],
-          supportedLocales: [
-            Locale('lt', ''),
-            // Locale('en', '')
-          ],
-          onGenerateRoute: widget.appRouter.onGenerateRoute,
-          initialRoute: '/',
-          // Home value can be removed after we define the default route in AppRoute()
-          home: BlocBuilder<AuthenticationBloc, AuthenticationState>(
-            builder: (context, state) {
-              if (state is AuthenticationUninitialized) {
-                //return SplashPage();
-              }
-              if (state is AuthenticationAuthenticated) {
-                // Adding context to allow changing route whole in foreground
-                WidgetsBinding.instance.addPostFrameCallback((_) {
-                  FCMProvider.setContext(context);
-                });
-
-                //If the notification opened the app
-                if(widget.pushNotifCategory != null){
-                  WidgetsBinding.instance.addPostFrameCallback((_) async {
-                    Future.delayed(const Duration(milliseconds: 4000), () async {
-                      await Navigator.of(context).pushNamed(getNotificationCategoryRoute(widget.pushNotifCategory));
-                    });
-                  });
-                }
-
-                // If app received notification while in background
-                Stream<RemoteMessage> _stream = FirebaseMessaging.onMessageOpenedApp;
-                _stream.listen((RemoteMessage event) async {
-                  if (event.data != null) {
-                    print("Handling category from stream: " + event.data["category"].toString());
-                    await Navigator.of(context).pushNamed(getNotificationCategoryRoute(event.data["category"].toString()));
+              localizationsDelegates: [
+                AppLocalizations.delegate,
+                GlobalMaterialLocalizations.delegate,
+                GlobalWidgetsLocalizations.delegate,
+                GlobalCupertinoLocalizations.delegate,
+              ],
+              supportedLocales: AppLanguage.supported.values.map((e) => e.locale),
+              locale: language.locale,
+              onGenerateRoute: widget.appRouter.onGenerateRoute,
+              initialRoute: '/',
+              // Home value can be removed after we define the default route in AppRoute()
+              home: BlocBuilder<AuthenticationBloc, AuthenticationState>(
+                builder: (context, state) {
+                  if (state is AuthenticationUninitialized) {
+                    //return SplashPage();
                   }
-                });
-                return NewsPage();
-              } else {
-                return RegistrationPage(userRepository: widget.userRepository);
-              }
-            },
-          ),
-        ));
+                  if (state is AuthenticationAuthenticated) {
+                    // Adding context to allow changing route whole in foreground
+                    WidgetsBinding.instance.addPostFrameCallback((_) {
+                      FCMProvider.setContext(context);
+                    });
+
+                    //If the notification opened the app
+                    if(widget.pushNotifCategory != null){
+                      WidgetsBinding.instance.addPostFrameCallback((_) async {
+                        Future.delayed(const Duration(milliseconds: 4000), () async {
+                          await Navigator.of(context).pushNamed(getNotificationCategoryRoute(widget.pushNotifCategory));
+                        });
+                      });
+                    }
+
+                    // If app received notification while in background
+                    Stream<RemoteMessage> _stream = FirebaseMessaging.onMessageOpenedApp;
+                    _stream.listen((RemoteMessage event) async {
+                      if (event.data != null) {
+                        print("Handling category from stream: " + event.data["category"].toString());
+                        await Navigator.of(context).pushNamed(getNotificationCategoryRoute(event.data["category"].toString()));
+                      }
+                    });
+                    return NewsPage();
+                  } else {
+                    return RegistrationPage(userRepository: widget.userRepository);
+                  }
+                },
+              ),
+            );
+          },
+        )
+    );
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:rainbow_challenge/bloc/language_cubit.dart';
 import 'package:rainbow_challenge/pages/login/change_password_form.dart';
 import 'package:rainbow_challenge/pages/pages.dart';
 import 'package:rainbow_challenge/pages/profile/profile_balance_form.dart';
@@ -203,7 +204,26 @@ class _MainArea extends StatelessWidget {
             );
           },
           child: Text('Vaivorykščių suvestinė'),
-        )
+        ),
+        BlocBuilder<LanguageCubit, AppLanguage>(
+          builder: (context, state) {
+            return DropdownButton<AppLanguage>(
+              value: state,
+              underline: SizedBox(),
+              items: AppLanguage.supported.values.map((e) {
+                return DropdownMenuItem(
+                  value: e,
+                  child: Text('${e.icon} ${e.name}')
+                );
+              }).toList(),
+              onChanged: (value) {
+                if (value != null) {
+                  BlocProvider.of<LanguageCubit>(context).setLanguage(value);
+                }
+              },
+            );
+          },
+        ),
       ]);
     },
   );
