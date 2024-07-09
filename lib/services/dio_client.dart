@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:rainbow_challenge/bloc/language_cubit.dart';
 import 'package:rainbow_challenge/constants/api.dart';
 import 'package:rainbow_challenge/utils/model/api_model.dart';
 import 'package:rainbow_challenge/utils/model/challenge/challenge_quiz/quiz_correct_answers_class.dart';
@@ -429,7 +430,12 @@ class DioClient {
 
   Future<void> addAuthorizationHeader() async {
     String token = await _getAccessToken();
-    _dio.options.headers = {"Authorization": "Token $token"};
+    final locale = await AppLanguage.getCurrentLocale();
+
+    _dio.options.headers = {
+      "Authorization": "Token $token",
+      "Accept-Language": "${locale.languageCode}-${locale.countryCode}".toLowerCase()
+    };
   }
 
   Future<String?> registerFCMToken({required dynamic endPoint, required dynamic itemObject}) async {

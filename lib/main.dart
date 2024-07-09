@@ -56,6 +56,8 @@ void main() async {
 // Perhaps App could be added as an import
 
 class App extends StatefulWidget {
+  static final navigatorKey = GlobalKey<NavigatorState>();
+
   final UserRepository userRepository;
   final AppRouter appRouter;
   final Connectivity connectivity;
@@ -101,6 +103,7 @@ class _AppState extends State<App> {
         child: BlocBuilder<LanguageCubit, AppLanguage>(
           builder: (context, language) {
             return MaterialApp(
+              navigatorKey: App.navigatorKey,
               debugShowCheckedModeBanner: false,
               theme: DesignTheme.lightTheme,
               darkTheme: DesignTheme.lightTheme,

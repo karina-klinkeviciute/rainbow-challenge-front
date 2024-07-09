@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:rainbow_challenge/main.dart';
 import 'package:rainbow_challenge/utils/repository/user_repository.dart';
 
 class LanguageCubit extends Cubit<AppLanguage> {
@@ -29,4 +30,13 @@ class AppLanguage {
   final Locale locale;
 
   AppLanguage(this.icon, this.name, this.locale);
+
+  static Future<Locale> getCurrentLocale() async {
+    final context = App.navigatorKey.currentContext;
+    if (context != null) {
+      return Localizations.localeOf(context);
+    }
+    final language = await UserRepository().getLanguage();
+    return language.locale;
+  }
 }

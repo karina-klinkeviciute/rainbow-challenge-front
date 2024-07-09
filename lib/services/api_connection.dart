@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'dart:io' show Platform;
 //import 'dart:developer';
 import 'package:http/http.dart' as http;
+import 'package:rainbow_challenge/bloc/language_cubit.dart';
 import 'package:rainbow_challenge/constants/api.dart';
 import 'package:rainbow_challenge/services/dio_client.dart';
 import 'package:rainbow_challenge/utils/model/api_model.dart';
@@ -32,9 +33,7 @@ Future<Token> getToken(UserLogin userLogin) async {
   //print(_tokenURL);
   final http.Response response = await http.post(
     Uri.parse(_tokenURL),
-    headers: <String, String>{
-      'Content-Type': 'application/json; charset=UTF-8',
-    },
+    headers: await _getHeaders(),
     body: jsonEncode(userLogin.toDatabaseJson()),
   );
   if (response.statusCode == 200) {
@@ -64,9 +63,7 @@ Future<SocialLoginToken> getTokenFromSocial(SocialLoginWidgetType type, String a
 Future<String?> createUser(UserRegister userRegister) async {
   final http.Response response = await http.post(
     Uri.parse(_registerURL),
-    headers: <String, String>{
-      'Content-Type': 'application/json; charset=UTF-8'
-    },
+    headers: await _getHeaders(),
     body: jsonEncode(userRegister.toDatabaseJson()),
   );
 
@@ -82,9 +79,7 @@ Future<String?> createUserRecoveryEmail(
     UserRecoveryEmail userRecoveryEmail) async {
   final http.Response response = await http.post(
     Uri.parse(_recoveryEmailURL),
-    headers: <String, String>{
-      'Content-Type': 'application/json; charset=UTF-8'
-    },
+    headers: await _getHeaders(),
     body: jsonEncode(userRecoveryEmail.toDatabaseJson()),
   );
 
@@ -104,6 +99,14 @@ Future<String?> registerFCMToken({required dynamic fcmToken}) async {
       "type": _getDeviceType()
     };
   return dio.registerFCMToken(endPoint: _registerFCMTokenEndpoint, itemObject: itemObject);
+}
+
+Future<Map<String, String>> _getHeaders() async {
+  final locale = await AppLanguage.getCurrentLocale();
+  return {
+    'Content-Type': 'application/json; charset=UTF-8',
+    "Accept-Language": "${locale.languageCode}-${locale.countryCode}".toLowerCase()
+  };
 }
 
 
