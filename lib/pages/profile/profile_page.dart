@@ -11,6 +11,7 @@ import 'package:rainbow_challenge/theme/colors.dart';
 import 'package:rainbow_challenge/theme/headings.dart';
 import 'package:rainbow_challenge/utils/repository/user_profile_repository.dart';
 import 'package:rainbow_challenge/utils/repository/user_repository.dart';
+import 'package:rainbow_challenge/widgets/language_widget.dart';
 import 'package:rainbow_challenge/widgets/wrapper_custom_appbar.dart';
 import 'cubit/profile_info_cubit.dart';
 import 'package:rainbow_challenge/bloc/authentication_bloc.dart';
@@ -205,25 +206,7 @@ class _MainArea extends StatelessWidget {
           },
           child: Text('Vaivorykščių suvestinė'),
         ),
-        BlocBuilder<LanguageCubit, AppLanguage>(
-          builder: (context, state) {
-            return DropdownButton<AppLanguage>(
-              value: state,
-              underline: SizedBox(),
-              items: AppLanguage.supported.values.map((e) {
-                return DropdownMenuItem(
-                  value: e,
-                  child: Text('${e.icon} ${e.name}')
-                );
-              }).toList(),
-              onChanged: (value) {
-                if (value != null) {
-                  BlocProvider.of<LanguageCubit>(context).setLanguage(value);
-                }
-              },
-            );
-          },
-        ),
+        LanguageWidget(),
       ]);
     },
   );

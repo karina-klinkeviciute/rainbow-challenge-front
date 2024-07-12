@@ -19,6 +19,7 @@ import 'package:rainbow_challenge/pages/registration/bloc/reg_bloc.dart';
 import 'package:rainbow_challenge/pages/registration/bloc/reg_event.dart';
 import 'package:rainbow_challenge/pages/registration/bloc/reg_state.dart';
 import 'package:rainbow_challenge/pages/registration/registration_confirm.dart';
+import 'package:rainbow_challenge/widgets/language_widget.dart';
 import 'package:rainbow_challenge/widgets/social_login_widget.dart';
 
 import 'fields/email.dart';
@@ -61,7 +62,8 @@ class RegistrationForm extends StatelessWidget {
               SocialLoginWidget(type: SocialLoginWidgetType.google),
               SocialLoginWidget(type: SocialLoginWidgetType.apple),
               _LoginButton(context),
-              _recoveryPassword(context)
+              _recoveryPassword(context),
+              LanguageWidget(),
             ],
           ),
         ));
