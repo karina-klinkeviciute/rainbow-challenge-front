@@ -5,6 +5,7 @@ import 'package:rainbow_challenge/pages/login/recovery_page.dart';
 import 'package:rainbow_challenge/pages/pages.dart';
 import 'package:rainbow_challenge/pages/registration/registration_page.dart';
 import 'package:rainbow_challenge/utils/repository/user_repository.dart';
+import 'package:rainbow_challenge/widgets/language_widget.dart';
 import 'package:rainbow_challenge/widgets/social_login_widget.dart';
 
 class LoginForm extends StatefulWidget {
@@ -132,7 +133,8 @@ class _LoginFormState extends State<LoginForm> {
                                     'Užmiršai slaptažodį? Spausk čia',
                                     textAlign: TextAlign.center,
                                   ), //TODO localizations
-                                )
+                                ),
+                                LanguageWidget(),
                               ],
                             )),
                       )
