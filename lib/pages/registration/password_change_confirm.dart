@@ -15,13 +15,13 @@ class PasswordChangeConfirm extends StatelessWidget {
       mainArea: Column(
         children: [
           Text(
-            AppLocalizations.of(context)!.password_change_success,
+            AppLocalizations.of(context)!.password_update_success,
             textAlign: TextAlign.center,
             style: TextStyle(fontSize: 20),
           ),
           SizedBox(height: 50),
           ElevatedButton(
-            child: Text(AppLocalizations.of(context)!.back_to_profile),
+            child: Text(AppLocalizations.of(context)!.action_back_to_profile),
             onPressed: () {
               Navigator.push(
                 context,

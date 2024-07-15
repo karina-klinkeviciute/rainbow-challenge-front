@@ -131,7 +131,7 @@ class _AgeInputField extends StatelessWidget {
                 enabledBorder: UnderlineInputBorder(
                     borderSide:
                         BorderSide(color: ThemeColors.primaryColor, width: 1))),
-            hint: Text('${AppLocalizations.of(context)!.year_o_birth} *'),
+            hint: Text('${AppLocalizations.of(context)!.year_of_birth} *'),
             isDense: false,
             value: _selectedValue,
             key: const Key('Age_textField'),
@@ -245,7 +245,7 @@ class _GenderInputField extends StatelessWidget {
         value: Genders().other,
       ),
       DropdownMenuItem(
-        child: Text(AppLocalizations.of(context)!.gender_preer_not_to_say),
+        child: Text(AppLocalizations.of(context)!.gender_prefer_not_to_say),
         value: Genders().preferNotToSay,
       )
     ];

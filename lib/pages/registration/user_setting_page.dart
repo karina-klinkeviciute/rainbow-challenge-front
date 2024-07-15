@@ -108,7 +108,7 @@ class _AgeInputField extends StatelessWidget {
                 enabledBorder: UnderlineInputBorder(
                     borderSide:
                         BorderSide(color: ThemeColors.primaryColor, width: 1))),
-            hint: Text('${AppLocalizations.of(context)!.year_o_birth}: ${state.year_of_birth.value}'),
+            hint: Text('${AppLocalizations.of(context)!.year_of_birth}: ${state.year_of_birth.value}'),
             value: _selectedValue,
             isDense: false,
             key: const Key('Age_textField'),
@@ -136,7 +136,7 @@ class _GenderInputField extends StatelessWidget {
         value: Genders().woman,
       ),
       DropdownMenuItem(
-        child: Text(AppLocalizations.of(context)!.gender_nonbinary),
+        child: Text(AppLocalizations.of(context)!.gender_non_binary),
         value: Genders().nonBinary,
       ),
       DropdownMenuItem(
@@ -164,7 +164,7 @@ class _GenderInputField extends StatelessWidget {
               ),
             ),
             isDense: false,
-            hint: Text(AppLocalizations.of(context)!.gender: ${_translate(state.gender.value)}'),
+            hint: Text('${AppLocalizations.of(context)!.gender}: ${_translate(state.gender.value)}'),
             value: _selectedValue,
             key: const Key('Gender_textField'),
             onChanged: (gender) {
@@ -262,7 +262,7 @@ class _RegionInputField extends StatelessWidget {
             isDense: false,
             hint: SingleChildScrollView(
               child: Text(
-                AppLocalizations.of(context)!.region: ${state.region.value.length > 22 ? '${state.region.value.substring(0, 22)}' : state.region.value}',
+                '${AppLocalizations.of(context)!.region}: ${state.region.value.length > 22 ? '${state.region.value.substring(0, 22)}' : state.region.value}',
                 textScaleFactor:
                     MediaQuery.of(context).size.width < 350 ? 0.75 : 1,
                 textHeightBehavior:
@@ -292,7 +292,7 @@ class _RegSubmit extends StatelessWidget {
         return Padding(
           padding: EdgeInsets.only(top: 20),
           child: ElevatedButton(
-              child: Text(AppLocalizations.of(context)!.update_settings),
+              child: Text(AppLocalizations.of(context)!.action_update_settings),
               onPressed: () =>
                   context.read<RegistrationBloc>().add(SendNewUserData())),
         );

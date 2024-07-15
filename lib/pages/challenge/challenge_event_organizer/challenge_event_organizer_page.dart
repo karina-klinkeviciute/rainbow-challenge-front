@@ -93,7 +93,7 @@ class _ChallengeEventOrganizerPageState
                 fillColor: Colors.white,
                 contentPadding: EdgeInsets.symmetric(horizontal: 12),
                 filled: true,
-                hintText: AppLocalizations.of(context)!.challenge_event_name,
+                hintText: AppLocalizations.of(context)!.challenge_event_name_hint_text,
                 border: border,
                 disabledBorder: border,
                 enabledBorder: border,

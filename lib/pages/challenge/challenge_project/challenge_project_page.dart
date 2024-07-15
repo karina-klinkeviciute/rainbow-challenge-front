@@ -254,7 +254,7 @@ class _ChallengeProjectPageState extends State<ChallengeProjectPage> {
         result["main_joined_challenge"] != null &&
         (result["main_joined_challenge"] as Map<String, dynamic>)["status"] ==
             "joined") {
-      await showMessage(context, AppLocalizations.of(context)!.message_thank_you, AppLocalizations.of(context)!.message_changes_where_saved");
+      await showMessage(context, AppLocalizations.of(context)!.message_thank_you, AppLocalizations.of(context)!.message_changes_where_saved);
       Navigator.of(context).pop();
       return;
     }
