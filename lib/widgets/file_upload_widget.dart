@@ -44,7 +44,7 @@ class _FileUploadWidgetState extends State<FileUploadWidget> {
         ),
         ElevatedButton(
             onPressed: onFileUploadPressed,
-            child: Text("${AppLocalizations.of(context)!.attach_file} (Max 20MB)")),
+            child: Text("${AppLocalizations.of(context)!.files_attach_file} (Max 20MB)")),
       ],
     );
   }
