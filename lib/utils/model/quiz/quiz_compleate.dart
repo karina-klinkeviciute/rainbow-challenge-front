@@ -8,6 +8,7 @@ import 'package:rainbow_challenge/pages/pages.dart';
 import 'package:rainbow_challenge/utils/model/challenge/challenge_class.dart';
 import 'package:rainbow_challenge/utils/repository/user_repository.dart';
 import 'package:rainbow_challenge/widgets/widgets.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class QuizPageConfirm extends StatelessWidget {
   final int count;
@@ -22,18 +23,18 @@ class QuizPageConfirm extends StatelessWidget {
         width: MediaQuery.of(context).size.width * 0.8,
         child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
           Text(
-            'Teisingai atsakei ${count} klausimų',
+            '${AppLocalizations.of(context)!.correct_answers_amount}: ${count}',
             textAlign: TextAlign.center,
             style: TextStyle(fontSize: 20),
           ),
           Text(
-            'Tau įskaičiuota ${count} vaivorykščių',
+            '${AppLocalizations.of(context)!.rainbows_added_amount}: ${count}',
             textAlign: TextAlign.center,
             style: TextStyle(fontSize: 20),
           ),
           SizedBox(height: 50),
           ElevatedButton(
-            child: Text('Grįžti į užduotis'),
+            child: Text(AppLocalizations.of(context)!.action_back_to_challenges),
             onPressed: () {
               Navigator.push(
                 context,

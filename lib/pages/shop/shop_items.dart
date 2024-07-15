@@ -6,6 +6,7 @@ import 'package:rainbow_challenge/pages/shop/shop_sucsess_claim.dart';
 import 'package:rainbow_challenge/services/dio_client.dart';
 import 'package:rainbow_challenge/widgets/rainbow_price.dart';
 import 'package:rainbow_challenge/widgets/widgets.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ShopItemPage extends StatefulWidget {
   ShopItemPage({
@@ -112,7 +113,7 @@ class _ShopItemPageState extends State<ShopItemPage> {
                       ),
                       Center(
                         child: ElevatedButton(
-                            child: Text('Užsakyti'),
+                            child: Text(AppLocalizations.of(context)!.order),
                             onPressed: () {
                               registerPrizeClaim(
                                   uiid: widget.uuid,
@@ -152,7 +153,7 @@ class _ShopItemPageState extends State<ShopItemPage> {
           enabledBorder: UnderlineInputBorder(
               borderSide: BorderSide(color: Colors.transparent))),
       hint: Text(
-        'Pasirink kiekį',
+        AppLocalizations.of(context)!.choose_amount,
       ),
       value: _selectedValue,
       key: const Key('Amount_textField'),

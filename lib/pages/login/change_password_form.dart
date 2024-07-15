@@ -12,6 +12,7 @@ import 'package:rainbow_challenge/pages/registration/registration_confirm.dart';
 import 'package:rainbow_challenge/pages/registration/registration_form.dart';
 import 'package:rainbow_challenge/widgets/auth_text_field.dart';
 import 'package:rainbow_challenge/widgets/widgets.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ChangePasswordForm extends StatelessWidget {
   const ChangePasswordForm({Key? key}) : super(key: key);
@@ -38,7 +39,7 @@ class ChangePasswordForm extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                const HeadlineWidget(title: 'Keisti slaptažodį'),
+                HeadlineWidget(title: AppLocalizations.of(context)!.change_password),
                 _NewPasswordInputField(),
                 _ReNewPasswordInput(),
                 _CurrentPasswordInputField(),
@@ -60,7 +61,7 @@ class _NewPasswordInputField extends StatelessWidget {
         return Padding(
           padding: const EdgeInsets.only(bottom: 16.0),
           child: AuthTextField(
-            hint: 'Slaptažodis',
+            hint: AppLocalizations.of(context)!.password_hint,
             key: const Key('Password_textField'),
             isPasswordField: true,
             isRequiredField: true,
@@ -89,7 +90,7 @@ class _ReNewPasswordInput extends StatelessWidget {
         return Padding(
           padding: const EdgeInsets.only(bottom: 16.0),
           child: AuthTextField(
-            hint: 'Pakartokite slaptažodį',
+            hint: AppLocalizations.of(context)!.repeat_password,
             isRequiredField: true,
             key: const Key('RePassword_textField'),
             isPasswordField: true,
@@ -119,7 +120,7 @@ class _PassworsSetSubmit extends StatelessWidget {
         return Padding(
           padding: EdgeInsets.only(top: 20),
           child: ElevatedButton(
-            child: Text('Keisti slaptažodį'),
+            child: Text(AppLocalizations.of(context)!.change_password),
             onPressed: state.status.isValidated
                 ? () => context
                     .read<RegistrationBloc>()

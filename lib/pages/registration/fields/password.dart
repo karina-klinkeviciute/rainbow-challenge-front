@@ -1,4 +1,5 @@
 import 'package:formz/formz.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 enum PasswordValidationError { invalid, empty }
 
@@ -23,7 +24,7 @@ extension Explanation on PasswordValidationError? {
   String? get title {
     switch (this) {
       case PasswordValidationError.invalid:
-        return "Slaptažodis turi būti ne trumpesnis negu 8 simboliai, iš jų bent 1 skaičius";
+        return AppLocalizations.of(context)!.password_rules;
       default:
         return null;
     }

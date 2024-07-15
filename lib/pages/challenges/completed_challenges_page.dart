@@ -124,7 +124,7 @@ class _ChallengesList extends StatelessWidget {
       return (challengeTypeNames.isEmpty)
           ? Center(
               child: Text(
-              'Atliktų užduočių nėra',
+                AppLocalizations.of(context)!.challenges_no_completed_challenges,
               style: Theme.of(context).textTheme.headline3,
             ))
           : ListView.builder(

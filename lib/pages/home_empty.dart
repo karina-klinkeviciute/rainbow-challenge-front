@@ -9,6 +9,7 @@ import 'package:rainbow_challenge/theme/fonts.dart' as ThemeFonts;
 import 'package:rainbow_challenge/utils/repository/challenges/challenges_repository.dart';
 import 'package:rainbow_challenge/utils/repository/user_profile_repository.dart';
 import 'package:rainbow_challenge/widgets/message.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'challenges/challenges_page.dart';
 import 'challenges/cubit/challenges_cubit.dart';
@@ -40,8 +41,7 @@ class HomeEmptyPage extends StatelessWidget {
                     child: MessageWidget(
                       icon: Icons.favorite,
                       title:
-                          'Šiuo metu turinys ruošiamas, tačiau jau dabar gali'
-                          ' pradėti spręsti užduotis!',
+                      AppLocalizations.of(context)!.home_empty_title,
                       //   message:
                       //      '<p>Čia galima, esant reikalui, įdėti išsamesnę žinutę su HtmlWidget().'
                       //      ' Pavyzdžiui, kai norime lankytojui <strong>suteikti daugiau </strong> '
@@ -69,27 +69,27 @@ class HomeEmptyPage extends StatelessWidget {
                   child: TabBar(
                     tabs: [
                       Tab(
-                        text: 'Pradžia',
+                        text: AppLocalizations.of(context)!.menu_home,
                         icon: Icon(Icons.home),
                         iconMargin: EdgeInsets.zero,
                       ),
                       Tab(
-                        text: 'Profilis',
+                        text: AppLocalizations.of(context)!.menu_profile,
                         icon: Icon(Icons.account_circle),
                         iconMargin: EdgeInsets.zero,
                       ),
                       Tab(
-                        text: 'Užduotys',
+                        text: AppLocalizations.of(context)!.menu_challenges,
                         icon: Icon(Icons.star_outline),
                         iconMargin: EdgeInsets.zero,
                       ),
                       Tab(
-                        text: 'Regionai',
+                        text: AppLocalizations.of(context)!.menu_regions,
                         icon: Icon(Icons.place),
                         iconMargin: EdgeInsets.zero,
                       ),
                       Tab(
-                        text: 'Navigacija',
+                        text: AppLocalizations.of(context)!.menu_navigation,
                         icon: Icon(Icons.menu),
                         iconMargin: EdgeInsets.zero,
                       ),

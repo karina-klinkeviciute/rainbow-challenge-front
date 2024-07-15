@@ -1,4 +1,5 @@
 import 'package:formz/formz.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 enum EmailValidationError { invalid }
 
@@ -22,7 +23,7 @@ extension Explanation on EmailValidationError {
   String? get title {
     switch (this) {
       case EmailValidationError.invalid:
-        return "Prašom įvesti tinkamą el. pašto adresą";
+        return AppLocalizations.of(context)!.email_enter_valid;
       default:
         return null;
     }

@@ -21,6 +21,7 @@ import 'package:rainbow_challenge/pages/registration/bloc/reg_state.dart';
 import 'package:rainbow_challenge/pages/registration/registration_confirm.dart';
 import 'package:rainbow_challenge/widgets/language_widget.dart';
 import 'package:rainbow_challenge/widgets/social_login_widget.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'fields/email.dart';
 
@@ -46,7 +47,7 @@ class RegistrationForm extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              const HeadlineWidget(title: 'Naujas vartotojas'),
+              HeadlineWidget(title: AppLocalizations.of(context)!.new_user),
               _EmailInputField(),
               _PasswordInputField(),
               _ConfirmPasswordInput(),
@@ -80,7 +81,7 @@ Widget _LoginButton(BuildContext context) {
                     userRepository: UserRepository(),
                   )));
     },
-    child: const Text('Turi paskyrą? Prisijunk'), //TODO localizations
+    child: Text(AppLocalizations.of(context)!.action_have_account_login),
   );
 }
 
@@ -94,10 +95,10 @@ Widget _recoveryPassword(BuildContext context) {
                     userRepository: UserRepository(),
                   )));
     },
-    child: const Text(
-      'Užmiršai slaptažodį? Spausk čia',
+    child: Text(
+      AppLocalizations.of(context)!.action_forgot_password,
       textAlign: TextAlign.center,
-    ), //TODO localizations
+    ),
   );
 }
 
@@ -130,7 +131,7 @@ class _AgeInputField extends StatelessWidget {
                 enabledBorder: UnderlineInputBorder(
                     borderSide:
                         BorderSide(color: ThemeColors.primaryColor, width: 1))),
-            hint: Text('Gimimo metai*'),
+            hint: Text('${AppLocalizations.of(context)!.year_o_birth} *'),
             isDense: false,
             value: _selectedValue,
             key: const Key('Age_textField'),
@@ -154,7 +155,7 @@ class _EmailInputField extends StatelessWidget {
         return Padding(
           padding: const EdgeInsets.only(bottom: 16.0),
           child: AuthTextField(
-            hint: 'El. pašto adresas',
+            hint: AppLocalizations.of(context)!.email,
             key: const Key('Email_textField'),
             isRequiredField: true,
             error: state.email.error != null
@@ -180,7 +181,7 @@ class _PasswordInputField extends StatelessWidget {
         return Padding(
           padding: const EdgeInsets.only(bottom: 16.0),
           child: AuthTextField(
-            hint: 'Slaptažodis',
+            hint: AppLocalizations.of(context)!.password_hint,
             key: const Key('Password_textField'),
             isPasswordField: true,
             isRequiredField: true,
@@ -207,7 +208,7 @@ class _ConfirmPasswordInput extends StatelessWidget {
         return Padding(
           padding: const EdgeInsets.only(bottom: 16.0),
           child: AuthTextField(
-            hint: 'Pakartokite slaptažodį',
+            hint: AppLocalizations.of(context)!.repeat_password,
             isRequiredField: true,
             key: const Key('RePassword_textField'),
             isPasswordField: true,
@@ -228,23 +229,23 @@ class _GenderInputField extends StatelessWidget {
   Widget build(BuildContext context) {
     List<DropdownMenuItem<String>> _genders = [
       DropdownMenuItem(
-        child: Text('Moteris'),
+        child: Text(AppLocalizations.of(context)!.gender_woman),
         value: Genders().woman,
       ),
       DropdownMenuItem(
-        child: Text('Vyras'),
+        child: Text(AppLocalizations.of(context)!.gender_man),
         value: Genders().man,
       ),
       DropdownMenuItem(
-        child: Text('Nebinarinė'),
+        child: Text(AppLocalizations.of(context)!.gender_non_binary),
         value: Genders().nonBinary,
       ),
       DropdownMenuItem(
-        child: Text('Kita'),
+        child: Text(AppLocalizations.of(context)!.gender_other),
         value: Genders().other,
       ),
       DropdownMenuItem(
-        child: Text('Nenoriu nurodyti'),
+        child: Text(AppLocalizations.of(context)!.gender_preer_not_to_say),
         value: Genders().preferNotToSay,
       )
     ];
@@ -263,7 +264,7 @@ class _GenderInputField extends StatelessWidget {
                     BorderSide(color: ThemeColors.primaryColor, width: 1),
               ),
             ),
-            hint: Text('Lytis*'),
+            hint: Text('${AppLocalizations.of(context)!.gender} *'),
             isDense: false,
             value: _selectedValue,
             key: const Key('Gender_textField'),
@@ -289,7 +290,7 @@ class _GenderOtherInputField extends StatelessWidget {
           return Padding(
             padding: const EdgeInsets.only(bottom: 16.0),
             child: AuthTextField(
-              hint: 'Lytis, jei kita',
+              hint: AppLocalizations.of(context)!.gender_if_other,
               key: const Key('GenderOther_textField'),
               isRequiredField: false,
               keyboardType: TextInputType.text,
@@ -362,7 +363,7 @@ class _RegionInputField extends StatelessWidget {
             value: _selectedValue,
             isDense: false,
             hint: Text(
-              'Regionas*',
+              '${AppLocalizations.of(context)!.region} *',
               textHeightBehavior:
                   TextHeightBehavior(applyHeightToFirstAscent: true),
             ),
@@ -475,7 +476,7 @@ class _RegSubmit extends StatelessWidget {
         return Padding(
           padding: EdgeInsets.only(top: 20),
           child: ElevatedButton(
-            child: Text('Registruotis'),
+            child: Text(AppLocalizations.of(context)!.action_register),
             onPressed: state.status.isValidated
                 ? () => context.read<RegistrationBloc>().add(FormSubmitted())
                 : null,

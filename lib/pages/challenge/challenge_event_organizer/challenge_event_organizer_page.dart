@@ -93,7 +93,7 @@ class _ChallengeEventOrganizerPageState
                 fillColor: Colors.white,
                 contentPadding: EdgeInsets.symmetric(horizontal: 12),
                 filled: true,
-                hintText: "Renginio pavadinimas *",
+                hintText: AppLocalizations.of(context)!.challenge_event_name,
                 border: border,
                 disabledBorder: border,
                 enabledBorder: border,
@@ -112,7 +112,7 @@ class _ChallengeEventOrganizerPageState
                 fillColor: Colors.white,
                 contentPadding: EdgeInsets.symmetric(horizontal: 12),
                 filled: true,
-                hintText: "Aprašymas *",
+                hintText: AppLocalizations.of(context)!.challenge_event_description_hint_text,
                 border: border,
                 disabledBorder: border,
                 enabledBorder: border,
@@ -132,7 +132,7 @@ class _ChallengeEventOrganizerPageState
                 fillColor: Colors.white,
                 contentPadding: EdgeInsets.symmetric(horizontal: 12),
                 filled: true,
-                hintText: "Renginio nuoroda",
+                hintText: AppLocalizations.of(context)!.challenge_event_link_hint_text,
                 border: border,
                 disabledBorder: border,
                 enabledBorder: border,
@@ -148,7 +148,7 @@ class _ChallengeEventOrganizerPageState
             padding: EdgeInsets.only(top: 10),
             child: Row(
               children: [
-                Text("Organizuoju vienas",
+                Text(AppLocalizations.of(context)!.challenge_event_organizing_alone,
                     style: Theme.of(context).textTheme.button),
                 Switch(
                   value: organizedAlone,
@@ -167,7 +167,7 @@ class _ChallengeEventOrganizerPageState
                   saveAction(context);
                 },
                 child: Text(
-                  "Saugoti ir pateikti vėliau",
+                  AppLocalizations.of(context)!.challenge_save_and_submit_later,
                   style: TextStyle(color: Colors.white),
                 ))),
         Padding(
@@ -177,7 +177,7 @@ class _ChallengeEventOrganizerPageState
                   completeAction(context);
                 },
                 child: Text(
-                  "Pateikti",
+                  AppLocalizations.of(context)!.action_submit,
                   style: TextStyle(color: Colors.white),
                 )))
       ],
@@ -186,7 +186,7 @@ class _ChallengeEventOrganizerPageState
 
   completeAction(BuildContext context) async {
     if (nameController.text == "" || descriptionController.text == "") {
-      await showMessage(context, "Klaida", "Laukai yra privalomi");
+      await showMessage(context, AppLocalizations.of(context)!.error, AppLocalizations.of(context)!.message_fields_are_required);
       return;
     }
 
@@ -211,8 +211,8 @@ class _ChallengeEventOrganizerPageState
         result["main_joined_challenge"] != null &&
         (result["main_joined_challenge"] as Map<String, dynamic>)["status"] ==
             "completed") {
-      await showMessage(context, "Ačiū!",
-          "Ačiū už atliktą užduotį! Savanoris peržiūrės jūsų atsakymą ir įskaitys vaivorykštes. Apie tai būsite informuoti pranešimų skiltyje.");
+      await showMessage(context, AppLocalizations.of(context)!.message_thank_you,
+          AppLocalizations.of(context)!.message_challenge_completed_volunteer_will_take_a_look);
       Navigator.of(context).pop();
       return;
     }
@@ -221,19 +221,19 @@ class _ChallengeEventOrganizerPageState
         result["main_joined_challenge"] != null &&
         (result["main_joined_challenge"] as Map<String, dynamic>)["status"] ==
             "confirmed") {
-      await showMessage(context, "Ačiū!",
-          "Ačiū už atliktą užduotį. Jums vaivorykštės įskaičiuotos.");
+      await showMessage(context, AppLocalizations.of(context)!.message_thank_you,
+          AppLocalizations.of(context)!.message_challenge_completed_rainbows_issued);
       Navigator.of(context).pop();
       return;
     }
 
     if (result != null && result["error"] != null) {
-      await showMessage(context, "Klaida", result["error"]);
+      await showMessage(context, AppLocalizations.of(context)!.error, result["error"]);
       return;
     }
 
     await showMessage(
-        context, "Klaida", "Nenumatyta klaida, mėginkite dar kartą");
+        context, AppLocalizations.of(context)!.error, AppLocalizations.of(context)!.error_unknown_error);
   }
 
   saveAction(BuildContext context) async {
@@ -258,18 +258,18 @@ class _ChallengeEventOrganizerPageState
         result["main_joined_challenge"] != null &&
         (result["main_joined_challenge"] as Map<String, dynamic>)["status"] ==
             "joined") {
-      await showMessage(context, "Ačiū!", "Pakeitimai išsaugoti");
+      await showMessage(context, AppLocalizations.of(context)!.message_thank_you, AppLocalizations.of(context)!.message_changes_where_saved);
       Navigator.of(context).pop();
       return;
     }
 
     if (result != null && result["error"] != null) {
-      await showMessage(context, "Klaida", result["error"]);
+      await showMessage(context, AppLocalizations.of(context)!.error, result["error"]);
       return;
     }
 
     await showMessage(
-        context, "Klaida", "Nenumatyta klaida, mėginkite dar kartą");
+        context, AppLocalizations.of(context)!.error, AppLocalizations.of(context)!.error_unknown_error);
   }
 
   Future showMessage(BuildContext context, String title, String message) {

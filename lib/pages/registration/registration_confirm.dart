@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rainbow_challenge/pages/login/login_page.dart';
 import 'package:rainbow_challenge/utils/repository/user_repository.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class RegistrationPageConfirm extends StatelessWidget {
   const RegistrationPageConfirm({Key? key}) : super(key: key);
@@ -16,13 +17,13 @@ class RegistrationPageConfirm extends StatelessWidget {
         child: Column(
           children: [
             Text(
-              'Registracija sėkminga. Prisijungti galėsi po to, kai aktyvuosi paskyrą. Aktyvavimo nuorodą nusiuntėme nurodytu el. pašto adresu.',
+              AppLocalizations.of(context)!.registration_successful,
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 20),
             ),
             SizedBox(height: 50),
             ElevatedButton(
-              child: Text('Prisijungti'),
+              child: Text(AppLocalizations.of(context)!.action_login),
               onPressed: () {
                 Navigator.pushReplacement(
                     context,

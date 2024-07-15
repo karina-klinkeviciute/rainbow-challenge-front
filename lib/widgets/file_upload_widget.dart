@@ -6,6 +6,7 @@ import 'package:rainbow_challenge/services/dio_client.dart';
 import 'package:rainbow_challenge/theme/colors.dart';
 import 'package:rainbow_challenge/utils/model/file_model.dart';
 import 'package:rainbow_challenge/utils/repository/files_repository.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class FileUploadWidget extends StatefulWidget {
   String uuid;
@@ -43,7 +44,7 @@ class _FileUploadWidgetState extends State<FileUploadWidget> {
         ),
         ElevatedButton(
             onPressed: onFileUploadPressed,
-            child: Text("Pridėti failą (Max 20MB)")),
+            child: Text("${AppLocalizations.of(context)!.attach_file} (Max 20MB)")),
       ],
     );
   }
@@ -103,7 +104,7 @@ class _FileUploadWidgetState extends State<FileUploadWidget> {
   void _msg(context) {
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
       content: Text(
-        'Klaida. Failas, kurį bandėte įkelti, per didelis.',
+        AppLocalizations.of(context)!.files_too_big,
         textAlign: TextAlign.center,
       ),
       backgroundColor: Colors.redAccent,

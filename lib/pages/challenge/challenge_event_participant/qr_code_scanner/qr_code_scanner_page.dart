@@ -6,6 +6,7 @@ import 'package:rainbow_challenge/pages/challenge/challenge_event_participant/qr
 import 'package:rainbow_challenge/widgets/auth_text_field.dart';
 import 'package:rainbow_challenge/widgets/widgets.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class QrCodeScannerPage extends StatefulWidget {
   QrCodeScannerPage({Key? key, required this.uuid}) : super(key: key);
@@ -54,7 +55,7 @@ class QrCodeScannerPageState extends State<QrCodeScannerPage> {
             Expanded(
               flex: 2,
               child: Center(
-                child: Text('Paliesk juodą ekraną QR kodo skenavimui”'),
+                child: Text(AppLocalizations.of(context)!.challenge_event_touch_black_screen_for_qr),
               ),
             ),
             //in case we need to add manually qr code
@@ -104,9 +105,9 @@ class QrCodeScannerPageState extends State<QrCodeScannerPage> {
           context: context,
           builder: (BuildContext context) => AlertDialog(
             elevation: 80,
-            title: const Text('Ačiū'),
-            content: const Text(
-                'Ačiū už atliktą užduotį! Jums įskaičiuota vaivorykščių.'), //TODO add localizations
+            title: Text(AppLocalizations.of(context)!.message_thank_you),
+            content: Text(
+                AppLocalizations.of(context)!.message_challenge_completed_rainbows_issued),
             actions: <Widget>[
               TextButton(
                 onPressed: () {
@@ -124,8 +125,8 @@ class QrCodeScannerPageState extends State<QrCodeScannerPage> {
         context: context,
         builder: (BuildContext context) => AlertDialog(
           elevation: 80,
-          title: const Text('Ačiū'),
-          content: const Text('QR kodas neteisingas'), //TODO add localizations
+          title: Text(AppLocalizations.of(context)!.message_thank_you),
+          content: Text(AppLocalizations.of(context)!.challenge_event_qr_code_incorrect),
           actions: <Widget>[
             TextButton(
               onPressed: () {

@@ -7,6 +7,7 @@ import 'package:rainbow_challenge/pages/registration/registration_page.dart';
 import 'package:rainbow_challenge/utils/repository/user_repository.dart';
 import 'package:rainbow_challenge/widgets/language_widget.dart';
 import 'package:rainbow_challenge/widgets/social_login_widget.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class LoginForm extends StatefulWidget {
   @override
@@ -51,12 +52,12 @@ class _LoginFormState extends State<LoginForm> {
                     children: <Widget>[
                       TextFormField(
                         decoration: InputDecoration(
-                            labelText: 'El. paštas', icon: Icon(Icons.person)),
+                            labelText: AppLocalizations.of(context)!.email, icon: Icon(Icons.person)),
                         controller: _usernameController,
                       ),
                       TextFormField(
                         decoration: InputDecoration(
-                            labelText: 'Slaptažodis',
+                            labelText: AppLocalizations.of(context)!.password,
                             icon: Icon(Icons.security)),
                         controller: _passwordController,
                         obscureText: true,
@@ -71,7 +72,7 @@ class _LoginFormState extends State<LoginForm> {
                                 ? _onLoginButtonPressed
                                 : null,
                             child: Text(
-                              'Prisijungti',
+                              AppLocalizations.of(context)!.action_login,
                               style: TextStyle(
                                 fontSize: 24.0,
                               ),
@@ -114,10 +115,10 @@ class _LoginFormState extends State<LoginForm> {
                                                       UserRepository(),
                                                 )));
                                   },
-                                  child: const Text(
-                                    'Neturi paskyros? Registruokis',
+                                  child: Text(
+                                    AppLocalizations.of(context)!.action_register,
                                     textAlign: TextAlign.center,
-                                  ), //TODO add localizations
+                                  ),
                                 ),
                                 TextButton(
                                   onPressed: () {
@@ -129,10 +130,10 @@ class _LoginFormState extends State<LoginForm> {
                                                       UserRepository(),
                                                 )));
                                   },
-                                  child: const Text(
-                                    'Užmiršai slaptažodį? Spausk čia',
+                                  child: Text(
+                                    AppLocalizations.of(context)!.action_forgot_password,
                                     textAlign: TextAlign.center,
-                                  ), //TODO localizations
+                                  ),
                                 ),
                                 LanguageWidget(),
                               ],
