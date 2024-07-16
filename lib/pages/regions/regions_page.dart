@@ -83,7 +83,7 @@ class _Regions extends StatelessWidget {
                       bestRegionsList[index].points.toString(),
                       style: Theme.of(context)
                           .textTheme
-                          .headline5!
+                          .headlineSmall!
                           .merge(TextStyle(color: _color(index))),
                     ),
                   ]),
@@ -125,6 +125,6 @@ Color _color(int index) {
 TextStyle _textStyle(int index, context) {
   return Theme.of(context)
       .textTheme
-      .headline5!
+      .headlineSmall!
       .merge(TextStyle(color: _color(index)));
 }

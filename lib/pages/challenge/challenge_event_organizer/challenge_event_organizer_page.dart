@@ -149,7 +149,7 @@ class _ChallengeEventOrganizerPageState
             child: Row(
               children: [
                 Text("Organizuoju vienas",
-                    style: Theme.of(context).textTheme.button),
+                    style: Theme.of(context).textTheme.labelLarge),
                 Switch(
                   value: organizedAlone,
                   onChanged: (value) {

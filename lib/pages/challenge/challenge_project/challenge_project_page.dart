@@ -145,7 +145,7 @@ class _ChallengeProjectPageState extends State<ChallengeProjectPage> {
             child: Row(
               children: [
                 Text("Atlikau vienas",
-                    style: Theme.of(context).textTheme.button),
+                    style: Theme.of(context).textTheme.labelLarge),
                 Switch(
                   value: implementedAlone,
                   onChanged: (value) {
