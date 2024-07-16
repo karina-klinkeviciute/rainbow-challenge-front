@@ -28,7 +28,7 @@ class HeadlineWidget extends StatelessWidget {
             Text(
               subtitle!,
               textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.headline3!.merge(
+              style: Theme.of(context).textTheme.displaySmall!.merge(
                   const TextStyle(color: ThemeColors.primaryColor, height: 1)),
             ),
         ],

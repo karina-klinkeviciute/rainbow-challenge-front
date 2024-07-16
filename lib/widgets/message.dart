@@ -85,7 +85,7 @@ class MessageWidget extends StatelessWidget {
             Text(
               title,
               textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.headline3!.merge(
+              style: Theme.of(context).textTheme.displaySmall!.merge(
                   const TextStyle(color: ThemeColors.primaryColor, height: 1)),
             ),
             const SizedBox(height: 10),

@@ -20,18 +20,19 @@ class HtmlWidget extends StatelessWidget {
       data: data,
       style: {
         'body': Style(
-            margin: const EdgeInsets.all(0),
+            margin: Margins.zero,
             color: ThemeColors.neutralColor,
             lineHeight: const LineHeight(1.4),
             textAlign: (center == false) ? TextAlign.left : TextAlign.center),
-        'p': Style(margin: const EdgeInsets.only(bottom: 10)),
+        'p': Style(margin: Margins.only(bottom: 10)),
         'a': Style(color: ThemeColors.secondaryColor)
       },
-      onLinkTap: (url, _, __, ___) async {
-        // print('url launched');
-        if (await canLaunchUrl(Uri.parse(url!))) {
-          await launchUrl(Uri.parse(url), mode: LaunchMode.externalApplication);
-        }
+      onLinkTap: (url, attributes, element) {
+        canLaunchUrl(Uri.parse(url!)).then((value) {
+          if (value) {
+            launchUrl(Uri.parse(url), mode: LaunchMode.externalApplication);
+          }
+        });
       },
     );
   }

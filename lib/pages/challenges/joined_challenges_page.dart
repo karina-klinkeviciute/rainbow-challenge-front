@@ -124,7 +124,7 @@ class _ChallengesList extends StatelessWidget {
           ? Center(
               child: Text(
               'Pradėtų užduočių nėra',
-              style: Theme.of(context).textTheme.headline3,
+              style: Theme.of(context).textTheme.displaySmall,
             ))
           : ListView.builder(
               shrinkWrap: true,
@@ -154,7 +154,7 @@ class _challengeType extends StatelessWidget {
         title: Text(typeTitle,
             style: Theme.of(context)
                 .textTheme
-                .headline4!
+                .headlineMedium!
                 .merge(const TextStyle(color: ThemeColors.neutralColor))),
         controlAffinity: ListTileControlAffinity.leading,
         children: [
@@ -182,11 +182,11 @@ class _challengeType extends StatelessWidget {
           style: (!challenge.can_be_joined && !challenge.is_joined)
               ? Theme.of(context)
                   .textTheme
-                  .bodyText2!
+                  .bodyMedium!
                   .merge(const TextStyle(color: Colors.grey))
               : Theme.of(context)
                   .textTheme
-                  .bodyText2!
+                  .bodyMedium!
                   .merge(const TextStyle(color: ThemeColors.neutralColor))),
       onTap: () {
         Navigator.push(
