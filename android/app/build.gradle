@@ -32,7 +32,8 @@ if (keystorePropertiesFile.exists()) {
 android {
     namespace "rainbowchallenge.lt.rainbow_challenge"
     compileSdkVersion flutter.compileSdkVersion
-    ndkVersion flutter.ndkVersion
+//    ndkVersion flutter.ndkVersion
+    ndkVersion "26.1.10909125"
 
     compileOptions {
 //        sourceCompatibility JavaVersion.VERSION_17
