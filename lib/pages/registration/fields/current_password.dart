@@ -1,5 +1,5 @@
 import 'package:formz/formz.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:rainbow_challenge/localization/localization_helper.dart';
 
 enum CurrentPasswordValidationError { invalid, empty }
 
@@ -25,7 +25,7 @@ extension Explanation on CurrentPasswordValidationError? {
   String? get title {
     switch (this) {
       case CurrentPasswordValidationError.invalid:
-        return AppLocalizations.of(context)!.password_rules;
+        return LocalizationHelper.current.password_rules;
       default:
         return null;
     }

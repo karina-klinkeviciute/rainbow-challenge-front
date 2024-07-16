@@ -1,5 +1,5 @@
 import 'package:formz/formz.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:rainbow_challenge/localization/localization_helper.dart';
 
 enum EmailRecoveryValidationError { invalid }
 
@@ -25,7 +25,7 @@ extension Explanation on EmailRecoveryValidationError {
   String? get title {
     switch (this) {
       case EmailRecoveryValidationError.invalid:
-        return AppLocalizations.of(context)!.email_enter_valid;
+        return LocalizationHelper.current.email_enter_valid;
       default:
         return null;
     }

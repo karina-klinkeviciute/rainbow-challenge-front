@@ -7,13 +7,13 @@ import 'package:rainbow_challenge/theme/colors.dart';
 import 'package:rainbow_challenge/utils/model/gender_model/gender_model.dart';
 import 'package:rainbow_challenge/utils/model/region/region_class.dart';
 import 'package:rainbow_challenge/utils/repository/user_repository.dart';
-import 'package:rainbow_challenge/widgets/auth_text_field.dart';
 import 'package:rainbow_challenge/pages/registration/bloc/reg_bloc.dart';
 import 'package:rainbow_challenge/pages/registration/bloc/reg_event.dart';
 import 'package:rainbow_challenge/pages/registration/bloc/reg_state.dart';
 import 'package:rainbow_challenge/widgets/widgets.dart';
 import 'package:rainbow_challenge/pages/registration/delete_account_page.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:rainbow_challenge/localization/localization_helper.dart';
 
 class UserSettingsForm extends StatelessWidget {
   const UserSettingsForm({Key? key}) : super(key: key);
@@ -311,19 +311,19 @@ void _msg(_, txt) {
 
 String _translate(String text) {
   if (text == 'man') {
-    return AppLocalizations.of(context)!.man;
+    return LocalizationHelper.current.gender_man;
   }
   if (text == 'woman') {
-    return AppLocalizations.of(context)!.woman;
+    return LocalizationHelper.current.gender_woman;
   }
   if (text == 'non-binary') {
-    return AppLocalizations.of(context)!.non-binary;
+    return LocalizationHelper.current.gender_non_binary;
   }
   if (text == 'other') {
-    return AppLocalizations.of(context)!.other;
+    return LocalizationHelper.current.gender_other;
   }
   if (text == 'prefer_not_to_say') {
-    return AppLocalizations.of(context)!.prefer_not_to_say;
+    return LocalizationHelper.current.gender_prefer_not_to_say;
   }
   return '';
 }
