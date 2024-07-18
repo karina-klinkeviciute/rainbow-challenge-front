@@ -3,6 +3,7 @@ import 'package:rainbow_challenge/services/dio_client.dart';
 import 'package:rainbow_challenge/theme/colors.dart';
 import 'package:rainbow_challenge/utils/model/available_prize/prize_class.dart';
 import 'package:rainbow_challenge/widgets/widgets.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ProfileRainbowForm extends StatelessWidget {
   ProfileRainbowForm({
@@ -18,7 +19,7 @@ class ProfileRainbowForm extends StatelessWidget {
         width: MediaQuery.of(context).size.width * 0.8,
         child: Column(
           children: [
-            const HeadlineWidget(title: 'Vaivorykštės'),
+            HeadlineWidget(title: AppLocalizations.of(context)!.rainbows),
             FutureBuilder<RainbowBalance>(
                 future: getData(),
                 builder: (context, AsyncSnapshot<RainbowBalance> snapshot) {
@@ -32,21 +33,21 @@ class ProfileRainbowForm extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.all(10),
                           child: Text(
-                            'Gautos vaivorykštės:      ${snapshot.data!.earnedRainbows.toString()}',
+                            '${AppLocalizations.of(context)!.rainbows_received}:      ${snapshot.data!.earnedRainbows.toString()}',
                             style: TextStyle(fontSize: 18),
                           ),
                         ),
                         Padding(
                           padding: const EdgeInsets.all(10),
                           child: Text(
-                            'Aktyvios vaivorykštės:  ${snapshot.data!.remainingRainbows.toString()}',
+                            '${AppLocalizations.of(context)!.rainbows_active}:  ${snapshot.data!.remainingRainbows.toString()}',
                             style: TextStyle(fontSize: 18),
                           ),
                         ),
                         Padding(
                           padding: const EdgeInsets.fromLTRB(10, 30, 10, 10),
                           child: Text(
-                            'Vaivorykštės gavai už šias užduotis:',
+                            AppLocalizations.of(context)!.rainbows_received_for_tasks,
                             textAlign: TextAlign.center,
                             style: TextStyle(
                                 fontSize: 20, fontWeight: FontWeight.bold),
@@ -59,7 +60,7 @@ class ProfileRainbowForm extends StatelessWidget {
                             DataColumn(
                               label: Expanded(
                                 child: Text(
-                                  'Užduoties Pavadinimas',
+                                  AppLocalizations.of(context)!.challenge_name,
                                   style: TextStyle(fontStyle: FontStyle.italic),
                                 ),
                               ),
@@ -108,7 +109,7 @@ class ProfileRainbowForm extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.fromLTRB(10, 30, 10, 10),
                           child: Text(
-                            'Vaivorykštes išleidai:',
+                            AppLocalizations.of(context)!.rainbows_spent_on,
                             textAlign: TextAlign.center,
                             style: TextStyle(
                                 fontSize: 20, fontWeight: FontWeight.bold),
@@ -165,11 +166,11 @@ class _challengeType extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text('Kaina: ${typeTitle.price}'),
+                Text('${AppLocalizations.of(context)!.price}: ${typeTitle.price}'),
                 SizedBox(width: 20),
-                Text('Kiekis: ${typeTitle.amount}'),
+                Text('${AppLocalizations.of(context)!.amount}: ${typeTitle.amount}'),
                 SizedBox(width: 20),
-                Text('Viso: ${typeTitle.total}')
+                Text('${AppLocalizations.of(context)!.total}: ${typeTitle.total}')
               ],
             ),
           )

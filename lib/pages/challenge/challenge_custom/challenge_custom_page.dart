@@ -7,6 +7,7 @@ import 'package:rainbow_challenge/utils/repository/joined_challenges/joined_chal
 import 'package:rainbow_challenge/widgets/file_upload_widget.dart';
 import 'cubit/challenge_custom_cubit.dart';
 import 'package:rainbow_challenge/widgets/widgets.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 // Single challenge page of type Event Participant.
 part 'part_info.dart';
@@ -71,7 +72,7 @@ class _ChallengeCustomPageState extends State<ChallengeCustomPage> {
                 fillColor: Colors.white,
                 contentPadding: EdgeInsets.symmetric(horizontal: 12),
                 filled: true,
-                hintText: "Aprašykite, kaip atlikote užduotį *",
+                hintText: AppLocalizations.of(context)!.challenge_description_hint_text,
                 border: border,
                 disabledBorder: border,
                 enabledBorder: border,
@@ -90,7 +91,7 @@ class _ChallengeCustomPageState extends State<ChallengeCustomPage> {
                   saveAction(context);
                 },
                 child: Text(
-                  "Saugoti ir pateikti vėliau",
+                  AppLocalizations.of(context)!.challenge_save_and_submit_later,
                   style: TextStyle(color: Colors.white),
                 ))),
         Padding(
@@ -115,7 +116,7 @@ class _ChallengeCustomPageState extends State<ChallengeCustomPage> {
 
   completeAction(BuildContext context) async {
     if (descriptionController.text == "") {
-      await showMessage(context, "Klaida", "Laukas yra privalomas");
+      await showMessage(context, AppLocalizations.of(context)!.error, AppLocalizations.of(context)!.message_field_is_required);
       return;
     }
 
@@ -137,8 +138,8 @@ class _ChallengeCustomPageState extends State<ChallengeCustomPage> {
         result["main_joined_challenge"] != null &&
         (result["main_joined_challenge"] as Map<String, dynamic>)["status"] ==
             "completed") {
-      await showMessage(context, "Ačiū!",
-          "Ačiū už atliktą užduotį! Savanoris peržiūrės jūsų atsakymą ir įskaitys vaivorykštes. Apie tai būsite informuoti pranešimų skiltyje.");
+      await showMessage(context, AppLocalizations.of(context)!.message_thank_you,
+          AppLocalizations.of(context)!.message_challenge_completed_volunteer_will_take_a_look);
       Navigator.of(context).pop();
       return;
     }
@@ -147,19 +148,19 @@ class _ChallengeCustomPageState extends State<ChallengeCustomPage> {
         result["main_joined_challenge"] != null &&
         (result["main_joined_challenge"] as Map<String, dynamic>)["status"] ==
             "confirmed") {
-      await showMessage(context, "Ačiū!",
-          "Ačiū už atliktą užduotį. Jums vaivorykštės įskaičiuotos.");
+      await showMessage(context, AppLocalizations.of(context)!.message_thank_you,
+          AppLocalizations.of(context)!.message_challenge_completed_rainbows_issued);
       Navigator.of(context).pop();
       return;
     }
 
     if (result != null && result["error"] != null) {
-      await showMessage(context, "Klaida", result["error"]);
+      await showMessage(context, AppLocalizations.of(context)!.error, result["error"]);
       return;
     }
 
     await showMessage(
-        context, "Klaida", "Nenumatyta klaida, mėginkite dar kartą");
+        context, AppLocalizations.of(context)!.error, AppLocalizations.of(context)!.error_unknown_error);
   }
 
   saveAction(BuildContext context) async {
@@ -181,18 +182,18 @@ class _ChallengeCustomPageState extends State<ChallengeCustomPage> {
         result["main_joined_challenge"] != null &&
         (result["main_joined_challenge"] as Map<String, dynamic>)["status"] ==
             "joined") {
-      await showMessage(context, "Ačiū!", "Pakeitimai išsaugoti");
+      await showMessage(context, AppLocalizations.of(context)!.message_thank_you, AppLocalizations.of(context)!.message_changes_where_saved);
       Navigator.of(context).pop();
       return;
     }
 
     if (result != null && result["error"] != null) {
-      await showMessage(context, "Klaida", result["error"]);
+      await showMessage(context, AppLocalizations.of(context)!.error, result["error"]);
       return;
     }
 
     await showMessage(
-        context, "Klaida", "Nenumatyta klaida, mėginkite dar kartą");
+        context, AppLocalizations.of(context)!.error, AppLocalizations.of(context)!.error_unknown_error);
   }
 
   Future showMessage(BuildContext context, String title, String message) {

@@ -1,4 +1,5 @@
 import 'package:formz/formz.dart';
+import 'package:rainbow_challenge/localization/localization_helper.dart';
 
 enum CurrentPasswordValidationError { invalid, empty }
 
@@ -24,7 +25,7 @@ extension Explanation on CurrentPasswordValidationError? {
   String? get title {
     switch (this) {
       case CurrentPasswordValidationError.invalid:
-        return "Slaptažodis turi būti ne trumpesnis negu 8 simboliai, iš jų bent 1 skaičius";
+        return LocalizationHelper.current.password_rules;
       default:
         return null;
     }

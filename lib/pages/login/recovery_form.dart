@@ -11,6 +11,8 @@ import 'package:rainbow_challenge/widgets/auth_text_field.dart';
 import 'package:formz/formz.dart';
 import 'package:rainbow_challenge/widgets/headline.dart';
 import 'package:rainbow_challenge/pages/registration/registration_confirm.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class RecoveryEmailForm extends StatelessWidget {
   const RecoveryEmailForm({Key? key}) : super(key: key);
@@ -33,7 +35,7 @@ class RecoveryEmailForm extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Center(child: const HeadlineWidget(title: 'Naujas vartotojas')),
+              Center(child: HeadlineWidget(title: AppLocalizations.of(context)!.new_user)),
               _RecoveryEmailInputField(),
               _RecoverySubmit(),
               Center(
@@ -48,10 +50,10 @@ class RecoveryEmailForm extends StatelessWidget {
                                       userRepository: UserRepository(),
                                     )));
                       },
-                      child: const Text(
-                        'Neturi paskyros? Registruokis',
+                      child: Text(
+                        AppLocalizations.of(context)!.action_register,
                         textAlign: TextAlign.center,
-                      ), //TODO add localizations
+                      ),
                     )),
               )
             ],
@@ -70,7 +72,7 @@ class _RecoveryEmailInputField extends StatelessWidget {
         return Padding(
           padding: const EdgeInsets.only(bottom: 16.0),
           child: AuthTextField(
-            hint: 'Įvesk el. pašto adresą',
+            hint: AppLocalizations.of(context)!.enter_email,
             key: const Key('Recovery_email_textField'),
             isRequiredField: true,
             error: state.email_recovery.error != null
@@ -99,7 +101,7 @@ class _RecoverySubmit extends StatelessWidget {
         return Padding(
           padding: EdgeInsets.only(top: 20),
           child: ElevatedButton(
-            child: Text('Įvesk el. pašto adresą'),
+            child: Text(AppLocalizations.of(context)!.enter_email),
             onPressed: state.status.isValidated
                 ? () => context
                     .read<RegistrationBloc>()

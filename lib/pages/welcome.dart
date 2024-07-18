@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rainbow_challenge/theme/colors.dart';
 import 'package:rainbow_challenge/theme/headings.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'dart:math' as math;
 
@@ -27,12 +28,12 @@ class WelcomePage extends StatelessWidget {
                 children: [
                   const _HeadLine(),
                   ElevatedButton(
-                    child: Text('Prisijungti'.toUpperCase()),
+                    child: Text(AppLocalizations.of(context)!.action_login),
                     onPressed: () {},
                   ),
                   const SizedBox(height: 5),
                   OutlinedButton(
-                    child: Text('Registruotis'.toUpperCase()),
+                    child: Text(AppLocalizations.of(context)!.action_register),
                     onPressed: () {},
                   ),
                   const SizedBox(height: 5),
@@ -40,11 +41,11 @@ class WelcomePage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       TextButton(
-                        child: const Text('Taisyklės'),
+                        child: Text(AppLocalizations.of(context)!.rules),
                         onPressed: () {},
                       ),
                       TextButton(
-                        child: const Text('Sąlygos'),
+                        child: Text(AppLocalizations.of(context)!.conditions),
                         onPressed: () {},
                       ),
                     ],

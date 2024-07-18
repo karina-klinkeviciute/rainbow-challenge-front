@@ -1,5 +1,5 @@
 import 'package:formz/formz.dart';
-import 'package:flutter/material.dart';
+import 'package:rainbow_challenge/localization/localization_helper.dart';
 
 enum ReNewPasswordValidationError {
   invalid,
@@ -27,7 +27,7 @@ extension Explanation on ReNewPasswordValidationError? {
   String? get name {
     switch (this) {
       case ReNewPasswordValidationError.mismatch:
-        return 'Slaptažodžiai turi sutapti';
+        return LocalizationHelper.current.passwords_must_match;
       default:
         return null;
     }

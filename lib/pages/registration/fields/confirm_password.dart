@@ -1,5 +1,5 @@
 import 'package:formz/formz.dart';
-import 'package:flutter/material.dart';
+import 'package:rainbow_challenge/localization/localization_helper.dart';
 
 enum ConfirmedPasswordValidationError {
   invalid,
@@ -28,7 +28,7 @@ extension Explanation on ConfirmedPasswordValidationError? {
   String? get name {
     switch (this) {
       case ConfirmedPasswordValidationError.mismatch:
-        return 'Slaptažodžiai turi sutapti';
+        return LocalizationHelper.current.passwords_must_match;
       default:
         return null;
     }

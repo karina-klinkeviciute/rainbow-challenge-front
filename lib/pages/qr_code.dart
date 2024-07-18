@@ -6,6 +6,7 @@ import 'package:rainbow_challenge/pages/challenge/challenge_event_participant/qr
 import 'package:rainbow_challenge/widgets/auth_text_field.dart';
 import 'package:rainbow_challenge/widgets/widgets.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class QrCodePage extends StatefulWidget {
   QrCodePage({
@@ -54,7 +55,7 @@ class QrCodePageState extends State<QrCodePage> {
             Expanded(
               flex: 2,
               child: Center(
-                child: Text('Paliesk juodą ekraną QR kodo skenavimui”'),
+                child: Text(AppLocalizations.of(context)!.challenge_event_touch_black_screen_for_qr),
               ),
             ),
             //in case we need to add manually qr code
@@ -104,7 +105,7 @@ class QrCodePageState extends State<QrCodePage> {
         context: context,
         builder: (BuildContext context) => AlertDialog(
           elevation: 80,
-          title: const Text('Ačiū'),
+          title: Text(AppLocalizations.of(context)!.message_thank_you),
           content: Text('$response',textAlign: TextAlign.center), //TODO add localizations
           actions: <Widget>[
             TextButton(
@@ -123,9 +124,9 @@ class QrCodePageState extends State<QrCodePage> {
         er = er.replaceAll(RegExp('[)]|[(]|[}]|[{]|\\]|[[]'), '');
         print(er);
         if(er=="You have already completed this challenge"){
-          er='Jūs jau atlikote šią užduotį anksčiau';
+          er=AppLocalizations.of(context)!.challenge_completed_already;
         }        if(er=="QR code is invalid."){
-          er='QR kodas negaliojantis';
+          er=AppLocalizations.of(context)!.challenge_event_qr_code_incorrect;
         }
         
         setState(() {});
@@ -134,8 +135,8 @@ class QrCodePageState extends State<QrCodePage> {
         context: context,
         builder: (BuildContext context) => AlertDialog(
           elevation: 80,
-          title: const Text('Ačiū'),
-          content: Text('${er}',textAlign: TextAlign.center), //TODO add localizations
+          title: Text(AppLocalizations.of(context)!.message_thank_you),
+          content: Text('${er}',textAlign: TextAlign.center),
           actions: <Widget>[
             TextButton(
               onPressed: () {

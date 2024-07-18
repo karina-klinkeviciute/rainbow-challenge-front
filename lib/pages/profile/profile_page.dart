@@ -187,7 +187,7 @@ class _MainArea extends StatelessWidget {
               ),
             );
           },
-          child: Text('Keisti slaptažodį'),
+          child: Text(AppLocalizations.of(context)!.change_password),
         ),
         TextButton(
           onPressed: () {
@@ -204,7 +204,7 @@ class _MainArea extends StatelessWidget {
               ),
             );
           },
-          child: Text('Vaivorykščių suvestinė'),
+          child: Text(AppLocalizations.of(context)!.rainbows_summary),
         ),
         LanguageWidget(),
       ]);

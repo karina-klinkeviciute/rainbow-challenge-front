@@ -110,7 +110,7 @@ class _Page extends StatelessWidget {
               builder: (BuildContext context) => AlertDialog(
                 title: Text(AppLocalizations.of(context)!.error),
                 content: Text(
-                    joinedChallengeResponse.errorMessage ?? "Unknown error"),
+                    joinedChallengeResponse.errorMessage ?? AppLocalizations.of(context)!.error_unknown_error),
                 actions: <Widget>[
                   TextButton(
                     onPressed: () => Navigator.pop(context, 'OK'),
@@ -175,7 +175,7 @@ class _Page extends StatelessWidget {
               builder: (BuildContext context) => AlertDialog(
                 title: Text(AppLocalizations.of(context)!.error),
                 content: Text(
-                    joinedChallengeResponse.errorMessage ?? "Unknown error"),
+                    joinedChallengeResponse.errorMessage ?? AppLocalizations.of(context)!.error_unknown_error),
                 actions: <Widget>[
                   TextButton(
                     onPressed: () => Navigator.pop(context, 'OK'),

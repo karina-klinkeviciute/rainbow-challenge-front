@@ -7,13 +7,13 @@ import 'package:rainbow_challenge/theme/colors.dart';
 import 'package:rainbow_challenge/utils/model/gender_model/gender_model.dart';
 import 'package:rainbow_challenge/utils/model/region/region_class.dart';
 import 'package:rainbow_challenge/utils/repository/user_repository.dart';
-import 'package:rainbow_challenge/widgets/auth_text_field.dart';
 import 'package:rainbow_challenge/pages/registration/bloc/reg_bloc.dart';
 import 'package:rainbow_challenge/pages/registration/bloc/reg_event.dart';
 import 'package:rainbow_challenge/pages/registration/bloc/reg_state.dart';
 import 'package:rainbow_challenge/widgets/widgets.dart';
 import 'package:rainbow_challenge/pages/registration/delete_account_page.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:rainbow_challenge/localization/localization_helper.dart';
 
 class UserSettingsForm extends StatelessWidget {
   const UserSettingsForm({Key? key}) : super(key: key);
@@ -38,7 +38,7 @@ class UserSettingsForm extends StatelessWidget {
           } else if (state.status.isSubmissionSuccess) {
             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
               content: Text(
-                'Nustatymai pakeisti',
+                AppLocalizations.of(context)!.settings_changed,
                 textAlign: TextAlign.center,
               ),
               backgroundColor: Colors.green,
@@ -53,7 +53,7 @@ class UserSettingsForm extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                const HeadlineWidget(title: 'Naudotojo nustatymai'),
+                HeadlineWidget(title: AppLocalizations.of(context)!.user_settings),
                 _AgeInputField(),
                 _RegionInputField(),
                 _GenderInputField(),
@@ -108,7 +108,7 @@ class _AgeInputField extends StatelessWidget {
                 enabledBorder: UnderlineInputBorder(
                     borderSide:
                         BorderSide(color: ThemeColors.primaryColor, width: 1))),
-            hint: Text('Gimimo metai: ${state.year_of_birth.value}'),
+            hint: Text('${AppLocalizations.of(context)!.year_of_birth}: ${state.year_of_birth.value}'),
             value: _selectedValue,
             isDense: false,
             key: const Key('Age_textField'),
@@ -128,23 +128,23 @@ class _GenderInputField extends StatelessWidget {
   Widget build(BuildContext context) {
     List<DropdownMenuItem<String>> _genders = [
       DropdownMenuItem(
-        child: Text('Vyras'),
+        child: Text(AppLocalizations.of(context)!.gender_man),
         value: Genders().man,
       ),
       DropdownMenuItem(
-        child: Text('Moteris'),
+        child: Text(AppLocalizations.of(context)!.gender_woman),
         value: Genders().woman,
       ),
       DropdownMenuItem(
-        child: Text('Nebinarinė'),
+        child: Text(AppLocalizations.of(context)!.gender_non_binary),
         value: Genders().nonBinary,
       ),
       DropdownMenuItem(
-        child: Text('Kita'),
+        child: Text(AppLocalizations.of(context)!.gender_other),
         value: Genders().other,
       ),
       DropdownMenuItem(
-        child: Text('Nenoriu nurodyti'),
+        child: Text(AppLocalizations.of(context)!.gender_prefer_not_to_say),
         value: Genders().preferNotToSay,
       )
     ];
@@ -164,7 +164,7 @@ class _GenderInputField extends StatelessWidget {
               ),
             ),
             isDense: false,
-            hint: Text('Lytis: ${_translate(state.gender.value)}'),
+            hint: Text('${AppLocalizations.of(context)!.gender}: ${_translate(state.gender.value)}'),
             value: _selectedValue,
             key: const Key('Gender_textField'),
             onChanged: (gender) {
@@ -262,7 +262,7 @@ class _RegionInputField extends StatelessWidget {
             isDense: false,
             hint: SingleChildScrollView(
               child: Text(
-                'Regionas: ${state.region.value.length > 22 ? '${state.region.value.substring(0, 22)}' : state.region.value}',
+                '${AppLocalizations.of(context)!.region}: ${state.region.value.length > 22 ? '${state.region.value.substring(0, 22)}' : state.region.value}',
                 textScaleFactor:
                     MediaQuery.of(context).size.width < 350 ? 0.75 : 1,
                 textHeightBehavior:
@@ -292,7 +292,7 @@ class _RegSubmit extends StatelessWidget {
         return Padding(
           padding: EdgeInsets.only(top: 20),
           child: ElevatedButton(
-              child: Text('Atnaujinti nustatymus'),
+              child: Text(AppLocalizations.of(context)!.action_update_settings),
               onPressed: () =>
                   context.read<RegistrationBloc>().add(SendNewUserData())),
         );
@@ -311,19 +311,19 @@ void _msg(_, txt) {
 
 String _translate(String text) {
   if (text == 'man') {
-    return "Vyras";
+    return LocalizationHelper.current.gender_man;
   }
   if (text == 'woman') {
-    return "Moteris";
+    return LocalizationHelper.current.gender_woman;
   }
   if (text == 'non-binary') {
-    return "Nebinarinė";
+    return LocalizationHelper.current.gender_non_binary;
   }
   if (text == 'other') {
-    return "Kita";
+    return LocalizationHelper.current.gender_other;
   }
   if (text == 'prefer_not_to_say') {
-    return "Nenoriu nurodyti";
+    return LocalizationHelper.current.gender_prefer_not_to_say;
   }
   return '';
 }
