@@ -157,7 +157,7 @@ class _challengeType extends StatelessWidget {
         title: Text(typeTitle.name,
             style: Theme.of(context)
                 .textTheme
-                .headline4!
+                .headlineMedium!
                 .merge(const TextStyle(color: ThemeColors.neutralColor))),
         controlAffinity: ListTileControlAffinity.leading,
         children: [

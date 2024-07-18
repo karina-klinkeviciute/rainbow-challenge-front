@@ -118,7 +118,7 @@ class _TitleSection extends StatelessWidget {
             title,
             style: Theme.of(context)
                 .textTheme
-                .headline3!
+                .displaySmall!
                 .merge(const TextStyle(color: Colors.black, height: 1)),
           ),
           const Divider(),

@@ -155,7 +155,7 @@ class _NewsList extends StatelessWidget {
                 Text(newsItem.title,
                     style: Theme.of(context)
                         .textTheme
-                        .bodyText2!
+                        .bodyMedium!
                         .merge(TextStyle(fontWeight: FontWeight.bold))),
 
                 Container(

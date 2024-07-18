@@ -29,14 +29,15 @@ class DesignTheme with ChangeNotifier {
         primaryColorDark: ThemeColors.primaryColorDark,
         canvasColor: ThemeColors.bgColor,
         scaffoldBackgroundColor: Colors.white,
-        bottomAppBarColor: Colors.white,
+        bottomAppBarTheme: BottomAppBarTheme(
+          color: Colors.white,
+        ),
         cardColor: Colors.white,
         dividerColor: ThemeColors.neutralColorLight,
         focusColor: ThemeColors.secondaryColorDark,
         hoverColor: ThemeColors.secondaryColorDark,
         highlightColor: ThemeColors.primaryColorDark,
         splashColor: ThemeColors.secondaryColor,
-        selectedRowColor: Colors.grey,
         unselectedWidgetColor: Colors.grey.shade400,
         disabledColor: Colors.grey.shade200,
         bottomNavigationBarTheme: const BottomNavigationBarThemeData(
@@ -46,19 +47,21 @@ class DesignTheme with ChangeNotifier {
         // Some info about buttons theming:
         // https://flutter.dev/docs/release/breaking-changes/buttons
         textButtonTheme: TextButtonThemeData(
-          style: TextButton.styleFrom(primary: ThemeColors.secondaryColor),
+          style: TextButton.styleFrom(
+            foregroundColor: ThemeColors.secondaryColor,
+          ),
         ),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
               minimumSize: const Size(250, 42),
-              primary: ThemeColors.secondaryColor,
+              backgroundColor: ThemeColors.secondaryColor,
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8.0))),
         ),
         outlinedButtonTheme: OutlinedButtonThemeData(
           style: OutlinedButton.styleFrom(
               minimumSize: const Size(250, 42),
-              primary: ThemeColors.secondaryColor,
+              backgroundColor: ThemeColors.secondaryColor,
               side: const BorderSide(
                   width: 1.0, color: ThemeColors.secondaryColor),
               shape: RoundedRectangleBorder(
@@ -78,46 +81,46 @@ class DesignTheme with ChangeNotifier {
         // Read more about TextTheme:
         // https://api.flutter.dev/flutter/material/TextTheme-class.html
         textTheme: const TextTheme(
-          headline1: TextStyle(
+          displayLarge: TextStyle(
               fontSize: 72.0,
               fontWeight: FontWeight.w600,
               fontFamily: ThemeFonts.primaryFontFamily,
               fontStyle: FontStyle.italic),
-          headline2: TextStyle(
+          displayMedium: TextStyle(
               fontSize: 50.0,
               fontWeight: FontWeight.w600,
               fontFamily: ThemeFonts.primaryFontFamily,
               color: ThemeColors.primaryColorDark),
-          headline3: TextStyle(
+          displaySmall: TextStyle(
               fontSize: 24.0,
               fontWeight: FontWeight.w600,
               height: 1,
               fontFamily: ThemeFonts.primaryFontFamily),
-          headline4: TextStyle(
+          headlineMedium: TextStyle(
               fontSize: 18.0,
               fontWeight: FontWeight.w600,
               fontFamily: ThemeFonts.secondaryFontFamily),
-          headline5: TextStyle(
+          headlineSmall: TextStyle(
               fontSize: 16.0,
               fontWeight: FontWeight.w600,
               fontFamily: ThemeFonts.secondaryFontFamily),
-          headline6: TextStyle(
+          titleLarge: TextStyle(
               fontSize: 14.0,
               fontWeight: FontWeight.w600,
               fontFamily: ThemeFonts.secondaryFontFamily),
-          subtitle1: TextStyle(
+          titleMedium: TextStyle(
               fontSize: 24.0, fontFamily: ThemeFonts.primaryFontFamily),
-          subtitle2: TextStyle(
+          titleSmall: TextStyle(
               fontSize: 18.0, fontFamily: ThemeFonts.primaryFontFamily),
-          bodyText1: TextStyle(
+          bodyLarge: TextStyle(
               fontSize: 16.0, fontFamily: ThemeFonts.primaryFontFamily),
-          bodyText2: TextStyle(
+          bodyMedium: TextStyle(
               fontSize: 14.0, fontFamily: ThemeFonts.secondaryFontFamily),
-          caption: TextStyle(
+          bodySmall: TextStyle(
               fontSize: 12.0, fontFamily: ThemeFonts.secondaryFontFamily),
-          button: TextStyle(
+          labelLarge: TextStyle(
               fontSize: 18.0, fontFamily: ThemeFonts.secondaryFontFamily),
-          overline: TextStyle(
+          labelSmall: TextStyle(
               fontSize: 12.0, fontFamily: ThemeFonts.secondaryFontFamily),
         ));
   }

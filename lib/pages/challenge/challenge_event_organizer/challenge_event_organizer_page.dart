@@ -149,7 +149,7 @@ class _ChallengeEventOrganizerPageState
             child: Row(
               children: [
                 Text(AppLocalizations.of(context)!.challenge_event_organizing_alone,
-                    style: Theme.of(context).textTheme.button),
+                    style: Theme.of(context).textTheme.labelLarge),
                 Switch(
                   value: organizedAlone,
                   onChanged: (value) {

@@ -18,7 +18,7 @@ class ChallengeHeadlineWidget extends StatelessWidget {
             child: Text(title,
                 style: Theme.of(context)
                     .textTheme
-                    .headline3!
+                    .displaySmall!
                     .merge(TextStyle(color: ThemeColors.primaryColor)))),
         SizedBox(
           width: 20,
@@ -30,7 +30,7 @@ class ChallengeHeadlineWidget extends StatelessWidget {
               width: 16,
             ),
             Text(points.toString(),
-                style: Theme.of(context).textTheme.headline3!)
+                style: Theme.of(context).textTheme.displaySmall!)
           ],
         )
       ]),
