@@ -2,7 +2,6 @@ import 'package:rainbow_challenge/constants/api.dart';
 import 'package:rainbow_challenge/services/dio_client.dart';
 import 'package:rainbow_challenge/utils/model/challenge/challenge_quiz/quiz_correct_answers_class.dart';
 import 'package:rainbow_challenge/utils/model/models.dart';
-import 'package:rainbow_challenge/utils/model/quiz/correct_answer.dart';
 
 class ChallengesQuizRepository {
   final DioClient dioClient;

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:rainbow_challenge/pages/challenge/challenge_page.dart';
 import 'package:rainbow_challenge/widgets/widgets.dart';
 
 // Example page. Testing, playing with widgets and compositions.

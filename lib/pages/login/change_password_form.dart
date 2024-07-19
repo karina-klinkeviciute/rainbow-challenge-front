@@ -8,8 +8,6 @@ import 'package:rainbow_challenge/pages/registration/fields/current_password.dar
 import 'package:rainbow_challenge/pages/registration/fields/new_password.dart';
 import 'package:rainbow_challenge/pages/registration/fields/re_new_password.dart';
 import 'package:rainbow_challenge/pages/registration/password_change_confirm.dart';
-import 'package:rainbow_challenge/pages/registration/registration_confirm.dart';
-import 'package:rainbow_challenge/pages/registration/registration_form.dart';
 import 'package:rainbow_challenge/widgets/auth_text_field.dart';
 import 'package:rainbow_challenge/widgets/widgets.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';

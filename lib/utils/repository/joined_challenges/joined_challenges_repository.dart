@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:rainbow_challenge/constants/api.dart';
 import 'package:rainbow_challenge/services/dio_client.dart';
 import 'package:rainbow_challenge/utils/model/api_response.dart';
 import 'package:rainbow_challenge/utils/model/models.dart';
@@ -16,7 +15,7 @@ class JoinedChallengesRepository {
     });
 
     if (challengeRaw.isNotEmpty && challengeRaw.keys.contains("_error")) {
-      var error = challengeRaw["_error"] as DioError;
+      var error = challengeRaw["_error"] as DioException;
       var responseData = error.response?.data as List;
       var response = ApiResponse<JoinedChallenge>(
           null, false, responseData.first as String);

@@ -71,8 +71,7 @@ class App extends StatefulWidget {
     required this.appRouter,
     required this.initLanguage,
     this.pushNotifCategory = null,
-  }) : assert(userRepository != null),
-       super(key: key);
+  }) : super(key: key);
 
   @override
   _AppState createState() => _AppState();
@@ -143,11 +142,9 @@ class _AppState extends State<App> {
                     // If app received notification while in background
                     Stream<RemoteMessage> _stream = FirebaseMessaging.onMessageOpenedApp;
                     _stream.listen((RemoteMessage event) async {
-                      if (event.data != null) {
-                        print("Handling category from stream: " + event.data["category"].toString());
-                        await Navigator.of(context).pushNamed(getNotificationCategoryRoute(event.data["category"].toString()));
-                      }
-                    });
+                      print("Handling category from stream: " + event.data["category"].toString());
+                      await Navigator.of(context).pushNamed(getNotificationCategoryRoute(event.data["category"].toString()));
+                                        });
                     return NewsPage();
                   } else {
                     return RegistrationPage(userRepository: widget.userRepository);

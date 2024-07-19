@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:rainbow_challenge/utils/repository/texts_repository.dart';
 import 'package:rainbow_challenge/widgets/widgets.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rainbow_challenge/constants/api.dart';
-import 'package:rainbow_challenge/navigation/route_arguments/single_challenge_arguments.dart';
 import 'package:rainbow_challenge/services/dio_client.dart';
 import 'package:rainbow_challenge/widgets/file_upload_widget.dart';
 import '../../../theme/colors.dart';

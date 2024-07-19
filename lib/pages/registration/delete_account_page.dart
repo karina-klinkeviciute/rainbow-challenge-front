@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
-import 'package:rainbow_challenge/constants/drop_down_lists.dart';
 import 'package:rainbow_challenge/pages/registration/delete_account_confirm.dart';
 import 'package:rainbow_challenge/pages/registration/fields/current_password.dart';
-import 'package:rainbow_challenge/theme/colors.dart';
 import 'package:rainbow_challenge/utils/repository/user_repository.dart';
 import 'package:rainbow_challenge/widgets/auth_text_field.dart';
 import 'package:rainbow_challenge/pages/registration/bloc/reg_bloc.dart';
@@ -14,22 +11,6 @@ import 'package:rainbow_challenge/pages/registration/bloc/reg_state.dart';
 import 'package:rainbow_challenge/widgets/widgets.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:formz/formz.dart';
-import 'package:rainbow_challenge/constants/drop_down_lists.dart';
-import 'package:rainbow_challenge/theme/colors.dart';
-import 'package:rainbow_challenge/utils/model/gender_model/gender_model.dart';
-import 'package:rainbow_challenge/utils/model/region/region_class.dart';
-import 'package:rainbow_challenge/utils/repository/user_repository.dart';
-import 'package:rainbow_challenge/widgets/auth_text_field.dart';
-import 'package:rainbow_challenge/pages/registration/bloc/reg_bloc.dart';
-import 'package:rainbow_challenge/pages/registration/bloc/reg_event.dart';
-import 'package:rainbow_challenge/pages/registration/bloc/reg_state.dart';
-import 'package:rainbow_challenge/widgets/widgets.dart';
-import 'package:rainbow_challenge/pages/registration/delete_account_page.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class DeleteAccountPage extends StatelessWidget {
   const DeleteAccountPage({Key? key}) : super(key: key);

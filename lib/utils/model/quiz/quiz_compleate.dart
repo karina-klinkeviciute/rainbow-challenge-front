@@ -1,12 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:rainbow_challenge/constants/app.dart';
-import 'package:rainbow_challenge/pages/challenges/challenges_page.dart';
-import 'package:rainbow_challenge/pages/challenges/cubit/challenges_cubit.dart';
-import 'package:rainbow_challenge/pages/login/login_page.dart';
 import 'package:rainbow_challenge/pages/pages.dart';
-import 'package:rainbow_challenge/utils/model/challenge/challenge_class.dart';
-import 'package:rainbow_challenge/utils/repository/user_repository.dart';
 import 'package:rainbow_challenge/widgets/widgets.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 

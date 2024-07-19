@@ -1,7 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'dart:async';
 import 'package:equatable/equatable.dart';
-import 'package:rainbow_challenge/pages/pages.dart';
 import 'package:rainbow_challenge/utils/model/models.dart';
 import 'package:rainbow_challenge/utils/repository/repositories.dart';
 

@@ -16,7 +16,7 @@ class FilesRepository {
       if (response != null) {
         return response.map((e) => FileModel.fromJson(e)).toList();
       }
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       print(e.message! + '1111');
     }
 

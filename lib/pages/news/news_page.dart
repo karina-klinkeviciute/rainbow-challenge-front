@@ -1,10 +1,7 @@
 import 'dart:math';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rainbow_challenge/pages/profile/cubit/profile_info_cubit.dart';
-import 'package:rainbow_challenge/pages/regions/cubit/regions_cubit.dart';
-import 'package:rainbow_challenge/pages/regions/regions_page.dart';
 import 'package:rainbow_challenge/pages/shop/cubit/shop_info_cubit.dart';
 import 'package:rainbow_challenge/pages/shop/cubit/shop_prize_cubit.dart';
 import 'package:rainbow_challenge/pages/shop/shop_page.dart';

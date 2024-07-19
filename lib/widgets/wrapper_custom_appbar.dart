@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:rainbow_challenge/theme/colors.dart';
 
 // A widget that uses a built in Scaffold widget with pages that use standard
 // Scaffold structure with custom Scaffold.AppBar settings

@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-import 'package:rainbow_challenge/utils/model/reg_user_model.dart';
 
 abstract class RegEvent extends Equatable {
   const RegEvent();

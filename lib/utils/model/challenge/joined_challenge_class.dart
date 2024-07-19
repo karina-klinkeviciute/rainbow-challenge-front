@@ -2,7 +2,6 @@
 //
 //     final joinedChallenges = joinedChallengesFromJson(jsonString);
 
-import 'package:meta/meta.dart';
 import 'dart:convert';
 
 import 'package:rainbow_challenge/utils/model/models.dart';

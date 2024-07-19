@@ -1,4 +1,3 @@
-import 'package:json_annotation/json_annotation.dart';
 
 // explicitToJson lets using nested class Challenge
 class ChallengeQuizCorrectAnswers {

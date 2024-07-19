@@ -12,7 +12,7 @@ class DesignTheme with ChangeNotifier {
     return ThemeData(
         scrollbarTheme: ScrollbarThemeData(
             radius: Radius.circular(20),
-            thumbColor: MaterialStateProperty.all(ThemeColors.secondaryColor)),
+            thumbColor: WidgetStateProperty.all(ThemeColors.secondaryColor)),
         appBarTheme: AppBarTheme(
           backgroundColor: Colors.white,
           shape: Border(

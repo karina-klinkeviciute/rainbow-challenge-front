@@ -7,8 +7,7 @@ import 'package:rainbow_challenge/utils/repository/user_repository.dart';
 class RegistrationPage extends StatelessWidget {
   final UserRepository userRepository;
   const RegistrationPage({Key? key, required this.userRepository})
-      : assert(userRepository != null),
-        super(key: key);
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {

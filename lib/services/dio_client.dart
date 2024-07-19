@@ -1,11 +1,8 @@
-import 'dart:convert';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
 import 'package:rainbow_challenge/bloc/language_cubit.dart';
 import 'package:rainbow_challenge/constants/api.dart';
-import 'package:rainbow_challenge/utils/model/api_model.dart';
 import 'package:rainbow_challenge/utils/model/challenge/challenge_quiz/quiz_correct_answers_class.dart';
 import 'package:rainbow_challenge/utils/model/quiz/correct_answer.dart';
 import 'package:rainbow_challenge/utils/model/reg_user_model.dart';
@@ -149,7 +146,7 @@ class DioClient {
 
   initializeInterceptors() {
     _dio.interceptors.add(InterceptorsWrapper(
-        onError: (DioError e, ErrorInterceptorHandler handler) {
+        onError: (DioException e, ErrorInterceptorHandler handler) {
       print(e.message);
     }, onRequest: (options, handler) {
       print("Method: ${options.method}");
@@ -164,7 +161,7 @@ class DioClient {
     Response response;
     try {
       response = await _dio.get(endPoint);
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       print(e.message);
       throw Exception(e.message);
     }
@@ -178,12 +175,13 @@ class DioClient {
       final response = await _dio.get(endPoint);
       print(response.data);
       return response.data as List;
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       print(e);
     } on Exception catch (e) {
       // Unhandled exception
       print(e);
     }
+    return null;
   }
 
   Future<Map<String, dynamic>?> getItem(String endPoint) async {
@@ -192,7 +190,7 @@ class DioClient {
       final response = await _dio.get(endPoint);
       print(response.data);
       return response.data;
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       print('Error');
       print(e);
       return <String, dynamic>{"_exception": e};
@@ -211,7 +209,7 @@ class DioClient {
       final response = await _dio.post(endPoint, data: itemObject);
       print('Item added ${response.data}');
       return response.data;
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       print(e);
       return <String, dynamic>{"_error": e};
     } on Exception catch (e) {
@@ -228,7 +226,7 @@ class DioClient {
       final response = await _dio.post(endPoint, data: itemObject);
       print('Prize claimed ${response}');
       return response;
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       print(e.response);
       throw e.response?.data.values;
       // return <String, dynamic>{"_error": e};
@@ -248,7 +246,7 @@ class DioClient {
       final response = await _dio.post(endPoint, data: itemObject);
       print('Prize claimed ${response}');
       return CorrectAnswer.fromJson(response.data).correctAnswer.uuid;
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       print(e.response);
       throw e.response?.data.values;
       // return <String, dynamic>{"_error": e};
@@ -271,7 +269,7 @@ class DioClient {
         return 'Užduotis atlikta';
       }
       return response.statusMessage;
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       print(e.response);
       throw e.response?.data.values;
       // return <String, dynamic>{"_error": e};
@@ -290,7 +288,7 @@ class DioClient {
       final response = await _dio.get(endPoint);
       print('Prize claimed ${response}');
       return RegUser.fromJson(response.data);
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       print(e.response);
       throw e.response?.data.values;
       // return <String, dynamic>{"_error": e};
@@ -310,7 +308,7 @@ class DioClient {
       final response = await _dio.patch(endPoint, data: itemObject);
       print('Item updated ${response.data}');
       return response.data;
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       print(e);
 
       if (e.response?.data is Map<String, dynamic>) {
@@ -322,6 +320,7 @@ class DioClient {
       // Unhandled exception
       print(e);
     }
+    return null;
   }
 
   patchItem(String endPoint, Map<String, dynamic> itemObject) async {
@@ -331,7 +330,7 @@ class DioClient {
       print('Item updated ${response.data}');
       return ChallengeQuizCorrectAnswers.fromJson(response.data)
           .correct_answers_count;
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       print(e);
     } on Exception catch (e) {
       // Unhandled exception
@@ -347,7 +346,7 @@ class DioClient {
       print("Data sent: $itemObject");
       print("User updated $response.data");
       return response.statusMessage;
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       print(e);
     } on Exception catch (e) {
       // Unhandled exception
@@ -363,7 +362,7 @@ class DioClient {
       print("Data sent: $itemObject");
       print("User info: ${response.data}");
       return response.statusMessage;
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       print(e);
     } on Exception catch (e) {
       // Unhandled exception
@@ -377,7 +376,7 @@ class DioClient {
       await addAuthorizationHeader();
       final response = await _dio.post(endPoint, data: itemObject);
       return response.data;
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       print(e);
 
       if (e.response?.data is Map<String, dynamic>) {
@@ -398,12 +397,13 @@ class DioClient {
       final response = await _dio.delete(endPoint, data: itemObject);
       print('Item removed ${response.data}');
       return response.data;
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       print(e);
     } on Exception catch (e) {
       // Unhandled exception
       print(e);
     }
+    return null;
   }
 
   Future<Map<String, dynamic>?> uploadFile(
@@ -418,7 +418,7 @@ class DioClient {
       await addAuthorizationHeader();
       var response = await _dio.post(endPoint, data: formData);
       return response.data;
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       print('222');
       // print(e);
       throw (e);
@@ -426,6 +426,7 @@ class DioClient {
       print('333');
       print(e);
     }
+    return null;
   }
 
   Future<void> addAuthorizationHeader() async {
@@ -448,12 +449,13 @@ class DioClient {
       print("FCM token sent to Backend! Response: ${response.statusMessage}");
 
       return response.statusMessage; 
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       print(e);
       print(e.response);
     } on Exception catch (e) {
       print(e);
     }
+    return null;
   }
 
   Future<String> _getAccessToken() async {

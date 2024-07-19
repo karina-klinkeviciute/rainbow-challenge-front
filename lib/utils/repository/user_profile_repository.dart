@@ -1,4 +1,3 @@
-import 'dart:convert';
 
 import 'package:rainbow_challenge/services/dio_client.dart';
 import 'package:rainbow_challenge/utils/model/available_prize/prize_class.dart';

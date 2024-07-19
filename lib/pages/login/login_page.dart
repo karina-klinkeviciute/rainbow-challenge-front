@@ -11,8 +11,7 @@ class LoginPage extends StatelessWidget {
   final UserRepository userRepository;
 
   LoginPage({Key? key, required this.userRepository})
-      : assert(userRepository != null),
-        super(key: key);
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {

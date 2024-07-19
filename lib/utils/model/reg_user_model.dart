@@ -2,7 +2,6 @@
 //
 //     final regUser = regUserFromJson(jsonString);
 
-import 'dart:convert';
 
 class RegUser {
   RegUser({
