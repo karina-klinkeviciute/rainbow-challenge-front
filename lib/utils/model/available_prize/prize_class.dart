@@ -7,7 +7,7 @@ part 'prize_class.g.dart';
 class Prize {
   String name;
   String uuid;
-  String description;
+  String? description;
   int amount;
   int price;
   int amount_remaining;

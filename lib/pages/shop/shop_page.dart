@@ -118,7 +118,7 @@ class _PrizeList extends StatelessWidget {
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                childAspectRatio: MediaQuery.of(context).size.width * 0.002,
+                childAspectRatio: MediaQuery.of(context).size.width * 0.0018,
                 crossAxisSpacing: 20,
                 mainAxisSpacing: 20,
                 crossAxisCount: 2),
@@ -143,7 +143,7 @@ class _PrizeList extends StatelessWidget {
             amount_remaining: prizeItem.amount_remaining,
             image: prizeItem.image,
             uuid: prizeItem.uuid,
-            description: prizeItem.description,
+            description: prizeItem.description ?? '',
             name: prizeItem.name,
             price: prizeItem.price.toString(),
           );
@@ -190,9 +190,10 @@ class _PrizeList extends StatelessWidget {
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 3),
-                child: Text(prizeItem.description,
+                child: Text(prizeItem.description ?? '',
                     textAlign: TextAlign.start,
                     maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                     style: Theme.of(context).textTheme.bodySmall!),
               ),
               Row(
