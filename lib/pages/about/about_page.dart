@@ -73,8 +73,48 @@ class _Logos extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          HeadingLinedWidget(
-              title: AppLocalizations.of(context)!.about_page_logos),
+          HeadingLinedWidget(title: AppLocalizations.of(context)!.about_page_logos),
+          Row(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Image.asset(
+                'assets/images/logo_tja.jpg',
+                width: 220,
+              )
+            ],
+          ),
+          const SizedBox(height: 8),
+          Row(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Image.asset(
+                'assets/images/logo_saplinq.jpg',
+                width: _width,
+              ),
+              const SizedBox(width: 20),
+              Image.asset(
+                'assets/images/logo_ilga.png',
+                width: _width,
+              ),
+            ],
+          ),
+          const SizedBox(height: 8),
+          Row(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Image.asset(
+                'assets/images/logo_eu.png',
+                width: 220,
+              )
+            ],
+          ),
+          const SizedBox(height: 8),
           Row(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.center,
@@ -86,38 +126,36 @@ class _Logos extends StatelessWidget {
               )
             ],
           ),
+          const SizedBox(height: 8),
           Row(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Image.asset(
-                'assets/images/tja.jpg',
+                'assets/images/logo_frida.png',
                 width: _width,
               ),
               const SizedBox(width: 20),
+              Image.asset(
+                'assets/images/logo_rosa.png',
+                width: _width,
+              ),
+            ],
+          ),
+          const SizedBox(height: 8),
+          Row(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
               Image.asset(
                 'assets/images/logo_jra.png',
                 width: _width,
               ),
             ],
           ),
-          Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Image.asset(
-                'assets/images/logo_rosa.png',
-                width: _width,
-              ),
-              const SizedBox(width: 20),
-              Image.asset(
-                'assets/images/logo_frida.png',
-                width: _width,
-              ),
-            ],
-          ),
+
         ],
       ),
     );
