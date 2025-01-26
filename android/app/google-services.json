@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "704936491342",
+    "project_id": "rainbow-challenge-370315",
+    "storage_bucket": "rainbow-challenge-370315.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:704936491342:android:887a243c44b88e7c42461f",
+        "android_client_info": {
+          "package_name": "rainbowchallenge.lt.rainbow_challenge"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "704936491342-cefi1ai735332r0ir2l5bkpo16tc86c3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "rainbowchallenge.lt.rainbow_challenge",
+            "certificate_hash": "e0bdf637e30a6cd756b8fbbde7f8c275ef30487a"
+          }
+        },
+        {
+          "client_id": "704936491342-iqtt68sblh4u21jutaq5fkifv9tmo59n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDwJNICNAgvVveRGyk-p1nMYUL3VOBAkSE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "704936491342-iqtt68sblh4u21jutaq5fkifv9tmo59n.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "704936491342-9athjvo98ouv8c07f56vkoblnjq3d74h.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.rainbowchallenge"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
