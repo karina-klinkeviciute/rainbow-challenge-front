@@ -21,8 +21,8 @@ class AppLanguage {
   static final supported = {
     'lt': AppLanguage('🇱🇹', 'Lietuvių', Locale('lt', 'LT')),
     'en': AppLanguage('🇬🇧', 'English', Locale('en', 'GB')),
-    // 'pt': AppLanguage('🇵🇹', 'Português', Locale('pt', 'PT')),
-    // 'sk': AppLanguage('🇸🇰', 'Slovenský', Locale('sk', 'SK')),
+    'pt': AppLanguage('🇵🇹', 'Português', Locale('pt', 'PT')),
+    'sk': AppLanguage('🇸🇰', 'Slovenský', Locale('sk', 'SK')),
   };
 
   final String icon;
