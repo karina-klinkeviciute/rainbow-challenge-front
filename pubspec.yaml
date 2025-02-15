@@ -1,7 +1,7 @@
 name: rainbow_challenge
 description: Rainbow challenge
 
-version: 1.0.26+27
+version: 1.0.29+30
 
 environment:
   sdk: '>=3.0.0 <4.0.0'
@@ -33,7 +33,7 @@ dependencies:
   file_picker: ^8.0.6
   flutter_launcher_icons: ^0.13.1
   firebase_core: ^3.2.0
-  firebase_messaging: ^15.0.3
+  firebase_messaging: ^15.2.1
   flutter_local_notifications: ^17.2.1+2
   google_sign_in: ^6.1.4
   sign_in_button: ^3.2.0
