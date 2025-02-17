@@ -77,7 +77,7 @@
     "joined_challenge_event_field_qr_code_right": "Desafio concluída",
     "correct_answers_amount": "Respondeste corretamente a tantas perguntas",
     "rainbows_added_amount": "Recebeste tantos arco-íris",
-    "error": "Erro"
+    "error": "Erro",
     "error_unknown_error": "Erro inesperado, tenta de novo",
     "message_fields_are_required": "Os campos são obrigatórios",
     "message_field_is_required": "O campo é obrigatório",
