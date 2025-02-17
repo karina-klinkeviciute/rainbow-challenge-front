@@ -65,7 +65,7 @@
     "challenge_event_link_hint_text": "Link do evento *",
     "challenge_event_organizing_alone": "Organizo sozinhe",
     "challenge_event_touch_black_screen_for_qr": "Toque na tela preta para ler o código QR",
-    "challenge_event_qr_scanned": "Código QR lido"
+    "challenge_event_qr_scanned": "Código QR lido",
     "challenge_event_qr_code_incorrect": "Código QR incorreto",
     "challenge_project_name_hint_text": "Nome do projeto *",
     "challenge_project_description_hint_text": "Descrição do projeto *",
