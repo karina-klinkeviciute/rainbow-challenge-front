@@ -11,7 +11,7 @@ import 'package:rainbow_challenge/pages/registration/bloc/reg_event.dart';
 import 'package:rainbow_challenge/pages/registration/bloc/reg_state.dart';
 import 'package:rainbow_challenge/widgets/widgets.dart';
 import 'package:rainbow_challenge/pages/registration/delete_account_page.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:rainbow_challenge/localization/app_localizations.dart'; 
 import 'package:rainbow_challenge/localization/localization_helper.dart';
 
 class UserSettingsForm extends StatelessWidget {

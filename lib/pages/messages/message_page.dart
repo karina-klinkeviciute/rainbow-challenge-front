@@ -4,7 +4,7 @@ import 'package:rainbow_challenge/services/dio_client.dart';
 import 'package:rainbow_challenge/utils/model/message.dart';
 import 'package:rainbow_challenge/utils/repository/messages_repository.dart';
 import 'package:rainbow_challenge/widgets/wrapper_main.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:rainbow_challenge/localization/app_localizations.dart'; 
 
 class MessagePage extends StatefulWidget {
   final Message message;

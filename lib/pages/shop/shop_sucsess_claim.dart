@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rainbow_challenge/pages/pages.dart';
 import 'package:rainbow_challenge/widgets/wrapper_main.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:rainbow_challenge/localization/app_localizations.dart'; 
 
 class ShopSuccessPage extends StatelessWidget {
   const ShopSuccessPage({Key? key}) : super(key: key);

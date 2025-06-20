@@ -8,7 +8,7 @@ import 'package:rainbow_challenge/social_signin_config.dart';
 
 import 'package:sign_in_button/sign_in_button.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:rainbow_challenge/localization/app_localizations.dart'; 
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
 enum SocialLoginWidgetType {

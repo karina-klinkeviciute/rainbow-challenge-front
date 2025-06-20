@@ -3,7 +3,7 @@ import 'package:rainbow_challenge/widgets/widgets.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'cubit/about_cubit.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:rainbow_challenge/localization/app_localizations.dart'; 
 
 class AboutPage extends StatelessWidget {
   AboutPage({Key? key}) : super(key: key);

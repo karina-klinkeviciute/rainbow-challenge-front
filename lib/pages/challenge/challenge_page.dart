@@ -8,7 +8,7 @@ import 'package:rainbow_challenge/theme/colors.dart';
 import 'package:rainbow_challenge/utils/model/challenge/challenge_class.dart';
 import 'package:rainbow_challenge/utils/repository/joined_challenges/joined_challenges_repository.dart';
 import 'package:rainbow_challenge/widgets/widgets.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:rainbow_challenge/localization/app_localizations.dart'; 
 
 class ChallengePage extends StatelessWidget {
   ChallengePage({Key? key, required this.challengeInfo}) : super(key: key);

@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rainbow_challenge/pages/challenge/challenge_event_participant/qr_code_scanner/cubit/qr_code_scanner_cubit.dart';
 import 'package:rainbow_challenge/widgets/widgets.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:rainbow_challenge/localization/app_localizations.dart'; 
 
 class QrCodeScannerPage extends StatefulWidget {
   QrCodeScannerPage({Key? key, required this.uuid}) : super(key: key);

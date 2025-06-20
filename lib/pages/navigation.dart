@@ -5,7 +5,7 @@ import 'package:rainbow_challenge/services/dio_client.dart';
 import 'package:rainbow_challenge/theme/colors.dart';
 import 'package:rainbow_challenge/theme/headings.dart';
 import 'package:rainbow_challenge/theme/icons.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:rainbow_challenge/localization/app_localizations.dart'; 
 import 'package:badges/badges.dart' as badge;
 import 'package:rainbow_challenge/utils/repository/messages_repository.dart';
 // A page that consists of all main pages displayed in a grid.

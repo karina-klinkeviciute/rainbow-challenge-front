@@ -10,7 +10,7 @@ import 'package:rainbow_challenge/utils/model/available_prize/prize_class.dart';
 import 'package:rainbow_challenge/widgets/rainbow_price.dart';
 import 'package:rainbow_challenge/widgets/wrapper_custom_appbar.dart';
 import 'package:rainbow_challenge/widgets/widgets.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:rainbow_challenge/localization/app_localizations.dart'; 
 
 // TODO: get medals data and fix conditional view for them.
 // TODO: add option to logout.

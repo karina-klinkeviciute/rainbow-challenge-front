@@ -12,7 +12,7 @@ import 'package:rainbow_challenge/theme/icons.dart';
 import 'package:rainbow_challenge/utils/model/models.dart';
 import 'package:rainbow_challenge/utils/repository/joined_challenges/prize_repository.dart';
 import '../pages.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:rainbow_challenge/localization/app_localizations.dart'; 
 import 'package:rainbow_challenge/widgets/widgets.dart';
 
 import 'package:rainbow_challenge/utils/repository/repositories.dart';

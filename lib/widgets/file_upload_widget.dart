@@ -6,7 +6,7 @@ import 'package:rainbow_challenge/services/dio_client.dart';
 import 'package:rainbow_challenge/theme/colors.dart';
 import 'package:rainbow_challenge/utils/model/file_model.dart';
 import 'package:rainbow_challenge/utils/repository/files_repository.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:rainbow_challenge/localization/app_localizations.dart'; 
 
 class FileUploadWidget extends StatefulWidget {
   String uuid;

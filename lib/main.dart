@@ -17,7 +17,7 @@ import 'package:rainbow_challenge/bloc/authentication_bloc.dart';
 
 //import 'package:rainbow_challenge/pages/splash.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:rainbow_challenge/localization/app_localizations.dart'; 
 import "package:flutter/services.dart";
 
 void main() async {

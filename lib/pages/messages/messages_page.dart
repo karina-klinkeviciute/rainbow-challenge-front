@@ -4,7 +4,7 @@ import 'package:rainbow_challenge/theme/colors.dart';
 import 'package:rainbow_challenge/utils/model/message.dart';
 import 'package:rainbow_challenge/utils/repository/messages_repository.dart';
 import 'package:rainbow_challenge/widgets/widgets.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:rainbow_challenge/localization/app_localizations.dart'; 
 
 import 'message_page.dart';
 

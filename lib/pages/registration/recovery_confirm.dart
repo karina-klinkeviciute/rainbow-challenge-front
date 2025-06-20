@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rainbow_challenge/pages/login/login_page.dart';
 import 'package:rainbow_challenge/utils/repository/user_repository.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:rainbow_challenge/localization/app_localizations.dart'; 
 
 class RecoveryPageConfirm extends StatelessWidget {
   const RecoveryPageConfirm({Key? key}) : super(key: key);

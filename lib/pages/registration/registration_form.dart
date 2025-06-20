@@ -20,7 +20,7 @@ import 'package:rainbow_challenge/pages/registration/bloc/reg_state.dart';
 import 'package:rainbow_challenge/pages/registration/registration_confirm.dart';
 import 'package:rainbow_challenge/widgets/language_widget.dart';
 import 'package:rainbow_challenge/widgets/social_login_widget.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:rainbow_challenge/localization/app_localizations.dart'; 
 
 import 'fields/email.dart';
 
