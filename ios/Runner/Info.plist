@@ -65,5 +65,12 @@
     </array>
     <key>CADisableMinimumFrameDurationOnPhone</key>
     <true/>
+	<key>UIApplicationSupportsIndirectInputEvents</key>
+	<true/>
+	<!-- Add this for Firebase notifications -->
+    <key>UIBackgroundModes</key>
+    <array>
+        <string>remote-notification</string>
+    </array>
 </dict>
 </plist>
