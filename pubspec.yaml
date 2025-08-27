@@ -1,7 +1,7 @@
 name: rainbow_challenge
 description: Rainbow challenge
 
-version: 1.0.35+36
+version: 1.0.36+37
 
 environment:
   sdk: '>=3.8.0 <4.0.0'
