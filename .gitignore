@@ -49,3 +49,12 @@ app.*.map.json
 
 # FVM Version Cache
 .fvm/
+
+# iOS related
+ios/Podfile.lock
+
+# Flutter DevTools
+devtools_options.yaml
+
+# Generated localization files
+lib/localization/app_localizations*.dart

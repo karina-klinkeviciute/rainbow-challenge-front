@@ -79,7 +79,7 @@ class _GoogleButton extends _SocialLoginButton {
       "email",
     ];
 
-    GoogleSignIn? googleSignIn = null;
+    GoogleSignIn? googleSignIn;
     if (Platform.isAndroid) {
       googleSignIn = GoogleSignIn(scopes: scopes);
     } else if (Platform.isIOS) {
@@ -90,21 +90,31 @@ class _GoogleButton extends _SocialLoginButton {
       );
     }
 
-    try {
-      if (googleSignIn != null) {
-        final GoogleSignInAccount? googleAccount = await googleSignIn.signIn();
-        if (googleAccount == null) {
-          throw new Exception("Google Account not available");
-        }
+    if (googleSignIn == null) {
+      onError(Exception("Google Sign-In not configured for this platform"));
+      return;
+    }
 
-        var auth = await googleAccount.authentication;
-        if (auth.idToken != null) {
-          onAuthCode(auth.idToken!);
-        } else {
-          throw new Exception("Google Authentication not available");
-        }
+    try {
+      // Sign out first to ensure clean state
+      await googleSignIn.signOut();
+      
+      final GoogleSignInAccount? googleAccount = await googleSignIn.signIn();
+      if (googleAccount == null) {
+        // User cancelled the sign-in
+        return;
       }
+
+      final GoogleSignInAuthentication auth = await googleAccount.authentication;
+      final String? idToken = auth.idToken;
+      
+      if (idToken == null || idToken.isEmpty) {
+        throw Exception("Failed to get authentication token from Google");
+      }
+      
+      onAuthCode(idToken);
     } catch (error) {
+      print("Google Sign-In Error: $error");
       onError(error);
     }
   }
