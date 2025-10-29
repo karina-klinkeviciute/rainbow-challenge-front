@@ -56,3 +56,10 @@ devtools_options.yaml
 
 # Generated localization files
 lib/localization/app_localizations*.dart
+
+# certificates
+*.p12
+*.pem
+*.cer
+*.csr
+*.key
