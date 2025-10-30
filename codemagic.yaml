@@ -81,19 +81,14 @@ workflows:
     publishing:
       email:
         recipients:
-          - ieva@skyhook.se  # TODO: Replace with your actual email
+          - ieva@skyhook.se
         notify:
           success: true
           failure: true
           
       app_store_connect:
         # Manual authentication
-        api_key: $APP_STORE_CONNECT_PRIVATE_KEY      # The .p8 file contents
+        api_key: $APP_STORE_CONNECT_PRIVATE_KEY
         key_id: $APP_STORE_CONNECT_KEY_IDENTIFIER    
-        issuer_id: $APP_STORE_CONNECT_ISSUER_ID      # Your issuer ID
-        # Submit to TestFlight automatically
+        issuer_id: $APP_STORE_CONNECT_ISSUER_ID
         submit_to_testflight: true
-        
-        # Optional: Set to true if you want to auto-submit to App Store review
-        # (Usually you want manual control over this)
-        # submit_to_app_store: false
