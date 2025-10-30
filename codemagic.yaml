@@ -1,0 +1,107 @@
+# codemagic.yaml
+workflows:
+  ios-release:
+    name: iOS Release Build
+    max_build_duration: 120
+    instance_type: mac_mini_m2
+    integrations:
+      app_store_connect: codemagic  # Uses your existing App Store Connect API integration
+    environment:
+      groups:
+        - apple  # Your variable group with APPLE_TEAM_ID
+      ios_signing:
+        distribution_type: app_store
+        bundle_identifier: org.rainbowchallenge
+      vars:
+        BUNDLE_ID: "org.rainbowchallenge"
+        XCODE_WORKSPACE: "Runner.xcworkspace"
+        XCODE_SCHEME: "Runner"
+      flutter: stable
+      xcode: latest
+      cocoapods: default
+    triggering:
+      events:
+        - tag
+      tag_patterns:
+        - pattern: 'v*.*.*'
+          include: true
+      cancel_previous_builds: true
+    scripts:
+      - name: Set up environment
+        script: |
+          echo "Building version from pubspec.yaml"
+          
+      - name: Get Flutter dependencies
+        script: |
+          flutter pub get
+          
+      - name: Install CocoaPods dependencies
+        script: |
+          cd ios && pod install
+          
+      - name: Create ExportOptions.plist dynamically
+        script: |
+          cat > ios/ExportOptions.plist <<EOF
+          <?xml version="1.0" encoding="UTF-8"?>
+          <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+          <plist version="1.0">
+          <dict>
+              <key>method</key>
+              <string>app-store</string>
+              <key>teamID</key>
+              <string>$APPLE_TEAM_ID</string>
+              <key>uploadBitcode</key>
+              <false/>
+              <key>uploadSymbols</key>
+              <true/>
+          </dict>
+          </plist>
+          EOF
+          
+      - name: Set up code signing
+        script: |
+          xcode-project use-profiles
+          
+      - name: Increment build number
+        script: |
+          # Auto-increment build number using commit count
+          BUILD_NUMBER=$(($(git rev-list --count HEAD)))
+          echo "Build number: $BUILD_NUMBER"
+          
+          # Get current version from pubspec.yaml
+          CURRENT_VERSION=$(grep 'version:' pubspec.yaml | sed 's/version: //g' | cut -d'+' -f1)
+          echo "Current version: $CURRENT_VERSION"
+          
+          # Update version in pubspec.yaml with new build number
+          sed -i '' "s/version: .*/version: $CURRENT_VERSION+$BUILD_NUMBER/" pubspec.yaml
+          
+          # Update iOS build number
+          cd ios
+          agvtool new-version -all $BUILD_NUMBER
+          cd ..
+          
+      - name: Flutter build ipa
+        script: |
+          flutter build ipa --release \
+            --export-options-plist=$CM_BUILD_DIR/ios/ExportOptions.plist
+            
+    artifacts:
+      - build/ios/ipa/*.ipa
+      - /tmp/xcodebuild_logs/*.log
+      - flutter_drive.log
+      
+    publishing:
+      email:
+        recipients:
+          - ieva@skyhook.se  # TODO: Replace with your actual email
+        notify:
+          success: true
+          failure: true
+          
+      app_store_connect:
+        # Submit to TestFlight automatically
+        submit_to_testflight: true
+        
+        # Optional: Set to true if you want to auto-submit to App Store review
+        # (Usually you want manual control over this)
+        # submit_to_app_store: false
