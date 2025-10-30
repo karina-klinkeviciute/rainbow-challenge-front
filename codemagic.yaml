@@ -7,9 +7,6 @@ workflows:
     environment:
       groups:
         - apple  # Your variable group with APPLE_TEAM_ID
-      ios_signing:
-        distribution_type: app_store
-        bundle_identifier: org.rainbowchallenge
       vars:
         BUNDLE_ID: "org.rainbowchallenge"
         XCODE_WORKSPACE: "Runner.xcworkspace"
@@ -37,27 +34,20 @@ workflows:
         script: |
           cd ios && pod install
           
-      - name: Create ExportOptions.plist dynamically
+      - name: Set up automatic code signing
         script: |
-          cat > ios/ExportOptions.plist <<EOF
-          <?xml version="1.0" encoding="UTF-8"?>
-          <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-          <plist version="1.0">
-          <dict>
-              <key>method</key>
-              <string>app-store</string>
-              <key>teamID</key>
-              <string>$APPLE_TEAM_ID</string>
-              <key>uploadBitcode</key>
-              <false/>
-              <key>uploadSymbols</key>
-              <true/>
-          </dict>
-          </plist>
-          EOF
+          # Fetch signing files from App Store Connect
+          app-store-connect fetch-signing-files "$BUNDLE_ID" \
+            --type IOS_APP_STORE \
+            --create
           
-      - name: Set up code signing
-        script: |
+          # Create keychain
+          keychain initialize
+          
+          # Add certificates to keychain
+          keychain add-certificates
+          
+          # Set up Xcode project to use fetched profiles
           xcode-project use-profiles
           
       - name: Increment build number
@@ -81,7 +71,7 @@ workflows:
       - name: Flutter build ipa
         script: |
           flutter build ipa --release \
-            --export-options-plist=$CM_BUILD_DIR/ios/ExportOptions.plist
+            --export-options-plist=/Users/builder/export_options.plist
             
     artifacts:
       - build/ios/ipa/*.ipa
