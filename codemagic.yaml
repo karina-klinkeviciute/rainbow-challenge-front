@@ -4,8 +4,6 @@ workflows:
     name: iOS Release Build
     max_build_duration: 120
     instance_type: mac_mini_m2
-    integrations:
-      app_store_connect: codemagic  # Uses your existing App Store Connect API integration
     environment:
       groups:
         - apple  # Your variable group with APPLE_TEAM_ID
@@ -99,6 +97,10 @@ workflows:
           failure: true
           
       app_store_connect:
+        # Manual authentication
+        api_key: $APP_STORE_CONNECT_PRIVATE_KEY      # The .p8 file contents
+        key_id: $APP_STORE_CONNECT_KEY_IDENTIFIER    
+        issuer_id: $APP_STORE_CONNECT_ISSUER_ID      # Your issuer ID
         # Submit to TestFlight automatically
         submit_to_testflight: true
         
