@@ -5,12 +5,11 @@ workflows:
     instance_type: mac_mini_m2
     environment:
       groups:
-        - apple  # Your variable group with App Store Connect credentials
+        - apple
       vars:
         BUNDLE_ID: "org.rainbowchallenge"
         XCODE_WORKSPACE: "ios/Runner.xcworkspace"
         XCODE_SCHEME: "Runner"
-        APPLE_TEAM_ID: "K5575UY9JM"
       flutter: stable
       xcode: latest
       cocoapods: default
@@ -22,10 +21,6 @@ workflows:
           include: true
       cancel_previous_builds: true
     scripts:
-      - name: Set up environment
-        script: |
-          echo "Building version from pubspec.yaml"
-          
       - name: Get Flutter dependencies
         script: |
           flutter pub get
@@ -37,25 +32,18 @@ workflows:
       - name: Set up code signing
         script: |
           keychain initialize
-          app-store-connect fetch-signing-files "$BUNDLE_ID" \
-            --type IOS_APP_STORE \
-            --create
-          xcode-project use-profiles
+          # Certificates from team settings will be used automatically
           
       - name: Increment build number
         script: |
-          # Auto-increment build number using commit count
           BUILD_NUMBER=$(($(git rev-list --count HEAD) + 1))
           echo "Build number: $BUILD_NUMBER"
           
-          # Get current version from pubspec.yaml
           CURRENT_VERSION=$(grep 'version:' pubspec.yaml | sed 's/version: //g' | cut -d'+' -f1)
           echo "Current version: $CURRENT_VERSION"
           
-          # Update version in pubspec.yaml with new build number
           sed -i '' "s/version: .*/version: $CURRENT_VERSION+$BUILD_NUMBER/" pubspec.yaml
           
-          # Update iOS build number
           cd ios
           agvtool new-version -all $BUILD_NUMBER
           agvtool new-marketing-version $CURRENT_VERSION
@@ -68,7 +56,6 @@ workflows:
     artifacts:
       - build/ios/ipa/*.ipa
       - /tmp/xcodebuild_logs/*.log
-      - flutter_drive.log
       
     publishing:
       email:
