@@ -6,11 +6,12 @@ workflows:
     instance_type: mac_mini_m2
     environment:
       groups:
-        - apple  # Your variable group with APPLE_TEAM_ID
+        - apple  # Your variable group with App Store Connect credentials
       vars:
         BUNDLE_ID: "org.rainbowchallenge"
         XCODE_WORKSPACE: "Runner.xcworkspace"
         XCODE_SCHEME: "Runner"
+        APPLE_TEAM_ID: "K5575UY9JM"  # Your team ID from ExportOptions.plist
       flutter: stable
       xcode: latest
       cocoapods: default
@@ -34,11 +35,34 @@ workflows:
         script: |
           cd ios && pod install
           
-      - name: Set up automatic code signing
+      - name: Set up code signing
         script: |
-          # Fetch signing files from App Store Connect
+          # Validate required environment variables
+          echo "Validating App Store Connect credentials..."
+          if [[ -z "$APP_STORE_CONNECT_PRIVATE_KEY" ]]; then
+            echo "Error: APP_STORE_CONNECT_PRIVATE_KEY is not set"
+            exit 1
+          fi
+          if [[ -z "$APP_STORE_CONNECT_KEY_IDENTIFIER" ]]; then
+            echo "Error: APP_STORE_CONNECT_KEY_IDENTIFIER is not set"
+            exit 1
+          fi
+          if [[ -z "$APP_STORE_CONNECT_ISSUER_ID" ]]; then
+            echo "Error: APP_STORE_CONNECT_ISSUER_ID is not set"
+            exit 1
+          fi
+          echo "All required credentials are present"
+          
+          # Fetch signing files from App Store Connect with proper authentication
+          echo "Fetching signing files for bundle ID: $BUNDLE_ID"
+          echo "Using key ID: $APP_STORE_CONNECT_KEY_IDENTIFIER"
+          echo "Using issuer ID: $APP_STORE_CONNECT_ISSUER_ID"
+          
           app-store-connect fetch-signing-files "$BUNDLE_ID" \
             --type IOS_APP_STORE \
+            --private-key @env:APP_STORE_CONNECT_PRIVATE_KEY \
+            --key-id $APP_STORE_CONNECT_KEY_IDENTIFIER \
+            --issuer-id $APP_STORE_CONNECT_ISSUER_ID \
             --create
           
           # Create keychain
@@ -48,7 +72,47 @@ workflows:
           keychain add-certificates
           
           # Set up Xcode project to use fetched profiles
-          xcode-project use-profiles
+          xcode-project use-profiles \
+            --team-id $APPLE_TEAM_ID
+          
+          # Verify certificates were added
+          echo "Checking for certificates..."
+          keychain list-certificates
+          
+          # Verify provisioning profiles were fetched
+          echo "Checking for provisioning profiles..."
+          find /Users/builder/Library/MobileDevice/Provisioning\ Profiles -name "*.mobileprovision" -o -name "*.provisionprofile" | head -5 || echo "No provisioning profiles found"
+          
+      - name: Create export options
+        script: |
+          # Create export options with proper team ID
+          cat > /Users/builder/export_options.plist << 'EOF'
+          <?xml version="1.0" encoding="UTF-8"?>
+          <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+          <plist version="1.0">
+          <dict>
+              <key>method</key>
+              <string>app-store</string>
+              <key>teamID</key>
+              <string>K5575UY9JM</string>
+              <key>uploadBitcode</key>
+              <false/>
+              <key>uploadSymbols</key>
+              <true/>
+              <key>compileBitcode</key>
+              <false/>
+              <key>signingStyle</key>
+              <string>automatic</string>
+          </dict>
+          </plist>
+          EOF
+          
+          # Verify certificates and profiles
+          echo "Checking certificates..."
+          keychain list-certificates || echo "No certificates in keychain"
+          
+          echo "Checking provisioning profiles..."
+          find /Users/builder/Library/MobileDevice/Provisioning\ Profiles -name "*.mobileprovision" -o -name "*.provisionprofile" | head -5 || echo "No provisioning profiles found"
           
       - name: Increment build number
         script: |
@@ -87,8 +151,6 @@ workflows:
           failure: true
           
       app_store_connect:
-        # Manual authentication
-        api_key: $APP_STORE_CONNECT_PRIVATE_KEY
-        key_id: $APP_STORE_CONNECT_KEY_IDENTIFIER    
-        issuer_id: $APP_STORE_CONNECT_ISSUER_ID
+        auth: integration
         submit_to_testflight: true
+        submit_to_app_store: false
