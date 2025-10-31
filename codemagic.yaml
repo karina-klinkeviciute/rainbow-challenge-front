@@ -32,8 +32,7 @@ workflows:
       - name: Set up code signing
         script: |
           keychain initialize
-          # Certificates from team settings will be used automatically
-          
+          xcode-project use-profiles          
       - name: Increment build number
         script: |
           BUILD_NUMBER=$(($(git rev-list --count HEAD) + 1))
