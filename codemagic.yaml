@@ -3,9 +3,12 @@ workflows:
     name: iOS Release Build
     max_build_duration: 120
     instance_type: mac_mini_m2
+    integrations:
+      app_store_connect: codemagic
     environment:
-      groups:
-        - apple
+      ios_signing:
+        distribution_type: app_store
+        bundle_identifier: org.rainbowchallenge
       vars:
         BUNDLE_ID: "org.rainbowchallenge"
         XCODE_WORKSPACE: "ios/Runner.xcworkspace"
@@ -21,36 +24,81 @@ workflows:
           include: true
       cancel_previous_builds: true
     scripts:
-      - name: Get Flutter dependencies
+      - name: Set up code signing settings on Xcode project
         script: |
-          flutter pub get
+          xcode-project use-profiles
           
-      - name: Install CocoaPods dependencies
+      - name: Get Flutter packages
         script: |
-          cd ios && pod install && cd ..
+          flutter packages pub get
           
-      - name: Set up code signing
+      - name: Install pods
         script: |
-          keychain initialize
-          xcode-project use-profiles          
-      - name: Increment build number
+          find . -name "Podfile" -execdir pod install \;          
+      - name: Set up automatic versioning
         script: |
-          BUILD_NUMBER=$(($(git rev-list --count HEAD) + 1))
+          # Get current version from pubspec.yaml as minimum baseline
+          CURRENT_VERSION=$(grep 'version:' pubspec.yaml | sed 's/version: //g' | cut -d'+' -f1)
+          echo "Current pubspec version: $CURRENT_VERSION"
+          
+          # Parse current version numbers
+          IFS='.' read -r CURRENT_MAJOR CURRENT_MINOR CURRENT_PATCH <<< "$CURRENT_VERSION"
+          
+          # Get latest git tag or use current version as fallback
+          LATEST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "v$CURRENT_VERSION")
+          LATEST_VERSION=${LATEST_TAG#v}  # Remove 'v' prefix
+          echo "Latest git tag: $LATEST_TAG"
+          
+          # Parse tag version numbers
+          IFS='.' read -r TAG_MAJOR TAG_MINOR TAG_PATCH <<< "$LATEST_VERSION"
+          
+          # Use whichever version is higher as baseline
+          if [[ "$CURRENT_MAJOR" -gt "$TAG_MAJOR" ]] || \
+             [[ "$CURRENT_MAJOR" -eq "$TAG_MAJOR" && "$CURRENT_MINOR" -gt "$TAG_MINOR" ]] || \
+             [[ "$CURRENT_MAJOR" -eq "$TAG_MAJOR" && "$CURRENT_MINOR" -eq "$TAG_MINOR" && "$CURRENT_PATCH" -gt "$TAG_PATCH" ]]; then
+            BASE_VERSION="$CURRENT_VERSION"
+            BASE_MAJOR=$CURRENT_MAJOR
+            BASE_MINOR=$CURRENT_MINOR
+            BASE_PATCH=$CURRENT_PATCH
+            echo "Using pubspec version as baseline: $BASE_VERSION"
+          else
+            BASE_VERSION="$LATEST_VERSION"
+            BASE_MAJOR=$TAG_MAJOR
+            BASE_MINOR=$TAG_MINOR
+            BASE_PATCH=$TAG_PATCH
+            echo "Using git tag version as baseline: $BASE_VERSION"
+          fi
+          
+          # Auto-increment patch version based on commit count since last tag (or +1 if no tag)
+          COMMITS_SINCE_TAG=$(git rev-list ${LATEST_TAG}..HEAD --count 2>/dev/null || echo "1")
+          
+          # Calculate new version
+          NEW_PATCH=$((BASE_PATCH + COMMITS_SINCE_TAG))
+          AUTO_VERSION="$BASE_MAJOR.$BASE_MINOR.$NEW_PATCH"
+          
+          echo "Commits since tag: $COMMITS_SINCE_TAG"
+          echo "Auto-generated version: $AUTO_VERSION"
           echo "Build number: $BUILD_NUMBER"
           
-          CURRENT_VERSION=$(grep 'version:' pubspec.yaml | sed 's/version: //g' | cut -d'+' -f1)
-          echo "Current version: $CURRENT_VERSION"
+          # Update pubspec.yaml with new version
+          sed -i '' "s/version: .*/version: $AUTO_VERSION+$BUILD_NUMBER/" pubspec.yaml
           
-          sed -i '' "s/version: .*/version: $CURRENT_VERSION+$BUILD_NUMBER/" pubspec.yaml
-          
+          # Update iOS project
           cd ios
           agvtool new-version -all $BUILD_NUMBER
-          agvtool new-marketing-version $CURRENT_VERSION
+          agvtool new-marketing-version $AUTO_VERSION
           cd ..
           
       - name: Flutter build ipa
         script: |
-          flutter build ipa --release
+          # Get the auto-generated version from pubspec.yaml
+          AUTO_VERSION=$(grep 'version:' pubspec.yaml | sed 's/version: //g' | cut -d'+' -f1)
+          
+          echo "Building with version: $AUTO_VERSION, build: $BUILD_NUMBER"
+          
+          flutter build ipa --release \
+            --build-name=$AUTO_VERSION \
+            --build-number=$BUILD_NUMBER
             
     artifacts:
       - build/ios/ipa/*.ipa
@@ -65,7 +113,6 @@ workflows:
           failure: true
           
       app_store_connect:
-        api_key: $APP_STORE_CONNECT_PRIVATE_KEY
-        key_id: $APP_STORE_CONNECT_KEY_IDENTIFIER    
-        issuer_id: $APP_STORE_CONNECT_ISSUER_ID
+        auth: integration
         submit_to_testflight: true
+        submit_to_app_store: false
