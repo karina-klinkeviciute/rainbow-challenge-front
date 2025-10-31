@@ -37,27 +37,6 @@ workflows:
           
       - name: Set up code signing
         script: |
-          # Validate required environment variables
-          echo "Validating App Store Connect credentials..."
-          if [[ -z "$APP_STORE_CONNECT_PRIVATE_KEY" ]]; then
-            echo "Error: APP_STORE_CONNECT_PRIVATE_KEY is not set"
-            exit 1
-          fi
-          if [[ -z "$APP_STORE_CONNECT_KEY_IDENTIFIER" ]]; then
-            echo "Error: APP_STORE_CONNECT_KEY_IDENTIFIER is not set"
-            exit 1
-          fi
-          if [[ -z "$APP_STORE_CONNECT_ISSUER_ID" ]]; then
-            echo "Error: APP_STORE_CONNECT_ISSUER_ID is not set"
-            exit 1
-          fi
-          echo "All required credentials are present"
-          
-          # Fetch signing files from App Store Connect with proper authentication
-          echo "Fetching signing files for bundle ID: $BUNDLE_ID"
-          echo "Using key ID: $APP_STORE_CONNECT_KEY_IDENTIFIER"
-          echo "Using issuer ID: $APP_STORE_CONNECT_ISSUER_ID"
-          
           app-store-connect fetch-signing-files "$BUNDLE_ID" \
             --type IOS_APP_STORE \
             --private-key @env:APP_STORE_CONNECT_PRIVATE_KEY \
@@ -65,23 +44,9 @@ workflows:
             --issuer-id $APP_STORE_CONNECT_ISSUER_ID \
             --create
           
-          # Create keychain
           keychain initialize
-          
-          # Add certificates to keychain
           keychain add-certificates
-          
-          # Set up Xcode project to use fetched profiles
-          xcode-project use-profiles \
-            --team-id $APPLE_TEAM_ID
-          
-          # Verify certificates were added
-          echo "Checking for certificates..."
-          keychain list-certificates
-          
-          # Verify provisioning profiles were fetched
-          echo "Checking for provisioning profiles..."
-          find /Users/builder/Library/MobileDevice/Provisioning\ Profiles -name "*.mobileprovision" -o -name "*.provisionprofile" | head -5 || echo "No provisioning profiles found"
+          xcode-project use-profiles
           
       - name: Create export options
         script: |
@@ -155,4 +120,4 @@ workflows:
         key_id: $APP_STORE_CONNECT_KEY_IDENTIFIER    
         issuer_id: $APP_STORE_CONNECT_ISSUER_ID
         submit_to_testflight: true
-        
+
