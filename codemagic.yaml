@@ -37,16 +37,13 @@ workflows:
           
       - name: Set up code signing
         script: |
-          app-store-connect fetch-signing-files "$BUNDLE_ID" \
-            --type IOS_APP_STORE \
-            --private-key @env:APP_STORE_CONNECT_PRIVATE_KEY \
-            --key-id $APP_STORE_CONNECT_KEY_IDENTIFIER \
-            --issuer-id $APP_STORE_CONNECT_ISSUER_ID \
-            --create
+          # Check what bundle ID Xcode is actually using
+          echo "Expected bundle ID: $BUNDLE_ID"
+          echo "Detected bundle ID from Xcode project:"
+          xcode-project detect-bundle-id
           
+          # Simple automatic code signing
           keychain initialize
-          keychain add-certificates
-          xcode-project use-profiles
           
       - name: Create export options
         script: |
