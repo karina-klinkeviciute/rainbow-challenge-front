@@ -34,7 +34,10 @@ workflows:
           
       - name: Install pods
         script: |
-          find . -name "Podfile" -execdir pod install \;          
+          cd ios
+          pod deintegrate
+          pod install
+          cd ..          
       - name: Set up automatic versioning
         script: |
           # Get current version from pubspec.yaml as minimum baseline
