@@ -4,7 +4,7 @@ workflows:
     max_build_duration: 120
     instance_type: mac_mini_m2
     integrations:
-      app_store_connect: codemagic2
+      app_store_connect: "Codemagic key"
     environment:
       ios_signing:
         distribution_type: app_store
