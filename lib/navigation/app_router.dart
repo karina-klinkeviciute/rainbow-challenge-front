@@ -111,7 +111,6 @@ class AppRouter {
 
   Route? onGenerateRoute(RouteSettings routeSettings) {
     switch (routeSettings.name) {
-
       // Maybe we should divide this file to parts?
       case AppRoute.challenges:
         return MaterialPageRoute(
@@ -318,32 +317,14 @@ class AppRouter {
                   child: ShopItemsPage(),
                 ));
 
-      case AppRoute.challengesJoined:
-        return MaterialPageRoute(builder: (_) => JoinedChallengesPage());
-
-      case AppRoute.challengesCompleted:
-        return MaterialPageRoute(builder: (_) => CompletedChallengesPage());
-
-      case AppRoute.regions:
-        return MaterialPageRoute(builder: (_) => RegionsPage());
-
       case AppRoute.navigation:
         return MaterialPageRoute(builder: (_) => NavigationPage());
 
       case AppRoute.logout:
         return MaterialPageRoute(builder: (_) => LogoutPage());
 
-      case AppRoute.shopItems:
-        return MaterialPageRoute(builder: (_) => ShopItemsPage());
-
-      case AppRoute.qrCode:
-        return MaterialPageRoute(builder: (_) => QrCodePage());
-
       case AppRoute.messages:
         return MaterialPageRoute(builder: (_) => MessagesPage());
-
-      case AppRoute.about:
-        return MaterialPageRoute(builder: (_) => AboutPage());
 
       default:
         return MaterialPageRoute(builder: (_) => HomeEmptyPage());
