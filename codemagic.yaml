@@ -101,7 +101,8 @@ workflows:
           
           flutter build ipa --release \
             --build-name=$AUTO_VERSION \
-            --build-number=$BUILD_NUMBER
+            --build-number=$BUILD_NUMBER \
+            --export-options-plist=/Users/builder/export_options.plist 
             
     artifacts:
       - build/ios/ipa/*.ipa
