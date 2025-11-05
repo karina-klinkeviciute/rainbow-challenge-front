@@ -25,11 +25,11 @@ class DesignTheme with ChangeNotifier {
               const IconThemeData(color: ThemeColors.neutralColorLight),
         ),
         primaryColor: ThemeColors.primaryColor,
-        primaryColorLight: const Color.fromARGB(255, 212, 198, 240),
+        primaryColorLight: ThemeColors.primaryColorLight,
         primaryColorDark: ThemeColors.primaryColorDark,
         canvasColor: ThemeColors.bgColor,
         scaffoldBackgroundColor: Colors.white,
-        bottomAppBarTheme: const BottomAppBarThemeData(
+        bottomAppBarTheme: BottomAppBarThemeData(
           color: Colors.white,
         ),
         cardColor: Colors.white,

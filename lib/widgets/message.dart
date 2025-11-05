@@ -68,7 +68,7 @@ class MessageWidget extends StatelessWidget {
                       width: 90,
                       height: 50,
                       decoration: BoxDecoration(
-                        color: Colors.white..withValues(alpha: 0.8),
+                        color: Colors.white.withValues(alpha: 0.8),
                         //  boxShadow: BoxShadow
                       )),
                 ),
