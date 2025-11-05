@@ -29,7 +29,7 @@ class DesignTheme with ChangeNotifier {
         primaryColorDark: ThemeColors.primaryColorDark,
         canvasColor: ThemeColors.bgColor,
         scaffoldBackgroundColor: Colors.white,
-        bottomAppBarTheme: BottomAppBarTheme(
+        bottomAppBarTheme: const BottomAppBarThemeData(
           color: Colors.white,
         ),
         cardColor: Colors.white,
