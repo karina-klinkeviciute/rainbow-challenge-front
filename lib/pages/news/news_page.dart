@@ -132,7 +132,7 @@ class _NewsList extends StatelessWidget {
                     top: BorderSide(
                         width: 1,
                         color:
-                            ThemeColors.neutralColorLight.withOpacity(0.3)))),
+                            ThemeColors.neutralColorLight.withValues(alpha: 0.3)))),
         padding: EdgeInsets.symmetric(vertical: 15),
         margin: EdgeInsets.symmetric(horizontal: 15),
         child: Row(
@@ -169,7 +169,7 @@ class _NewsList extends StatelessWidget {
             SizedBox(width: 10),
             Icon(
               Icons.chevron_right_outlined,
-              color: ThemeColors.secondaryColor.withOpacity(0.7),
+              color: ThemeColors.secondaryColor.withValues(alpha: 0.7),
               size: 24.0,
             ),
           ],

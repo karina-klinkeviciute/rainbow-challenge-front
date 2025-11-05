@@ -262,8 +262,8 @@ class _RegionInputField extends StatelessWidget {
             hint: SingleChildScrollView(
               child: Text(
                 '${AppLocalizations.of(context)!.region}: ${state.region.value.length > 22 ? '${state.region.value.substring(0, 22)}' : state.region.value}',
-                textScaleFactor:
-                    MediaQuery.of(context).size.width < 350 ? 0.75 : 1,
+                textScaler: TextScaler.linear(
+                    MediaQuery.of(context).size.width < 350 ? 0.75 : 1),
                 textHeightBehavior:
                     TextHeightBehavior(applyHeightToFirstAscent: true),
               ),

@@ -171,13 +171,15 @@ class _PrizeList extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               if (prizeItem.image != null)
-                ImageExternalWidget(
-                  url: prizeItem.image!,
-                  width: MediaQuery.of(context).size.width * 0.4,
-                  height: MediaQuery.of(context).size.height * 0.12,
+                Expanded(
+                  child: ImageExternalWidget(
+                    url: prizeItem.image!,
+                    width: MediaQuery.of(context).size.width * 0.4,
+                    height: MediaQuery.of(context).size.height * 0.12,
+                  ),
                 )
               else
-                _RandomPlaceholderImage(),
+                Expanded(child: _RandomPlaceholderImage()),
               Padding(
                 padding: const EdgeInsets.only(top: 5),
                 child: Text(prizeItem.name,
