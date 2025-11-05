@@ -3,7 +3,7 @@ import 'package:rainbow_challenge/services/dio_client.dart';
 import 'package:rainbow_challenge/theme/colors.dart';
 import 'package:rainbow_challenge/utils/model/available_prize/prize_class.dart';
 import 'package:rainbow_challenge/widgets/widgets.dart';
-import 'package:rainbow_challenge/localization/app_localizations.dart'; 
+import 'package:rainbow_challenge/localization/app_localizations.dart';
 
 class ProfileRainbowForm extends StatelessWidget {
   ProfileRainbowForm({
@@ -47,7 +47,8 @@ class ProfileRainbowForm extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.fromLTRB(10, 30, 10, 10),
                           child: Text(
-                            AppLocalizations.of(context)!.rainbows_received_for_tasks,
+                            AppLocalizations.of(context)!
+                                .rainbows_received_for_tasks,
                             textAlign: TextAlign.center,
                             style: TextStyle(
                                 fontSize: 20, fontWeight: FontWeight.bold),
@@ -87,7 +88,7 @@ class ProfileRainbowForm extends StatelessWidget {
                                             Icon(
                                               Icons.chevron_right_outlined,
                                               color: ThemeColors.secondaryColor
-                                                  .withOpacity(0.7),
+                                                  .withValues(alpha: 0.7),
                                               size: 24.0,
                                             ),
                                           ],
@@ -166,11 +167,14 @@ class _challengeType extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text('${AppLocalizations.of(context)!.price}: ${typeTitle.price}'),
+                Text(
+                    '${AppLocalizations.of(context)!.price}: ${typeTitle.price}'),
                 SizedBox(width: 20),
-                Text('${AppLocalizations.of(context)!.amount}: ${typeTitle.amount}'),
+                Text(
+                    '${AppLocalizations.of(context)!.amount}: ${typeTitle.amount}'),
                 SizedBox(width: 20),
-                Text('${AppLocalizations.of(context)!.total}: ${typeTitle.total}')
+                Text(
+                    '${AppLocalizations.of(context)!.total}: ${typeTitle.total}')
               ],
             ),
           )

@@ -4,7 +4,7 @@ import 'package:rainbow_challenge/theme/colors.dart';
 import 'package:rainbow_challenge/utils/model/message.dart';
 import 'package:rainbow_challenge/utils/repository/messages_repository.dart';
 import 'package:rainbow_challenge/widgets/widgets.dart';
-import 'package:rainbow_challenge/localization/app_localizations.dart'; 
+import 'package:rainbow_challenge/localization/app_localizations.dart';
 
 import 'message_page.dart';
 
@@ -85,7 +85,7 @@ class _MessagesPageState extends State<MessagesPage> {
                                 : FontWeight.bold))),
                 Icon(
                   Icons.chevron_right_outlined,
-                  color: ThemeColors.secondaryColor.withOpacity(0.7),
+                  color: ThemeColors.secondaryColor.withValues(alpha: 0.7),
                   size: 24.0,
                 ),
               ],

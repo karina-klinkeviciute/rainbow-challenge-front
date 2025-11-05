@@ -17,7 +17,7 @@ class DesignTheme with ChangeNotifier {
           backgroundColor: Colors.white,
           shape: Border(
               bottom: BorderSide(
-                  color: ThemeColors.neutralColorLight.withOpacity(0.5),
+                  color: ThemeColors.neutralColorLight.withValues(alpha: 0.5),
                   width: 0.5)),
           elevation: 0,
           iconTheme: const IconThemeData(color: ThemeColors.secondaryColor),
@@ -25,7 +25,7 @@ class DesignTheme with ChangeNotifier {
               const IconThemeData(color: ThemeColors.neutralColorLight),
         ),
         primaryColor: ThemeColors.primaryColor,
-        primaryColorLight: ThemeColors.primaryColor,
+        primaryColorLight: const Color.fromARGB(255, 212, 198, 240),
         primaryColorDark: ThemeColors.primaryColorDark,
         canvasColor: ThemeColors.bgColor,
         scaffoldBackgroundColor: Colors.white,
