@@ -33,7 +33,7 @@ android {
     namespace "rainbowchallenge.lt.rainbow_challenge"
     compileSdkVersion 36
 //    ndkVersion flutter.ndkVersion
-    ndkVersion "26.1.10909125"
+    ndkVersion "27.0.12077973"
 
     compileOptions {
 //        sourceCompatibility JavaVersion.VERSION_17
@@ -59,7 +59,7 @@ android {
         applicationId "rainbowchallenge.lt.rainbow_challenge"
         // You can update the following values to match your application needs.
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
-        minSdkVersion 21
+        minSdkVersion flutter.minSdkVersion
         targetSdkVersion 36
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
