@@ -1,0 +1,3 @@
+version: 2
+paths-ignore:
+  - lib/localization/**
