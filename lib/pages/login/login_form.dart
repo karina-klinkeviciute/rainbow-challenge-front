@@ -6,7 +6,7 @@ import 'package:rainbow_challenge/pages/pages.dart';
 import 'package:rainbow_challenge/utils/repository/user_repository.dart';
 import 'package:rainbow_challenge/widgets/language_widget.dart';
 import 'package:rainbow_challenge/widgets/social_login_widget.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:rainbow_challenge/localization/app_localizations.dart'; 
 
 class LoginForm extends StatefulWidget {
   @override

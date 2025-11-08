@@ -9,7 +9,7 @@ import 'package:rainbow_challenge/theme/fonts.dart' as ThemeFonts;
 import 'package:rainbow_challenge/utils/repository/challenges/challenges_repository.dart';
 import 'package:rainbow_challenge/utils/repository/user_profile_repository.dart';
 import 'package:rainbow_challenge/widgets/message.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:rainbow_challenge/localization/app_localizations.dart'; 
 
 import 'challenges/challenges_page.dart';
 import 'challenges/cubit/challenges_cubit.dart';

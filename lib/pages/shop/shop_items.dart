@@ -5,7 +5,7 @@ import 'package:rainbow_challenge/pages/shop/shop_sucsess_claim.dart';
 import 'package:rainbow_challenge/services/dio_client.dart';
 import 'package:rainbow_challenge/widgets/rainbow_price.dart';
 import 'package:rainbow_challenge/widgets/widgets.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:rainbow_challenge/localization/app_localizations.dart'; 
 
 class ShopItemPage extends StatefulWidget {
   ShopItemPage({

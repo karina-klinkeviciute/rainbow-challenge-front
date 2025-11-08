@@ -10,7 +10,7 @@ import 'package:rainbow_challenge/utils/repository/repositories.dart';
 import 'package:rainbow_challenge/widgets/auth_text_field.dart';
 import 'package:formz/formz.dart';
 import 'package:rainbow_challenge/widgets/headline.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:rainbow_challenge/localization/app_localizations.dart'; 
 
 
 class RecoveryEmailForm extends StatelessWidget {

@@ -11,7 +11,7 @@ import 'package:rainbow_challenge/pages/registration/bloc/reg_event.dart';
 import 'package:rainbow_challenge/pages/registration/bloc/reg_state.dart';
 import 'package:rainbow_challenge/widgets/widgets.dart';
 import 'package:rainbow_challenge/pages/registration/delete_account_page.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:rainbow_challenge/localization/app_localizations.dart'; 
 import 'package:rainbow_challenge/localization/localization_helper.dart';
 
 class UserSettingsForm extends StatelessWidget {
@@ -262,8 +262,8 @@ class _RegionInputField extends StatelessWidget {
             hint: SingleChildScrollView(
               child: Text(
                 '${AppLocalizations.of(context)!.region}: ${state.region.value.length > 22 ? '${state.region.value.substring(0, 22)}' : state.region.value}',
-                textScaleFactor:
-                    MediaQuery.of(context).size.width < 350 ? 0.75 : 1,
+                textScaler: TextScaler.linear(
+                    MediaQuery.of(context).size.width < 350 ? 0.75 : 1),
                 textHeightBehavior:
                     TextHeightBehavior(applyHeightToFirstAscent: true),
               ),

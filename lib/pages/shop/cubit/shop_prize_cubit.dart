@@ -6,17 +6,28 @@ import 'package:rainbow_challenge/utils/repository/joined_challenges/prize_repos
 
 class ShopPrizeCubit extends Cubit<ShopPrizeState> {
   final PrizeRepository prizeRepository;
+  Timer? _timer;
   ShopPrizeCubit({
     required this.prizeRepository,
   }) : super(ShopPrizeInitial());
 
   void fetchPrize() {
-    Timer(Duration(seconds: 2), () {
-      print('PrizeFetched');
-      prizeRepository.fetchPrize().then((prizesList) {
-        emit(ShopPrizeLoaded(prizesList: prizesList));
-      });
+    _timer = Timer(Duration(seconds: 2), () {
+      if (!isClosed) {
+        print('PrizeFetched');
+        prizeRepository.fetchPrize().then((prizesList) {
+          if (!isClosed) {
+            emit(ShopPrizeLoaded(prizesList: prizesList));
+          }
+        });
+      }
     });
+  }
+  
+  @override
+  Future<void> close() {
+    _timer?.cancel();
+    return super.close();
   }
 }
 

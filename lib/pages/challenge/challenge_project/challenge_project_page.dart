@@ -7,7 +7,7 @@ import 'package:rainbow_challenge/utils/repository/joined_challenges/joined_chal
 import 'package:rainbow_challenge/widgets/file_upload_widget.dart';
 import 'cubit/challenge_project_cubit.dart';
 import 'package:rainbow_challenge/widgets/widgets.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:rainbow_challenge/localization/app_localizations.dart'; 
 
 // Single challenge page of type Event Participant.
 part 'part_info.dart';

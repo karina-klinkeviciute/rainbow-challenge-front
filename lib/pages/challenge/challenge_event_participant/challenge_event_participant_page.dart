@@ -9,7 +9,7 @@ import 'qr_code_scanner/qr_code_scanner_page.dart';
 import 'package:rainbow_challenge/theme/icons.dart';
 import 'cubit/challenge_event_participant_cubit.dart';
 import 'package:rainbow_challenge/widgets/widgets.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:rainbow_challenge/localization/app_localizations.dart'; 
 
 // Single challenge page of type Event Participant.
 part 'part_info.dart';

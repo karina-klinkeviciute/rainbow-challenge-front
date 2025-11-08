@@ -10,7 +10,7 @@ import 'package:rainbow_challenge/utils/model/available_prize/prize_class.dart';
 import 'package:rainbow_challenge/widgets/rainbow_price.dart';
 import 'package:rainbow_challenge/widgets/wrapper_custom_appbar.dart';
 import 'package:rainbow_challenge/widgets/widgets.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:rainbow_challenge/localization/app_localizations.dart'; 
 
 // TODO: get medals data and fix conditional view for them.
 // TODO: add option to logout.
@@ -171,13 +171,15 @@ class _PrizeList extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               if (prizeItem.image != null)
-                ImageExternalWidget(
-                  url: prizeItem.image!,
-                  width: MediaQuery.of(context).size.width * 0.4,
-                  height: MediaQuery.of(context).size.height * 0.12,
+                Expanded(
+                  child: ImageExternalWidget(
+                    url: prizeItem.image!,
+                    width: MediaQuery.of(context).size.width * 0.4,
+                    height: MediaQuery.of(context).size.height * 0.12,
+                  ),
                 )
               else
-                _RandomPlaceholderImage(),
+                Expanded(child: _RandomPlaceholderImage()),
               Padding(
                 padding: const EdgeInsets.only(top: 5),
                 child: Text(prizeItem.name,

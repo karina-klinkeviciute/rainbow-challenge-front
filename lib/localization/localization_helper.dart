@@ -1,4 +1,4 @@
-import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // Change this to your localization file path
+import 'package:rainbow_challenge/localization/app_localizations.dart'; // Change this to your localization file path
 import 'package:rainbow_challenge/main.dart'; // Ensure you import the main file where MyApp is defined
 
 class LocalizationHelper {

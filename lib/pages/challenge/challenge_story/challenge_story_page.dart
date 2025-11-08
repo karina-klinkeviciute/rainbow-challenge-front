@@ -7,7 +7,7 @@ import '../../../theme/colors.dart';
 import '../../../utils/repository/joined_challenges/joined_challenges_repository.dart';
 import 'cubit/challenge_story_cubit.dart';
 import 'package:rainbow_challenge/widgets/widgets.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:rainbow_challenge/localization/app_localizations.dart'; 
 
 // Single challenge page of type Event Participant.
 part 'part_info.dart';

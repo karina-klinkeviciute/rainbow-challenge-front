@@ -59,11 +59,20 @@
             <string>Editor</string>
             <key>CFBundleURLSchemes</key>
             <array>
-                <string></string>
+                <string>com.googleusercontent.apps.704936491342-ffrjh5j3dt2khjbf14feuho0683h7gui</string>
             </array>
         </dict>
     </array>
     <key>CADisableMinimumFrameDurationOnPhone</key>
     <true/>
+	<key>UIApplicationSupportsIndirectInputEvents</key>
+	<true/>
+	<!-- Add this for Firebase notifications -->
+    <key>UIBackgroundModes</key>
+    <array>
+        <string>remote-notification</string>
+    </array>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
 </dict>
 </plist>

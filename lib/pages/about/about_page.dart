@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:rainbow_challenge/widgets/widgets.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'cubit/about_cubit.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:rainbow_challenge/localization/app_localizations.dart';
 
 class AboutPage extends StatelessWidget {
   AboutPage({Key? key}) : super(key: key);
@@ -73,7 +72,8 @@ class _Logos extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          HeadingLinedWidget(title: AppLocalizations.of(context)!.about_page_logos),
+          HeadingLinedWidget(
+              title: AppLocalizations.of(context)!.about_page_logos),
           Row(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.center,
@@ -155,13 +155,8 @@ class _Logos extends StatelessWidget {
               ),
             ],
           ),
-
         ],
       ),
     );
   }
 }
-
-const _url = 'https://tja.lt';
-void _launchURL() async =>
-    await canLaunch(_url) ? await launch(_url) : throw 'Could not launch $_url';

@@ -9,7 +9,7 @@ import 'package:rainbow_challenge/pages/registration/bloc/reg_bloc.dart';
 import 'package:rainbow_challenge/pages/registration/bloc/reg_event.dart';
 import 'package:rainbow_challenge/pages/registration/bloc/reg_state.dart';
 import 'package:rainbow_challenge/widgets/widgets.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:rainbow_challenge/localization/app_localizations.dart'; 
 
 
 class DeleteAccountPage extends StatelessWidget {

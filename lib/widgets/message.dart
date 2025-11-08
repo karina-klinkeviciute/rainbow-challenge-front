@@ -41,7 +41,8 @@ class MessageWidget extends StatelessWidget {
                       width: 90,
                       height: 50,
                       decoration: BoxDecoration(
-                        color: ThemeColors.secondaryColor.withOpacity(0.4),
+                        color:
+                            ThemeColors.secondaryColor.withValues(alpha: 0.4),
                         //  boxShadow: BoxShadow
                       )),
                 ),
@@ -54,7 +55,7 @@ class MessageWidget extends StatelessWidget {
                       width: 90,
                       height: 50,
                       decoration: BoxDecoration(
-                        color: ThemeColors.tetriaryColor.withOpacity(0.5),
+                        color: ThemeColors.tetriaryColor.withValues(alpha: 0.5),
                         //  boxShadow: BoxShadow
                       )),
                 ),
@@ -67,7 +68,7 @@ class MessageWidget extends StatelessWidget {
                       width: 90,
                       height: 50,
                       decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(0.8),
+                        color: Colors.white.withValues(alpha: 0.8),
                         //  boxShadow: BoxShadow
                       )),
                 ),

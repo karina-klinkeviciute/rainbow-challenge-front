@@ -31,9 +31,9 @@ if (keystorePropertiesFile.exists()) {
 
 android {
     namespace "rainbowchallenge.lt.rainbow_challenge"
-    compileSdkVersion flutter.compileSdkVersion
+    compileSdkVersion 36
 //    ndkVersion flutter.ndkVersion
-    ndkVersion "26.1.10909125"
+    ndkVersion "27.0.12077973"
 
     compileOptions {
 //        sourceCompatibility JavaVersion.VERSION_17
@@ -60,7 +60,7 @@ android {
         // You can update the following values to match your application needs.
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
         minSdkVersion flutter.minSdkVersion
-        targetSdkVersion flutter.targetSdkVersion
+        targetSdkVersion 36
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
     }

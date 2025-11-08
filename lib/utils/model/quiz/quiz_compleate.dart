@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rainbow_challenge/pages/pages.dart';
 import 'package:rainbow_challenge/widgets/widgets.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:rainbow_challenge/localization/app_localizations.dart'; 
 
 class QuizPageConfirm extends StatelessWidget {
   final int count;

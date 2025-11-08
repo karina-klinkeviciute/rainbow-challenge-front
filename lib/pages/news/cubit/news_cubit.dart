@@ -8,13 +8,24 @@ part 'news_state.dart';
 
 class NewsCubit extends Cubit<NewsState> {
   final NewsRepository newsRepository;
+  Timer? _timer;
   NewsCubit({required this.newsRepository}) : super(NewsInitial());
 
   void fetchNews() {
-    Timer(Duration(seconds: 1), () {
-      newsRepository.fetchNews().then((newsList) {
-        emit(NewsLoaded(newsList: newsList));
-      });
+    _timer = Timer(Duration(seconds: 1), () {
+      if (!isClosed) {
+        newsRepository.fetchNews().then((newsList) {
+          if (!isClosed) {
+            emit(NewsLoaded(newsList: newsList));
+          }
+        });
+      }
     });
+  }
+  
+  @override
+  Future<void> close() {
+    _timer?.cancel();
+    return super.close();
   }
 }
